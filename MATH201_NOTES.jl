@@ -17,7 +17,7 @@ begin
     # using SymPy
     using QRCoders
     using PrettyTables
-	# using Primes
+    # using Primes
     # using LinearSolve
     # using NonlinearSolve
     # using ForwardDiff
@@ -26,7 +26,7 @@ begin
 end
 
 # ╔═╡ 71bc54d5-d0ed-42d3-9bc1-48aa86e91d1d
-TableOfContents(title="📚 MATH208: Differential Equations and Linear Algebra", indent=true, depth=4)
+TableOfContents(title="📚 MATH201: Calculus III", indent=true, depth=4)
 
 # ╔═╡ e414122f-b93a-4510-b8ae-026c303e0df9
 begin
@@ -42,8 +42,8 @@ end
 
 # ╔═╡ cd269caf-ef81-43d7-a1a8-6668932b6363
 # exportqrcode("https://www.mathmatize.com/")
-let 
-	img = LocalImage("./qrcode.png")
+let
+    img = LocalImage("./qrcode.png")
 end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
