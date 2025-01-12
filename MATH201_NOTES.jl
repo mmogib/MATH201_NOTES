@@ -162,7 +162,7 @@ begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
     md""" # Syllabus
     ## Syallbus
-    See here [Term 241 - MATH208 - Syllabus](https://www.dropbox.com/scl/fi/5u3riz5gzbfuj9c5h8bn2/T241MATH208Syllabus.pdf?rlkey=pcjja6yvflfzazbxx1wkkyazo&raw=1)
+    See here [Term 242 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/default-document-library/math201-242.pdf?sfvrsn=f665d644_1)
     ## Textbook
     __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
     $text_book
@@ -172,8 +172,8 @@ begin
 
     | Day       | Time        |
     |-----------|-------------|
-    | Sunday    | 11:00-11:50AM |
-    | Monday | 12:00-12:50PM |
+    | Sunday    | 02:00-02:50PM |
+    | Tuesday | 02:00-02:50PM |
     Also you can ask for an online meeting through __TEAMS__.
     """
 end
