@@ -4,6 +4,18 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    #! format: off
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+    #! format: on
+end
+
 # ╔═╡ f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 begin
     using CommonMark
@@ -44,6 +56,135 @@ end
 # exportqrcode("https://www.mathmatize.com/")
 let
     img = LocalImage("./qrcode.png")
+end
+
+# ╔═╡ 109ff314-76c9-474f-b516-6bb17f1e0b62
+md"""# 10.2 Plane Curves and Parametric equations
+
+__Objectives__:
+
+> - Sketch the graph of a curve given by a set of parametric equations.
+> - Eliminate the parameter in a set of parametric equations.
+> - Find a set of parametric equations to represent a curve.
+> - __(READ ONLY)__Understand two classic calculus problems, the tautochrone and brachistochrone problems.
+## Plane Curves and Parametric Equations
+"""
+
+# ╔═╡ ee1e2234-cd28-4013-aef6-4af835af9465
+md"""
+Consider the equation
+```math
+y = -x^2 + x + 10
+```
+
+Imagine an a person is walking and following this path. This equation 
+
+- tell you where the person has been
+- __BUT does NOT tell__ when the object was at a given point ``(x, y)``.
+
+"""
+
+# ╔═╡ 73107910-a89d-4f4a-8aeb-567aeca3e717
+begin
+	s10_2_t_slider = @bind s10_2_t Slider(0:10,show_value=true) 
+	s10_2_xt_input = @bind s10_2_xt TextField(20,placeholder="Enter a function of t") 
+	cm"""
+	t = $s10_2_t_slider
+
+	x = $s10_2_xt_input
+	"""
+end
+
+# ╔═╡ 277ad9ab-687c-4034-8a01-65e5cadb9a61
+let
+	f(x) = -x^2 + x + 1
+	eval(Meta.parse("x(t)=$s10_2_xt"))
+	p = plot(f;framestyle=:origin,xlimits=(0,2),label=L"y=-x^2 + x + 1")
+	scatter(p,[x(s10_2_t)],[f(x(s10_2_t))],label="Person")
+end
+
+# ╔═╡ 62611550-7596-412e-b492-1cfcab69d942
+let
+	t = [-2,-1,0]
+	x(t) = t^2-4
+	y(t) = t/2
+	
+	annot(t) = (x(t)+0.52,y(t)+0.1,L"t=%$t",8)
+	
+	p = plot(x.(t[1]:0.1:t[end]),y.(t[1]:0.1:t[end]),label=nothing)
+	p = scatter(p,x.(t),y.(t),aspect_ratio=1, framestyle=:origin, xlimits=(-5,6),ylimits=(-2,4),label=nothing, annotations=annot.(t))
+	function get_table()
+		tbl_str = "<table>
+        <thead>
+            <tr>
+                <th>t</th>
+                <th>x</th>
+                <th>y</th>
+            </tr>
+        </thead>
+        <tbody>"
+		
+		for ti in t
+			tbl_str *= "<tr><td> $ti </td><td> $(x(ti))</td><td> $(y(ti))</td></tr>"
+		end
+		tbl_str*="</tbody></table>"			
+	end
+	cm"""
+	$(get_table())
+
+	$p
+	"""
+end
+
+# ╔═╡ 356e2c2e-b9dd-4988-81a0-c87036998ec6
+md"##  Eliminating the Parameter"
+
+# ╔═╡ 56158e41-0621-413d-958b-afb9939493d2
+begin
+	s10_2_ex3_input=@bind s10_2_ex3 NumberField(0:0.1:2π+0.1)
+	cm"""
+	``\theta = `` $(s10_2_ex3_input)
+	"""
+end
+
+# ╔═╡ cb90c129-362b-41c9-aadb-90b89ac1c3c1
+let
+	a = 0.0
+	b = s10_2_ex3
+	x(t)=3cos(t)
+	y(t)=4sin(t)
+	t =a:0.01:b
+	p = plot(x.(t),y.(t),aspect_ratio=1,framestyle=:origin,label=nothing,xlimit=(-5,5),ylimits=(-5,5))
+	scatter(p,[x(b)],[y(b)],label=nothing)
+end
+
+# ╔═╡ ed6f28c3-5edc-48a5-9ab6-99fdb660067a
+md"##  Finding Parametric Equations"
+
+# ╔═╡ 586c9e7e-18d2-49ab-b12e-db30611f726b
+begin
+	s10_2_ex5_slider = @bind s10_2_ex5 Slider(0:0.1:8π)
+	cm"""
+	``\theta = `` $s10_2_ex5_slider
+	"""
+	
+end
+
+# ╔═╡ ec386f03-b425-4e7d-9539-06060d3b9057
+let
+	a = 5
+	θ =s10_2_ex5
+	b = a*θ
+	x(t) = a*sin(t)+b
+	y(t) = a*cos(t)+a
+	xs(t) = a*(t-sin(t))
+	ys(t) = a*(1-cos(t))
+	ts = 0.0:0.01:2π+0.01
+	p = plot(x.(ts),y.(ts),framestyle=:origin,aspect_ratio=1,label=nothing)
+	p= plot(p,xticks=(collect(0:π:10π), ["$(i)π" for i in 1:10]),xlimits=(-a-1,10π),ylimits=(-1,2a+1))
+	p = plot(p,xs.(0:0.01:θ),ys.(0:0.01:θ),label=nothing)
+	p = scatter(p,[xs(θ)],[ys(θ)],label=nothing)
+	# annotate!(p,[(5π,2a+5,L"x=a(\theta-\sin{\theta})"),(5π,2a+3,L"y=a(1-\cos{\theta)}")])
 end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
@@ -177,6 +318,79 @@ begin
     Also you can ask for an online meeting through __TEAMS__.
     """
 end
+
+# ╔═╡ 58eb74fd-b5e5-4e41-bd2f-99d29dbdece8
+cm"""
+$(define("a Plane Curve"))
+If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
+"""
+
+# ╔═╡ 4026f2d0-ec69-4491-b4b7-313c501d7f50
+cm"""
+$(ex(1,"Sketching a Curve"))
+Sketch the curve described by the parametric equations
+```math
+x=f(t)=t^2-4
+```
+and
+```math
+y=g(t)=\frac{t}{2}
+```
+where ``-2 \leq t \leq 3``.
+"""
+
+# ╔═╡ b2f647d7-9fe4-4ab7-b251-8ba27485ae35
+cm"""
+
+$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
+"""
+
+# ╔═╡ b4eff26d-d34b-49b4-be8a-64cffaf2f431
+cm"""
+$(ex(2,"Adjusting the Domain"))
+Sketch the curve represented by the equations
+```math
+x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
+```
+by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
+"""
+
+# ╔═╡ 8a4f89a9-d0ee-4a4f-9f2e-ed2620247d50
+cm"""
+$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
+See LarsonCalculus.com for an interactive version of this type of example.
+Sketch the curve represented by
+```math
+x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
+```
+by eliminating the parameter and finding the corresponding rectangular equation.
+"""
+
+# ╔═╡ 061935b4-9e9b-42ff-926f-e183cbf2de74
+cm"""
+$(ex(4,"Finding Parametric Equations for a Given Graph"))
+Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
+
+- __(a.)__ ``t=x``
+- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
+
+"""
+
+# ╔═╡ 109e181f-e208-4e42-8169-16582873f069
+cm"""
+$(ex(5,"Parametric Equations for a Cycloid"))
+Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a cycloid.
+"""
+
+# ╔═╡ be94da4b-60cb-41c2-8dbd-05e96104e6c1
+cm"""
+$(define("Smooth Curve"))
+A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously 0 , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+"""
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
@@ -2276,8 +2490,27 @@ version = "1.4.1+1"
 # ╟─e414122f-b93a-4510-b8ae-026c303e0df9
 # ╟─8408e369-40eb-4f9b-a7d7-26cde3e34a74
 # ╟─cd269caf-ef81-43d7-a1a8-6668932b6363
+# ╟─109ff314-76c9-474f-b516-6bb17f1e0b62
+# ╟─ee1e2234-cd28-4013-aef6-4af835af9465
+# ╟─73107910-a89d-4f4a-8aeb-567aeca3e717
+# ╟─277ad9ab-687c-4034-8a01-65e5cadb9a61
+# ╟─58eb74fd-b5e5-4e41-bd2f-99d29dbdece8
+# ╟─4026f2d0-ec69-4491-b4b7-313c501d7f50
+# ╟─62611550-7596-412e-b492-1cfcab69d942
+# ╟─356e2c2e-b9dd-4988-81a0-c87036998ec6
+# ╟─b2f647d7-9fe4-4ab7-b251-8ba27485ae35
+# ╟─b4eff26d-d34b-49b4-be8a-64cffaf2f431
+# ╟─8a4f89a9-d0ee-4a4f-9f2e-ed2620247d50
+# ╟─56158e41-0621-413d-958b-afb9939493d2
+# ╠═cb90c129-362b-41c9-aadb-90b89ac1c3c1
+# ╟─ed6f28c3-5edc-48a5-9ab6-99fdb660067a
+# ╟─061935b4-9e9b-42ff-926f-e183cbf2de74
+# ╟─109e181f-e208-4e42-8169-16582873f069
+# ╟─586c9e7e-18d2-49ab-b12e-db30611f726b
+# ╟─ec386f03-b425-4e7d-9539-06060d3b9057
+# ╟─be94da4b-60cb-41c2-8dbd-05e96104e6c1
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
-# ╠═ef081dfa-b610-4c7a-a039-7258f4f6e80e
+# ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
 # ╟─107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
