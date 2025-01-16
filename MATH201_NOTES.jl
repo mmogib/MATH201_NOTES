@@ -87,7 +87,7 @@ Imagine an a person is walking and following this path. This equation
 # ╔═╡ 73107910-a89d-4f4a-8aeb-567aeca3e717
 begin
 	s10_2_t_slider = @bind s10_2_t Slider(0:10,show_value=true) 
-	s10_2_xt_input = @bind s10_2_xt TextField(20,placeholder="Enter a function of t") 
+	s10_2_xt_input = @bind s10_2_xt TextField(20,default="t",placeholder="Enter a function of t") 
 	cm"""
 	t = $s10_2_t_slider
 
@@ -105,7 +105,7 @@ end
 
 # ╔═╡ 62611550-7596-412e-b492-1cfcab69d942
 let
-	t = [-2,-1,0]
+	t = [-2,-1,0,1,2,3]
 	x(t) = t^2-4
 	y(t) = t/2
 	
@@ -141,7 +141,7 @@ md"##  Eliminating the Parameter"
 
 # ╔═╡ 56158e41-0621-413d-958b-afb9939493d2
 begin
-	s10_2_ex3_input=@bind s10_2_ex3 NumberField(0:0.1:2π+0.1)
+	s10_2_ex3_input=@bind s10_2_ex3 NumberField(0:0.1:3π/4+0.1)
 	cm"""
 	``\theta = `` $(s10_2_ex3_input)
 	"""
@@ -163,7 +163,7 @@ md"##  Finding Parametric Equations"
 
 # ╔═╡ 586c9e7e-18d2-49ab-b12e-db30611f726b
 begin
-	s10_2_ex5_slider = @bind s10_2_ex5 Slider(0:0.1:8π)
+	s10_2_ex5_slider = @bind s10_2_ex5 Slider(0:0.1:10π)
 	cm"""
 	``\theta = `` $s10_2_ex5_slider
 	"""
@@ -172,7 +172,7 @@ end
 
 # ╔═╡ ec386f03-b425-4e7d-9539-06060d3b9057
 let
-	a = 5
+	a = 2
 	θ =s10_2_ex5
 	b = a*θ
 	x(t) = a*sin(t)+b
@@ -184,8 +184,88 @@ let
 	p= plot(p,xticks=(collect(0:π:10π), ["$(i)π" for i in 1:10]),xlimits=(-a-1,10π),ylimits=(-1,2a+1))
 	p = plot(p,xs.(0:0.01:θ),ys.(0:0.01:θ),label=nothing)
 	p = scatter(p,[xs(θ)],[ys(θ)],label=nothing)
-	# annotate!(p,[(5π,2a+5,L"x=a(\theta-\sin{\theta})"),(5π,2a+3,L"y=a(1-\cos{\theta)}")])
+	annotate!(p,[(5π,2a+5,L"x=a(\theta-\sin{\theta})"),(5π,2a+3,L"y=a(1-\cos{\theta)}")])
 end
+
+# ╔═╡ e9c17c2a-342a-4de2-a6d7-7464bca2d166
+md"# 10.3 Parametric Equations and Calculus"
+
+# ╔═╡ 46c20239-40b8-4336-a575-13b120f42de9
+cm"""
+__Objectives__
+
+> 1. Find the slope of a tangent line to a curve given by a set of parametric equations.
+> 1. Find the arc length of a curve given by a set of parametric equations.
+> 1. Find the area of a surface of revolution (parametric form).
+"""
+
+# ╔═╡ 1c946ad8-f21c-4030-b4b3-b51ef163c8c0
+md"##  Slope and Tangent Lines"
+
+# ╔═╡ d580f679-2677-4bc1-957f-fa3db84403ad
+begin
+	s10_3_ex3_slider = @bind s10_3_ex3_t Slider(-2:0.1:2,show_value=true)
+	cm"""
+	``t = `` $s10_3_ex3_slider
+	"""
+end
+
+# ╔═╡ e0cb37ff-82c1-4ffc-90ef-7ec4b056da85
+let
+	ts= -2.0:0.001:s10_3_ex3_t
+	x(t) = 2t-π*sin(t)
+	y(t) = 2-π*cos(t)
+	p=plot(x.(ts),y.(ts),
+		frame_style=:origin, aspect_ratio=1, 
+		title="Prolate cycloid",
+		label = nothing,
+		xlimits=(-7,7), xticks=([-π,0,π],[L"-\pi",L"0",L"\pi"]),
+		ylimits=(-3,7), yticks=(collect(-2:2:6),[L"%$i" for i in -2:2:6]),
+		c=:black
+	)
+	
+	scatter!([x(s10_3_ex3_t)],[y(s10_3_ex3_t)],label=nothing,m=(2,3))
+	if s10_3_ex3_t>=1.9
+		plot!([x->x*(-π/2)+2,x->x*(π/2)+2],c=:blue,lw=0.6,label=nothing)
+	end
+	p
+end
+
+# ╔═╡ 84ee076f-c8f3-406e-8ef9-fb81e54130d0
+md"## Arc Length"
+
+# ╔═╡ c0efef5c-a5cb-4b5f-89a1-557d62cecf3b
+begin
+	s10_3_ex4_slider = @bind s10_3_ex4 Slider(0:0.1:10π)
+	cm"""
+	``t = `` $s10_3_ex4_slider
+	"""
+	
+end
+
+# ╔═╡ 83eaa558-cf7e-46de-9143-0085b12c2702
+let
+	ts = 0.0:0.01:2π+0.1
+	tsd = 0.0:0.01:s10_3_ex4
+	r = 1
+	R =4+r
+	h,k = R*cos(s10_3_ex4),R*sin(s10_3_ex4) 
+	P = [R*cos(s10_3_ex4)-cos(R*s10_3_ex4),R*sin(s10_3_ex4)-sin(R*s10_3_ex4)]
+	p = plot(4sin.(ts),4cos.(ts),
+		frame_style=:origin, aspect_ratio=1, 
+		title="Epicycloid",
+		label = nothing,
+		xlimits=(-7,7), xticks=(collect(-6:2:6),[L"%$i" for i in -6:2:6]),
+		ylimits=(-7,7), yticks=(collect(-6:2:6),[L"%$i" for i in -6:2:6]),
+		c=:black,lw=0.5
+	)
+	plot!(h.+r*sin.(ts),k.+r*cos.(ts),label=nothing)
+	plot!([P[1]],[P[2]],series=scatter,seriestype=:scatter, label=nothing)
+	plot!(R*cos.(tsd)-cos.(R*tsd),R*sin.(tsd)-sin.(R*tsd),label=nothing)
+end
+
+# ╔═╡ 80cd32aa-7156-4896-b76e-78869f8e5000
+md"## Area of a Surface of Revolution"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -390,6 +470,102 @@ Determine the curve traced by a point ``P`` on the circumference of a circle of 
 cm"""
 $(define("Smooth Curve"))
 A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously 0 , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+"""
+
+# ╔═╡ 0c0b4d35-5c61-4a3c-b534-6e7437844706
+cm"""
+$(bth("Parametric Form of the Derivative"))
+If a smooth curve ``C`` is given by the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+then the slope of ``C`` at ``(x, y)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
+```
+"""
+
+# ╔═╡ 99e98559-8b42-4b3e-8667-bfabbcc07c6d
+cm"""
+$(ex(1,"Differentiation and Parametric Form"))
+Find ``d y / d x`` for the curve given by 
+```math
+x=\sin t\quad \text{and} \quad y=\cos t.
+```
+"""
+
+# ╔═╡ 161c8ffd-748e-407a-8948-13a9d7481766
+cm"""
+$(bbl("Remark",""))
+```math
+\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
+```
+"""
+
+# ╔═╡ 7e0aaff0-9f10-4f26-a204-4f5ccc0b7ed0
+cm"""
+$(ex(2,"Finding Slope and Concavity"))
+For the curve given by
+```math
+x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
+```
+find the slope and concavity at the point ``(2,3)``.
+"""
+
+# ╔═╡ 1701aff4-76d8-4cbe-a477-8bd10987dd2f
+cm"""
+$(ex(3,"A Curve with Two Tangent Lines at a Point"))
+The prolate cycloid given by
+```math
+x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
+```
+crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
+"""
+
+# ╔═╡ 110286ce-3cec-4d66-88f2-311972ff9285
+cm"""
+$(bth("Arc Length in Parametric Form"))
+If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
+```math
+s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
+```
+"""
+
+# ╔═╡ cf66301b-be6e-4507-b471-b9b38481ef0e
+cm"""
+$(ex(4,"Finding Arc Length"))
+
+A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown in Figure 10.33. The epicycloid traced by a point on the circumference of the smaller circle is given by
+```math
+x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
+```
+
+Find the distance traveled by the point in one complete trip about the larger circle.
+"""
+
+# ╔═╡ 0726ebd1-a83e-42ee-82f5-74dd930266f0
+cm"""
+$(bth("Area of a Surface of Revolution"))
+If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
+
+__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``x``-axis: ``g(t) \geq 0``
+
+__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``y``-axis: ``f(t) \geq 0``
+"""
+
+# ╔═╡ 2bef46e1-44b2-4dd3-92b1-d50b1a395b97
+cm"""
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+
+Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
+```math
+\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
+```
+as shown in Figure 10.34. Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -2496,19 +2672,37 @@ version = "1.4.1+1"
 # ╟─277ad9ab-687c-4034-8a01-65e5cadb9a61
 # ╟─58eb74fd-b5e5-4e41-bd2f-99d29dbdece8
 # ╟─4026f2d0-ec69-4491-b4b7-313c501d7f50
-# ╟─62611550-7596-412e-b492-1cfcab69d942
+# ╠═62611550-7596-412e-b492-1cfcab69d942
 # ╟─356e2c2e-b9dd-4988-81a0-c87036998ec6
 # ╟─b2f647d7-9fe4-4ab7-b251-8ba27485ae35
 # ╟─b4eff26d-d34b-49b4-be8a-64cffaf2f431
 # ╟─8a4f89a9-d0ee-4a4f-9f2e-ed2620247d50
 # ╟─56158e41-0621-413d-958b-afb9939493d2
-# ╠═cb90c129-362b-41c9-aadb-90b89ac1c3c1
+# ╟─cb90c129-362b-41c9-aadb-90b89ac1c3c1
 # ╟─ed6f28c3-5edc-48a5-9ab6-99fdb660067a
 # ╟─061935b4-9e9b-42ff-926f-e183cbf2de74
 # ╟─109e181f-e208-4e42-8169-16582873f069
 # ╟─586c9e7e-18d2-49ab-b12e-db30611f726b
 # ╟─ec386f03-b425-4e7d-9539-06060d3b9057
 # ╟─be94da4b-60cb-41c2-8dbd-05e96104e6c1
+# ╟─e9c17c2a-342a-4de2-a6d7-7464bca2d166
+# ╟─46c20239-40b8-4336-a575-13b120f42de9
+# ╟─1c946ad8-f21c-4030-b4b3-b51ef163c8c0
+# ╟─0c0b4d35-5c61-4a3c-b534-6e7437844706
+# ╟─99e98559-8b42-4b3e-8667-bfabbcc07c6d
+# ╟─161c8ffd-748e-407a-8948-13a9d7481766
+# ╟─7e0aaff0-9f10-4f26-a204-4f5ccc0b7ed0
+# ╟─1701aff4-76d8-4cbe-a477-8bd10987dd2f
+# ╟─d580f679-2677-4bc1-957f-fa3db84403ad
+# ╟─e0cb37ff-82c1-4ffc-90ef-7ec4b056da85
+# ╟─84ee076f-c8f3-406e-8ef9-fb81e54130d0
+# ╟─110286ce-3cec-4d66-88f2-311972ff9285
+# ╟─cf66301b-be6e-4507-b471-b9b38481ef0e
+# ╟─c0efef5c-a5cb-4b5f-89a1-557d62cecf3b
+# ╟─83eaa558-cf7e-46de-9143-0085b12c2702
+# ╟─80cd32aa-7156-4896-b76e-78869f8e5000
+# ╟─0726ebd1-a83e-42ee-82f5-74dd930266f0
+# ╟─2bef46e1-44b2-4dd3-92b1-d50b1a395b97
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
