@@ -267,6 +267,221 @@ end
 # ╔═╡ 80cd32aa-7156-4896-b76e-78869f8e5000
 md"## Area of a Surface of Revolution"
 
+# ╔═╡ 3a115647-a0a9-4a0b-a939-729799a528a4
+md"# 10.4 Polar coordinates and Polar Graphs"
+
+# ╔═╡ 5af5e402-69d2-4a09-8dd1-5ba91d482fe2
+cm"""
+> __Objectives__
+> 1. Understand the polar coordinate system.
+> 1. Rewrite rectangular coordinates and equations in polar form and vice versa.
+> 1. Sketch the graph of an equation given in polar form.
+> 1. Find the slope of a tangent line to a polar graph.
+> 1.  Identify several types of special polar graphs.
+"""
+
+# ╔═╡ aeef6042-2182-4068-8fb0-0fedc2badaec
+md"## Polar Coordinates"
+
+# ╔═╡ 7ebe5d0a-e565-4e2a-9fc2-8f2a852bf9c6
+let
+	n = 0
+	P = (2,π/3+n*2π)
+	plot([P[2]],[P[1]];
+	proj=:polar,seriestype=:scatter,thetaticks=([0,1,π],[0,1,2]),label=L"P%$P")
+	# plot!(;proj=:cart)
+end
+
+# ╔═╡ 3f565a27-fdc0-4209-9105-dc3f3ae3dfc2
+ md"## Coordinate Conversion"
+
+# ╔═╡ ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
+md"## Polar Graphs"
+
+# ╔═╡ 78b5718d-6c40-413d-b990-b8bbf6b323ba
+let
+	θs = range(0,2π,length=200)
+	θssec = repeat([1],100)
+	r(θ) = 2
+	p1=plot(
+		θs,r.(θs);
+		proj=:polar,
+		label=L"r=2"	
+	)
+	plot!(
+		repeat([π/3],400),[range(0,3,length=200)...,-range(0,3,length=200)...];
+		proj=:polar,
+		label=L"\theta=\frac{\pi}{3}"	
+	)
+	p2 = plot(θssec,map(ti -> ti[1] > 50 ? (100-ti[1])*ti[2] : -ti[1]*ti[2] ,enumerate(θssec));
+		label=L"r=\sec(\theta)",
+		ylimits=(-3,3),
+		aspectratio=1,
+		frame_style=:origin
+	)
+	cm"""
+	$p1
+
+	$p2
+	"""
+end
+
+# ╔═╡ 390823d7-4567-4782-823b-d7de116c4374
+let
+	θ = [0,π/6,π/3,π/2,2π/3,5π/6,π]
+	θs = ["0","π/6","π/3","π/2","2π/3","5π/6","π"]
+	r(θ) = 2*cos(3*θ)
+	table = vcat(
+		θ',
+		r.(θ)'
+		
+	)
+	r1 = map(x->"<td> $x </td>",θs)
+	r2 = map(x->"<td> $(round(x,digits=2)) </td>",r.(θ))
+	cm"""
+	<table>
+		
+	<tr> 
+	<td>
+	
+	``\theta``
+	
+	</td>
+	
+	$r1 
+	
+	</tr>
+	
+	<tr> 
+	
+	<td>
+	
+	``r``
+	
+	</td>
+	
+	$r2 
+	
+	</tr>
+	
+
+	</table>
+	"""
+end
+
+# ╔═╡ dd8e4284-9ddc-43ba-93cb-00024faff337
+begin
+	s10_4_ex4_slider = @bind s10_4_ex4 NumberField(0:π/6:π)
+	cm"""
+	``\theta = `` $(s10_4_ex4_slider)
+	"""
+end
+
+# ╔═╡ a671c82c-084b-4520-a82b-b66a41b4e5f8
+let
+	n = 3
+	a = 2
+	θs = 0:0.01:s10_4_ex4
+	r(θ) = a*cos(n*θ) 
+	plot(θs,r.(θs);
+	proj=:polar,label=nothing,
+		
+	)
+	# plot!(;proj=:cart)
+end
+
+# ╔═╡ b69a0131-c8cd-4ba2-a124-548baa1bc52d
+md"##  Slope and Tangent Lines"
+
+# ╔═╡ c3b508e4-913c-4e33-b759-7d15d31de0b4
+cm"""
+$(bbl("Remarks,""))
+
+- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
+- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
+
+- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
+"""
+
+
+# ╔═╡ 784aad5e-9618-4ab5-ac7a-0d0394abe25d
+let
+	
+	r(θ) = sin(θ) 
+	plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+	# plot!(;proj=:cart)
+end
+
+# ╔═╡ fee76b84-3a2d-487c-b034-84ba199a1b90
+let
+	
+	r(θ) = 2(1-cos(θ)) 
+	plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+	# plot!(;proj=:cart)
+end
+
+# ╔═╡ bceaaa97-8e13-45a4-ac8c-90d9e9280a75
+md"##  Special Polar Graphs"
+
+# ╔═╡ b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
+let
+	a = 1
+	b  = 3
+	r(θ) = a + b*cos(θ) 
+	p= plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+	cm"""
+	__Limaçons__
+	
+	$p
+	"""
+	
+end
+
+# ╔═╡ 1f2859ea-80c9-4918-a4fb-d9db5123cacb
+let
+	a = 1
+	n  = 3
+	r(θ) = a*cos(n*θ) 
+	p= plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+	cm"""
+	 __Rose Curves__
+	
+	$p
+	"""
+	
+end
+
+# ╔═╡ 0abd3e51-8fe7-4d35-9d0b-23e03e01ab34
+let
+	a = 1
+	n  = 2
+	# θs = range(0,2π,length=200)
+	# r(θ) = cos(2*θ)>=0 && abs(a)*abs(cos(n*θ))
+	r(θ) = sin(2*θ)>=0 && abs(a)*abs(sin(n*θ))
+	p= plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+		cm"""
+	 __Circles and Lemniscates__
+	
+	$p
+	"""
+	
+end
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -469,7 +684,7 @@ Determine the curve traced by a point ``P`` on the circumference of a circle of 
 # ╔═╡ be94da4b-60cb-41c2-8dbd-05e96104e6c1
 cm"""
 $(define("Smooth Curve"))
-A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously 0 , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
 """
 
 # ╔═╡ 0c0b4d35-5c61-4a3c-b534-6e7437844706
@@ -565,7 +780,102 @@ Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
 ```math
 \left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
 ```
-as shown in Figure 10.34. Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
+Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
+"""
+
+# ╔═╡ c1fe9952-c638-479a-a166-e95956f879ca
+cm"""
+$(bbl("",""))
+To form the polar coordinate system in the plane, 
+- fix a point ``O``, called __the pole (or origin)__, and 
+- construct from ``O`` an initial ray called the __polar axis__, 
+
+Then each point ``P`` in the plane can be assigned polar coordinates 
+```math
+(r, \theta)
+``` 
+as follows.
+```math
+\begin{aligned}
+& r=\text { directed distance from } O \text { to } P \\
+& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
+\end{aligned}
+```
+
+"""
+
+# ╔═╡ 056b4af6-c433-497e-81e0-70bb3096bc3c
+cm"""
+$(bth("Coordinate Conversion"))
+The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{array}{ll}
+\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
+x=r \cos \theta & \tan \theta=\frac{y}{x} \\
+y=r \sin \theta & r^2=x^2+y^2
+\end{array}
+```
+"""
+
+# ╔═╡ ca784670-8225-4c3e-a4ee-8f7ab59adc85
+cm"""
+$(ex(1,"Polar-to-Rectangular Conversion"))
+- (a) For the point ``(r, \theta)=(2, \pi)``,
+- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
+
+"""
+
+# ╔═╡ f8dcab6d-2926-43d3-ba9f-b4a50316038e
+cm"""
+$(ex(2,"Rectangular-to-Polar Conversion"))
+- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
+- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
+"""
+
+# ╔═╡ c602fc93-2bdc-444f-9b2d-d20caf751a8f
+cm"""
+$(ex(3,"
+Graphing Polar Equations"))
+Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
+- __(a.)__ ``r=2``
+- __(b.)__ ``\theta=\frac{\pi}{2}``
+- __(c.)__ ``r=\sec \theta``
+"""
+
+# ╔═╡ 519d7317-a639-4d2d-9cb5-8647d6992eb2
+cm"""
+$(ex(4,"
+Sketching a Polar Graph"))
+Sketch the graph of ``r=2 \cos 3 \theta``.
+"""
+
+# ╔═╡ 5c4a9aa7-9223-46d7-91f9-f958e3be6eeb
+cm"""
+$(bth("Slope in Polar Form"))
+If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r-f(\theta)`` at the point ``(r, \theta)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
+```
+provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``. 
+"""
+
+# ╔═╡ 0fe1255e-5df0-477e-8999-4b93750b2a6f
+cm"""
+$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
+"""
+
+# ╔═╡ 35220a5b-a101-495e-b617-361510394818
+cm"""
+$(ex(6,"
+Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
+"""
+
+# ╔═╡ 11bbb488-8f5a-47ae-b8a6-c05d7cd01f45
+cm"""
+$(bth("Tangent Lines at the Pole"))
+If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -2672,7 +2982,7 @@ version = "1.4.1+1"
 # ╟─277ad9ab-687c-4034-8a01-65e5cadb9a61
 # ╟─58eb74fd-b5e5-4e41-bd2f-99d29dbdece8
 # ╟─4026f2d0-ec69-4491-b4b7-313c501d7f50
-# ╠═62611550-7596-412e-b492-1cfcab69d942
+# ╟─62611550-7596-412e-b492-1cfcab69d942
 # ╟─356e2c2e-b9dd-4988-81a0-c87036998ec6
 # ╟─b2f647d7-9fe4-4ab7-b251-8ba27485ae35
 # ╟─b4eff26d-d34b-49b4-be8a-64cffaf2f431
@@ -2703,6 +3013,34 @@ version = "1.4.1+1"
 # ╟─80cd32aa-7156-4896-b76e-78869f8e5000
 # ╟─0726ebd1-a83e-42ee-82f5-74dd930266f0
 # ╟─2bef46e1-44b2-4dd3-92b1-d50b1a395b97
+# ╟─3a115647-a0a9-4a0b-a939-729799a528a4
+# ╟─5af5e402-69d2-4a09-8dd1-5ba91d482fe2
+# ╟─aeef6042-2182-4068-8fb0-0fedc2badaec
+# ╟─c1fe9952-c638-479a-a166-e95956f879ca
+# ╠═7ebe5d0a-e565-4e2a-9fc2-8f2a852bf9c6
+# ╟─3f565a27-fdc0-4209-9105-dc3f3ae3dfc2
+# ╟─056b4af6-c433-497e-81e0-70bb3096bc3c
+# ╟─ca784670-8225-4c3e-a4ee-8f7ab59adc85
+# ╟─f8dcab6d-2926-43d3-ba9f-b4a50316038e
+# ╟─ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
+# ╟─c602fc93-2bdc-444f-9b2d-d20caf751a8f
+# ╟─78b5718d-6c40-413d-b990-b8bbf6b323ba
+# ╟─519d7317-a639-4d2d-9cb5-8647d6992eb2
+# ╟─390823d7-4567-4782-823b-d7de116c4374
+# ╟─dd8e4284-9ddc-43ba-93cb-00024faff337
+# ╟─a671c82c-084b-4520-a82b-b66a41b4e5f8
+# ╟─b69a0131-c8cd-4ba2-a124-548baa1bc52d
+# ╟─5c4a9aa7-9223-46d7-91f9-f958e3be6eeb
+# ╟─c3b508e4-913c-4e33-b759-7d15d31de0b4
+# ╟─0fe1255e-5df0-477e-8999-4b93750b2a6f
+# ╠═784aad5e-9618-4ab5-ac7a-0d0394abe25d
+# ╟─35220a5b-a101-495e-b617-361510394818
+# ╠═fee76b84-3a2d-487c-b034-84ba199a1b90
+# ╟─11bbb488-8f5a-47ae-b8a6-c05d7cd01f45
+# ╟─bceaaa97-8e13-45a4-ac8c-90d9e9280a75
+# ╟─b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
+# ╟─1f2859ea-80c9-4918-a4fb-d9db5123cacb
+# ╟─0abd3e51-8fe7-4d35-9d0b-23e03e01ab34
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
