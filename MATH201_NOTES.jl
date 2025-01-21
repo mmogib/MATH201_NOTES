@@ -288,12 +288,24 @@ let
 	n = 0
 	P = (2,π/3+n*2π)
 	plot([P[2]],[P[1]];
-	proj=:polar,seriestype=:scatter,thetaticks=([0,1,π],[0,1,2]),label=L"P%$P")
+	proj=:polar,seriestype=:scatter,thetaticks=([0,1,π],[0,1,2]),label=L"P%$P",grid=5)
 	# plot!(;proj=:cart)
 end
 
 # ╔═╡ 3f565a27-fdc0-4209-9105-dc3f3ae3dfc2
  md"## Coordinate Conversion"
+
+# ╔═╡ f8a97efa-4469-42b8-95af-3a6bf3973b5d
+cm"""
+<div style="color: red;font-weight:800">
+
+- ABDULKAREEM ABDULLAH ALHUDHAIF
+- ABDULRAHMAN DHAFER ALSHEHRI
+- MOHANAD OMAR ALSOMALI
+
+</div>
+
+"""
 
 # ╔═╡ ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
 md"## Polar Graphs"
@@ -476,11 +488,169 @@ let
 	)
 		cm"""
 	 __Circles and Lemniscates__
+
+	``r^2  = a^2 \sin^2\theta``
 	
 	$p
 	"""
 	
 end
+
+# ╔═╡ cd2a10a5-9166-4754-b277-02efd8747eb3
+md"""
+# 10.5 Area and Arc Length in Polar Coordinates
+> __Objectives__ 
+> 1. Find the area of a region bounded by a polar graph.
+> 1. Find the points of intersection of two polar graphs.
+> 1. Find the arc length of a polar graph.
+> 1. Find the area of a surface of revolution (polar form).
+"""
+
+# ╔═╡ ad06e95d-2879-4039-84bc-07b7856e2d89
+md"##  Area of a Polar Region"
+
+# ╔═╡ b6e05c6d-5124-4d6e-8160-c2b36cbee1d6
+let
+	r(θ) = 3*cos(3*θ)
+	ts = -π/6:0.01:π/6
+	p= plot(ts, r.(ts),fill=true, proj=:polar,label=nothing)
+	plot!(r;
+	proj=:polar,label=nothing,
+		l=(2,:black)
+
+	)
+	plot!(repeat([π/6],100),range(-3,3,length=100);
+	proj=:polar,label=nothing,
+		l=(2,:red,:dash),
+		annotations=[(0.5cos(π/6),0.7sin(π/6),L"\theta=\pi/6")]
+
+	)
+	plot!(repeat([-π/6],100),range(-3,3,length=100);
+	proj=:polar,label=nothing,
+		l=(2,:red,:dash),
+		annotations=[(0.5cos(-π/6),0.7sin(-π/6),L"\theta=-\pi/6")]
+
+	)
+		cm"""
+	 __Rose__
+
+	``r  = 3\cos 3\theta``
+	
+	$p
+	"""
+	
+end
+
+# ╔═╡ b294b1df-4b78-4aeb-bbb3-f943adcf4c13
+let
+	r(θ) = 1 - 2sin(θ)
+	ts = π/6:0.01:5π/6
+	p= plot(ts, r.(ts), proj=:polar,label=nothing)
+	plot!(r;
+	proj=:polar,label=nothing,
+		l=(2,:black),
+		fill=true,
+		
+	)
+	plot!(repeat([π/6],100),range(0,3,length=100);
+	proj=:polar,label=nothing,
+		l=(2,:red,:dash),
+		annotations=[(0.5cos(π/6),0.9sin(π/6),L"\theta=\pi/6")]
+
+	)
+	plot!(repeat([5π/6],100),range(0,3,length=100);
+	proj=:polar,label=nothing,
+		l=(2,:red,:dash),
+		annotations=[(0.5cos(5π/6),0.9sin(5π/6),L"\theta=5\pi/6")]
+
+	)
+		cm"""
+	 __Rose__
+
+	``r  = 1-2\sin \theta``
+	
+	$p
+
+	``A_1 = \text{area of inner loop} = \pi - \frac{3\sqrt{3}}{2}``
+		
+	``A_2 = \text{area of outer loop} = 2\pi + \frac{3\sqrt{3}}{2}``
+	
+		
+	``A = \text{area between loops} = A_2-A_1 = \pi - 3\sqrt{3}``
+
+	
+	"""
+	
+end
+
+# ╔═╡ 0e42e5fb-6a5b-4636-b8b6-309617e14256
+md"##  Points of Intersection of Polar Graphs"
+
+# ╔═╡ d38a523d-ac85-4a47-b099-80a0d2273233
+let
+	r1(θ) = -6.0cos(θ)
+	r2(θ) = 2.0 - 2cos(θ)
+	# ts = range(2π/3,4π/3,length=100)
+	ts = range(π/2,3π/2,length=500)
+	r3(t) = t >=2π/3 && t <=4π/3 ? r2(t) : r1(t)
+	p= plot(ts,r3.(ts), fill=true, proj=:polar,label=nothing)
+	plot!(r1;
+	proj=:polar,label=nothing,
+		l=(2,:black),
+		
+	)
+	plot!(r2;
+	proj=:polar,label=nothing,
+		l=(1,:grey),
+		
+	)
+	# plot!(repeat([π/6],100),range(0,3,length=100);
+	# proj=:polar,label=nothing,
+	# 	l=(2,:red,:dash),
+	# 	annotations=[(0.5cos(π/6),0.9sin(π/6),L"\theta=\pi/6")]
+
+	# )
+	# plot!(repeat([5π/6],100),range(0,3,length=100);
+	# proj=:polar,label=nothing,
+	# 	l=(2,:red,:dash),
+	# 	annotations=[(0.5cos(5π/6),0.9sin(5π/6),L"\theta=5\pi/6")]
+
+	# )
+		cm"""
+	 __Rose__
+
+	``r  = 1-2\sin \theta``
+	
+	$p
+
+		
+	``A = \text{area between the curves} = \frac{5\pi}{2}``
+
+	
+	"""
+	
+end
+
+# ╔═╡ 11a883eb-56a3-49ac-89d2-e7c9ffb2c043
+md"##  Arc Length in Polar Form"
+
+# ╔═╡ a22ae8b2-7d44-40cf-ae4f-bebe3b5da083
+let
+	r(θ) = 2 - 2cos(θ)
+	p= plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+		cm"""
+
+	
+	$p
+	"""
+	
+end
+
+# ╔═╡ d8085786-1e5e-4c8a-9847-9948a23643fc
+md"## Area of a Surface of Revolution"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -750,7 +920,7 @@ s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} 
 cm"""
 $(ex(4,"Finding Arc Length"))
 
-A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown in Figure 10.33. The epicycloid traced by a point on the circumference of the smaller circle is given by
+A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
 ```math
 x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
 ```
@@ -876,6 +1046,90 @@ Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \the
 cm"""
 $(bth("Tangent Lines at the Pole"))
 If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
+"""
+
+# ╔═╡ 352c4204-c676-47a6-887d-a3bdd5cc7d66
+cm"""
+__What is the area of a sector of a circle?__
+
+$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
+
+__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
+
+$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
+
+
+"""
+	
+
+# ╔═╡ f886e4c9-1fa1-45fa-b1b8-ffbca56c522a
+cm"""
+$(bth("Area in Polar Coordinates"))
+If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
+```math
+A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
+```
+```math
+=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
+```
+"""
+
+# ╔═╡ 362222c0-5e65-4d84-8766-7d2fd678dd7b
+cm"""
+$(ex(1,"
+Finding the Area of a Polar Region"))
+Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
+"""
+
+# ╔═╡ 96397bdb-4add-4b15-af28-076a0057e88b
+cm"""
+$(ex(2,"Finding the Area Bounded by a Single Curve"))
+Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
+"""
+
+# ╔═╡ 709ebbe9-c14a-4461-9367-adc512422e9e
+cm"""
+$(ex(3,"Finding the Area of a Region Between Two Curves"))
+Find the area of the region common to the two regions bounded by the curves
+```math
+r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
+```
+and
+```math
+r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
+```
+
+"""
+
+# ╔═╡ 603bd8f0-a602-453a-9caf-a73303b78559
+cm"""
+$(bth("Arc Length of a Polar Curve"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
+```math
+s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
+```
+"""
+
+# ╔═╡ f7c6fc51-4c31-4eca-a79b-766068558894
+cm"""
+$(ex(4,"Finding the Length of a Polar Curve"))
+Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
+"""
+
+# ╔═╡ c0475c93-9b5b-4f13-a045-114b824c1af2
+cm"""
+$(bth("Area of a Surface of Revolution"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
+1. ``S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta``
+
+About the polar axis
+2. ``S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta``
+
+About the line ``\theta=\frac{\pi}{2}``
+$(ebl())
+
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3022,6 +3276,7 @@ version = "1.4.1+1"
 # ╟─056b4af6-c433-497e-81e0-70bb3096bc3c
 # ╟─ca784670-8225-4c3e-a4ee-8f7ab59adc85
 # ╟─f8dcab6d-2926-43d3-ba9f-b4a50316038e
+# ╟─f8a97efa-4469-42b8-95af-3a6bf3973b5d
 # ╟─ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
 # ╟─c602fc93-2bdc-444f-9b2d-d20caf751a8f
 # ╟─78b5718d-6c40-413d-b990-b8bbf6b323ba
@@ -3033,7 +3288,7 @@ version = "1.4.1+1"
 # ╟─5c4a9aa7-9223-46d7-91f9-f958e3be6eeb
 # ╟─c3b508e4-913c-4e33-b759-7d15d31de0b4
 # ╟─0fe1255e-5df0-477e-8999-4b93750b2a6f
-# ╠═784aad5e-9618-4ab5-ac7a-0d0394abe25d
+# ╟─784aad5e-9618-4ab5-ac7a-0d0394abe25d
 # ╟─35220a5b-a101-495e-b617-361510394818
 # ╠═fee76b84-3a2d-487c-b034-84ba199a1b90
 # ╟─11bbb488-8f5a-47ae-b8a6-c05d7cd01f45
@@ -3041,6 +3296,23 @@ version = "1.4.1+1"
 # ╟─b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
 # ╟─1f2859ea-80c9-4918-a4fb-d9db5123cacb
 # ╟─0abd3e51-8fe7-4d35-9d0b-23e03e01ab34
+# ╟─cd2a10a5-9166-4754-b277-02efd8747eb3
+# ╟─ad06e95d-2879-4039-84bc-07b7856e2d89
+# ╟─352c4204-c676-47a6-887d-a3bdd5cc7d66
+# ╟─f886e4c9-1fa1-45fa-b1b8-ffbca56c522a
+# ╟─362222c0-5e65-4d84-8766-7d2fd678dd7b
+# ╟─b6e05c6d-5124-4d6e-8160-c2b36cbee1d6
+# ╟─96397bdb-4add-4b15-af28-076a0057e88b
+# ╟─b294b1df-4b78-4aeb-bbb3-f943adcf4c13
+# ╟─0e42e5fb-6a5b-4636-b8b6-309617e14256
+# ╟─709ebbe9-c14a-4461-9367-adc512422e9e
+# ╟─d38a523d-ac85-4a47-b099-80a0d2273233
+# ╟─11a883eb-56a3-49ac-89d2-e7c9ffb2c043
+# ╟─603bd8f0-a602-453a-9caf-a73303b78559
+# ╟─f7c6fc51-4c31-4eca-a79b-766068558894
+# ╟─a22ae8b2-7d44-40cf-ae4f-bebe3b5da083
+# ╟─d8085786-1e5e-4c8a-9847-9948a23643fc
+# ╟─c0475c93-9b5b-4f13-a045-114b824c1af2
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
