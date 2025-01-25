@@ -295,18 +295,6 @@ end
 # ╔═╡ 3f565a27-fdc0-4209-9105-dc3f3ae3dfc2
  md"## Coordinate Conversion"
 
-# ╔═╡ f8a97efa-4469-42b8-95af-3a6bf3973b5d
-cm"""
-<div style="color: red;font-weight:800">
-
-- ABDULKAREEM ABDULLAH ALHUDHAIF
-- ABDULRAHMAN DHAFER ALSHEHRI
-- MOHANAD OMAR ALSOMALI
-
-</div>
-
-"""
-
 # ╔═╡ ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
 md"## Polar Graphs"
 
@@ -405,17 +393,6 @@ end
 # ╔═╡ b69a0131-c8cd-4ba2-a124-548baa1bc52d
 md"##  Slope and Tangent Lines"
 
-# ╔═╡ c3b508e4-913c-4e33-b759-7d15d31de0b4
-cm"""
-$(bbl("Remarks,""))
-
-- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
-- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
-
-- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
-"""
-
-
 # ╔═╡ 784aad5e-9618-4ab5-ac7a-0d0394abe25d
 let
 	
@@ -443,7 +420,7 @@ md"##  Special Polar Graphs"
 
 # ╔═╡ b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
 let
-	a = 1
+	a = 10
 	b  = 3
 	r(θ) = a + b*cos(θ) 
 	p= plot(r;
@@ -461,7 +438,7 @@ end
 # ╔═╡ 1f2859ea-80c9-4918-a4fb-d9db5123cacb
 let
 	a = 1
-	n  = 3
+	n  = 10
 	r(θ) = a*cos(n*θ) 
 	p= plot(r;
 	proj=:polar,label=nothing,
@@ -477,11 +454,11 @@ end
 
 # ╔═╡ 0abd3e51-8fe7-4d35-9d0b-23e03e01ab34
 let
-	a = 1
-	n  = 2
+	a = 1/2
+	n  = 6
 	# θs = range(0,2π,length=200)
 	# r(θ) = cos(2*θ)>=0 && abs(a)*abs(cos(n*θ))
-	r(θ) = sin(2*θ)>=0 && abs(a)*abs(sin(n*θ))
+	r(θ) = sin(n*θ)>=0 && abs(a)*abs(sin(n*θ))
 	p= plot(r;
 	proj=:polar,label=nothing,
 		
@@ -651,6 +628,15 @@ end
 
 # ╔═╡ d8085786-1e5e-4c8a-9847-9948a23643fc
 md"## Area of a Surface of Revolution"
+
+# ╔═╡ 40cb2c1d-7387-4d02-a8f2-83d84ddf207f
+# let
+# 	n = 100
+# 	ts = range(-5, stop = 5, length = n)
+# 	z = 1:n
+# 	plot(ts,ts, (x,y)->x + x^2 - y^2, zcolor = reverse(z),  leg = false, cbar = false, w = 5, camera=(30,30),st=:surface)
+# 	# plot!(zeros(n), zeros(n), 1:n, w = 10)
+# end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1022,12 +1008,23 @@ Sketch the graph of ``r=2 \cos 3 \theta``.
 # ╔═╡ 5c4a9aa7-9223-46d7-91f9-f958e3be6eeb
 cm"""
 $(bth("Slope in Polar Form"))
-If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r-f(\theta)`` at the point ``(r, \theta)`` is
+If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
 ```math
 \frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
 ```
 provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``. 
 """
+
+# ╔═╡ c3b508e4-913c-4e33-b759-7d15d31de0b4
+cm"""
+$(bbl("Remarks",""))
+
+- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
+- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
+
+- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
+"""
+
 
 # ╔═╡ 0fe1255e-5df0-477e-8999-4b93750b2a6f
 cm"""
@@ -1195,7 +1192,7 @@ Symbolics = "~6.15.3"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.2"
+julia_version = "1.11.3"
 manifest_format = "2.0"
 project_hash = "90d48343095fe5d990c1670257717d90a27e925e"
 
@@ -3276,7 +3273,6 @@ version = "1.4.1+1"
 # ╟─056b4af6-c433-497e-81e0-70bb3096bc3c
 # ╟─ca784670-8225-4c3e-a4ee-8f7ab59adc85
 # ╟─f8dcab6d-2926-43d3-ba9f-b4a50316038e
-# ╟─f8a97efa-4469-42b8-95af-3a6bf3973b5d
 # ╟─ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
 # ╟─c602fc93-2bdc-444f-9b2d-d20caf751a8f
 # ╟─78b5718d-6c40-413d-b990-b8bbf6b323ba
@@ -3293,8 +3289,8 @@ version = "1.4.1+1"
 # ╠═fee76b84-3a2d-487c-b034-84ba199a1b90
 # ╟─11bbb488-8f5a-47ae-b8a6-c05d7cd01f45
 # ╟─bceaaa97-8e13-45a4-ac8c-90d9e9280a75
-# ╟─b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
-# ╟─1f2859ea-80c9-4918-a4fb-d9db5123cacb
+# ╠═b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
+# ╠═1f2859ea-80c9-4918-a4fb-d9db5123cacb
 # ╟─0abd3e51-8fe7-4d35-9d0b-23e03e01ab34
 # ╟─cd2a10a5-9166-4754-b277-02efd8747eb3
 # ╟─ad06e95d-2879-4039-84bc-07b7856e2d89
@@ -3313,6 +3309,7 @@ version = "1.4.1+1"
 # ╟─a22ae8b2-7d44-40cf-ae4f-bebe3b5da083
 # ╟─d8085786-1e5e-4c8a-9847-9948a23643fc
 # ╟─c0475c93-9b5b-4f13-a045-114b824c1af2
+# ╠═40cb2c1d-7387-4d02-a8f2-83d84ddf207f
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
