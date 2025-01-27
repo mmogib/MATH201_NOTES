@@ -630,6 +630,30 @@ end
 md"## Area of a Surface of Revolution"
 
 # ╔═╡ 40cb2c1d-7387-4d02-a8f2-83d84ddf207f
+let
+	r(θ) = cos(θ)
+	p= plot(r;
+	proj=:polar,label=nothing,
+		
+	)
+		cm"""
+
+	
+	$p
+	"""
+	
+end
+
+# ╔═╡ 1d54944c-ef82-4237-ad76-62ed4e201577
+md"""#  11.1 Vectors in the Plan
+> __Objectives__
+> 1. Write the component form of a vector.
+> 2. Perform vector operations and interpret the results geometrically.
+> 3. Write a vector as a linear combination of standard unit vectors.
+
+"""
+
+# ╔═╡ 6f0edbab-49c3-4da1-a099-9ec899060383
 # let
 # 	n = 100
 # 	ts = range(-5, stop = 5, length = n)
@@ -637,6 +661,63 @@ md"## Area of a Surface of Revolution"
 # 	plot(ts,ts, (x,y)->x + x^2 - y^2, zcolor = reverse(z),  leg = false, cbar = false, w = 5, camera=(30,30),st=:surface)
 # 	# plot!(zeros(n), zeros(n), 1:n, w = 10)
 # end
+
+# ╔═╡ 26e3fb79-48b1-4d69-a1b2-5364168e7a36
+md"## Component Form of a Vector"
+
+# ╔═╡ 4b6ded9a-929d-48d9-9649-6cd0a2dc38f7
+let
+	plot(
+		[0;1],[0;1], 
+		frame_style=:none, 
+		label=:none, arrow=true, lw=6, color=:black,
+		aspect_ratio=1,
+		annotations=[
+			(0,0.1,L"P"),
+			(0,-0.1,"Initial point"),
+			(1,1.1,L"Q"),
+			(1.3,0.9,"Terminal point"),
+			(0.8,0.5,L"\textbf{v}=\vec{PQ}"),
+		],
+		ylimits=(-0.2,1.2)		
+	)
+	scatter!([0;1],[0;1],label=:none, m=5,c=:black)
+	
+end
+
+# ╔═╡ 136624c5-6f20-4cc5-82f5-079b8f9c9618
+cm"## Vector Operations"
+
+# ╔═╡ 1135fb0d-4ef3-4d84-a487-940b1be56887
+let
+	v1 =(2,0.5)
+	v2 = (0.5,1.5)
+	vs = [v1;v2]
+	p = plot(;frame_style=:origin,xlimits=(-1,3),ylimits=(-1,3))
+	for (i,v) in enumerate(vs)
+		plot!(p,[0;v[1]],[0,v[2]],arrow=true,annotations=[((v.+0.1)...,L"v_%$i")],label=:none, c=:black)
+	end
+	v = v1 .+ v2
+	plot!(p,[0;v[1]],[0,v[2]],arrow=true,annotations=[((v.+0.1)...,L"v_1+v_2",:red)],label=:none, c=:red)
+	v = v1 .- v2
+	plot!(p,[0;v[1]],[0,v[2]],arrow=true,annotations=[((v.+0.1)...,L"v_1-v_2",:blue)],label=:none, c=:blue)
+
+	p
+end
+
+# ╔═╡ 3d3598a8-5e3e-478a-ae71-c99772908426
+md"## Standard Unit Vectors"
+
+# ╔═╡ ced54357-381f-4ecd-a1f1-c3b397ac8185
+cm"""
+
+The unit vectors ``\langle 1,0\rangle`` and ``\langle 0,1\rangle`` are called the standard unit vectors in the plane and are denoted by
+```math
+\mathbf{i}=\langle 1,0\rangle \text { and } \mathbf{j}=\langle 0,1\rangle
+```
+
+__Standard unit vectors__
+"""
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1117,16 +1198,140 @@ Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioi
 cm"""
 $(bth("Area of a Surface of Revolution"))
 Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
-1. ``S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta``
+1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
 
-About the polar axis
-2. ``S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta``
 
-About the line ``\theta=\frac{\pi}{2}``
+
+2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
 $(ebl())
 
 $(ex(5,"Finding the Area of a Surface of Revolution"))
 Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
+"""
+
+# ╔═╡ 16395162-789a-4822-aaff-8a34b4e246f3
+cm"""
+$(ex(1,"Vector Representation: Directed Line Segments"))
+Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
+"""
+
+# ╔═╡ 8ba6d7b2-5a2b-4874-b31c-ef56dd617097
+cm"""
+$(define("Component Form of a Vector in the Plane"))
+If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
+
+Moreover, the length (or magnitude) of ``\textbf{v}`` is
+```math
+\begin{aligned}
+\|\mathbf{v}\| 
+& =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
+\end{aligned}
+```
+"""
+
+# ╔═╡ fe2376f2-8de3-4163-94f1-b77c3c0e092e
+cm"""
+$(ex(2,"Component Form and Length of a Vector"))
+Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
+"""
+
+# ╔═╡ 81101ecd-e335-4cc1-a503-4a62bd964118
+cm"""
+$(define("Vector Addition and Scalar Multiplication"))
+Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
+1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
+2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
+```math
+c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
+```
+3. The negative of ``\mathbf{v}`` is the vector
+```math
+-\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
+```
+4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
+```math
+\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
+```
+"""
+
+# ╔═╡ ee6a4043-a6e8-466f-a262-f6ec04372c7d
+cm"""
+$(ex(3,"Vector Operations"))
+For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
+- (a.) ``\frac{1}{2} \mathbf{v}``
+- (b.) ``\mathbf{w}-\mathbf{v}``
+- (c.) ``\mathbf{v}+2 \mathbf{w}``
+"""
+
+# ╔═╡ c448ff49-ac48-4019-9520-0d6ead2c5bd9
+cm"""
+$(bth("Properties of Vector Operations"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``  
+
+
+2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
+
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
+
+4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
+
+5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
+
+6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
+"""
+
+# ╔═╡ 1c3a4171-ffc3-46f9-8618-e74abeaef721
+cm"""
+$(bth("Length of a Scalar Multiple"))
+Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
+```math
+\|c \mathbf{v}\|=|c|\|\mathbf{v}\|
+```
+``|c|`` is the absolute value of ``c``.
+"""
+
+# ╔═╡ 6e84190d-302e-401c-91b8-775451b4dc37
+cm"""
+$(bth("Unit Vector in the Direction of  v"))
+If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
+```math
+\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
+```
+has length 1 and the same direction as ``\mathbf{v}``.
+"""
+
+# ╔═╡ c68d34a8-bdf0-4516-a72c-cb047ebd4c7c
+cm"""
+$(bbl("triangle inequality for vectors",""))
+```math
+\|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
+```
+
+"""
+
+# ╔═╡ 2ec1ab72-fec7-43fe-9c5e-f4415bcb9f6a
+cm"""
+$(ex(4,"Finding a Unit Vector"))
+Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
+"""
+
+# ╔═╡ a17a0d9d-ebeb-4893-aba7-f0618e045511
+cm"""
+$(ex(5,"Writing a Linear Combination of Unit Vectors"))
+Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
+"""
+
+# ╔═╡ adad65b4-1106-41a3-a0ac-413e4072b0a1
+cm"""
+$(ex(6,"Writing a Vector of Given Magnitude and Direction"))
+The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3310,6 +3515,26 @@ version = "1.4.1+1"
 # ╟─d8085786-1e5e-4c8a-9847-9948a23643fc
 # ╟─c0475c93-9b5b-4f13-a045-114b824c1af2
 # ╠═40cb2c1d-7387-4d02-a8f2-83d84ddf207f
+# ╟─1d54944c-ef82-4237-ad76-62ed4e201577
+# ╟─6f0edbab-49c3-4da1-a099-9ec899060383
+# ╟─26e3fb79-48b1-4d69-a1b2-5364168e7a36
+# ╟─4b6ded9a-929d-48d9-9649-6cd0a2dc38f7
+# ╟─16395162-789a-4822-aaff-8a34b4e246f3
+# ╟─8ba6d7b2-5a2b-4874-b31c-ef56dd617097
+# ╟─fe2376f2-8de3-4163-94f1-b77c3c0e092e
+# ╟─136624c5-6f20-4cc5-82f5-079b8f9c9618
+# ╟─81101ecd-e335-4cc1-a503-4a62bd964118
+# ╟─1135fb0d-4ef3-4d84-a487-940b1be56887
+# ╟─ee6a4043-a6e8-466f-a262-f6ec04372c7d
+# ╟─c448ff49-ac48-4019-9520-0d6ead2c5bd9
+# ╟─1c3a4171-ffc3-46f9-8618-e74abeaef721
+# ╟─6e84190d-302e-401c-91b8-775451b4dc37
+# ╟─c68d34a8-bdf0-4516-a72c-cb047ebd4c7c
+# ╟─2ec1ab72-fec7-43fe-9c5e-f4415bcb9f6a
+# ╟─3d3598a8-5e3e-478a-ae71-c99772908426
+# ╟─ced54357-381f-4ecd-a1f1-c3b397ac8185
+# ╟─a17a0d9d-ebeb-4893-aba7-f0618e045511
+# ╟─adad65b4-1106-41a3-a0ac-413e4072b0a1
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
