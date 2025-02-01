@@ -719,6 +719,57 @@ The unit vectors ``\langle 1,0\rangle`` and ``\langle 0,1\rangle`` are called th
 __Standard unit vectors__
 """
 
+# ╔═╡ f75a4200-8ab9-421d-8b10-1ad5f6d279ce
+md"""
+# 11.2 Space Coordinates and Vectors in Space
+> __Objectives__
+> 1. Understand the three-dimensional rectangular coordinate system.
+> 2. Analyze vectors in space.
+"""
+
+# ╔═╡ 7dfefa60-23cf-4d9d-b768-c26c2fba8bf6
+md"## Coordinates in Space"
+
+# ╔═╡ 15b84eda-16bc-4255-9e0b-8eb04abdf931
+
+
+# ╔═╡ f01c3fb1-6331-4a1f-acab-9243b577c0b7
+let
+	# Center of the sphere
+	h, k, l = 5/2, 1, 0
+	
+	# Radius of the sphere
+	r = sqrt(97) / 2
+	
+	# Generate points on the sphere using spherical coordinates
+	u = LinRange(0, 2π, 100)  # Azimuthal angle
+	v = LinRange(0, π, 100)   # Polar angle
+	
+	# Create a grid of u and v values
+	u_grid = repeat(u', length(v), 1)
+	v_grid = repeat(v, 1, length(u))
+	
+	# Parametric equations for the sphere
+	x = h .+ r * sin.(v_grid) .* cos.(u_grid)
+	y = k .+ r * sin.(v_grid) .* sin.(u_grid)
+	z = l .- r * cos.(v_grid)
+	
+	# Plot the sphere
+	surface(x, y, z, 
+		color = RGBA{Float64}(1, 0, 0, 0.1),
+		camera=(30,30),
+		xlimits=(-10,10),
+		ylimits=(-10,10),
+		zlimits=(-10,10),
+		frame_style=:origin,
+		legend = false, 
+		# xlabel = "x", ylabel = "y", zlabel = "z", 
+		title = "Sphere with Center " * L"(2.5, 1, 0)" * "and Radius " * L"\sqrt{97}/2")
+end
+
+# ╔═╡ 638a3b2e-23ff-45c5-9d4c-da3ea28dc123
+md"## Vectors in Space"
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -1332,6 +1383,73 @@ Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal poin
 cm"""
 $(ex(6,"Writing a Vector of Given Magnitude and Direction"))
 The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
+"""
+
+# ╔═╡ 8629cb44-2eda-40c1-afe1-e2a80f207ff0
+cm"""
+$(ex(1,"Finding the Distance Between Two Points in Space"))
+Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
+"""
+
+# ╔═╡ e409714e-9620-4699-86db-3371f34a3286
+cm"""
+$(bbl("Vectors in Space",""))
+Let ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` be vectors in space and let ``c`` be a scalar.
+1. Equality of Vectors: ``\mathbf{u}=\mathbf{v}`` if and only if ``u_1=v_1, u_2=v_2``, and ``u_3=v_3``.
+2. Component Form: If ``\mathbf{v}`` is represented by the directed line segment from ``P\left(p_1, p_2, p_3\right)`` to ``Q\left(q_1, q_2, q_3\right)``, then
+```math
+\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle=\left\langle q_1-p_1, q_2-p_2, q_3-p_3\right\rangle
+```
+3. Length: ``\|\mathbf{v}\|=\sqrt{v_1^2+v_2^2+v_3^2}``
+4. Unit Vector in the Direction of ``\mathbf{v}: \frac{\mathbf{v}}{\|\mathbf{v}\|}=\left(\frac{1}{\|\mathbf{v}\|}\right)\left\langle v_1, v_2, v_3\right\rangle, \quad \mathbf{v} \neq \mathbf{0}``
+5. Vector Addition: ``\mathbf{v}+\mathbf{u}=\left\langle v_1+u_1, v_2+u_2, v_3+u_3\right\rangle``
+6. Scalar Multiplication: ``c \mathbf{v}=\left\langle c v_1, c v_2, c v_3\right\rangle``
+"""
+
+# ╔═╡ dfa813df-1e71-4004-8327-d333a326648b
+cm"""
+$(ex(3,"Finding the Component Form of a Vector in Space"))
+Find the component form and magnitude of the vector ``\mathbf{v}`` having initial point ``(-2,3,1)`` and terminal point ``(0,-4,4)``. Then find a unit vector in the direction of ``\mathbf{v}``.
+"""
+
+# ╔═╡ 67eaf1f0-d71d-4fb1-b782-d7b0e73e21fc
+cm"""
+$(define("Parallel Vectors"))
+Two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}`` are parallel when there is some scalar ``c`` such that ``\mathbf{u}=c \mathbf{v}``.
+"""
+
+# ╔═╡ 9ffd817f-3680-4fdc-a369-f3f55e62c4a0
+cm"""
+$(ex(4,"Parallel Vectors"))
+Vector ``\mathbf{w}`` has initial point ``(2,-1,3)`` and terminal point ``(-4,7,5)``. Which of the following vectors is parallel to ``\mathbf{w}`` ?
+a. ``\mathbf{u}=\langle 3,-4,-1\rangle``
+b. ``\mathbf{v}=\langle 12,-16,4\rangle``
+"""
+
+# ╔═╡ e982617c-8230-4818-bd2f-223d31638735
+cm"""
+$(ex(5,"Using Vectors to Determine Collinear Points"))
+Determine whether the points
+```math
+P(1,-2,3), \quad Q(2,1,0), \quad \text { and } \quad R(4,7,-6)
+```
+are collinear.
+"""
+
+# ╔═╡ 4a8731dd-a218-41eb-83ee-18afe812b53d
+cm"""
+$(ex(6,"Standard Unit Vector Notation"))
+- __(a.)__ Write the vector ``\mathbf{v}=4 \mathbf{i}-5 \mathbf{k}`` in component form.
+- __(b.)__ Find the terminal point of the vector ``\mathbf{v}=7 \mathbf{i}-\mathbf{j}+3 \mathbf{k}``, given that the initial point is ``P(-2,3,5)``.
+c. Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
+"""
+
+# ╔═╡ 8dea5ec4-8f71-42bb-bb4d-178db354a8de
+cm"""
+$(ex(7,"Measuring Force"))
+A television camera weighing ``120`` pounds is supported by a tripod, as shown below. Represent the force exerted on each leg of the tripod as a vector. 
+
+$(post_img("https://www.dropbox.com/scl/fi/avv2vzzviidm4m8opc3uk/fig_11_23.png?rlkey=o3rnxynprpdg5lt0jkbh6wp9p&dl=1"))
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3516,7 +3634,7 @@ version = "1.4.1+1"
 # ╟─c0475c93-9b5b-4f13-a045-114b824c1af2
 # ╠═40cb2c1d-7387-4d02-a8f2-83d84ddf207f
 # ╟─1d54944c-ef82-4237-ad76-62ed4e201577
-# ╟─6f0edbab-49c3-4da1-a099-9ec899060383
+# ╠═6f0edbab-49c3-4da1-a099-9ec899060383
 # ╟─26e3fb79-48b1-4d69-a1b2-5364168e7a36
 # ╟─4b6ded9a-929d-48d9-9649-6cd0a2dc38f7
 # ╟─16395162-789a-4822-aaff-8a34b4e246f3
@@ -3535,6 +3653,19 @@ version = "1.4.1+1"
 # ╟─ced54357-381f-4ecd-a1f1-c3b397ac8185
 # ╟─a17a0d9d-ebeb-4893-aba7-f0618e045511
 # ╟─adad65b4-1106-41a3-a0ac-413e4072b0a1
+# ╟─f75a4200-8ab9-421d-8b10-1ad5f6d279ce
+# ╟─7dfefa60-23cf-4d9d-b768-c26c2fba8bf6
+# ╟─8629cb44-2eda-40c1-afe1-e2a80f207ff0
+# ╠═15b84eda-16bc-4255-9e0b-8eb04abdf931
+# ╠═f01c3fb1-6331-4a1f-acab-9243b577c0b7
+# ╟─638a3b2e-23ff-45c5-9d4c-da3ea28dc123
+# ╟─e409714e-9620-4699-86db-3371f34a3286
+# ╟─dfa813df-1e71-4004-8327-d333a326648b
+# ╟─67eaf1f0-d71d-4fb1-b782-d7b0e73e21fc
+# ╟─9ffd817f-3680-4fdc-a369-f3f55e62c4a0
+# ╟─e982617c-8230-4818-bd2f-223d31638735
+# ╟─4a8731dd-a218-41eb-83ee-18afe812b53d
+# ╟─8dea5ec4-8f71-42bb-bb4d-178db354a8de
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
