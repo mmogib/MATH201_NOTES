@@ -730,9 +730,6 @@ md"""
 # ╔═╡ 7dfefa60-23cf-4d9d-b768-c26c2fba8bf6
 md"## Coordinates in Space"
 
-# ╔═╡ 15b84eda-16bc-4255-9e0b-8eb04abdf931
-
-
 # ╔═╡ f01c3fb1-6331-4a1f-acab-9243b577c0b7
 let
 	# Center of the sphere
@@ -767,8 +764,62 @@ let
 		title = "Sphere with Center " * L"(2.5, 1, 0)" * "and Radius " * L"\sqrt{97}/2")
 end
 
+# ╔═╡ b638364c-6b12-44e5-b70b-a1260bd20423
+cm"""
+
+<iframe src="https://www.geogebra.org/classic/vjqqpvzw?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+"""
+
 # ╔═╡ 638a3b2e-23ff-45c5-9d4c-da3ea28dc123
 md"## Vectors in Space"
+
+# ╔═╡ 641296c7-72ca-4d28-b55a-c6495edcfdd4
+md"""
+# 11.3 The Dot Product of Two Vectors
+> __Objectives__
+> 1. Use properties of the dot product of two vectors.
+> 1. Find the angle between two vectors using the dot product.
+> 1. Find the direction cosines of a vector in space.
+> 1. Find the projection of a vector onto another vector.
+> 1. Use vectors to find the work done by a constant force.
+
+"""
+
+# ╔═╡ 7752454b-924b-4290-846e-83680faa1807
+md"##  The Dot Product"
+
+# ╔═╡ 073611bb-04e2-40a5-8a28-31ea5a435da4
+md"## Angle Between Two Vectors"
+
+# ╔═╡ 0859018b-198b-467a-8a64-5f399ccb4c30
+md"## Direction Cosines"
+
+# ╔═╡ 9c11772f-dc9b-48f4-8bf5-966cdadc2363
+cm"""
+```math
+\begin{aligned}
+& \cos \alpha=\frac{v_1}{\|\mathbf{v}\|} 
+\qquad\color{red}{ \alpha \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{i}.}
+\\
+& \cos \beta=\frac{v_2}{\|\mathbf{v}\|} 
+\qquad\color{red}{ \alpha \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{i}.}
+\\
+& \cos \gamma=\frac{v_3}{\|\mathbf{v}\|}
+\qquad\color{red}{ \gamma \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{k}.}
+\end{aligned}
+```
+
+```math
+\cos^2\alpha +\cos^2\beta +\cos^2\gamma =1
+```
+"""
+
+# ╔═╡ effc20dc-3097-46bd-a7d6-afe882033a05
+md"## Projections and Vector Components"
+
+# ╔═╡ efabadf1-c3c5-4c9c-9bae-4eadd3d5a033
+md"## Work"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1391,6 +1442,16 @@ $(ex(1,"Finding the Distance Between Two Points in Space"))
 Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
 """
 
+# ╔═╡ 15b84eda-16bc-4255-9e0b-8eb04abdf931
+cm"""
+$(ex(2,"Finding the equation of a Sphere"))
+Find the standard equation of the sphere that has the points
+
+``(5, −2, 3)`` and ``(0, 4, −3)``
+
+ as endpoints of a diameter.
+"""
+
 # ╔═╡ e409714e-9620-4699-86db-3371f34a3286
 cm"""
 $(bbl("Vectors in Space",""))
@@ -1450,6 +1511,173 @@ $(ex(7,"Measuring Force"))
 A television camera weighing ``120`` pounds is supported by a tripod, as shown below. Represent the force exerted on each leg of the tripod as a vector. 
 
 $(post_img("https://www.dropbox.com/scl/fi/avv2vzzviidm4m8opc3uk/fig_11_23.png?rlkey=o3rnxynprpdg5lt0jkbh6wp9p&dl=1"))
+"""
+
+# ╔═╡ 6a4c706b-ee37-4a33-82b0-99e8e8db6fa9
+cm"""
+$(define("Dot Product"))
+The dot product of ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` is
+```math
+\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2
+```
+
+The dot product of ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` is
+```math
+\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2+u_3 v_3
+```
+$(ebl())
+
+$(bth("Properties of the Dot Product"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane or in space and let ``c`` be a scalar.
+
+1. ``\mathbf{u} \cdot \mathbf{v}=\mathbf{v} \cdot \mathbf{u}\qquad \color{red}{\text{Commutative Property}}``
+
+2. ``\mathbf{u} \cdot(\mathbf{v}+\mathbf{w})=\mathbf{u} \cdot \mathbf{v}+\mathbf{u} \cdot \mathbf{w}\qquad \color{red}{\text{Distributive Property}}``
+
+3. ``c(\mathbf{u} \cdot \mathbf{v})=c \mathbf{u} \cdot \mathbf{v}=\mathbf{u} \cdot c \mathbf{v}\qquad \qquad\color{red}{\text{Associative Property}}``
+4. ``\mathbf{0} \cdot \mathbf{v}=0``
+5. ``\mathbf{v} \cdot \mathbf{v}=\|\mathbf{v}\|^2``
+"""
+
+# ╔═╡ 1e816ba7-2ec6-46bd-b349-bea20140111c
+cm"""
+$(ex(1,"Finding Dot Products"))
+
+Let ``\mathbf{u}=\langle 2,-2\rangle, \mathbf{v}=\langle 5,8\rangle``, and ``\mathbf{w}=\langle-4,3\rangle``.
+
+- (a.) ``\mathbf{u} \cdot \mathbf{v}=\langle 2,-2\rangle \cdot\langle 5,8\rangle=2(5)+(-2)(8)=-6``
+- (b.) ``(\mathbf{u} \cdot \mathbf{v}) \mathbf{w}=-6\langle-4,3\rangle=\langle 24,-18\rangle``
+- (c.) ``\mathbf{u} \cdot(2 \mathbf{v})=2(\mathbf{u} \cdot \mathbf{v})=2(-6)=-12``
+- (d.) ``\|\mathbf{w}\|^2=\mathbf{w} \cdot \mathbf{w}=\langle-4,3\rangle \cdot\langle-4,3\rangle=(-4)(-4)+(3)(3)=25``
+"""
+
+# ╔═╡ a97991f4-dab7-473a-b5a5-d9002384cafc
+cm"""
+$(bth("Angle Between Two Vectors"))
+If ``\theta`` is the angle between two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}``, where ``0 \leq \theta \leq \pi``, then
+```math
+\cos \theta=\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}
+```
+"""
+
+# ╔═╡ 0c5db57b-b294-4d8c-9984-0b289e1d1495
+cm"""
+$(bbl("Remark",""))
+```math
+\mathbf{u} \cdot \mathbf{v}=\|\mathbf{u}\|\|\mathbf{v}\| \cos \theta\qquad \color{red}{\text{Alternative form of dot product}}
+```
+"""
+
+# ╔═╡ da6a09ec-523d-4612-979d-3c55b28288ce
+cm"""
+$(define(" Definition of Orthogonal Vectors"))
+ The vectors ``u`` and ``v`` are orthogonal when ``u∙v=0``
+"""
+
+# ╔═╡ 869abdcb-84b5-4d96-a101-0293a2d4c1e2
+cm"""
+$(ex(2,"Finding the Angle Between Two Vectors"))
+For ``\mathbf{u}=\langle 3,-1,2\rangle, \mathbf{v}=\langle-4,0,2\rangle, \mathbf{w}=\langle 1,-1,-2\rangle``, and ``\mathbf{z}=\langle 2,0,-1\rangle``, find the angle between each pair of vectors.
+
+- (a.) ``\mathbf{u}`` and ``\mathbf{v}``
+- (b.) ``\mathbf{u}`` and ``\mathbf{w}``
+- (c.) ``\mathbf{v}`` and ``\mathbf{z}``
+"""
+
+# ╔═╡ dd53c61c-fa51-4788-ba6a-4599c67b9313
+cm"""
+$(ex(3,"Alternative Form of the Dot Product"))
+Given that ``\|\mathbf{u}\|=10,\|\mathbf{v}\|=7``, and the angle between ``\mathbf{u}`` and ``\mathbf{v}`` is ``\pi / 4``, find ``\mathbf{u} \cdot \mathbf{v}``.
+"""
+
+# ╔═╡ 7253a177-0997-4620-84cd-4c362412b723
+cm"""
+
+$(post_img("https://www.dropbox.com/scl/fi/yoip1oldetoeth472ju81/fig_11_26.png?rlkey=g71oyxboekwrwumo2znb7mqtg&dl=1",400))
+
+"""
+
+# ╔═╡ c139972c-24bd-445f-b95e-ded16e2eba64
+cm"""
+$(ex(4,"Finding Direction Angles"))
+Find the direction cosines and angles for the vector ``\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}+4 \mathbf{k}``, and show that ``\cos ^2 \alpha+\cos ^2 \beta+\cos ^2 \gamma=1``
+"""
+
+# ╔═╡ c3980348-6644-48e6-97f4-8d6ed91547bc
+cm"""
+$(define("Projection and Vector Components"))
+Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors. Moreover, let
+```math
+\mathbf{u}=\mathbf{w}_1+\mathbf{w}_2
+```
+where ``\mathbf{w}_1`` is parallel to ``\mathbf{v}`` and ``\mathbf{w}_2`` is orthogonal to ``\mathbf{v}``, as shown in Figure below.
+1. ``\mathbf{w}_1`` is called the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` or the vector component of ``\mathbf{u}`` along ``\mathbf{v}``, and is denoted by ``\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}``.
+2. ``\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1`` is called the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}``.
+
+$(post_img("https://www.dropbox.com/scl/fi/dek860uer157a294ebkhg/fig_11_29.png?rlkey=yft18nd2xr98ot3s7345x4p6l&dl=1",500))
+"""
+
+# ╔═╡ 51696239-3ed3-484b-874a-64979a5cd91b
+cm"""
+$(ex(5,"Finding a Vector Component of <span style='font-style:italic;font-weight:200;'>u</span> Orthogonal to <span style='font-style:italic;font-weight:200;'>v</span>"))
+Find the vector component of ``\mathbf{u}=\langle 5,10\rangle`` that is orthogonal to ``\mathbf{v}=\langle 4,3\rangle``, given that
+```math
+\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\langle 8,6\rangle
+```
+and
+```math
+\mathbf{u}=\langle 5,10\rangle=\mathbf{w}_1+\mathbf{w}_2 .
+```
+"""
+
+# ╔═╡ 08370e88-8f77-44ba-a93a-51e90c7818fa
+cm"""
+$(bth("Projection Using the Dot Product"))
+If ``\mathbf{u}`` and ``\mathbf{v}`` are nonzero vectors, then the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` is
+```math
+\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\left(\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{v}\|^2}\right) \mathbf{v}
+```
+"""
+
+# ╔═╡ ba9914cc-7b24-45c8-b9f7-2e7e33ec8132
+cm"""
+$(ex(6,"Decomposing a Vector into Vector Components"))
+Find the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` and the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}`` for ``\mathbf{u}=3 \mathbf{i}-5 \mathbf{j}+2 \mathbf{k}`` and ``\quad \mathbf{v}=7 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``.
+"""
+
+# ╔═╡ a37acdbb-34f2-4643-808a-e5afe817088b
+cm"""
+$(ex(7,"Finding a Force"))
+A 600-pound boat sits on a ramp inclined at ``30^{\circ}``, as shown in Figure below. What force is required to keep the boat from rolling down the ramp?
+$(post_img("https://www.dropbox.com/scl/fi/9h16n07tc8x569rwdx5j7/fig_11_32.png?rlkey=rv5hgssgbggmveuj0tcj81ovk&dl=1",500))
+"""
+
+# ╔═╡ 217bbde3-e3cf-4e4f-94c7-7d139941ed3f
+cm"""
+
+The work ``W`` done by the constant force ``\mathbf{F}`` acting along the line of motion of an object is given by
+```math
+W=(\text { magnitude of force })(\text { distance })=\|\mathbf{F}\|\|\stackrel{\rightharpoonup}{P Q}\|
+```
+as shown in Figure 11.33(a). When the constant force ``\mathbf{F}`` is not directed along the line of motion, you can see from Figure 11.33(b) that the work ``W`` done by the force is
+```math
+W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\|=(\cos \theta)\|\mathbf{F}\|\|\overrightarrow{P Q}\|=\mathbf{F} \cdot \overrightarrow{P Q}
+```
+
+$(post_img("https://www.dropbox.com/scl/fi/qafxufq3s8tcrxnbisru2/fig_11_33.png?rlkey=4uypkytgkkby8yaomav0jszhr&dl=1",400))
+
+This notion of work is summarized in the next definition.
+
+$(define("Work"))
+The work ``W`` done by a constant force ``\mathbf{F}`` as its point of application moves along the vector ``\overrightarrow{P Q}`` is one of the following.
+1. ``W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\| \quad`` Projection form
+2. ``W=\mathbf{F} \cdot \stackrel{\rightharpoonup}{P Q}`` Dot product form
+$(ebl())
+
+$(ex(8,"Finding Work"))
+To close a sliding door, a person pulls on a rope with a constant force of 50 pounds at a constant angle of ``60^{\circ}``, as shown in Figure below. Find the work done in moving the door 12 feet to its closed position.
+
+$(post_img("https://www.dropbox.com/scl/fi/8wn5s5kestb1dtzxulldc/fig_11_34.png?rlkey=r0g1mc0s9vakiye1dkxd5oxrd&dl=1",400))
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3656,8 +3884,9 @@ version = "1.4.1+1"
 # ╟─f75a4200-8ab9-421d-8b10-1ad5f6d279ce
 # ╟─7dfefa60-23cf-4d9d-b768-c26c2fba8bf6
 # ╟─8629cb44-2eda-40c1-afe1-e2a80f207ff0
-# ╠═15b84eda-16bc-4255-9e0b-8eb04abdf931
-# ╠═f01c3fb1-6331-4a1f-acab-9243b577c0b7
+# ╟─15b84eda-16bc-4255-9e0b-8eb04abdf931
+# ╟─f01c3fb1-6331-4a1f-acab-9243b577c0b7
+# ╟─b638364c-6b12-44e5-b70b-a1260bd20423
 # ╟─638a3b2e-23ff-45c5-9d4c-da3ea28dc123
 # ╟─e409714e-9620-4699-86db-3371f34a3286
 # ╟─dfa813df-1e71-4004-8327-d333a326648b
@@ -3666,6 +3895,28 @@ version = "1.4.1+1"
 # ╟─e982617c-8230-4818-bd2f-223d31638735
 # ╟─4a8731dd-a218-41eb-83ee-18afe812b53d
 # ╟─8dea5ec4-8f71-42bb-bb4d-178db354a8de
+# ╟─641296c7-72ca-4d28-b55a-c6495edcfdd4
+# ╟─7752454b-924b-4290-846e-83680faa1807
+# ╟─6a4c706b-ee37-4a33-82b0-99e8e8db6fa9
+# ╟─1e816ba7-2ec6-46bd-b349-bea20140111c
+# ╟─073611bb-04e2-40a5-8a28-31ea5a435da4
+# ╟─a97991f4-dab7-473a-b5a5-d9002384cafc
+# ╟─0c5db57b-b294-4d8c-9984-0b289e1d1495
+# ╟─da6a09ec-523d-4612-979d-3c55b28288ce
+# ╟─869abdcb-84b5-4d96-a101-0293a2d4c1e2
+# ╟─dd53c61c-fa51-4788-ba6a-4599c67b9313
+# ╟─0859018b-198b-467a-8a64-5f399ccb4c30
+# ╟─7253a177-0997-4620-84cd-4c362412b723
+# ╟─9c11772f-dc9b-48f4-8bf5-966cdadc2363
+# ╟─c139972c-24bd-445f-b95e-ded16e2eba64
+# ╟─effc20dc-3097-46bd-a7d6-afe882033a05
+# ╟─c3980348-6644-48e6-97f4-8d6ed91547bc
+# ╟─51696239-3ed3-484b-874a-64979a5cd91b
+# ╟─08370e88-8f77-44ba-a93a-51e90c7818fa
+# ╟─ba9914cc-7b24-45c8-b9f7-2e7e33ec8132
+# ╟─a37acdbb-34f2-4643-808a-e5afe817088b
+# ╟─efabadf1-c3c5-4c9c-9bae-4eadd3d5a033
+# ╟─217bbde3-e3cf-4e4f-94c7-7d139941ed3f
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
