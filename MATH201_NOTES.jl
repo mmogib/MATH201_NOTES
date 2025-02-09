@@ -819,7 +819,45 @@ cm"""
 md"## Projections and Vector Components"
 
 # ╔═╡ efabadf1-c3c5-4c9c-9bae-4eadd3d5a033
-md"## Work"
+md"## Work (Reading)"
+
+# ╔═╡ 4487bfe5-df36-41d6-93dd-97e1242f2ae3
+md"# 11.4 The Cross Product of Two Vectors in Space"
+
+# ╔═╡ a75f9328-3c26-4e09-9688-4da4b11aefc5
+md"""
+> __Objectives__
+> 1. Find the cross product of two vectors in space.
+> 2. Use the triple scalar product of three vectors in space.
+"""
+
+# ╔═╡ 3235aa71-3bb9-4b19-92c5-3026e5dbd1c5
+md"## The Cross Product"
+
+# ╔═╡ 4d568a88-31ee-415d-9b7a-dd68277e76cc
+let
+	u = [1;-4;1]
+	v = [2;3;0]
+	u × v
+end
+
+# ╔═╡ b678c8fd-5f4d-4be0-8b89-2b5fd21a109a
+cm"""
+
+<iframe src="https://www.geogebra.org/classic/k64hdfn9?embed" width="600" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+"""
+
+# ╔═╡ 06908953-c831-4351-92f4-926d645eccd1
+md"## Application"
+
+# ╔═╡ 6a30bce0-3f06-4676-bd97-53d406f199ee
+md"## The Triple Scalar Product"
+
+# ╔═╡ e81a3b57-1139-40a7-8966-fb3b31e5cd05
+cm"""
+<iframe src="https://www.geogebra.org/classic/b5xwbxrg?embed" width="600" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1678,6 +1716,164 @@ $(ex(8,"Finding Work"))
 To close a sliding door, a person pulls on a rope with a constant force of 50 pounds at a constant angle of ``60^{\circ}``, as shown in Figure below. Find the work done in moving the door 12 feet to its closed position.
 
 $(post_img("https://www.dropbox.com/scl/fi/8wn5s5kestb1dtzxulldc/fig_11_34.png?rlkey=r0g1mc0s9vakiye1dkxd5oxrd&dl=1",400))
+"""
+
+# ╔═╡ daea6ac7-a442-4f05-a7bf-192a0a48bfee
+cm"""
+$(define("Cross Product of Two Vectors in Space"))
+Let
+```math
+\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k} \quad \text { and } \quad \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}
+```
+be vectors in space. The cross product of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector
+```math
+\mathbf{u} \times \mathbf{v}=\left(u_2 v_3-u_3 v_2\right) \mathbf{i}-\left(u_1 v_3-u_3 v_1\right) \mathbf{j}+\left(u_1 v_2-u_2 v_1\right) \mathbf{k}
+```
+"""
+
+# ╔═╡ 0f279112-e03e-403e-b131-6f6a934a427a
+cm"""
+$(ex(1,"Finding the Cross Product"))
+For ``\mathbf{u}=\mathbf{i}-2 \mathbf{j}+\mathbf{k}`` and ``\mathbf{v}=3 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``, find each of the following.
+- (a.) ``\mathbf{u} \times \mathbf{v}``
+- (b.) ``\mathbf{v} \times \mathbf{u}``
+- (c.) ``\mathbf{v} \times \mathbf{v}``
+"""
+
+# ╔═╡ 68436e91-4c49-4eb9-b744-884b9321feff
+cm"""
+$(bth("Algebraic Properties of the Cross Product"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in space, and let ``c`` be a scalar.
+1. ``\mathbf{u} \times \mathbf{v}=-(\mathbf{v} \times \mathbf{u})``
+2. ``\mathbf{u} \times(\mathbf{v}+\mathbf{w})=(\mathbf{u} \times \mathbf{v})+(\mathbf{u} \times \mathbf{w})``
+3. ``c(\mathbf{u} \times \mathbf{v})=(c \mathbf{u}) \times \mathbf{v}=\mathbf{u} \times(c \mathbf{v})``
+4. ``\mathbf{u} \times \mathbf{0}=\mathbf{0} \times \mathbf{u}=\mathbf{0}``
+5. ``\mathbf{u} \times \mathbf{u}=\mathbf{0}``
+6. ``\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=(\mathbf{u} \times \mathbf{v}) \cdot \mathbf{w}``
+"""
+
+# ╔═╡ 3794c467-23d0-472f-9d05-7ddf1fc0d5db
+cm"""
+$(bth("Geometric Properties of the Cross Product"))
+Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors in space, and let ``\theta`` be the angle between ``\mathbf{u}`` and ``\mathbf{v}``.
+1. ``\mathbf{u} \times \mathbf{v}`` is orthogonal to both ``\mathbf{u}`` and ``\mathbf{v}``.
+2. ``\|\mathbf{u} \times \mathbf{v}\|=\|\mathbf{u}\|\|\mathbf{v}\| \sin \theta``
+3. ``\mathbf{u} \times \mathbf{v}=\mathbf{0}`` if and only if ``\mathbf{u}`` and ``\mathbf{v}`` are scalar multiples of each other.
+4. ``\|\mathbf{u} \times \mathbf{v}\|=`` area of parallelogram having ``\mathbf{u}`` and ``\mathbf{v}`` as adjacent sides.
+"""
+
+# ╔═╡ 9a1d80e4-8aa8-4216-8f6b-b4eee617d6a8
+cm"""
+$(ex(2," Using the Cross Product"))
+Find a unit vector that is orthogonal to both
+```math
+\mathbf{u}=\mathbf{i}-4 \mathbf{j}+\mathbf{k}
+```
+and
+```math
+\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}
+```
+"""
+
+# ╔═╡ 038dd397-a465-401b-8e39-4d1a62010f51
+cm"""
+$(ex(3,"Geometric Application of the Cross Product"))
+The vertices of a quadrilateral are listed below. Show that the quadrilateral is a parallelogram and find its area.
+```math
+\begin{array}{ll}
+A=(5,2,0) & B=(2,6,1) \\
+C=(2,4,7) & D=(5,0,6)
+\end{array}
+```
+"""
+
+# ╔═╡ b8c87b6e-fb0a-4b66-b8a0-4cd426c914f5
+cm"""
+$(bbl("Torque",""))
+In physics, the cross product can be used to measure torque-the moment M of a force ``\mathbf{F}`` about a point ``\boldsymbol{P}``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/691imwz7wog1wxr2vx3jt/fig_11_39.png?rlkey=v4e50kju4mvmy8zd0vjy4v1ef&dl=1",300))
+
+If the point of application of the force is ``Q``, then the moment of ``\mathbf{F}`` about ``P`` is
+```math
+\mathbf{M}=\stackrel{\rightharpoonup}{P Q} \times \mathbf{F} . \quad \text { Moment of } \mathbf{F} \text { about } P
+```
+
+The magnitude of the moment ``\mathbf{M}`` measures the tendency of the vector ``\overrightarrow{P Q}`` to rotate counterclockwise (using the right-hand rule) about an axis directed along the vector ``\mathbf{M}``.
+"""
+
+# ╔═╡ 688203a2-c7c7-45bf-96dc-e31e69e51092
+cm"""
+$(ex(4,"An Application of the Cross Product"))
+A vertical force of 50 pounds is applied to the end of a one-foot lever that is attached to an axle at point ``P``, as shown below. 
+
+$(post_img("https://www.dropbox.com/scl/fi/9sqxf39xyyukd1zbqjv8o/fig_11_40.png?rlkey=szapu3urbrqd9pe9gfl7qfyai&dl=1",300))
+
+Find the moment of this force about the point ``P`` when ``\theta=60^{\circ}``.
+"""
+
+# ╔═╡ 055ddf9e-2174-43c2-bbfd-5d6c0ba2e567
+cm"""
+For vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in space, the dot product of ``\mathbf{u}`` and ``\mathbf{v} \times \mathbf{w}``
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})
+```
+is called the __triple scalar product__,
+
+$(bth("The Triple Scalar Product"))
+For ``\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k}, \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}``, and ``\mathbf{w}=w_1 \mathbf{i}+w_2 \mathbf{j}+w_3 \mathbf{k}``, the triple scalar product is
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{rrr}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{array}\right|
+```
+"""
+
+# ╔═╡ 3cebbc76-7b88-4e3c-981d-6b4bf69ac017
+cm"""
+$(bth("Geometric Property of the Triple Scalar Product"))
+The volume ``V`` of a parallelepiped with vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` as adjacent edges is
+```math
+V=|\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})| .
+```
+$(ebl())
+
+$(post_img("https://www.dropbox.com/scl/fi/5hf3ibte2ppgtlx0vegr1/fig_11_41.png?rlkey=z0qrbw2p1z30iyhae0mf2xdfo&dl=1",300))
+"""
+
+# ╔═╡ 61427306-0a04-420a-bfd0-361742530e81
+cm"""
+$(ex(5,"Volume by the Triple Scalar Product"))
+Find the volume of the parallelepiped shown below having
+```math
+\begin{aligned}
+\mathbf{u} & =3 \mathbf{i}-5 \mathbf{j}+\mathbf{k} \\
+\mathbf{v} & =2 \mathbf{j}-2 \mathbf{k}
+\end{aligned}
+```
+and
+```math
+\mathbf{w}=3 \mathbf{i}+\mathbf{j}+\mathbf{k}
+```
+as adjacent edges.
+
+"""
+
+# ╔═╡ a0711cd1-1ce2-4786-8e0b-4b758c227dd2
+cm"""
+$(bbl("Remark",""))
+
+The volume of the parallelepiped is ``0`` if and only if the three vectors are __coplanar__. 
+
+That is, when the vectors ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle``, ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle``, and ``\mathbf{w}=\left\langle w_1, w_2, w_3\right\rangle`` have the same initial point, they lie in the same plane if and only if
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{ccc}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{array}\right|=0
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3917,6 +4113,26 @@ version = "1.4.1+1"
 # ╟─a37acdbb-34f2-4643-808a-e5afe817088b
 # ╟─efabadf1-c3c5-4c9c-9bae-4eadd3d5a033
 # ╟─217bbde3-e3cf-4e4f-94c7-7d139941ed3f
+# ╟─4487bfe5-df36-41d6-93dd-97e1242f2ae3
+# ╟─a75f9328-3c26-4e09-9688-4da4b11aefc5
+# ╟─3235aa71-3bb9-4b19-92c5-3026e5dbd1c5
+# ╟─daea6ac7-a442-4f05-a7bf-192a0a48bfee
+# ╟─0f279112-e03e-403e-b131-6f6a934a427a
+# ╟─68436e91-4c49-4eb9-b744-884b9321feff
+# ╟─3794c467-23d0-472f-9d05-7ddf1fc0d5db
+# ╟─9a1d80e4-8aa8-4216-8f6b-b4eee617d6a8
+# ╠═4d568a88-31ee-415d-9b7a-dd68277e76cc
+# ╟─038dd397-a465-401b-8e39-4d1a62010f51
+# ╟─b678c8fd-5f4d-4be0-8b89-2b5fd21a109a
+# ╟─06908953-c831-4351-92f4-926d645eccd1
+# ╟─b8c87b6e-fb0a-4b66-b8a0-4cd426c914f5
+# ╟─688203a2-c7c7-45bf-96dc-e31e69e51092
+# ╟─6a30bce0-3f06-4676-bd97-53d406f199ee
+# ╟─055ddf9e-2174-43c2-bbfd-5d6c0ba2e567
+# ╟─3cebbc76-7b88-4e3c-981d-6b4bf69ac017
+# ╟─61427306-0a04-420a-bfd0-361742530e81
+# ╟─e81a3b57-1139-40a7-8966-fb3b31e5cd05
+# ╟─a0711cd1-1ce2-4786-8e0b-4b758c227dd2
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
