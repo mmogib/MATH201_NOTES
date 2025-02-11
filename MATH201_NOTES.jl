@@ -35,6 +35,7 @@ begin
     # using ForwardDiff
     # using Integrals
     # using OrdinaryDiffEq
+	using Unitful
 end
 
 # ╔═╡ 71bc54d5-d0ed-42d3-9bc1-48aa86e91d1d
@@ -841,6 +842,18 @@ let
 	u × v
 end
 
+# ╔═╡ 97cee0f8-4a2e-4cc1-b289-dfde9ee144c9
+let
+	A = [5;2;0.0]
+	B = [2;6;1.0]
+	C = [2;4;7.0]
+	D = [5;0;6.0]
+	AB = B-A
+	AD = D-A
+	r= AB × AD
+	norm(AB × AD)
+end
+
 # ╔═╡ b678c8fd-5f4d-4be0-8b89-2b5fd21a109a
 cm"""
 
@@ -858,6 +871,89 @@ md"## The Triple Scalar Product"
 cm"""
 <iframe src="https://www.geogebra.org/classic/b5xwbxrg?embed" width="600" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 """
+
+# ╔═╡ 8f2713c1-e74c-4e84-b4c6-b4ab421d919b
+md"""
+# 11.5 Lines and Planes in Space
+> __Objectives__
+> 1. Write a set of parametric equations for a line in space.
+> 1. Write a linear equation to represent a plane in space.
+> 1. Sketch the plane given by a linear equation.
+> 1. Find the distances between points, planes, and lines in space.
+"""
+
+# ╔═╡ 10e7b1ee-ccdd-49da-9e6e-8b26cd704f5f
+md"## Lines in Space"
+
+# ╔═╡ ceffc602-fad0-4310-b3c8-f0909e886879
+cm"""
+<iframe src="https://www.geogebra.org/classic/a87nndfp?embed" width="650" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+"""
+
+# ╔═╡ 58d43afd-4045-44cb-a5c0-3883dc886ece
+md"##  Planes in Space"
+
+# ╔═╡ 85d082f1-bcc4-4858-b7d1-de721f9ab501
+cm"""
+<iframe src="https://www.geogebra.org/classic/a87nndfp?embed" width="650" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ c015b262-4b35-4c7c-8533-61402e5703e2
+cm"""
+<iframe src="https://www.geogebra.org/classic/tg4tezst?embed" width="650" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ 63bddd53-9326-468a-89ac-6a8fd49dd32f
+let
+	n1 = [1;-2;1]
+	n2 = [2;3;-2]
+	α =acos(abs(n1⋅n2)/(norm(n1)*norm(n2))) |> u"°"
+	
+end
+
+# ╔═╡ 660ac7bd-7537-4042-9400-5a0dd4532508
+md"## Sketching Planes in Space"
+
+# ╔═╡ 8acf5369-439b-4294-bd1c-dd18095e8480
+cm"""
+Sketch the plane
+```math
+3x+2y+4z=12
+```
+"""
+
+
+# ╔═╡ 18ef6c08-1ded-45cd-a0bb-106acb2552f2
+md"## Distances Between Points, Planes, and Lines"
+
+# ╔═╡ 2f7931f0-c907-425e-a582-8014e4e0ca11
+let
+	Q = (1,5,-4)
+	P = (2,0,0)
+	n = (3,-1,2)
+	on_plane(P) = n⋅P == 6
+	PQ = Q .- P
+	D = abs(PQ⋅n)/norm(n)
+end
+
+# ╔═╡ dd677f71-05e6-4e44-807b-42520c7924f5
+let
+	Q=(0,-6,0)
+	P=(0,0,-1)
+	n = (6,-2,4)
+	D = abs(Q⋅n+4)/norm(n)
+	
+end
+
+# ╔═╡ d553ce36-0b68-4b9d-a261-992162b0bf58
+let
+	Q = (3,-1,4)
+	P =(-2,0,1)
+	u = (3,-2,4)
+	PQ = Q .- P
+	norm(cross(vcat(PQ...),vcat(u...)))/norm(u)
+end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1876,6 +1972,125 @@ w_1 & w_2 & w_3
 ```
 """
 
+# ╔═╡ a00f7ba8-5f66-4145-ad18-ff69a6d4e535
+cm"""
+$(bth("Parametric Equations of a Line in Space"))
+
+A line ``L`` parallel to the vector ``\mathbf{v}=\langle a, b, c\rangle`` and passing through the point ``P\left(x_1, y_1, z_1\right)`` is represented by the parametric equations
+```math
+x=x_1+a t, \quad y=y_1+b t, \quad \text { and } \quad z=z_1+c t .
+```
+$(ebl())
+
+If the direction numbers ``a, b``, and ``c`` are all nonzero, then you can eliminate the parameter ``t`` in the parametric equations to obtain symmetric equations of the line.
+```math
+\frac{x-x_1}{a}=\frac{y-y_1}{b}=\frac{z-z_1}{c} \quad \color{red}{\text{Symmetric equations}}
+```
+
+
+$(ex(1,"Finding Parametric and Symmetric Equations"))
+Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Figure 11.44.
+
+"""
+
+# ╔═╡ bd55e0c7-1bdd-4cfb-89f2-5701a230a3cd
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/9vzo9clna5s3ugrufyons/fig_11_45.png?rlkey=dyblrdq5uvbjp1wmdl8y5mryl&dl=1",400))
+
+$(bth("Standard Equation of a Plane in Space"))
+The plane containing the point ``\left(x_1, y_1, z_1\right)`` and having normal vector
+```math
+\mathbf{n}=\langle a, b, c\rangle
+```
+can be represented by the standard form of the equation of a plane
+```math
+a\left(x-x_1\right)+b\left(y-y_1\right)+c\left(z-z_1\right)=0 .
+```
+"""
+
+# ╔═╡ 63768194-bf80-4a28-8c15-224b4032cc40
+cm"""
+$(bbl("Remark",""))
+```math
+a x+b y+c z+d=0 \qquad \color{red}{\text{General form of equation of plane}}
+```
+"""
+
+# ╔═╡ 65d4fb31-ff0b-4ee1-a721-b2c2428cc81c
+cm"""
+$(ex(3,"Finding an Equation of a Plane in Three-Space"))
+Find an equation (in standard form and in general form) of the plane containing the points ``(2,1,1), \quad(1,4,1), \quad`` and ``\quad(-2,0,4)``.
+"""
+
+# ╔═╡ 2ff76dcb-2184-4096-9d88-b645bb3d8edb
+cm"""
+$(bbl("Angle between two planes",""))
+```math
+\cos \theta=\frac{\left|\mathbf{n}_1 \cdot \mathbf{n}_2\right|}{\left\|\mathbf{n}_1\right\|\left\|\mathbf{n}_2\right\|}
+```
+
+
+"""
+
+# ╔═╡ 60a656f9-f93b-448c-8dac-8d5c128583a7
+cm"""
+$(ex(4,"Finding the Line of Intersection of Two Planes"))
+Find the angle between the two planes ``x-2 y+z=0`` and ``2 x+3 y-2 z=0``. Then find parametric equations of their line of intersection.
+"""
+
+# ╔═╡ 5624db18-ee2e-4133-bd21-5c768821344f
+cm"""
+$(bth("Distance Between a Point and a Plane"))
+$(post_img("https://www.dropbox.com/scl/fi/5l5deuushije2ffszddg4/fig_11_52.png?rlkey=gz5llqi698cjwz5iuwwfruap4&dl=1",300))
+The distance between a plane and a point ``Q`` (not in the plane) is
+```math
+D=\left\|\operatorname{proj}_{\mathbf{n}} \stackrel{\rightharpoonup}{P Q}\right\|=\frac{|\stackrel{\rightharpoonup}{P Q} \cdot \mathbf{n}|}{\|\mathbf{n}\|}
+```
+where ``P`` is a point in the plane and ``\mathbf{n}`` is normal to the plane.
+
+
+$(ebl())
+
+$(ex(5,"Finding the Distance Between a Point and a Plane"))
+Find the distance between the point ``Q(1,5,-4)`` and the plane ``3 x-y+2 z=6``.
+"""
+
+# ╔═╡ 4bbdb2a2-2dd6-44a1-96b3-86a702a4a9c7
+cm"""
+$(bbl("Distance between a point and a plane"))
+Let ``Q(x_0,y_0,z_0)`` be any point. The distance between ``Q`` and the plane ``ax+by+cz+d=0`` is given by
+```math
+D=\frac{\left|a x_0+b y_0+c z_0+d\right|}{\sqrt{a^2+b^2+c^2}}
+```
+where ``P(x_1.y_1,z_2)`` on the plane.
+
+"""
+
+# ╔═╡ 8e9693d1-3804-4f05-89b8-16d5ed2a5288
+cm"""
+$(ex(6,"Finding the Distance Between Two Parallel Planes"))
+Two parallel planes, ``3 x-y+2 z-6=0`` and ``6 x-2 y+4 z+4=0``, find the distance between them.
+"""
+
+# ╔═╡ a97666b0-60ee-4399-8a9e-5f8551b31ae7
+cm"""
+$(bth("Distance Between a Point and a Line in Space"))
+The distance between a point ``Q`` and a line in space is
+```math
+D=\frac{\|\overrightarrow{P Q} \times \mathbf{u}\|}{\|\mathbf{u}\|}
+```
+where ``\mathbf{u}`` is a direction vector for the line and ``P`` is a point on the line.
+
+$(post_img("https://www.dropbox.com/scl/fi/y9ty0d9njoshc2ki0skey/fig_11_54.png?rlkey=wicvn44wlqvc72niqy28dfs1w&dl=1",300))
+$(ebl())
+
+$(ex(7,"Finding the Distance Between a Point and a Line"))
+Find the distance between the point ``Q(3,-1,4)`` and the line
+```math
+x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
+```
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -1919,6 +2134,7 @@ QRCoders = "f42e9828-16f3-11ed-2883-9126170b272d"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 Colors = "~0.12.11"
@@ -1933,6 +2149,7 @@ PlutoUI = "~0.7.60"
 PrettyTables = "~2.4.0"
 QRCoders = "~1.4.5"
 Symbolics = "~6.15.3"
+Unitful = "~1.22.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -1941,7 +2158,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.3"
 manifest_format = "2.0"
-project_hash = "90d48343095fe5d990c1670257717d90a27e925e"
+project_hash = "0a4dba39da0a41b47f84f534c194cf631fed203e"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "eea5d80188827b35333801ef97a40c2ed653b081"
@@ -3640,9 +3857,9 @@ version = "2.12.4"
 
 [[deps.Unitful]]
 deps = ["Dates", "LinearAlgebra", "Random"]
-git-tree-sha1 = "d95fe458f26209c66a187b1114df96fd70839efd"
+git-tree-sha1 = "c0667a8e676c53d390a09dc6870b3d8d6650e2bf"
 uuid = "1986cc42-f94f-5a68-af5c-568840ba703d"
-version = "1.21.0"
+version = "1.22.0"
 weakdeps = ["ConstructionBase", "InverseFunctions"]
 
     [deps.Unitful.extensions]
@@ -4123,6 +4340,7 @@ version = "1.4.1+1"
 # ╟─9a1d80e4-8aa8-4216-8f6b-b4eee617d6a8
 # ╠═4d568a88-31ee-415d-9b7a-dd68277e76cc
 # ╟─038dd397-a465-401b-8e39-4d1a62010f51
+# ╠═97cee0f8-4a2e-4cc1-b289-dfde9ee144c9
 # ╟─b678c8fd-5f4d-4be0-8b89-2b5fd21a109a
 # ╟─06908953-c831-4351-92f4-926d645eccd1
 # ╟─b8c87b6e-fb0a-4b66-b8a0-4cd426c914f5
@@ -4133,6 +4351,29 @@ version = "1.4.1+1"
 # ╟─61427306-0a04-420a-bfd0-361742530e81
 # ╟─e81a3b57-1139-40a7-8966-fb3b31e5cd05
 # ╟─a0711cd1-1ce2-4786-8e0b-4b758c227dd2
+# ╟─8f2713c1-e74c-4e84-b4c6-b4ab421d919b
+# ╟─10e7b1ee-ccdd-49da-9e6e-8b26cd704f5f
+# ╟─ceffc602-fad0-4310-b3c8-f0909e886879
+# ╟─a00f7ba8-5f66-4145-ad18-ff69a6d4e535
+# ╟─58d43afd-4045-44cb-a5c0-3883dc886ece
+# ╟─bd55e0c7-1bdd-4cfb-89f2-5701a230a3cd
+# ╟─63768194-bf80-4a28-8c15-224b4032cc40
+# ╟─65d4fb31-ff0b-4ee1-a721-b2c2428cc81c
+# ╟─85d082f1-bcc4-4858-b7d1-de721f9ab501
+# ╟─2ff76dcb-2184-4096-9d88-b645bb3d8edb
+# ╟─60a656f9-f93b-448c-8dac-8d5c128583a7
+# ╟─c015b262-4b35-4c7c-8533-61402e5703e2
+# ╠═63bddd53-9326-468a-89ac-6a8fd49dd32f
+# ╟─660ac7bd-7537-4042-9400-5a0dd4532508
+# ╟─8acf5369-439b-4294-bd1c-dd18095e8480
+# ╟─18ef6c08-1ded-45cd-a0bb-106acb2552f2
+# ╟─5624db18-ee2e-4133-bd21-5c768821344f
+# ╠═2f7931f0-c907-425e-a582-8014e4e0ca11
+# ╟─4bbdb2a2-2dd6-44a1-96b3-86a702a4a9c7
+# ╟─8e9693d1-3804-4f05-89b8-16d5ed2a5288
+# ╠═dd677f71-05e6-4e44-807b-42520c7924f5
+# ╟─a97666b0-60ee-4399-8a9e-5f8551b31ae7
+# ╠═d553ce36-0b68-4b9d-a261-992162b0bf58
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
