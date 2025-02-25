@@ -850,8 +850,7 @@ let
 	D = [5;0;6.0]
 	AB = B-A
 	AD = D-A
-	r= AB × AD
-	norm(AB × AD)
+	area = norm(AB × AD)
 end
 
 # ╔═╡ b678c8fd-5f4d-4be0-8b89-2b5fd21a109a
@@ -866,6 +865,14 @@ md"## Application"
 
 # ╔═╡ 6a30bce0-3f06-4676-bd97-53d406f199ee
 md"## The Triple Scalar Product"
+
+# ╔═╡ 4a8340ee-1c51-4be2-a703-2e8c5caf37b1
+let
+	u = [3;-5;1]
+	v = [0;2;-2]
+	w = [3;1;1]
+	volume = abs(u⋅(w × v))
+end
 
 # ╔═╡ e81a3b57-1139-40a7-8966-fb3b31e5cd05
 cm"""
@@ -886,6 +893,12 @@ md"""
 md"## Lines in Space"
 
 # ╔═╡ ceffc602-fad0-4310-b3c8-f0909e886879
+cm"""
+<iframe src="https://www.geogebra.org/classic/a87nndfp?embed" width="650" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+"""
+
+# ╔═╡ da52c005-f146-4fcc-95f5-627519d0c45e
 cm"""
 <iframe src="https://www.geogebra.org/classic/a87nndfp?embed" width="650" height="350" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 
@@ -939,12 +952,19 @@ end
 
 # ╔═╡ dd677f71-05e6-4e44-807b-42520c7924f5
 let
+	f1(x,y,z) = 3x-y+2z-6 
+	f2(x,y,z) = 6x-2y+4z+4
 	Q=(0,-6,0)
 	P=(0,0,-1)
+	PQ = Q.-P
 	n = (6,-2,4)
-	D = abs(Q⋅n+4)/norm(n)
+	D = abs(PQ⋅n)/norm(n)
+	
 	
 end
+
+# ╔═╡ 2be1d63d-2371-4d2b-b93d-fddeb49c451d
+
 
 # ╔═╡ d553ce36-0b68-4b9d-a261-992162b0bf58
 let
@@ -954,6 +974,70 @@ let
 	PQ = Q .- P
 	norm(cross(vcat(PQ...),vcat(u...)))/norm(u)
 end
+
+# ╔═╡ 32b036c0-92e1-40f7-8162-a2d8b4b43d90
+md"## Skew lines"
+
+# ╔═╡ f317bb32-dd20-45c1-8449-06b7f32672cd
+cm"""
+
+<iframe src="https://www.geogebra.org/classic/r488tpxz?embed" width="600" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+"""
+
+# ╔═╡ eac26ad2-d636-4b93-a562-d13b155f3609
+let
+	@variables x::Real, y::Real, z::Real, t::Real, s::Real
+	# P1 =[4;5;1]
+	# v1 = [5;5;-4]
+	# P2 =[4;-6;7]
+	# v2 = [1;8;-3]
+	
+	# L1(t)= P1 + v1 * t
+	# L2(s)= P2 + v2 * s
+	# v1 = [5;5;-4]
+	# v2 = [1;8;-3]
+	# n1 = v1 × v2
+	# f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
+	# PL1 = f1([x;y;z]) ~ 0
+	# # L1(t)
+	# f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
+	# PL2 = f2([x;y;z]) ~ 0
+	# L2(s)
+	# PL1, PL2
+	# P1P2 = P2-P1
+	# D=abs(n1 ⋅ P1P2)/norm(n1)
+end
+
+# ╔═╡ f803e12d-617e-478f-8593-5e5849384e1a
+
+
+# ╔═╡ 5141e6da-d53b-4cb8-ad27-0a2666aac859
+md"""
+# 11.6 Surfaces in Space
+> __Ovjectives__ 
+> 1. Recognize and write equations of cylindrical surfaces.
+> 2. Recognize and write equations of quadric surfaces.
+> 3. Recognize and write equations of surfaces of revolution~
+"""
+
+# ╔═╡ b73636ec-e481-4c1b-acc9-5e77127c6c17
+md"## Cylindrical Surfaces"
+
+# ╔═╡ a001c05b-f12f-4dfb-a193-783a082fd0b8
+cm"""
+__Equations of Cylinders__
+The equation of a cylinder whose rulings are parallel to one of the coordinate 
+axes contains only the variables corresponding to the other two axes.
+"""
+
+# ╔═╡ 0346f7e4-c32f-498a-80a3-12fb91431fd5
+cm"""
+<iframe src="https://www.geogebra.org/classic/bjkrnchk?embed" width="600" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ d7ea9082-e9cb-4386-ba49-6b7812608587
+md"## Quadric Surfaces"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1989,7 +2073,7 @@ If the direction numbers ``a, b``, and ``c`` are all nonzero, then you can elimi
 
 
 $(ex(1,"Finding Parametric and Symmetric Equations"))
-Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Figure 11.44.
+Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Below.
 
 """
 
@@ -2088,6 +2172,95 @@ $(ex(7,"Finding the Distance Between a Point and a Line"))
 Find the distance between the point ``Q(3,-1,4)`` and the line
 ```math
 x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
+```
+"""
+
+# ╔═╡ db120bce-efb1-4290-a94b-6cb0c94b61b6
+cm"""
+$(define("Skew Lines"))
+Two lines in space are __skew__ if they are neither parallel nor intersecting.
+"""
+
+# ╔═╡ b3fdfb31-a5f9-46ee-84cf-00aa58560960
+cm"""
+$(ex())
+Consider the following two lines in space.
+```math
+\begin{aligned}
+& L_1: x=4+5 t, y=5+5 t, z=1-4 t \\
+& L_2: x=4+s, y=-6+8 s, z=7-3 s
+\end{aligned}
+```
+- (i) Show that these lines are not parallel.
+- (ii) Show that these lines do not intersect and therefore are skew lines.
+- (iii) Show that the two lines lie in parallel planes.
+- (iv) Find the distance between the parallel planes from part (iii). This is the distance between the original skew lines.
+"""
+
+# ╔═╡ 8c5c067c-6516-496d-a171-b9b1bb48544d
+cm"""
+$(define("Cylinder"))
+Let ``C`` be a curve in a plane and let ``L`` be a line not in a parallel plane. The set of all lines parallel to ``L`` and intersecting ``C`` is a __cylinder__. The curve ``C`` is the __generating curve__ (or __directrix__) of the cylinder, and the parallel lines are __rulings__.
+
+$(post_img("https://www.dropbox.com/scl/fi/q0pbnl6g4n9ouhf0kbf4v/fig_11_57.png?rlkey=k0julsbb28j2liez5723p4hz7&dl=1"))
+"""
+
+# ╔═╡ d7a436c8-783c-4fe6-88cc-2118d6ca9ae4
+cm"""
+$(ex(1,"Sketching a Cylinder"))
+Sketch the surface represented by each equation.
+- (a.) ``z=y^2``
+- (b.) ``z=\sin x, \quad 0 \leq x \leq 2 \pi``
+"""
+
+# ╔═╡ f17896e2-a696-4eeb-9049-c27302971f1f
+cm"""
+$(define("Quadric Surface"))
+The equation of a quadric surface in space is a second-degree equation in three variables. The general form of the equation is
+```math
+A x^2+B y^2+C z^2+D x y+E x z+F y z+G x+H y+I z+J=0
+```
+
+There are six basic types of quadric surfaces: 
+1. __ellipsoid__, 
+2. __hyperboloid of one sheet__, 
+3. __hyperboloid of two sheets__, 
+4. __elliptic cone__, 
+5. __elliptic paraboloid__, and 
+6. __hyperbolic paraboloid__.
+"""
+
+# ╔═╡ 28789dce-b106-4c6a-aed9-4faa659d9706
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",500))
+
+$(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",500))
+"""
+
+# ╔═╡ 2f2c7b86-cb1d-4796-9717-76653a441b88
+cm"""
+$(ex(2,"Sketching a Quadric Surface"))
+Classify and sketch the surface
+```math
+4 x^2-3 y^2+12 z^2+12=0
+```
+"""
+
+# ╔═╡ 2aa9d376-fa6c-4b2b-9a3a-0b307caad4db
+cm"""
+$(ex(3,"Sketching a Quadric Surface"))
+Classify and sketch the surface
+```math
+x-y^2-4 z^2=0
+```
+"""
+
+# ╔═╡ a09252fe-4153-4416-8970-e6d7ce980b15
+cm"""
+$(ex(4,"A Quadric Surface Not Centered at the Origin"))
+Classify and sketch the surface
+```math
+x^2+2 y^2+z^2-4 x+4 y-2 z+3=0
 ```
 """
 
@@ -4349,12 +4522,14 @@ version = "1.4.1+1"
 # ╟─055ddf9e-2174-43c2-bbfd-5d6c0ba2e567
 # ╟─3cebbc76-7b88-4e3c-981d-6b4bf69ac017
 # ╟─61427306-0a04-420a-bfd0-361742530e81
+# ╠═4a8340ee-1c51-4be2-a703-2e8c5caf37b1
 # ╟─e81a3b57-1139-40a7-8966-fb3b31e5cd05
 # ╟─a0711cd1-1ce2-4786-8e0b-4b758c227dd2
 # ╟─8f2713c1-e74c-4e84-b4c6-b4ab421d919b
 # ╟─10e7b1ee-ccdd-49da-9e6e-8b26cd704f5f
 # ╟─ceffc602-fad0-4310-b3c8-f0909e886879
 # ╟─a00f7ba8-5f66-4145-ad18-ff69a6d4e535
+# ╟─da52c005-f146-4fcc-95f5-627519d0c45e
 # ╟─58d43afd-4045-44cb-a5c0-3883dc886ece
 # ╟─bd55e0c7-1bdd-4cfb-89f2-5701a230a3cd
 # ╟─63768194-bf80-4a28-8c15-224b4032cc40
@@ -4372,8 +4547,27 @@ version = "1.4.1+1"
 # ╟─4bbdb2a2-2dd6-44a1-96b3-86a702a4a9c7
 # ╟─8e9693d1-3804-4f05-89b8-16d5ed2a5288
 # ╠═dd677f71-05e6-4e44-807b-42520c7924f5
+# ╠═2be1d63d-2371-4d2b-b93d-fddeb49c451d
 # ╟─a97666b0-60ee-4399-8a9e-5f8551b31ae7
 # ╠═d553ce36-0b68-4b9d-a261-992162b0bf58
+# ╟─32b036c0-92e1-40f7-8162-a2d8b4b43d90
+# ╟─db120bce-efb1-4290-a94b-6cb0c94b61b6
+# ╟─b3fdfb31-a5f9-46ee-84cf-00aa58560960
+# ╟─f317bb32-dd20-45c1-8449-06b7f32672cd
+# ╠═eac26ad2-d636-4b93-a562-d13b155f3609
+# ╠═f803e12d-617e-478f-8593-5e5849384e1a
+# ╟─5141e6da-d53b-4cb8-ad27-0a2666aac859
+# ╟─b73636ec-e481-4c1b-acc9-5e77127c6c17
+# ╟─8c5c067c-6516-496d-a171-b9b1bb48544d
+# ╟─a001c05b-f12f-4dfb-a193-783a082fd0b8
+# ╟─d7a436c8-783c-4fe6-88cc-2118d6ca9ae4
+# ╟─0346f7e4-c32f-498a-80a3-12fb91431fd5
+# ╟─d7ea9082-e9cb-4386-ba49-6b7812608587
+# ╟─f17896e2-a696-4eeb-9049-c27302971f1f
+# ╟─28789dce-b106-4c6a-aed9-4faa659d9706
+# ╟─2f2c7b86-cb1d-4796-9717-76653a441b88
+# ╟─2aa9d376-fa6c-4b2b-9a3a-0b307caad4db
+# ╠═a09252fe-4153-4416-8970-e6d7ce980b15
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
