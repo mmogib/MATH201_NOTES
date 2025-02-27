@@ -981,7 +981,7 @@ md"## Skew lines"
 # ╔═╡ f317bb32-dd20-45c1-8449-06b7f32672cd
 cm"""
 
-<iframe src="https://www.geogebra.org/classic/r488tpxz?embed" width="600" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+<iframe src="https://www.geogebra.org/classic/r488tpxz?embed" width="700" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 
 """
 
@@ -989,24 +989,23 @@ cm"""
 let
 	@variables x::Real, y::Real, z::Real, t::Real, s::Real
 	# P1 =[4;5;1]
-	# v1 = [5;5;-4]
 	# P2 =[4;-6;7]
+	# v1 = [5;5;-4]
 	# v2 = [1;8;-3]
 	
 	# L1(t)= P1 + v1 * t
 	# L2(s)= P2 + v2 * s
-	# v1 = [5;5;-4]
-	# v2 = [1;8;-3]
 	# n1 = v1 × v2
 	# f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
 	# PL1 = f1([x;y;z]) ~ 0
-	# # L1(t)
+	# # # L1(t)
 	# f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
 	# PL2 = f2([x;y;z]) ~ 0
-	# L2(s)
 	# PL1, PL2
-	# P1P2 = P2-P1
+	# P1P2 = L2(0)-L1(5)
 	# D=abs(n1 ⋅ P1P2)/norm(n1)
+	# expand(f1(L1(t)))
+	# expand(f2(L2(t)))
 end
 
 # ╔═╡ f803e12d-617e-478f-8593-5e5849384e1a
@@ -1018,7 +1017,7 @@ md"""
 > __Ovjectives__ 
 > 1. Recognize and write equations of cylindrical surfaces.
 > 2. Recognize and write equations of quadric surfaces.
-> 3. Recognize and write equations of surfaces of revolution~
+> 3. Recognize and write equations of surfaces of revolution __(X)__
 """
 
 # ╔═╡ b73636ec-e481-4c1b-acc9-5e77127c6c17
@@ -1031,9 +1030,14 @@ The equation of a cylinder whose rulings are parallel to one of the coordinate
 axes contains only the variables corresponding to the other two axes.
 """
 
+# ╔═╡ 439bb6f7-3809-4fc6-83b1-d12ba556583d
+cm"""
+<iframe src="https://www.geogebra.org/classic/fm9cnxfr?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
 # ╔═╡ 0346f7e4-c32f-498a-80a3-12fb91431fd5
 cm"""
-<iframe src="https://www.geogebra.org/classic/bjkrnchk?embed" width="600" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+<iframe src="https://www.geogebra.org/classic/bjkrnchk?embed" width="800" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 """
 
 # ╔═╡ d7ea9082-e9cb-4386-ba49-6b7812608587
@@ -4560,6 +4564,7 @@ version = "1.4.1+1"
 # ╟─b73636ec-e481-4c1b-acc9-5e77127c6c17
 # ╟─8c5c067c-6516-496d-a171-b9b1bb48544d
 # ╟─a001c05b-f12f-4dfb-a193-783a082fd0b8
+# ╟─439bb6f7-3809-4fc6-83b1-d12ba556583d
 # ╟─d7a436c8-783c-4fe6-88cc-2118d6ca9ae4
 # ╟─0346f7e4-c32f-498a-80a3-12fb91431fd5
 # ╟─d7ea9082-e9cb-4386-ba49-6b7812608587
@@ -4567,7 +4572,7 @@ version = "1.4.1+1"
 # ╟─28789dce-b106-4c6a-aed9-4faa659d9706
 # ╟─2f2c7b86-cb1d-4796-9717-76653a441b88
 # ╟─2aa9d376-fa6c-4b2b-9a3a-0b307caad4db
-# ╠═a09252fe-4153-4416-8970-e6d7ce980b15
+# ╟─a09252fe-4153-4416-8970-e6d7ce980b15
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
