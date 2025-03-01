@@ -988,28 +988,25 @@ cm"""
 # ╔═╡ eac26ad2-d636-4b93-a562-d13b155f3609
 let
 	@variables x::Real, y::Real, z::Real, t::Real, s::Real
-	# P1 =[4;5;1]
-	# P2 =[4;-6;7]
-	# v1 = [5;5;-4]
-	# v2 = [1;8;-3]
+	P1 =[4;5;1]
+	P2 =[4;-6;7]
+	v1 = [5;5;-4]
+	v2 = [1;8;-3]
 	
-	# L1(t)= P1 + v1 * t
-	# L2(s)= P2 + v2 * s
-	# n1 = v1 × v2
-	# f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
-	# PL1 = f1([x;y;z]) ~ 0
+	L1(t)= P1 + v1 * t
+	L2(s)= P2 + v2 * s
+	n1 = v1 × v2
+	f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
+	PL1 = f1([x;y;z]) ~ 0
 	# # # L1(t)
-	# f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
-	# PL2 = f2([x;y;z]) ~ 0
-	# PL1, PL2
-	# P1P2 = L2(0)-L1(5)
-	# D=abs(n1 ⋅ P1P2)/norm(n1)
+	f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
+	PL2 = f2([x;y;z]) ~ 0
+	PL1, PL2
+	P1P2 = L2(0)-L1(5)
+	D=abs(n1 ⋅ P1P2)/norm(n1)
 	# expand(f1(L1(t)))
 	# expand(f2(L2(t)))
 end
-
-# ╔═╡ f803e12d-617e-478f-8593-5e5849384e1a
-
 
 # ╔═╡ 5141e6da-d53b-4cb8-ad27-0a2666aac859
 md"""
@@ -1042,6 +1039,53 @@ cm"""
 
 # ╔═╡ d7ea9082-e9cb-4386-ba49-6b7812608587
 md"## Quadric Surfaces"
+
+# ╔═╡ 28651479-0f46-4300-a0b7-61bc43c4fc8d
+md""" # 13.1 Introduction to Functions of Several Variables
+> __Objectives__
+> 1. Understand the notation for a function of several variables.
+> 1. Sketch the graph of a function of two variables.
+> 1. Sketch level curves for a function of two variables.
+> 1. Sketch level surfaces for a function of three variables.
+> 1. Use computer graphics to graph a function of two variables.
+ """
+
+# ╔═╡ bd84da28-de8c-4953-af90-aabe85233c1a
+md"## The Graph of a Function of Two Variables"
+
+# ╔═╡ 2f4753a7-c0fd-44e8-9be3-3a694715e107
+cm"""
+<iframe src="https://www.geogebra.org/classic/p2pwhv6k?embed" width="600" height="500" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ ec36ddf3-3c9a-481f-8ba0-0c3460fbe363
+md"## Level Curves"
+
+# ╔═╡ 6c012443-9419-4a04-a383-2d356ace3c38
+let
+	# Define the function f(x, y)
+	g(x, y) = 64 - x^2 - y^2
+	f(x, y) = sqrt(g(x,y))
+	
+	# Define ranges for x and y
+	# x in [-2, 2] and y in [-2, 2]
+	xs = range(-2, 2, length=300)
+	ys = range(-2, 2, length=300)
+	
+	# Compute function values over the grid.
+	# Use a ternary operator to ensure that the function is evaluated only when the argument is nonnegative.
+	Z = [ (g(x,y) >= 0 ? f(x,y) : NaN) for x in xs, y in ys ]
+	
+	# Plot the contour lines
+	contour(xs, ys, Z, 
+	    title = "Contour Plot of f(x,y) = √(16-4x²-y²)", 
+	    xlabel = "x", ylabel = "y", 
+	    fill = true, 
+	    colorbar = true)
+end
+
+# ╔═╡ fbe65bb0-b92d-4e46-9c6c-73ca0b4bc355
+md"## Level Surfaces"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -2266,6 +2310,92 @@ Classify and sketch the surface
 ```math
 x^2+2 y^2+z^2-4 x+4 y-2 z+3=0
 ```
+"""
+
+# ╔═╡ f41122cd-aecd-439a-b8db-27d76a9c7ac2
+cm"""
+$(define("Function of Two Variables"))
+Let ``D`` be a set of ordered pairs of real numbers. If to each ordered pair ``(x, y)`` in ``D`` there corresponds a unique real number ``f(x, y)``, then ``f`` is a function of ``\boldsymbol{x}`` and ``\boldsymbol{y}``. The set ``D`` is the domain of ``f``, and the corresponding set of values for ``f(x, y)`` is the range of ``f``. For the function
+```math
+z=f(x, y)
+```
+``x`` and ``y`` are called the independent variables and ``z`` is called the dependent variable.
+"""
+
+# ╔═╡ 7d1d5e03-2178-46d6-a52a-9c796b36129d
+cm"""
+$(ex(1,"Domains of Functions of Several Variables"))
+Find the domain of each function.
+- (a.) ``f(x, y)=\frac{\sqrt{x^2+y^2-9}}{x}``
+- (b.) ``g(x, y, z)=\frac{x}{\sqrt{9-x^2-y^2-z^2}}``
+"""
+
+# ╔═╡ 1399c636-3eb5-48ed-adff-1536b0fb8cc6
+cm"""
+$(ex(2,"Describing the Graph of a Function of Two Variables"))
+
+Consider the function given by
+```math
+f(x, y)=\sqrt{16-4 x^2-y^2} .
+```
+- (a.) Find the domain and range of the function.
+- (b.) Describe the graph of ``f``.
+"""
+
+# ╔═╡ f2642a3b-39c6-452c-b8f6-049a2d122438
+cm"""
+We use __a scalar field__ in which the scalar
+```math
+z =f(x, y)
+```
+is assigned to the point (x, y). 
+
+- A scalar field can be characterized by __level curves__ (or 
+__contour lines__) along which the value of f(x, y) is constant. 
+
+$(post_img("https://www.dropbox.com/scl/fi/hwccmtn3kckbo8orqxodc/fig_13_5.png?rlkey=7o7qgkgwtxpexc9efihxq0mpd&dl=1"))
+"""
+
+# ╔═╡ 9e33cc63-7ac1-4654-8408-44bda30d8a09
+cm"""
+$(ex(3,"Sketching a Contour Map"))
+Consider the hemisphere
+```math
+f(x, y)=\sqrt{64-x^2-y^2}
+```
+Sketch a contour map of this surface using level curves corresponding to ``c=0,1,2, \ldots, 8``.
+"""
+
+# ╔═╡ 802132ed-21f6-4afa-807e-c37e0f74675f
+cm"""
+$(ex(4,"Sketching a Contour Map"))
+Sketch a contour map of the hyperbolic paraboloid
+```math
+z=y^2-x^2
+```
+
+"""
+
+# ╔═╡ 6983401b-80d0-4317-ad3e-2323b19ed0e3
+cm"""
+The concept of a __level curve__ can be extended by one dimension to define a __level surface__. 
+If f is a function of three variables and c is a constant, then the graph of the 
+equation
+```math
+f(x, y, z) = c
+```
+is a level surface of ``f``, as shown in
+$(post_img("https://www.dropbox.com/scl/fi/ulqs8j9cnilxdmiuqtvnh/fig_13_14.png?rlkey=vub0vzuj1effvid8gnhh7cllh&dl=1"))
+"""
+
+# ╔═╡ bf8ea038-4609-4e9c-a06e-9118d3574f4b
+cm"""
+$(ex(6,"Level Surfaces"))
+Describe the level surfaces of
+```math
+f(x, y, z)=4 x^2+y^2+z^2
+```
+
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -4559,7 +4689,6 @@ version = "1.4.1+1"
 # ╟─b3fdfb31-a5f9-46ee-84cf-00aa58560960
 # ╟─f317bb32-dd20-45c1-8449-06b7f32672cd
 # ╠═eac26ad2-d636-4b93-a562-d13b155f3609
-# ╠═f803e12d-617e-478f-8593-5e5849384e1a
 # ╟─5141e6da-d53b-4cb8-ad27-0a2666aac859
 # ╟─b73636ec-e481-4c1b-acc9-5e77127c6c17
 # ╟─8c5c067c-6516-496d-a171-b9b1bb48544d
@@ -4573,6 +4702,20 @@ version = "1.4.1+1"
 # ╟─2f2c7b86-cb1d-4796-9717-76653a441b88
 # ╟─2aa9d376-fa6c-4b2b-9a3a-0b307caad4db
 # ╟─a09252fe-4153-4416-8970-e6d7ce980b15
+# ╟─28651479-0f46-4300-a0b7-61bc43c4fc8d
+# ╟─f41122cd-aecd-439a-b8db-27d76a9c7ac2
+# ╟─7d1d5e03-2178-46d6-a52a-9c796b36129d
+# ╟─bd84da28-de8c-4953-af90-aabe85233c1a
+# ╟─1399c636-3eb5-48ed-adff-1536b0fb8cc6
+# ╟─2f4753a7-c0fd-44e8-9be3-3a694715e107
+# ╟─ec36ddf3-3c9a-481f-8ba0-0c3460fbe363
+# ╟─f2642a3b-39c6-452c-b8f6-049a2d122438
+# ╟─9e33cc63-7ac1-4654-8408-44bda30d8a09
+# ╟─6c012443-9419-4a04-a383-2d356ace3c38
+# ╟─802132ed-21f6-4afa-807e-c37e0f74675f
+# ╟─fbe65bb0-b92d-4e46-9c6c-73ca0b4bc355
+# ╟─6983401b-80d0-4317-ad3e-2323b19ed0e3
+# ╟─bf8ea038-4609-4e9c-a06e-9118d3574f4b
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
