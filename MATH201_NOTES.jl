@@ -1087,6 +1087,30 @@ end
 # ╔═╡ fbe65bb0-b92d-4e46-9c6c-73ca0b4bc355
 md"## Level Surfaces"
 
+# ╔═╡ bf162d7b-1678-4741-9c09-e654bc1c6750
+md"""
+# 13.2 Limits and Continuity
+> __Objectives__
+> 1. Understand the definition of a neighborhood in the plane.
+> 1. Understand and use the definition of the limit of a function of two variables.
+> 1. Extend the concept of continuity to a function of two variables.
+> 1. Extend the concept of continuity to a function of three variables.
+"""
+
+# ╔═╡ 5fd599b4-4240-4a71-ab41-bbacf23cf91b
+md"## Neighborhoods in the Plane"
+
+# ╔═╡ b3341da1-2933-4248-92b8-948d83b7a98f
+md"## Limit of a Function of Two Variables"
+
+# ╔═╡ 42e8bb27-d67d-4b36-8502-9ec1f6a6a2fa
+cm"""
+<iframe src="https://www.geogebra.org/classic/a3zakjet?embed" width="600" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ d0bdc9ad-c1aa-471a-8bc3-159a5271feb3
+md"## Continuity of a Function of Two Variables"
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -2280,9 +2304,9 @@ There are six basic types of quadric surfaces:
 
 # ╔═╡ 28789dce-b106-4c6a-aed9-4faa659d9706
 cm"""
-$(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",500))
+$(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",800))
 
-$(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",500))
+$(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",800))
 """
 
 # ╔═╡ 2f2c7b86-cb1d-4796-9717-76653a441b88
@@ -2396,6 +2420,94 @@ Describe the level surfaces of
 f(x, y, z)=4 x^2+y^2+z^2
 ```
 
+"""
+
+# ╔═╡ a65b8fb7-3e35-46b9-bc48-36c5c893baff
+cm"""
+$(define("the Limit of a Function of Two Variables"))
+Let ``f`` be a function of two variables defined, except possibly at ``\left(x_0, y_0\right)``, on an open disk centered at ``\left(x_0, y_0\right)``, and let ``L`` be a real number. Then
+```math
+\lim _{(x, y) \rightarrow\left(x_0, y_0\right)} f(x, y)=L
+```
+if for each ``\varepsilon>0`` there corresponds a ``\delta>0`` such that
+```math
+|f(x, y)-L|<\varepsilon \quad \text { whenever } \quad 0<\sqrt{\left(x-x_0\right)^2+\left(y-y_0\right)^2}<\delta
+```
+"""
+
+# ╔═╡ 260b4106-b6d8-4659-8c7b-411d22b1be8b
+cm"""
+$(bbl("Remark","")) 
+
+Limits of functions of several variables have the same properties regarding sums, 
+differences, products, and quotients as do limits of functions of single variables.
+"""
+
+# ╔═╡ 6d3f312d-6abd-4d59-8ece-ee18fe98015e
+cm"""
+$(ex(2,"Finding a Limit"))
+Find the limit.
+```math
+\lim _{(x, y) \rightarrow(1,2)} \frac{5 x^2 y}{x^2+y^2}
+```
+"""
+
+# ╔═╡ 002f67d2-a621-4406-8e27-52388845b823
+cm"""
+$(ex(3,"Finding a Limit"))
+Find the limit: 
+```math
+\lim _{(x, y) \rightarrow(0,0)} \frac{5 x^2 y}{x^2+y^2}
+```
+"""
+
+# ╔═╡ fcea300d-0725-4533-a96f-5cf9d2d336f2
+cm"""
+$(ex(4,"A Limit That Does Not Exist"))
+Show that the limit does not exist.
+```math
+\lim _{(x, y) \rightarrow(0,0)}\left(\frac{x^2-y^2}{x^2+y^2}\right)^2
+```
+"""
+
+# ╔═╡ 4705162e-809d-4263-9b41-c8e2381ac033
+cm"""
+$(define("Continuity of a Function of Two Variables"))
+A function ``f`` of two variables is continuous at a point ``\left(\boldsymbol{x}_{\mathbf{0}}, \boldsymbol{y}_{\mathbf{0}}\right)`` in an open region ``R`` if ``f\left(x_0, y_0\right)`` is defined and is equal to the limit of ``f(x, y)`` as ``(x, y)`` approaches ``\left(x_0, y_0\right)``. That is,
+```math
+\lim _{(x, y) \rightarrow\left(x_0, y_0\right)} f(x, y)=f\left(x_0, y_0\right)
+```
+
+The function ``f`` is continuous in the open region ``\boldsymbol{R}`` if it is continuous at every point in ``R``.
+"""
+
+# ╔═╡ 6f185a3b-e49a-4b2f-b706-d01a937d9649
+cm"""
+$(bth("Continuity of a Composite Function"))
+
+If ``h`` is continuous at ``\left(x_0, y_0\right)`` and ``g`` is continuous at ``h\left(x_0, y_0\right)``, then the composite function given by ``(g \circ h)(x, y)=g(h(x, y))`` is continuous at ``\left(x_0, y_0\right)``. That is,
+```math
+\lim _{(x, y) \rightarrow\left(x_0, y_0\right)} g(h(x, y))=g\left(h\left(x_0, y_0\right)\right)
+```
+"""
+
+# ╔═╡ e6fa31f1-ec8c-4130-87b9-ad46c958aaba
+cm"""
+$(ex(5,"Testing for Continuity"))
+Discuss the continuity of each function.
+- (a.) ``\displaystyle f(x, y)=\frac{x-2 y}{x^2+y^2}``
+- (b.) ``\displaystyle g(x, y)=\frac{2}{y-x^2}``
+
+
+"""
+
+# ╔═╡ 48cc566e-35ab-4f0d-b0aa-82947d96b923
+cm"""
+$(ex(6,"Testing Continuity of a Function of Three Variables"))
+Discuss the continuity of
+```math
+f(x, y, z)=\frac{1}{x^2+y^2-z}
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -4716,6 +4828,20 @@ version = "1.4.1+1"
 # ╟─fbe65bb0-b92d-4e46-9c6c-73ca0b4bc355
 # ╟─6983401b-80d0-4317-ad3e-2323b19ed0e3
 # ╟─bf8ea038-4609-4e9c-a06e-9118d3574f4b
+# ╟─bf162d7b-1678-4741-9c09-e654bc1c6750
+# ╟─5fd599b4-4240-4a71-ab41-bbacf23cf91b
+# ╟─b3341da1-2933-4248-92b8-948d83b7a98f
+# ╟─a65b8fb7-3e35-46b9-bc48-36c5c893baff
+# ╟─42e8bb27-d67d-4b36-8502-9ec1f6a6a2fa
+# ╟─260b4106-b6d8-4659-8c7b-411d22b1be8b
+# ╟─6d3f312d-6abd-4d59-8ece-ee18fe98015e
+# ╟─002f67d2-a621-4406-8e27-52388845b823
+# ╟─fcea300d-0725-4533-a96f-5cf9d2d336f2
+# ╟─d0bdc9ad-c1aa-471a-8bc3-159a5271feb3
+# ╟─4705162e-809d-4263-9b41-c8e2381ac033
+# ╟─6f185a3b-e49a-4b2f-b706-d01a937d9649
+# ╟─e6fa31f1-ec8c-4130-87b9-ad46c958aaba
+# ╟─48cc566e-35ab-4f0d-b0aa-82947d96b923
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
