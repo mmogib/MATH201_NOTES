@@ -1111,6 +1111,51 @@ cm"""
 # ╔═╡ d0bdc9ad-c1aa-471a-8bc3-159a5271feb3
 md"## Continuity of a Function of Two Variables"
 
+# ╔═╡ bb9a3f6f-58cc-486b-b5c7-92dedf03ea91
+md"""
+# 13.3 Partial Derivatives
+> __Objectives__
+> 1. Find and use partial derivatives of a function of two variables.
+> 1. Find and use partial derivatives of a function of three or more variables.
+> 1. Find higher-order partial derivatives of a function of two or three variables.
+"""
+
+# ╔═╡ 62afda6b-a4e9-4d41-a65a-dfbd32594a07
+cm"## Partial Derivatives of a Function of Two Variables"
+
+# ╔═╡ adc510da-ee87-499f-aeac-5a342fce0cde
+md"## Partial Derivatives of a Function of Three or More Variables"
+
+# ╔═╡ 98f360c0-524d-434e-a6c8-7637475e8a3b
+md"## Higher-Order Partial Derivatives"
+
+# ╔═╡ ddf5e2ca-d8c6-40bf-aff1-4a718bf50994
+cm"""
+Let 
+```math
+z = f(x,y)
+```
+1. Differentiate twice with respect to ``x`` :
+```math
+\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)=\frac{\partial^2 f}{\partial x^2}=f_{x x}
+```
+2. Differentiate twice with respect to ``y`` :
+```math
+\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right)=\frac{\partial^2 f}{\partial y^2}=f_{y y}
+```
+3. Differentiate first with respect to ``x`` and then with respect to ``y`` :
+```math
+\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right)=\frac{\partial^2 f}{\partial y \partial x}=f_{x y} .
+```
+4. Differentiate first with respect to ``y`` and then with respect to ``x`` :
+```math
+\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right)=\frac{\partial^2 f}{\partial x \partial y}=f_{y x}
+```
+
+The third and fourth cases are called __mixed partial derivatives__.
+
+"""
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -2507,6 +2552,146 @@ $(ex(6,"Testing Continuity of a Function of Three Variables"))
 Discuss the continuity of
 ```math
 f(x, y, z)=\frac{1}{x^2+y^2-z}
+```
+"""
+
+# ╔═╡ 59daa341-a2c7-48d6-8e5c-b13d60e8e8d8
+cm"""
+$(define("Partial Derivatives of a Function of Two Variables"))
+If ``z=f(x, y)``, then the first partial derivatives of ``f`` with respect to ``x`` and ``y`` are the functions ``f_x`` and ``f_y`` defined by
+```math
+f_x(x, y)=\lim _{\Delta x \rightarrow 0} \frac{f(x+\Delta x, y)-f(x, y)}{\Delta x}
+```
+
+Partial derivative with respect to ``x``
+and
+```math
+f_y(x, y)=\lim _{\Delta y \rightarrow 0} \frac{f(x, y+\Delta y)-f(x, y)}{\Delta y}
+```
+
+Partial derivative with respect to ``y``
+provided the limits exist.
+"""
+
+# ╔═╡ ca09f049-9a3a-4019-b4f3-1f82107bb5a2
+cm"""
+$(ex(1,"Finding Partial Derivatives"))
+__(a)__ Consider 
+```math
+f(x, y)=3 x-x^2 y^2+2 x^3 y
+```
+Find ``f_x`` and ``f_y``.
+
+__(b)__ Consider 
+```math
+f(x, y)=(\ln x)\left(\sin x^2 y\right),
+```
+
+Find ``f_x`` and ``f_y``.
+"""
+
+# ╔═╡ f83a86dc-1963-44a7-b46e-0c6b40ec7851
+cm"""
+$(bbl("Notation for First Partial Derivatives"))
+For ``z=f(x, y)``, the partial derivatives ``f_x`` and ``f_y`` are denoted by
+```math
+\frac{\partial}{\partial x} f(x, y)=f_x(x, y)=z_x=\frac{\partial z}{\partial x} \quad \text { Partial derivative with respect to } x
+```
+and
+```math
+\frac{\partial}{\partial y} f(x, y)=f_y(x, y)=z_y=\frac{\partial z}{\partial y} . \quad \text { Partial derivative with respect to } y
+```
+
+The first partials evaluated at the point ``(a, b)`` are denoted by
+```math
+\left.\frac{\partial z}{\partial x}\right|_{(a, b)}=f_x(a, b)
+```
+and
+```math
+\left.\frac{\partial z}{\partial y}\right|_{(a, b)}=f_y(a, b)
+```
+"""
+
+# ╔═╡ ce30e0fa-dd38-4724-b5f5-6e975a6d443d
+cm"""
+$(ex(2,"Finding and Evaluating Partial Derivatives"))
+For ``f(x, y)=x e^{x^2 y}``, find ``f_x`` and ``f_y``, and evaluate each at the point ``(1, \ln 2)``.
+"""
+
+# ╔═╡ b4497983-8c65-43f2-aeb3-c12a0f80d201
+cm"""
+$(ex(3,"Finding the Slopes of a Surface"))
+Find the slopes in the ``x``-direction and in the ``y``-direction of the surface
+```math
+f(x, y)=-\frac{x^2}{2}-y^2+\frac{25}{8}
+```
+at the point ``\left(\frac{1}{2}, 1,2\right)``.
+"""
+
+# ╔═╡ 633bf8a0-b2ec-4775-8ea9-de0b033970c5
+cm"""
+$(ex(4,"Finding the Slopes of a Surface"))
+Find the slopes of the surface
+```math
+f(x, y)=1-(x-1)^2-(y-2)^2
+```
+at the point ``(1,2,1)`` in the ``x``-direction and in the ``y``-direction.
+"""
+
+# ╔═╡ 9a5c6eab-7941-486a-b180-e0e2727a701f
+cm"""
+$(ex(6,"Finding Partial Derivative"))
+__(a)__
+```math
+ f(x, y, z) = xy + yz^2 + xz 
+```
+__(b)__
+```math
+ f(x, y, z) =  z sin(xy^2 + 2z) 
+```
+
+"""
+
+# ╔═╡ 7d7faf90-e8eb-4a62-b94c-60c760fd4e44
+cm"""
+$(ex(7,"Finding Second Partial Derivatives"))
+
+Find the second partial derivatives of
+```math
+f(x, y)=3 x y^2-2 y+5 x^2 y^2
+```
+and determine the value of ``f_{x y}(-1,2)``.
+"""
+
+# ╔═╡ 32b941ef-6b87-4254-9f20-e8d3cd872baf
+cm"""
+$(bth("Equality of Mixed Partial Derivatives"))
+If ``f`` is a function of ``x`` and ``y`` such that ``f_{x y}`` and ``f_{y x}`` are continuous on an open disk ``R``, then, for every ``(x, y)`` in ``R``,
+```math
+f_{x y}(x, y)=f_{y x}(x, y)
+```
+"""
+
+# ╔═╡ 2f57a777-90bd-4692-99b5-f0d1c0ac7f52
+cm"""
+$(ex())
+Consider the function defined by
+```math
+f(x, y)= \begin{cases}\frac{x y\left(x^2-y^2\right)}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)^{-}\end{cases}
+```
+- (a) Find ``f_x(x, y)`` and ``f_y(x, y)`` for ``(x, y) \neq(0,0)``.
+- (b) Use the definition of partial derivatives to find ``f_x(0,0)`` and ``f_y(0,0)``.
+
+- (c) Use the definition of partial derivatives to find ``f_{\mathrm{xy}}(0,0)`` and ``f_{yx}(0,0)``.
+- (d) Using Theorem 13.3 and the result of part (c), what can be said about ``f_{x y}`` or ``f_{y x}`` ?
+"""
+
+# ╔═╡ 72fdeacd-4332-463b-bb57-0fd6550be8c1
+cm"""
+$(ex(8,"Finding Higher-Order Partial Derivatives"))
+Show that ``f_{x z}=f_{z x}`` and ``f_{x z z}=f_{z z z}=f_{z z x}`` for the function
+```math
+f(x, y, z)=y e^x+x \ln z .
 ```
 """
 
@@ -4842,6 +5027,22 @@ version = "1.4.1+1"
 # ╟─6f185a3b-e49a-4b2f-b706-d01a937d9649
 # ╟─e6fa31f1-ec8c-4130-87b9-ad46c958aaba
 # ╟─48cc566e-35ab-4f0d-b0aa-82947d96b923
+# ╟─bb9a3f6f-58cc-486b-b5c7-92dedf03ea91
+# ╟─62afda6b-a4e9-4d41-a65a-dfbd32594a07
+# ╟─59daa341-a2c7-48d6-8e5c-b13d60e8e8d8
+# ╟─ca09f049-9a3a-4019-b4f3-1f82107bb5a2
+# ╟─f83a86dc-1963-44a7-b46e-0c6b40ec7851
+# ╟─ce30e0fa-dd38-4724-b5f5-6e975a6d443d
+# ╟─b4497983-8c65-43f2-aeb3-c12a0f80d201
+# ╟─633bf8a0-b2ec-4775-8ea9-de0b033970c5
+# ╟─adc510da-ee87-499f-aeac-5a342fce0cde
+# ╟─9a5c6eab-7941-486a-b180-e0e2727a701f
+# ╟─98f360c0-524d-434e-a6c8-7637475e8a3b
+# ╟─ddf5e2ca-d8c6-40bf-aff1-4a718bf50994
+# ╟─7d7faf90-e8eb-4a62-b94c-60c760fd4e44
+# ╟─32b941ef-6b87-4254-9f20-e8d3cd872baf
+# ╟─2f57a777-90bd-4692-99b5-f0d1c0ac7f52
+# ╟─72fdeacd-4332-463b-bb57-0fd6550be8c1
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
