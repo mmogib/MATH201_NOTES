@@ -32,7 +32,7 @@ begin
     # using Primes
     # using LinearSolve
     # using NonlinearSolve
-    # using ForwardDiff
+    using ForwardDiff
     # using Integrals
     # using OrdinaryDiffEq
 	using Unitful
@@ -1156,6 +1156,77 @@ The third and fourth cases are called __mixed partial derivatives__.
 
 """
 
+# ╔═╡ 59bb2308-5672-43ec-8435-5c773930f790
+md"""
+# 13.4 Differentials
+> __Objectives__
+> 1. Understand the concepts of increments and differentials.
+> 1. Extend the concept of differentiability to a function of two variables.
+> 1. Use a differential as an approximation.
+"""
+
+# ╔═╡ 76c8098c-3f7e-413f-b0cf-f6fd2b1cf0a6
+md"## Increments and Differentialsp"
+
+# ╔═╡ 227654a8-0fb6-4a76-ae66-7f1cecfde140
+md"## Differentiability"
+
+# ╔═╡ 64703d48-53af-4c41-b9bd-f83f4d3accbf
+md"## Approximation by Differentials"
+
+# ╔═╡ 0184a7e2-4dfd-40a5-b879-4cf8d8db0f1e
+cm"""
+For small ``\Delta x`` and ``\Delta y``, you can use the approximation
+```math
+\Delta z \approx d z . \quad \color{red}{\text { Approximate change in } z}
+```
+"""
+
+# ╔═╡ 05d25506-5603-46e2-b1ae-e147fefc4d23
+let
+	@variables x::Real, y::Real, z::Real
+	@variables dx::Real, dy::Real, dz::Real
+	Δx, Δy = (1.01, 0.97) .- (1,1)
+	f(x,y)=sqrt(4-x^2-y^2)
+	z ~ f(x,y)
+	E = dz ~ ForwardDiff.gradient(x->f(x...),[x;y]) ⋅ [dx;dy]
+	substitute(E, Dict([x=>1,y=>1,dx=>Δx, dy=>Δy]))
+end
+
+# ╔═╡ 9a79cd75-1fcd-448f-9208-a7aa2b177da1
+let
+	@variables x::Real, y::Real, z::Real, dx::Real, dy::Real, dz::Real, dV::Real
+	V(x,y,z) = x*y*z
+
+	E= dV  ~  ForwardDiff.gradient(x->V(x...),[x;y;z]) ⋅ [dx;dy;dz]
+	dv = substitute(E,Dict([
+		x=>50,
+		y=>20,
+		z=>15,
+		dx=>0.01,
+		dy=>0.01,
+		dz=>0.01,
+	]))
+	V = 50*20*15
+	100*dv.rhs/V 
+end
+
+# ╔═╡ 2cbf0c60-e34c-4bd6-9862-eb459cf1068d
+md"""
+# 13.5 Chain Rules for Functions of Several Variables
+> __Objectives__
+> 1. Use the Chain Rules for functions of several variables.
+> 2. Find partial derivatives implicitly.
+"""
+
+# ╔═╡ 761b7f5a-b16a-4532-b9b0-c7dd8fdcae05
+md"## Implicit Partial Differentiation"
+
+# ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
+cm"""
+
+"""
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -1241,29 +1312,42 @@ begin
     end
     ex() = example("Example", "")
     function example(lable, desc)
-        """<div style="display:flex;">
-       <div style="
-       font-size: 112%;
-           line-height: 1.3;
-           font-weight: 600;
-           color: #f9ce4e;
-           float: left;
-           background-color: #5c5c5c;
-           border-left: 10px solid #474546;
-           padding: 5px 10px;
-           margin: 0 12px 20px 0;
-           border-radius: 0;
-       ">$lable:</div>
-       <div style="flex-grow:3;
-       line-height: 1.3;
-           font-weight: 600;
-           float: left;
-           padding: 5px 10px;
-           margin: 0 12px 20px 0;
-           border-radius: 0;
-       ">$desc</div>
-       </div>"""
+        """<div class="example-box">
+    <div class="example-header">
+      $lable
+    </div>
+    <div class="example-title">
+      $desc
+    </div>
+    <div class="example-content">
+      
+  </div>
+		"""
     end
+	# function example(lable, desc)
+ #        """<div style="display:flex;">
+ #       <div style="
+ #       font-size: 112%;
+ #           line-height: 1.3;
+ #           font-weight: 600;
+ #           color: #f9ce4e;
+ #           float: left;
+ #           background-color: #5c5c5c;
+ #           border-left: 10px solid #474546;
+ #           padding: 5px 10px;
+ #           margin: 0 12px 20px 0;
+ #           border-radius: 0;
+ #       ">$lable:</div>
+ #       <div style="flex-grow:3;
+ #       line-height: 1.3;
+ #           font-weight: 600;
+ #           float: left;
+ #           padding: 5px 10px;
+ #           margin: 0 12px 20px 0;
+ #           border-radius: 0;
+ #       ">$desc</div>
+ #       </div>"""
+ #    end
     @htl("")
 end
 
@@ -2695,6 +2779,170 @@ f(x, y, z)=y e^x+x \ln z .
 ```
 """
 
+# ╔═╡ 6c3c74d6-bd7b-4a2b-b44e-a84ec878c125
+cm"""
+$(define("Total Differential"))
+If ``z=f(x, y)`` and ``\Delta x`` and ``\Delta y`` are increments of ``x`` and ``y``, then the differentials of the independent variables ``x`` and ``y`` are
+```math
+d x=\Delta x \quad \text { and } \quad d y=\Delta y
+```
+and the total differential of the dependent variable ``z`` is
+```math
+d z=\frac{\partial z}{\partial x} d x+\frac{\partial z}{\partial y} d y=f_x(x, y) d x+f_y(x, y) d y
+```
+"""
+
+# ╔═╡ b6dd5a99-8f6a-4bf3-9e23-8a9a71d15707
+cm"""
+$(ex(1,"Finding the Total Differential"))
+Find the total differential for each function.
+- (a.) ``z=2 x \sin y-3 x^2 y^2``
+- (b.) ``w=x^2+y^2+z^2``
+"""
+
+# ╔═╡ 613868e2-94ed-42c6-89ed-c394bda099b7
+cm"""
+$(define("Differentiability"))
+A function ``f`` given by ``z=f(x, y)`` is differentiable at ``\left(x_0, y_0\right)`` if ``\Delta z`` can be written in the form
+```math
+\Delta z=f_x\left(x_0, y_0\right) \Delta x+f_y\left(x_0, y_0\right) \Delta y+\varepsilon_1 \Delta x+\varepsilon_2 \Delta y
+```
+where both ``\varepsilon_1`` and ``\varepsilon_2 \rightarrow 0`` as
+```math
+(\Delta x, \Delta y) \rightarrow(0,0)
+```
+
+The function ``f`` is differentiable in a region ``\boldsymbol{R}`` if it is differentiable at each point in ``R``.
+"""
+
+# ╔═╡ 608436e8-2663-45e4-8b47-4cd76b34c56e
+cm"""
+$(ex(2,"Showing that a Function Is Differentiable"))
+Show that the function
+```math
+f(x, y)=x^2+3 y
+```
+is differentiable at every point in the plane.
+"""
+
+# ╔═╡ df8ede71-c299-4ea1-8642-db1138eb229c
+cm"""
+$(bth("Sufficient Condition for Differentiability"))
+If ``f`` is a function of ``x`` and ``y``, where ``f_x`` and ``f_y`` are continuous in an open region ``R``, then ``f`` is differentiable on ``R``.
+
+"""
+
+# ╔═╡ 46b31b2e-c252-44e1-9ecd-59c787431098
+cm"""
+$(ex(3,"Using a Differential as an Approximation"))
+Use the differential ``d z`` to approximate the change in
+```math
+z=\sqrt{4-x^2-y^2}
+```
+as ``(x, y)`` moves from the point ``(1,1)`` to the point ``(1.01,0.97)``. Compare this approximation with the exact change in ``z``.
+"""
+
+# ╔═╡ e1f656aa-60dd-4d8b-9e09-ab47adfd7c56
+cm"""
+$(ex(4,"Error Analysis"))
+The possible error involved in measuring each dimension of a rectangular box is ``\pm 0.1`` millimeter. The dimensions of the box are ``x=50`` centimeters, ``y=20`` centimeters, and ``z=15`` centimeters, as shown below. Use ``d V`` to estimate the propagated error and the relative error in the calculated volume of the box.
+
+$(post_img("https://www.dropbox.com/scl/fi/1y1dnb0lijtqu1p8vl8z5/fig_13_37.png?rlkey=4xpdeaxy3lcn940i0y3vwyq31&dl=1"))
+"""
+
+# ╔═╡ c2a48a38-c4d8-4fcf-bfdb-c150772c59b4
+cm"""
+$(bth("Differentiability Implies Continuity"))
+If a function of ``x`` and ``y`` is differentiable at ``\left(x_0, y_0\right)``, then it is continuous at ``\left(x_0, y_0\right)``.
+"""
+
+# ╔═╡ e2ecfca2-22e3-478c-b2d3-74d91637378a
+cm"""
+$(ex(5,"A Function That Is Not Differentiable"))
+For the function
+```math
+f(x, y)= \begin{cases}\frac{-3 x y}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)\end{cases}
+```
+show that ``f_x(0,0)`` and ``f_y(0,0)`` both exist but that ``f`` is not differentiable at ``(0,0)``.
+"""
+
+# ╔═╡ f5085dcd-9dc6-4f1e-9725-30c0a168584d
+cm"""
+$(bth("Chain Rule: One Independent Variable"))
+Let ``w=f(x, y)``, where ``f`` is a differentiable function of ``x`` and ``y``. If ``x=g(t)`` and ``y=h(t)``, where ``g`` and ``h`` are differentiable functions of ``t``, then ``w`` is a differentiable function of ``t``, and
+```math
+\frac{d w}{d t}=\frac{\partial w}{\partial x} \frac{d x}{d t}+\frac{\partial w}{\partial y} \frac{d y}{d t}
+```
+$(ebl())
+
+$(ex(1,"Chain Rule: One Independent Variable"))
+Let ``w=x^2 y-y^2``, where ``x=\sin t`` and ``y=e^t``. Find ``d w / d t`` when ``t=0``.
+"""
+
+# ╔═╡ 44a48359-af1e-4c45-9318-6e7830d2368b
+cm"""
+$(ex(3,"Finding Partial Derivatives by Substitution"))
+Find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
+"""
+
+# ╔═╡ 219a676b-8bb1-4c4f-b631-d12e0ea69a8e
+cm"""
+$(bth("Chain Rule: Two Independent Variables"))
+Let ``w=f(x, y)``, where ``f`` is a differentiable function of ``x`` and ``y``. If ``x=g(s, t)`` and ``y=h(s, t)`` such that the first partials ``\partial x / \partial s, \partial x / \partial t, \partial y / \partial s``, and ``\partial y / \partial t`` all exist, then ``\partial w / \partial s`` and ``\partial w / \partial t`` exist and are given by
+```math
+\frac{\partial w}{\partial s}=\frac{\partial w}{\partial x} \frac{\partial x}{\partial s}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial s}
+```
+and
+```math
+\frac{\partial w}{\partial t}=\frac{\partial w}{\partial x} \frac{\partial x}{\partial t}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial t}
+```
+"""
+
+# ╔═╡ 5077b19e-11c2-4132-9d8d-47b969994a27
+cm"""
+$(ex(4,"The Chain Rule with Two Independent Variables"))
+ Use the Chain Rule to find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
+"""
+
+# ╔═╡ 39041bf2-d68e-4b86-a0c0-3b3b06bcd2e8
+cm"""
+$(ex(5,"The Chain Rule for a Function of Three Variables"))
+Find ``\partial w / \partial s`` and ``\partial w / \partial t`` when ``s=1`` and ``t=2 \pi`` for
+```math
+w=x y+y z+x z
+```
+where ``x=s \cos t, y=s \sin t``, and ``z=t``.
+"""
+
+# ╔═╡ 5d5b5f84-0ac0-4adf-a140-59ee30e79425
+cm"""
+$(bth("Chain Rule: Implicit Differentiation"))
+If the equation ``F(x, y)=0`` defines ``y`` implicitly as a differentiable function of ``x``, then
+```math
+\frac{d y}{d x}=-\frac{F_x(x, y)}{F_y(x, y)}, \quad F_y(x, y) \neq 0 .
+```
+
+If the equation ``F(x, y, z)=0`` defines ``z`` implicitly as a differentiable function of ``x`` and ``y``, then
+```math
+\frac{\partial z}{\partial x}=-\frac{F_x(x, y, z)}{F_z(x, y, z)} \quad \text { and } \quad \frac{\partial z}{\partial y}=-\frac{F_y(x, y, z)}{F_z(x, y, z)}, \quad F_z(x, y, z) \neq 0
+```
+"""
+
+# ╔═╡ cb40060d-118c-44ef-96fb-2646f8e120ab
+cm"""
+$(ex(6,"Finding a Derivative Implicitly"))
+Find ``d y / d x`` for
+```math
+y^3+y^2-5 y-x^2+4=0
+```
+
+$(ex(7,"Finding Partial Derivatives Implicitly"))
+Find ``\partial z / \partial x`` and ``\partial z / \partial y`` for
+```math
+3 x^2 z-x^2 y^2+2 z^3+3 y z-5=0
+```
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -2714,8 +2962,48 @@ ul li:before {
 .p40 {
 	padding-left: 40px;
 }
-</style>
 
+example-box {
+      max-width: 600px;           /* Limits the box width */
+      margin: 2rem auto;          /* Centers the box and adds vertical spacing */
+      border: 1px solid #ccc;     /* Light border */
+      border-radius: 4px;         /* Slightly rounded corners */
+      overflow: hidden;           /* Ensures the box boundary clips its children */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header area for "EXAMPLE 1" */
+    .example-header {
+      background: linear-gradient(90deg, #cc0000, #990000);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #990000;
+    }
+
+    /* Sub-header area for the title or subtitle */
+    .example-title {
+      background-color: #f9f9f9;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      margin: 0;                  /* Remove default heading margins */
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Main content area for the mathematical statement or instructions */
+    .example-content {
+      padding: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Optional styling for inline math or emphasis */
+    em {
+      font-style: italic;
+      color: #333;
+    }
 </style>
 """)
 
@@ -2724,6 +3012,7 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Colors = "5ae59095-9a9b-59fe-a467-6f913c188581"
 CommonMark = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 Latexify = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
@@ -2743,6 +3032,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 [compat]
 Colors = "~0.12.11"
 CommonMark = "~0.8.15"
+ForwardDiff = "~0.10.38"
 HypertextLiteral = "~0.9.5"
 LaTeXStrings = "~1.3.1"
 Latexify = "~0.16.5"
@@ -2762,7 +3052,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.3"
 manifest_format = "2.0"
-project_hash = "0a4dba39da0a41b47f84f534c194cf631fed203e"
+project_hash = "bf287ef2b56b981163be9cad41e7ead68e8bc4c2"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "eea5d80188827b35333801ef97a40c2ed653b081"
@@ -2971,6 +3261,12 @@ git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
 uuid = "38540f10-b2f7-11e9-35d8-d573e4eb0ff2"
 version = "0.2.4"
 
+[[deps.CommonSubexpressions]]
+deps = ["MacroTools"]
+git-tree-sha1 = "cda2cfaebb4be89c9084adaca7dd7333369715c5"
+uuid = "bbf7d656-a473-5ed7-a52c-81e309532950"
+version = "0.3.1"
+
 [[deps.CommonWorldInvalidations]]
 git-tree-sha1 = "ae52d1c52048455e85a387fbee9be553ec2b68d0"
 uuid = "f70d9fcc-98c5-4d4a-abd7-e4cdeebd8ca8"
@@ -3065,6 +3361,12 @@ deps = ["Mmap"]
 git-tree-sha1 = "9e2f36d3c96a820c678f2f1f1782582fcf685bae"
 uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 version = "1.9.1"
+
+[[deps.DiffResults]]
+deps = ["StaticArraysCore"]
+git-tree-sha1 = "782dd5f4561f5d267313f23853baaaa4c52ea621"
+uuid = "163ba53b-c6d8-5494-b064-1a9d43ac40c5"
+version = "1.1.0"
 
 [[deps.DiffRules]]
 deps = ["IrrationalConstants", "LogExpFunctions", "NaNMath", "Random", "SpecialFunctions"]
@@ -3217,6 +3519,16 @@ version = "2.13.96+0"
 git-tree-sha1 = "9c68794ef81b08086aeb32eeaf33531668d5f5fc"
 uuid = "1fa38f19-a742-5d3f-a2b9-30dd87b9d5f8"
 version = "1.3.7"
+
+[[deps.ForwardDiff]]
+deps = ["CommonSubexpressions", "DiffResults", "DiffRules", "LinearAlgebra", "LogExpFunctions", "NaNMath", "Preferences", "Printf", "Random", "SpecialFunctions"]
+git-tree-sha1 = "a2df1b776752e3f344e5116c06d75a10436ab853"
+uuid = "f6369f11-7733-5829-9624-2563aa707210"
+version = "0.10.38"
+weakdeps = ["StaticArrays"]
+
+    [deps.ForwardDiff.extensions]
+    ForwardDiffStaticArraysExt = "StaticArrays"
 
 [[deps.FreeType]]
 deps = ["CEnum", "FreeType2_jll"]
@@ -5043,9 +5355,35 @@ version = "1.4.1+1"
 # ╟─32b941ef-6b87-4254-9f20-e8d3cd872baf
 # ╟─2f57a777-90bd-4692-99b5-f0d1c0ac7f52
 # ╟─72fdeacd-4332-463b-bb57-0fd6550be8c1
+# ╟─59bb2308-5672-43ec-8435-5c773930f790
+# ╟─76c8098c-3f7e-413f-b0cf-f6fd2b1cf0a6
+# ╟─6c3c74d6-bd7b-4a2b-b44e-a84ec878c125
+# ╟─b6dd5a99-8f6a-4bf3-9e23-8a9a71d15707
+# ╟─227654a8-0fb6-4a76-ae66-7f1cecfde140
+# ╟─613868e2-94ed-42c6-89ed-c394bda099b7
+# ╟─608436e8-2663-45e4-8b47-4cd76b34c56e
+# ╟─df8ede71-c299-4ea1-8642-db1138eb229c
+# ╟─64703d48-53af-4c41-b9bd-f83f4d3accbf
+# ╟─0184a7e2-4dfd-40a5-b879-4cf8d8db0f1e
+# ╟─46b31b2e-c252-44e1-9ecd-59c787431098
+# ╠═05d25506-5603-46e2-b1ae-e147fefc4d23
+# ╟─e1f656aa-60dd-4d8b-9e09-ab47adfd7c56
+# ╠═9a79cd75-1fcd-448f-9208-a7aa2b177da1
+# ╟─c2a48a38-c4d8-4fcf-bfdb-c150772c59b4
+# ╟─e2ecfca2-22e3-478c-b2d3-74d91637378a
+# ╟─2cbf0c60-e34c-4bd6-9862-eb459cf1068d
+# ╟─f5085dcd-9dc6-4f1e-9725-30c0a168584d
+# ╟─44a48359-af1e-4c45-9318-6e7830d2368b
+# ╟─219a676b-8bb1-4c4f-b631-d12e0ea69a8e
+# ╟─5077b19e-11c2-4132-9d8d-47b969994a27
+# ╟─39041bf2-d68e-4b86-a0c0-3b3b06bcd2e8
+# ╟─761b7f5a-b16a-4532-b9b0-c7dd8fdcae05
+# ╟─5d5b5f84-0ac0-4adf-a140-59ee30e79425
+# ╠═cb40060d-118c-44ef-96fb-2646f8e120ab
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
-# ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
+# ╠═faf9928f-8ef8-4cde-9916-a153e505e204
+# ╠═ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
-# ╟─107407c8-5da0-4833-9965-75a82d84a0fb
+# ╠═107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
