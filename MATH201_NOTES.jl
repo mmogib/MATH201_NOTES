@@ -1190,15 +1190,16 @@ let
 	f(x,y)=sqrt(4-x^2-y^2)
 	z ~ f(x,y)
 	E = dz ~ ForwardDiff.gradient(x->f(x...),[x;y]) ⋅ [dx;dy]
-	substitute(E, Dict([x=>1,y=>1,dx=>Δx, dy=>Δy]))
+	substitute(E, Dict([x=>1,y=>1,dx=>Δx, dy=>Δy])), f(1.01,0.97)-f(1,1)
+	
 end
 
 # ╔═╡ 9a79cd75-1fcd-448f-9208-a7aa2b177da1
 let
-	@variables x::Real, y::Real, z::Real, dx::Real, dy::Real, dz::Real, dV::Real
-	V(x,y,z) = x*y*z
-
-	E= dV  ~  ForwardDiff.gradient(x->V(x...),[x;y;z]) ⋅ [dx;dy;dz]
+	@variables x::Real, y::Real, z::Real, dx::Real, dy::Real, dz::Real, dV::Real, V::Real
+	v(x,y,z) = x*y*z
+	Volume = V ~ v(x,y,z)
+	E = dV  ~  ForwardDiff.gradient(x->v(x...),[x;y;z]) ⋅ [dx;dy;dz]
 	dv = substitute(E,Dict([
 		x=>50,
 		y=>20,
@@ -1207,8 +1208,9 @@ let
 		dy=>0.01,
 		dz=>0.01,
 	]))
-	V = 50*20*15
-	100*dv.rhs/V 
+	v_value = 50*20*15
+	# dv = 20
+	100*dv.rhs/v_value 
 end
 
 # ╔═╡ 2cbf0c60-e34c-4bd6-9862-eb459cf1068d
@@ -1221,6 +1223,89 @@ md"""
 
 # ╔═╡ 761b7f5a-b16a-4532-b9b0-c7dd8fdcae05
 md"## Implicit Partial Differentiation"
+
+# ╔═╡ ae0266c1-7f05-4101-81ae-df25c27df315
+md"""
+# 13.6 Directional Derivatives and Gradients
+> __Objectives__
+> 1. Find and use directional derivatives of a function of two variables.
+> 1. Find the gradient of a function of two variables.
+> 1. Use the gradient of a function of two variables in applications.
+> 1. Find directional derivatives and gradients of functions of three variables.
+"""
+
+# ╔═╡ 4d7d2c66-bf71-4827-86cd-f0dc1b9193a7
+let
+	@variables x::Real, y::Real, f(..)
+	Dx=Differential(x)
+	Dy=Differential(y)
+	f(x,y) = 4 - x^2 - (1//4)*y^2
+	u = Dict(x=>1,y=>2.0)
+	d=[cos(π/3);sin(π/3)]
+	fx(x,y)=Dx(f(x,y))
+	fy(x,y)=Dy(f(x,y))
+	Ex = fx(x,y) ~ expand_derivatives(fx(x,y))
+	Ey = fy(x,y) ~ expand_derivatives(fy(x,y))
+	∇f= Symbolics.gradient(f(x,y),[x,y])
+	substitute(∇f,u) ⋅ d
+end
+
+# ╔═╡ dd361b26-7227-49b2-92d7-8c50ed1b930f
+let
+	@variables x::Real, y::Real, f(..)
+	Dx=Differential(x)
+	Dy=Differential(y)
+	f(x,y) = x^2*sin(2y)
+	u = Dict(x=>1, y=>π/2)
+	v=[3;-4]
+	d =v/norm(v)
+	fx(x,y)=Dx(f(x,y))
+	fy(x,y)=Dy(f(x,y))
+	Ex = fx(x,y) ~ expand_derivatives(fx(x,y))
+	Ey = fy(x,y) ~ expand_derivatives(fy(x,y))
+	∇f= Symbolics.gradient(f(x,y),[x,y])
+	substitute(∇f,u) ⋅ d
+end
+
+# ╔═╡ e869fbcf-3e95-43f8-b911-536dad2b2725
+md"## The Gradient of a Function of Two Variables"
+
+# ╔═╡ 94940200-af4b-4341-8f35-d5a6a5a12b0a
+md"##  Applications of the Gradient"
+
+# ╔═╡ 082deb16-6b16-46d2-875c-a356c62e04a0
+let
+	# Define the function f(x, y)
+	T(x, y) = 20 - 4x^2 - y^2
+	∇T(x,y) = [-8x;-y]
+	
+	# Define ranges for x and y
+	# x in [-2, 2] and y in [-2, 2]
+	xs = range(-3, 3, length=300)
+	ys = range(-5.5, 5, length=300)
+	ts = range(0.0,10.0, length=100)
+	# Compute function values over the grid.
+	# Use a ternary operator to ensure that the function is evaluated only when the argument is nonnegative.
+	Z = [T(x,y) for x in xs, y in ys ]
+	P=[2;-3]
+	Q=[2;-3]
+	path =map(1:290) do i 
+		Q = Q+0.01*∇T(Q...) 
+		Q
+	end
+	path=vcat([P],path)
+	# Plot the contour lines
+	contour(xs, ys, Z, 
+	    title = "Contour Plot of " * L" T(x, y) = 20 - 4x^2 - y^2", 
+	    xlabel = "x", ylabel = "y", frame_style=:origin)
+	scatter!([P[1]],[P[2]],label=:none, annotations=[(2.1,-2.7,L"(2,-3)",10)])
+	plot!(first.(path),last.(path),label=:none)
+	scatter!([path[end][1]],[path[end][2]],label=:none)
+	
+end
+
+# ╔═╡ a6b3ade2-a56f-4295-a670-acd5e67994cc
+md"## Functions of Three Variables"
 
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
@@ -2943,6 +3028,170 @@ Find ``\partial z / \partial x`` and ``\partial z / \partial y`` for
 ```
 """
 
+# ╔═╡ a29c4e46-432c-4903-85a9-48c226149768
+cm"""
+
+$(define("Directional Derivative"))
+Let ``f`` be a function of two variables ``x`` and ``y`` and let ``\mathbf{u}=\cos \theta \mathbf{i}+\sin \theta \mathbf{j}`` be a unit vector. Then the directional derivative of ``f`` in the direction of ``u``, denoted by ``D_{\mathbf{u}} f``, is
+```math
+D_{\mathbf{u}} f(x, y)=\lim _{t \rightarrow 0} \frac{f(x+t \cos \theta, y+t \sin \theta)-f(x, y)}{t}
+```
+provided this limit exists.
+$(ebl())
+
+$(bth("Directional Derivative"))
+If ``f`` is a differentiable function of ``x`` and ``y``, then the directional derivative of ``f`` in the direction of the unit vector ``\mathbf{u}=\cos \theta \mathbf{i}+\sin \theta \mathbf{j}`` is
+```math
+D_{\mathbf{u}} f(x, y)=f_x(x, y) \cos \theta+f_y(x, y) \sin \theta
+```
+"""
+
+# ╔═╡ 93dce18b-4697-4d64-998a-029a54d8d515
+cm"""
+$(ex(1,"Finding a Directional Derivative"))
+Find the directional derivative of
+```math
+f(x, y)=4-x^2-\frac{1}{4} y^2 \quad \text { Surface }
+```
+at ``(1,2)`` in the direction of
+```math
+\mathbf{u}=\left(\cos \frac{\pi}{3}\right) \mathbf{i}+\left(\sin \frac{\pi}{3}\right) \mathbf{j} . \quad \text { Direction }
+```
+"""
+
+# ╔═╡ a6ea5add-267a-4299-8533-f0b531f78ef3
+cm"""
+$(ex(2,"Finding a Directional Derivative"))
+
+Find the directional derivative of
+```math
+f(x, y)=x^2 \sin 2 y \quad \text { Surface }
+```
+at ``(1, \pi / 2)`` in the direction of
+```math
+\mathbf{v}=3 \mathbf{i}-4 \mathbf{j}
+```
+"""
+
+# ╔═╡ 6b2303ca-6cd4-4987-b4b6-cf6419687840
+cm"""
+$(define("Gradient of a Function of Two Variables"))
+Let ``z=f(x, y)`` be a function of ``x`` and ``y`` such that ``f_x`` and ``f_y`` exist. Then the gradient of ``\boldsymbol{f}``, denoted by ``\nabla f(x, y)``, is the vector
+```math
+\nabla f(x, y)=f_x(x, y) \mathbf{i}+f_y(x, y) \mathbf{j}
+```
+(The symbol ``\nabla f`` is read as "del ``f``.") Another notation for the gradient is given by ``\operatorname{grad} f(x, y)``. In Figure 13.48 , note that for each ``(x, y)``, the gradient ``\nabla f(x, y)`` is a vector in the plane (not a vector in space).
+
+$(ebl())
+
+$(ex(3,"Finding the Gradient of a Function"))
+Find the gradient of
+```math
+f(x, y)=y \ln x+x y^2
+```
+at the point ``(1,2)``.
+"""
+
+# ╔═╡ f96502b3-6d86-41c8-91dd-b9b53a7d3e7c
+cm"""
+$(bth("Alternative Form of the Directional Derivative"))
+If ``f`` is a differentiable function of ``x`` and ``y``, then the directional derivative of ``f`` in the direction of the unit vector ``\mathbf{u}`` is
+```math
+D_{\mathbf{u}} f(x, y)=\nabla f(x, y) \cdot \mathbf{u} .
+```
+"""
+
+# ╔═╡ 00ed95c8-3e3d-4875-85f4-4946609f120b
+cm"""
+$(ex(4,"Using ∇f(x, y) to Find a Directional Derivative"))
+Find the directional derivative of ``f(x, y)=3 x^2-2 y^2`` at ``\left(-\frac{3}{4}, 0\right)`` in the direction from ``P\left(-\frac{3}{4}, 0\right)`` to ``Q(0,1)``.
+"""
+
+# ╔═╡ 02e81392-398c-4283-ae9d-3db93f2cd518
+cm"""
+$(bth("Properties of the Gradient"))
+Let ``f`` be differentiable at the point ``(x, y)``.
+1. If ``\nabla f(x, y)=\mathbf{0}``, then ``D_{\mathbf{u}} f(x, y)=0`` for all ``\mathbf{u}``.
+2. The direction of maximum increase of ``f`` is given by ``\nabla f(x, y)``. The maximum value of ``D_{\mathbf{u}} f(x, y)`` is
+```math
+\|\nabla f(x, y)\| . \quad \text { Maximum value of } D_{\mathbf{u}} f(x, y)
+```
+3. The direction of minimum increase of ``f`` is given by ``-\nabla f(x, y)``. The minimum value of ``D_{\mathbf{u}} f(x, y)`` is
+```math
+-\|\nabla f(x, y)\| . \quad \text { Minimum value of } D_{\mathbf{u}} f(x, y)
+```
+"""
+
+# ╔═╡ f7d7bbba-e43a-4780-899e-b89e6614e828
+cm"""
+$(ex(5,"Finding the Direction of Maximum Increase"))
+The temperature in degrees Celsius on the surface of a metal plate is
+```math
+T(x, y)=20-4 x^2-y^2
+```
+where ``x`` and ``y`` are measured in centimeters. In what direction from ``(2,-3)`` does the temperature increase most rapidly? What is this rate of increase?
+
+$(ex(6,"Finding the Path of a Heat-Seeking Particle"))
+A heat-seeking particle is located at the point ``(2,-3)`` on a metal plate whose temperature at ``(x, y)`` is
+```math
+T(x, y)=20-4 x^2-y^2
+```
+
+Find the path of the particle as it continuously moves in the direction of maximum temperature increase.
+"""
+
+# ╔═╡ 030966eb-52b3-4eaa-aa7f-a68311daab84
+cm"""
+$(bth("Gradient Is Normal to Level Curves"))
+If ``f`` is differentiable at ``\left(x_0, y_0\right)`` and ``\nabla f\left(x_0, y_0\right) \neq \mathbf{0}``, then ``\nabla f\left(x_0, y_0\right)`` is normal to the level curve through ``\left(x_0, y_0\right)``.
+$(ebl())
+
+$(ex(7,"Finding a Normal Vector to a Level Curve"))
+Sketch the level curve corresponding to ``c=0`` for the function given by
+```math
+f(x, y)=y-\sin x
+```
+and find a normal vector at several points on the curve.
+"""
+
+# ╔═╡ 9ba838ff-5e69-481d-9120-654d82153d10
+cm"""
+$(bbl("Directional Derivative and Gradient for Three Variables",""))
+Let ``f`` be a function of ``x, y``, and ``z`` with continuous first partial derivatives. The directional derivative of ``f`` in the direction of a unit vector
+```math
+\mathbf{u}=a \mathbf{i}+b \mathbf{j}+c \mathbf{k}
+```
+is given by
+```math
+D_{\mathbf{u}} f(x, y, z)=a f_x(x, y, z)+b f_y(x, y, z)+c f_z(x, y, z)
+```
+
+The gradient of ``\boldsymbol{f}`` is defined as
+```math
+\nabla f(x, y, z)=f_x(x, y, z) \mathbf{i}+f_y(x, y, z) \mathbf{j}+f_z(x, y, z) \mathbf{k}
+```
+
+Properties of the gradient are as follows.
+1. ``D_{\mathbf{u}} f(x, y, z)=\nabla f(x, y, z) \cdot \mathbf{u}``
+2. If ``\nabla f(x, y, z)=\mathbf{0}``, then ``D_{\mathbf{u}} f(x, y, z)=0`` for all ``\mathbf{u}``.
+3. The direction of maximum increase of ``f`` is given by ``\nabla f(x, y, z)``. The maximum value of ``D_{\mathbf{u}} f(x, y, z)`` is
+```math
+\|\nabla f(x, y, z)\| . \quad \quad \text { Maximum value of } D_{\mathbf{u}} f(x, y, z)
+```
+4. The direction of minimum increase of ``f`` is given by ``-\nabla f(x, y, z)``. The minimum value of ``D_{\mathbf{u}} f(x, y, z)`` is
+```math
+-\|\nabla f(x, y, z)\| . \quad \quad \text { Minimum value of } D_{\mathbf{u}} f(x, y, z)
+```
+$(ebl())
+
+$(ex(8,"Finding the Gradient of a Function"))
+Find ``\nabla f(x, y, z)`` for the function
+```math
+f(x, y, z)=x^2+y^2-4 z
+```
+and find the direction of maximum increase of ``f`` at the point ``(2,-1,1)``.
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -3050,7 +3299,7 @@ Unitful = "~1.22.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.3"
+julia_version = "1.11.4"
 manifest_format = "2.0"
 project_hash = "bf287ef2b56b981163be9cad41e7ead68e8bc4c2"
 
@@ -4122,7 +4371,7 @@ version = "2.5.2+0"
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+2"
+version = "0.8.1+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -5379,11 +5628,28 @@ version = "1.4.1+1"
 # ╟─39041bf2-d68e-4b86-a0c0-3b3b06bcd2e8
 # ╟─761b7f5a-b16a-4532-b9b0-c7dd8fdcae05
 # ╟─5d5b5f84-0ac0-4adf-a140-59ee30e79425
-# ╠═cb40060d-118c-44ef-96fb-2646f8e120ab
+# ╟─cb40060d-118c-44ef-96fb-2646f8e120ab
+# ╟─ae0266c1-7f05-4101-81ae-df25c27df315
+# ╟─a29c4e46-432c-4903-85a9-48c226149768
+# ╟─93dce18b-4697-4d64-998a-029a54d8d515
+# ╠═4d7d2c66-bf71-4827-86cd-f0dc1b9193a7
+# ╟─a6ea5add-267a-4299-8533-f0b531f78ef3
+# ╠═dd361b26-7227-49b2-92d7-8c50ed1b930f
+# ╟─e869fbcf-3e95-43f8-b911-536dad2b2725
+# ╟─6b2303ca-6cd4-4987-b4b6-cf6419687840
+# ╟─f96502b3-6d86-41c8-91dd-b9b53a7d3e7c
+# ╟─00ed95c8-3e3d-4875-85f4-4946609f120b
+# ╟─94940200-af4b-4341-8f35-d5a6a5a12b0a
+# ╟─02e81392-398c-4283-ae9d-3db93f2cd518
+# ╟─f7d7bbba-e43a-4780-899e-b89e6614e828
+# ╟─082deb16-6b16-46d2-875c-a356c62e04a0
+# ╟─030966eb-52b3-4eaa-aa7f-a68311daab84
+# ╟─a6b3ade2-a56f-4295-a670-acd5e67994cc
+# ╟─9ba838ff-5e69-481d-9120-654d82153d10
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
-# ╠═faf9928f-8ef8-4cde-9916-a153e505e204
-# ╠═ef081dfa-b610-4c7a-a039-7258f4f6e80e
+# ╟─faf9928f-8ef8-4cde-9916-a153e505e204
+# ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
-# ╠═107407c8-5da0-4833-9965-75a82d84a0fb
+# ╟─107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
