@@ -1307,6 +1307,29 @@ end
 # ╔═╡ a6b3ade2-a56f-4295-a670-acd5e67994cc
 md"## Functions of Three Variables"
 
+# ╔═╡ 4875343c-3971-46c7-bfb1-e3780ce29c94
+md"""
+# 13.7 Tangent Planes and normal lines
+> __Objectives__
+> 1. Find equations of tangent planes and normal lines to surfaces.
+> 1. Find the angle of inclination of a plane in space.
+> 1. Compare the gradients f x, y and Fx, y, z.
+"""
+
+# ╔═╡ acd1aea4-c44a-4352-aed2-2236974d620f
+md"## Tangent Plane and Normal Line to a Surface"
+
+# ╔═╡ 399ff8df-aa95-40aa-874c-a0f18b57523b
+cm"""
+<iframe src="https://www.geogebra.org/classic/rkhgxuag?embed" width="600" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ 9bce4166-5f1c-4ed7-8a0b-9fc73c984230
+md"## The Angle of Inclination of a Plane"
+
+# ╔═╡ e83f7271-ba1b-4042-a90c-be0b2170b0c3
+md"## A Comparison of the Gradients ∇f(x, y) and ∇F(x, y, z)"
+
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
 
@@ -3190,6 +3213,112 @@ Find ``\nabla f(x, y, z)`` for the function
 f(x, y, z)=x^2+y^2-4 z
 ```
 and find the direction of maximum increase of ``f`` at the point ``(2,-1,1)``.
+"""
+
+# ╔═╡ 84af4974-7e57-47b0-9dcd-96281731fdb2
+cm"""
+$(ex(1,"Writing an Equation of a Surface"))
+ For the function
+```math
+ F(x, y z) = x^2 + y^2 + z^2 − 4
+```
+describe the level surface given by
+```math
+F(x, y, z) = 0.
+```
+"""
+
+# ╔═╡ 62608b1e-1818-45b3-affa-0769f78eac97
+cm"""
+$(define("Tangent Plane and Normal Line"))
+Let ``F`` be differentiable at the point ``P\left(x_0, y_0, z_0\right)`` on the surface ``S`` given by ``F(x, y, z)=0`` such that
+```math
+\nabla F\left(x_0, y_0, z_0\right) \neq \mathbf{0}
+```
+1. The plane through ``P`` that is normal to ``\nabla F\left(x_0, y_0, z_0\right)`` is called the __tangent plane to ``S`` at ``P``__.
+2. The line through ``P`` having the direction of ``\nabla F\left(x_0, y_0, z_0\right)`` is called the __normal line to ``S`` at ``P``__.
+"""
+
+# ╔═╡ 444df8e3-41c6-4c9a-b036-5d25243eec25
+cm"""
+$(bth("Equation of Tangent Plane"))
+If ``F`` is differentiable at ``\left(x_0, y_0, z_0\right)``, then an equation of the tangent plane to the surface given by ``F(x, y, z)=0`` at ``\left(x_0, y_0, z_0\right)`` is
+```math
+F_x\left(x_0, y_0, z_0\right)\left(x-x_0\right)+F_y\left(x_0, y_0, z_0\right)\left(y-y_0\right)+F_z\left(x_0, y_0, z_0\right)\left(z-z_0\right)=0
+```
+"""
+
+# ╔═╡ 29c0036c-7f7e-448c-8eac-4d41812f02a0
+cm"""
+$(ex(2,"Finding an Equation of a Tangent Plane"))
+Find an equation of the tangent plane to the hyperboloid
+```math
+z2 − 2x2 − 2y2 = 12
+```
+ at the point ``(1, −1, 4)``.
+"""
+
+# ╔═╡ d653cfc6-ce5e-4933-ab12-88688039f45d
+cm"""
+$(ex(3,"Finding an Equation of the Tangent Plane"))
+Find an equation of the tangent plane to the paraboloid
+```math
+z=1-\frac{1}{10}(x^2+4y^2)
+```
+at the point ``(1, 1, \frac{1}{2})``.
+"""
+
+# ╔═╡ e5dbd474-3874-4c3c-9a60-576db293c83a
+cm"""
+$(ex(4,"Finding an Equation of a normal line to a Surface"))
+Find a set of symmetric equations for the normal line to the surface
+```math
+xyz=12
+```
+at the point ``(2, −2, −3)``.
+"""
+
+# ╔═╡ d823c8f8-09db-446b-a4db-ff635ccd818b
+cm"""
+$(ex(5,"Finding the Equation of a Tangent line to a curve"))
+Find a set of parametric equations for the tangent line to the curve of intersection of the ellipsoid
+```math
+ x^2+2y^2+2z^2=20 
+```
+and the paraboloid
+```math
+x^2+y^2+z=4 
+```
+at the point ``(0, 1, 3)``,
+"""
+
+# ╔═╡ 2d7f7a9e-79e8-481e-a8d4-211d6757a273
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/bk9sray473m2p68840gc5/fig_13_62.png?rlkey=r32kfk81aheipc8h5gt6its5f&dl=1"))
+```math
+\cos \theta=\frac{|\mathbf{n} \cdot \mathbf{k}|}{\|\mathbf{n}\|\|\mathbf{k}\|}=\frac{|\mathbf{n} \cdot \mathbf{k}|}{\|\mathbf{n}\|}
+```
+
+"""
+
+# ╔═╡ de56b0b4-41c2-451f-9727-5682c97f9b88
+cm"""
+$(ex(6,"Finding the Angle of Inclination of a Tangent Plane"))
+Find the angle of inclination of the tangent plane to the ellipsoid
+```math
+\frac{x^2}{12}+\frac{y^2}{12}+\frac{z^2}{3}=1
+```
+at the point ``(2,2,1)``.
+"""
+
+# ╔═╡ 991a13c0-1a5d-43c1-a522-989b1b9766f1
+cm"""
+$(bth("Gradient Is Normal to Level Surfaces"))
+If ``F`` is differentiable at ``\left(x_0, y_0, z_0\right)`` and
+```math
+\nabla F\left(x_0, y_0, z_0\right) \neq \mathbf{0}
+```
+then ``\nabla F\left(x_0, y_0, z_0\right)`` is normal to the level surface through ``\left(x_0, y_0, z_0\right)``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -5646,6 +5775,21 @@ version = "1.4.1+1"
 # ╟─030966eb-52b3-4eaa-aa7f-a68311daab84
 # ╟─a6b3ade2-a56f-4295-a670-acd5e67994cc
 # ╟─9ba838ff-5e69-481d-9120-654d82153d10
+# ╟─4875343c-3971-46c7-bfb1-e3780ce29c94
+# ╟─acd1aea4-c44a-4352-aed2-2236974d620f
+# ╟─84af4974-7e57-47b0-9dcd-96281731fdb2
+# ╟─62608b1e-1818-45b3-affa-0769f78eac97
+# ╟─444df8e3-41c6-4c9a-b036-5d25243eec25
+# ╟─29c0036c-7f7e-448c-8eac-4d41812f02a0
+# ╟─d653cfc6-ce5e-4933-ab12-88688039f45d
+# ╟─e5dbd474-3874-4c3c-9a60-576db293c83a
+# ╟─d823c8f8-09db-446b-a4db-ff635ccd818b
+# ╟─399ff8df-aa95-40aa-874c-a0f18b57523b
+# ╟─9bce4166-5f1c-4ed7-8a0b-9fc73c984230
+# ╟─2d7f7a9e-79e8-481e-a8d4-211d6757a273
+# ╟─de56b0b4-41c2-451f-9727-5682c97f9b88
+# ╟─e83f7271-ba1b-4042-a90c-be0b2170b0c3
+# ╟─991a13c0-1a5d-43c1-a522-989b1b9766f1
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
