@@ -1289,7 +1289,7 @@ let
 	Z = [T(x,y) for x in xs, y in ys ]
 	P=[2;-3]
 	Q=[2;-3]
-	path =map(1:290) do i 
+	path =map(1:1000) do i 
 		Q = Q+0.01*∇T(Q...) 
 		Q
 	end
@@ -1301,6 +1301,7 @@ let
 	scatter!([P[1]],[P[2]],label=:none, annotations=[(2.1,-2.7,L"(2,-3)",10)])
 	plot!(first.(path),last.(path),label=:none)
 	scatter!([path[end][1]],[path[end][2]],label=:none)
+	# T(2,-3)
 	
 end
 
@@ -1319,10 +1320,83 @@ md"""
 # ╔═╡ acd1aea4-c44a-4352-aed2-2236974d620f
 md"## Tangent Plane and Normal Line to a Surface"
 
+# ╔═╡ 0126fd2d-90f3-416d-95b3-af9926b53184
+cm"""
+Consider the following __Equation of a surface ``S``__
+```math
+z = f(x,y)
+```
+Alternatively, we can see ``S`` as the level surface of a function ``F`` defined as 
+```math
+F(x,y,z) = f(x,y)-z
+```
+So ``S`` can be written as 
+```math
+F(x,y,z)=0
+```
+"""
+
+# ╔═╡ 87831bc7-6ab3-40da-91e9-64a606f49ef6
+cm"""
+<iframe src="https://www.geogebra.org/classic/c6ynw7v2?embed" width="400" height="300" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ 65f2c694-febb-4014-85aa-015f3bbbcb4f
+let
+	F(x,y,z) = z^2-2x^2-2y^2-12
+	dF(x,y,z)=[-4x;-4y;2z]
+	@variables x::Real, y::Real, z::Real
+	Dx=Differential(x)
+	Dy=Differential(y)
+	Dz=Differential(z)
+	P=[1;-1;4]
+	Eq = dF(P...)⋅([x;y;z]-P) ~ 0
+	cm""
+	
+end
+
+# ╔═╡ f0bcf1dc-4bb2-4314-acc4-c7bdbf35c907
+let
+	F(x,y,z) =1- (1//10)*(x^2+4y^2)-z
+	@variables x::Real, y::Real, z::Real
+	Dx=Differential(x)
+	Dy=Differential(y)
+	Dz=Differential(z)
+	dF=expand_derivatives.([Dx(F(x,y,z));Dy(F(x,y,z));Dz(F(x,y,z))])
+	df(t,s,u) = substitute(dF,Dict(x=>t,y=>s,z=>u))
+	P=[1;1;1//2]
+	# df(P...)
+	Eq = expand(df(P...)⋅([x;y;z]-P)) ~ 0
+	cm""
+	
+end
+
 # ╔═╡ 399ff8df-aa95-40aa-874c-a0f18b57523b
 cm"""
 <iframe src="https://www.geogebra.org/classic/rkhgxuag?embed" width="600" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 """
+
+# ╔═╡ 3d3da43e-a920-4d32-b7da-fc1c3caa8d68
+let
+	F1(x,y,z) = x^2+2y^2+2z^2-20 
+	F2(x,y,z) = x^2+y^2+z-4 
+	@variables x::Real, y::Real, z::Real, t::Real
+	Dx=Differential(x)
+	Dy=Differential(y)
+	Dz=Differential(z)
+	dF1=expand_derivatives.([Dx(F1(x,y,z));Dy(F1(x,y,z));Dz(F1(x,y,z))])
+	df1(t,s,u) = substitute(dF1,Dict(x=>t,y=>s,z=>u))
+	dF2=expand_derivatives.([Dx(F2(x,y,z));Dy(F2(x,y,z));Dz(F2(x,y,z))])
+	df2(t,s,u) = substitute(dF2,Dict(x=>t,y=>s,z=>u))
+	P=[0;1;3]
+	g1= df1(P...)
+	g2= df2(P...)
+	n = g1 × g2
+	
+	Eq = [x;y;z] ~ P + t*n
+	cm""
+	
+end
 
 # ╔═╡ 9bce4166-5f1c-4ed7-8a0b-9fc73c984230
 md"## The Angle of Inclination of a Plane"
@@ -3220,7 +3294,7 @@ cm"""
 $(ex(1,"Writing an Equation of a Surface"))
  For the function
 ```math
- F(x, y z) = x^2 + y^2 + z^2 − 4
+ F(x, y, z) = x^2 + y^2 + z^2 − 4
 ```
 describe the level surface given by
 ```math
@@ -3253,7 +3327,7 @@ cm"""
 $(ex(2,"Finding an Equation of a Tangent Plane"))
 Find an equation of the tangent plane to the hyperboloid
 ```math
-z2 − 2x2 − 2y2 = 12
+z^2 − 2x^2 − 2y^2 = 12
 ```
  at the point ``(1, −1, 4)``.
 """
@@ -5771,20 +5845,25 @@ version = "1.4.1+1"
 # ╟─94940200-af4b-4341-8f35-d5a6a5a12b0a
 # ╟─02e81392-398c-4283-ae9d-3db93f2cd518
 # ╟─f7d7bbba-e43a-4780-899e-b89e6614e828
-# ╟─082deb16-6b16-46d2-875c-a356c62e04a0
+# ╠═082deb16-6b16-46d2-875c-a356c62e04a0
 # ╟─030966eb-52b3-4eaa-aa7f-a68311daab84
 # ╟─a6b3ade2-a56f-4295-a670-acd5e67994cc
 # ╟─9ba838ff-5e69-481d-9120-654d82153d10
 # ╟─4875343c-3971-46c7-bfb1-e3780ce29c94
 # ╟─acd1aea4-c44a-4352-aed2-2236974d620f
+# ╟─0126fd2d-90f3-416d-95b3-af9926b53184
 # ╟─84af4974-7e57-47b0-9dcd-96281731fdb2
+# ╠═87831bc7-6ab3-40da-91e9-64a606f49ef6
 # ╟─62608b1e-1818-45b3-affa-0769f78eac97
 # ╟─444df8e3-41c6-4c9a-b036-5d25243eec25
 # ╟─29c0036c-7f7e-448c-8eac-4d41812f02a0
+# ╠═65f2c694-febb-4014-85aa-015f3bbbcb4f
 # ╟─d653cfc6-ce5e-4933-ab12-88688039f45d
+# ╠═f0bcf1dc-4bb2-4314-acc4-c7bdbf35c907
 # ╟─e5dbd474-3874-4c3c-9a60-576db293c83a
 # ╟─d823c8f8-09db-446b-a4db-ff635ccd818b
 # ╟─399ff8df-aa95-40aa-874c-a0f18b57523b
+# ╠═3d3da43e-a920-4d32-b7da-fc1c3caa8d68
 # ╟─9bce4166-5f1c-4ed7-8a0b-9fc73c984230
 # ╟─2d7f7a9e-79e8-481e-a8d4-211d6757a273
 # ╟─de56b0b4-41c2-451f-9727-5682c97f9b88
