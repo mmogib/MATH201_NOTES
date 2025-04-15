@@ -1351,7 +1351,7 @@ let
 	Dz=Differential(z)
 	P=[1;-1;4]
 	Eq = dF(P...)⋅([x;y;z]-P) ~ 0
-	cm""
+	# cm""
 	
 end
 
@@ -1365,9 +1365,11 @@ let
 	dF=expand_derivatives.([Dx(F(x,y,z));Dy(F(x,y,z));Dz(F(x,y,z))])
 	df(t,s,u) = substitute(dF,Dict(x=>t,y=>s,z=>u))
 	P=[1;1;1//2]
-	# df(P...)
+	df(P...)
 	Eq = expand(df(P...)⋅([x;y;z]-P)) ~ 0
-	cm""
+	# F(x,y,z)
+	# cm""
+	# df(x,y,z)
 	
 end
 
@@ -1394,7 +1396,7 @@ let
 	n = g1 × g2
 	
 	Eq = [x;y;z] ~ P + t*n
-	cm""
+	# cm""
 	
 end
 
@@ -1403,6 +1405,51 @@ md"## The Angle of Inclination of a Plane"
 
 # ╔═╡ e83f7271-ba1b-4042-a90c-be0b2170b0c3
 md"## A Comparison of the Gradients ∇f(x, y) and ∇F(x, y, z)"
+
+# ╔═╡ 30b7c4f0-be8d-48e0-879c-a3509bc72920
+md"""
+#  13.8 Extrema of Functions of Two Variables
+> __Objectives__
+> 1. Find absolute and relative extrema of a function of two variables.
+> 2. Use the Second Partials Test to find relative extrema of a function of two variables.
+"""
+
+# ╔═╡ 63fb338c-0b12-40da-a6d0-0ab6f939e6e8
+md"## Absolute Extrema and Relative Extrema"
+
+# ╔═╡ dcc7f567-2462-4bbe-bdf1-be48a95684b1
+md"## The Second Partials Test"
+
+# ╔═╡ c66a585f-c985-4ad3-a162-5acd67c4edaa
+cm"""
+Consider the surface ``z=y^2-x^2``
+"""
+
+# ╔═╡ ee21f10a-158e-4b87-9793-23a1ed4fbd0d
+cm"""
+<iframe src="https://www.geogebra.org/classic/j52tbtke?embed" width="600" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+"""
+
+# ╔═╡ a038e1b2-4828-45cb-8b7b-188460b57746
+md"""
+# 13.9 Applications of Extrema
+> __Objectives__
+> 1. Solve optimization problems involving functions of several variables.
+
+##  Applied Optimization Problems
+"""
+
+# ╔═╡ d5f2d879-2a40-4f69-8d94-b2f0faa6d8fc
+md"""
+ # 13.10 Lagrange Multipliers
+> __Objectives__
+> 1. Understand the Method of Lagrange Multipliers.
+> 2. Use Lagrange multipliers to solve constrained optimization problems.
+> 3. Use the Method of Lagrange Multipliers with two constraints.
+"""
+
+# ╔═╡ 745d2a4b-1761-49d1-b69b-7f9dbb9cb456
+md"## Lagrange Multipliers"
 
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
@@ -3393,6 +3440,151 @@ If ``F`` is differentiable at ``\left(x_0, y_0, z_0\right)`` and
 \nabla F\left(x_0, y_0, z_0\right) \neq \mathbf{0}
 ```
 then ``\nabla F\left(x_0, y_0, z_0\right)`` is normal to the level surface through ``\left(x_0, y_0, z_0\right)``.
+"""
+
+# ╔═╡ d595fb2d-43b7-4286-bfa0-4eb1ec756fb6
+cm"""
+$(bth("Extreme Value Theorem"))
+Let ``f`` be a continuous function of two variables ``x`` and ``y`` defined on a closed bounded region ``R`` in the ``x y``-plane.
+1. There is at least one point in ``R`` at which ``f`` takes on a minimum value.
+2. There is at least one point in ``R`` at which ``f`` takes on a maximum value.
+"""
+
+# ╔═╡ cbad0278-d29b-4f39-92a7-bc7336a56bf8
+cm"""
+$(define("Relative Extrema"))
+Let ``f`` be a function defined on a region ``R`` containing ``\left(x_0, y_0\right)``.
+1. The function ``f`` has a relative minimum at ``\left(x_0, y_0\right)`` if
+```math
+f(x, y) \geq f\left(x_0, y_0\right)
+```
+$(add_space(10))for all ``(x, y)`` in an open disk containing ``\left(x_0, y_0\right)``.
+
+2. The function ``f`` has a relative maximum at ``\left(x_0, y_0\right)`` if
+```math
+f(x, y) \leq f\left(x_0, y_0\right)
+```
+$(add_space(10))for all ``(x, y)`` in an open disk containing ``\left(x_0, y_0\right)``.
+"""
+
+# ╔═╡ 313b6f41-c2f0-46ba-8c13-ac761f9cbc57
+cm"""
+$(define("Critical Point"))
+Let ``f`` be defined on an open region ``R`` containing ``\left(x_0, y_0\right)``. The point ``\left(x_0, y_0\right)`` is a __critical point__ of ``f`` if one of the following is true.
+1. ``f_x\left(x_0, y_0\right)=0`` and ``f_y\left(x_0, y_0\right)=0``
+2. ``f_x\left(x_0, y_0\right)`` or ``f_y\left(x_0, y_0\right)`` does not exist.
+"""
+
+# ╔═╡ 5e34375a-7b17-4c7b-85f3-a4ea5a9c0719
+cm"""
+$(bth("Relative Extrema Occur Only at Critical Points"))
+If ``f`` has a relative extremum at ``\left(x_0, y_0\right)`` on an open region ``R``, then ``\left(x_0, y_0\right)`` is a critical point of ``f``.
+"""
+
+# ╔═╡ da3ad925-bae3-4b18-9e41-b857a0b78742
+cm"""
+$(ex(1,"Finding a Relative Extremum"))
+Determine the relative extrema of
+```math
+f(x, y)=2 x^2+y^2+8 x-6 y+20
+```
+"""
+
+# ╔═╡ 4af11cab-a96b-49ef-96db-ab92e105dcc2
+cm"""
+$(ex(2,"Finding a Relative Extremum"))
+Determine the relative extrema of
+```math
+f(x, y)=1-\left(x^2+y^2\right)^{1 / 3}
+```
+"""
+
+# ╔═╡ 70b733a5-2d5d-456a-8ef6-1108b4333bc1
+cm"""
+$(bth("Second Partials Test"))
+Let ``f`` have continuous second partial derivatives on an open region containing a point ``(a, b)`` for which
+```math
+f_x(a, b)=0 \quad \text { and } \quad f_y(a, b)=0
+```
+
+To test for relative extrema of ``f``, consider the quantity
+```math
+d=f_{x x}(a, b) f_{y y}(a, b)-\left[f_{x y}(a, b)\right]^2
+```
+1. If ``d>0`` and ``f_{x x}(a, b)>0``, then ``f`` has a relative minimum at ``(a, b)``.
+2. If ``d>0`` and ``f_{x x}(a, b)<0``, then ``f`` has a relative maximum at ``(a, b)``.
+3. If ``d<0``, then ``(a, b, f(a, b))`` is a saddle point.
+4. The test is inconclusive if ``d=0``.
+"""
+
+# ╔═╡ ac677c9b-ed6d-432f-b699-7436f66db31b
+cm"""
+$(ex(3,"Using the Second Partials Test"))
+Find the relative extrema of ``f(x, y)=-x^3+4 x y-2 y^2+1``.
+"""
+
+# ╔═╡ 187ed7b1-67f0-4af7-a39f-8acb5002c0a7
+cm"""
+$(ex(4,"Failure of the Second Partials Test"))
+Find the relative extrema of ``f(x, y)=x^2 y^2``. (See Graph [Here](https://www.desmos.com/3d/sv7uie6qrq))
+
+$(ex(5,"Finding Absolute Extrema"))
+Find the absolute extrema of the function
+```math
+f(x, y)=\sin x y
+```
+on the closed region given by
+```math
+0 \leq x \leq \pi \quad \text { and } \quad 0 \leq y \leq 1
+```
+See Graph [Here](https://www.desmos.com/3d/s8ebq9wjeq)
+"""
+
+# ╔═╡ 5b27b816-5b96-4d9e-b202-abca8c17423c
+cm"""
+$(ex(1,"Finding Maximum Volume"))
+A rectangular box is resting on the ``x y``-plane with one vertex at the origin. The opposite vertex lies in the plane
+```math
+6 x+4 y+3 z=24
+```
+as shown below. Find the maximum volume of the box.
+
+$(post_img("https://www.dropbox.com/scl/fi/pzs7r1nm6s7mtig8lydl4/fig_13_73.png?rlkey=7nxhtml9cmplq47x5mrpgwj8v&dl=1"))
+"""
+
+# ╔═╡ be41136b-f261-42fc-bb53-ea914bd0bc8e
+cm"""
+$(ex(2,"Finding the Maximum Profit"))
+A manufacturer determines that the profit ``P`` (in dollars) obtained by producing and selling ``x`` units of Product 1 and ``y`` units of Product 2 is approximated by the model
+```math
+P(x, y)=8 x+10 y-(0.001)\left(x^2+x y+y^2\right)-10,000 .
+```
+
+Find the production level that produces a maximum profit. What is the maximum profit?
+"""
+
+# ╔═╡ 48545afb-1e3b-4610-a5b0-65d89c9512b3
+cm"""
+$(bth("Lagrange's Theorem"))
+Let ``f`` and ``g`` have continuous first partial derivatives such that ``f`` has an extremum at a point ``\left(x_0, y_0\right)`` on the smooth constraint curve ``g(x, y)=c``. If ``\nabla g\left(x_0, y_0\right) \neq \mathbf{0}``, then there is a real number ``\lambda`` such that
+```math
+\nabla f\left(x_0, y_0\right)=\lambda \nabla g\left(x_0, y_0\right)
+```
+"""
+
+# ╔═╡ 0a5d4065-d6c4-4c4f-a8e1-be7dab47c747
+cm"""
+$(bbl("Method of Lagrange Multipliers",""))
+Let ``f`` and ``g`` satisfy the hypothesis of Lagrange's Theorem, and let ``f`` have a minimum or maximum subject to the constraint ``g(x, y)=c``. To find the minimum or maximum of ``f``, use these steps.
+1. Simultaneously solve the equations ``\nabla f(x, y)=\lambda \nabla g(x, y)`` and ``g(x, y)=c`` by solving the following system of equations.
+```math
+\begin{aligned}
+f_x(x, y) & =\lambda g_x(x, y) \\
+f_y(x, y) & =\lambda g_y(x, y) \\
+g(x, y) & =c
+\end{aligned}
+```
+2. Evaluate ``f`` at each solution point obtained in the first step. The greatest value yields the maximum of ``f`` subject to the constraint ``g(x, y)=c``, and the least value yields the minimum of ``f`` subject to the constraint ``g(x, y)=c``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -5853,7 +6045,7 @@ version = "1.4.1+1"
 # ╟─acd1aea4-c44a-4352-aed2-2236974d620f
 # ╟─0126fd2d-90f3-416d-95b3-af9926b53184
 # ╟─84af4974-7e57-47b0-9dcd-96281731fdb2
-# ╠═87831bc7-6ab3-40da-91e9-64a606f49ef6
+# ╟─87831bc7-6ab3-40da-91e9-64a606f49ef6
 # ╟─62608b1e-1818-45b3-affa-0769f78eac97
 # ╟─444df8e3-41c6-4c9a-b036-5d25243eec25
 # ╟─29c0036c-7f7e-448c-8eac-4d41812f02a0
@@ -5869,6 +6061,27 @@ version = "1.4.1+1"
 # ╟─de56b0b4-41c2-451f-9727-5682c97f9b88
 # ╟─e83f7271-ba1b-4042-a90c-be0b2170b0c3
 # ╟─991a13c0-1a5d-43c1-a522-989b1b9766f1
+# ╟─30b7c4f0-be8d-48e0-879c-a3509bc72920
+# ╟─63fb338c-0b12-40da-a6d0-0ab6f939e6e8
+# ╟─d595fb2d-43b7-4286-bfa0-4eb1ec756fb6
+# ╟─cbad0278-d29b-4f39-92a7-bc7336a56bf8
+# ╟─313b6f41-c2f0-46ba-8c13-ac761f9cbc57
+# ╟─5e34375a-7b17-4c7b-85f3-a4ea5a9c0719
+# ╟─da3ad925-bae3-4b18-9e41-b857a0b78742
+# ╟─4af11cab-a96b-49ef-96db-ab92e105dcc2
+# ╟─dcc7f567-2462-4bbe-bdf1-be48a95684b1
+# ╟─c66a585f-c985-4ad3-a162-5acd67c4edaa
+# ╟─ee21f10a-158e-4b87-9793-23a1ed4fbd0d
+# ╟─70b733a5-2d5d-456a-8ef6-1108b4333bc1
+# ╟─ac677c9b-ed6d-432f-b699-7436f66db31b
+# ╟─187ed7b1-67f0-4af7-a39f-8acb5002c0a7
+# ╟─a038e1b2-4828-45cb-8b7b-188460b57746
+# ╟─5b27b816-5b96-4d9e-b202-abca8c17423c
+# ╟─be41136b-f261-42fc-bb53-ea914bd0bc8e
+# ╟─d5f2d879-2a40-4f69-8d94-b2f0faa6d8fc
+# ╟─745d2a4b-1761-49d1-b69b-7f9dbb9cb456
+# ╟─48545afb-1e3b-4610-a5b0-65d89c9512b3
+# ╟─0a5d4065-d6c4-4c4f-a8e1-be7dab47c747
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
