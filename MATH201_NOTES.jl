@@ -1505,6 +1505,36 @@ md"""
 # ╔═╡ f688c01d-9131-4db4-b19b-dacd2673e0e3
 md"## Area of a Plane Region"
 
+# ╔═╡ 80ffef93-9531-473e-929d-6a2dddb4a9d9
+md"""
+#  14.2 Double Integrals and Volume
+> 1. Use a double integral to represent the volume of a solid region and use properties of double integrals.
+> 2. Evaluate a double integral as an iterated integral.
+> 3. Find the average value of a function over a region.
+"""
+
+# ╔═╡ 13bae81a-e7c0-4acd-8b71-2f3d1ff13c97
+md"## Double Integrals and Volume of a Solid Region"
+
+# ╔═╡ 3ccd0629-a678-4072-ac1e-ef7667770067
+let
+	f(x,y) = 1- (1//2)*x^2-(1//2)*y^2
+	n = 4
+	Δx = 1//n
+	xs = [(2i-1)//2n for i in 1:n]
+	ys = [(2i-1)//2n for i in 1:n]
+	ms = reshape([(x,y) for y in ys for x in xs],n,n)
+	ΔA=1//n^2
+	V = sum(((x,y),)->f(x,y)*ΔA, ms)
+	Float64(V)
+end
+
+# ╔═╡ 1274002f-83dd-4692-b187-93077f46f0f7
+md"##  Evaluation of Double Integrals"
+
+# ╔═╡ d0b202f1-864d-4d5d-bd3f-ade0e640e786
+md"##  Average Value of a Function"
+
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
 
@@ -3771,6 +3801,136 @@ y=-3 x+6\quad\color{red}{\text{Line and x-axis form lower boundary.}}
 ```
 
 
+"""
+
+# ╔═╡ b1ba4b5a-9673-449c-b0f7-6d3723c22b92
+cm"""
+Consider the countinuous function ``f(x,y)\geq 0``
+$(post_img("https://www.dropbox.com/scl/fi/d1r0zhp46g1wd480a7ih6/fig_14_8.png?rlkey=jfmg0gr1u3ytv3txz2m8vpmvt&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/yle6j30u1k0jb6f99wei4/fig_14_9.png?rlkey=3pzli926yppsfxyklmw6jlzrg&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/b0urecj17pzrws2bsw8as/fig_14_10.png?rlkey=o370zqxksdf6baidflsrh53z5&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/klsbozx2cdqs91fsk4awn/fig_14_11.png?rlkey=e92k2ojdyo465h3lqck0n0h49&dl=1",400))
+"""
+
+# ╔═╡ e8cf8716-3b41-41b0-82d5-ea77fc90dbe1
+cm"""
+$(ex(1,"Approximating the Volume of a Solid"))
+Approximate the volume of the solid lying between the paraboloid
+```math
+f(x, y)=1-\frac{1}{2} x^2-\frac{1}{2} y^2
+```
+and the square region ``R`` given by ``0 \leq x \leq 1,0 \leq y \leq 1``. Use a partition made up of squares whose sides have a length of ``\frac{1}{4}``.
+"""
+
+# ╔═╡ 58acf581-e670-49c6-983d-0347d8eb247e
+cm"""
+$(define("Double Integral"))
+If ``f`` is defined on a closed, bounded region ``R`` in the ``x y``-plane, then the double integral of ``f`` over ``R`` is
+```math
+\int_R \int f(x, y) d A=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i\right) \Delta A_i
+```
+provided the limit exists. If the limit exists, then ``f`` is integrable over ``R``.
+"""
+
+# ╔═╡ 4dbc26c0-a569-4ce3-b5f7-31433dd12d6a
+cm"""
+$(bbl("Volume of a Solid Region",""))
+If ``f`` is integrable over a plane region ``R`` and ``f(x, y) \geq 0`` for all ``(x, y)`` in ``R``, then the volume of the solid region that lies above ``R`` and below the graph of ``f`` is
+```math
+V=\int_R \int f(x, y) d A
+```
+$(ebl())
+
+$(bth("Properties of Double Integrals"))
+Let ``f`` and ``g`` be continuous over a closed, bounded plane region ``R``, and let ``c`` be a constant.
+1. ``\displaystyle\iint_R c f(x, y) d A=c \int_R \int f(x, y) d A``
+2. ``\displaystyle\iint_R[f(x, y) \pm g(x, y)] d A=\int_R \int f(x, y) d A \pm \int_R \int g(x, y) d A``
+3. ``\displaystyle\iint_R f(x, y) d A \geq 0, \quad`` if ``f(x, y) \geq 0``
+4. ``\displaystyle\iint_R \int f(x, y) d A \geq \int_R \int g(x, y) d A, \quad`` if ``f(x, y) \geq g(x, y)``
+5. ``\displaystyle\iint_R f(x, y) d A=\int_{R_1} \int f(x, y) d A+\int_{R_2} \int f(x, y) d A``, where ``R`` is the union of two nonoverlapping subregions ``R_1`` and ``R_2``.
+"""
+
+# ╔═╡ dd9f47df-f2a3-4030-9db7-355493bb45bf
+cm"""
+$(bth("Fubini's Theorem"))
+Let ``f`` be continuous on a plane region ``R``.
+1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then
+```math
+\iint_R  f(x, y) d A=\int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) d y d x
+```
+2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then
+```math
+\iint_R  f(x, y) d A=\int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) d x d y .
+```
+"""
+
+# ╔═╡ 54f56621-bc3a-4056-9cae-9554537c1182
+cm"""
+$(ex(2,"Eevaluating a Double Integral as an Iterated Integral"))
+
+Evaluate
+```math
+\iint_R \left(1-\frac{1}{2} x^2-\frac{1}{2} y^2\right) d A
+```
+where ``R`` is the region given by
+```math
+0 \leq x \leq 1, \quad 0 \leq y \leq 1 .
+```
+"""
+
+# ╔═╡ 579d1d38-7bf0-4601-a839-67c297bd65d8
+cm"""
+$(ex(3,"Finding Volume by a Double Integral"))
+Find the volume of the solid region bounded by the paraboloid ``z=4-x^2-2 y^2`` and the ``x y``-plane seen  [here](https://www.desmos.com/3d/ine3ie6963)
+"""
+
+# ╔═╡ 0015fad2-c7e0-499b-b835-cb826eb237e7
+cm"""
+$(ex(4,"Comparing Different Orders of Integration"))
+Find the volume of the solid region bounded by the surface
+```math
+f(x, y)=e^{-x^2} \quad \text { Surface }
+```
+and the planes ``z=0, y=0, y=x``, and ``x=1``, as shown [Here](https://www.desmos.com/3d/fo6kmsxrdj).
+"""
+
+# ╔═╡ b1a5eea3-93b3-4036-af63-4a8a92d8ab18
+cm"""
+$(ex(5,"Volume of a Region Bounded by Two Surfaces"))
+Find the volume of the solid region bounded above by the paraboloid
+```math
+z=1-x^2-y^2
+```
+
+and below by the plane
+```math
+z=1-y
+```
+
+"""
+
+# ╔═╡ ab2231d4-8dc5-4158-96d1-7498efb6dfcd
+cm"""
+$(define("the Average Value of a Function Over a Region"))
+If ``f`` is integrable over the plane region ``R``, then the average value of ``f`` over ``R`` is
+```math
+\text { Average value }=\frac{1}{A} \int_R \int f(x, y) d A
+```
+where ``A`` is the area of ``R``.
+$(ebl())
+
+$(ex(6,"Finding the Average Value of a Function"))
+Find the average value of
+```math
+f(x, y)=\frac{1}{2} x y
+```
+over the plane region ``R``, where ``R`` is a rectangle with vertices
+```math
+(0,0),(4,0),(4,3), \quad \text { and } \quad(0,3)
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -6396,6 +6556,21 @@ version = "1.4.1+2"
 # ╟─b8f80404-174d-4b76-b431-f15b5e5c339c
 # ╟─87595306-badc-4652-a379-1c9562baa99b
 # ╟─b522d883-61c5-4a01-8098-d45d90a2988c
+# ╟─80ffef93-9531-473e-929d-6a2dddb4a9d9
+# ╟─13bae81a-e7c0-4acd-8b71-2f3d1ff13c97
+# ╟─b1ba4b5a-9673-449c-b0f7-6d3723c22b92
+# ╟─e8cf8716-3b41-41b0-82d5-ea77fc90dbe1
+# ╠═3ccd0629-a678-4072-ac1e-ef7667770067
+# ╟─58acf581-e670-49c6-983d-0347d8eb247e
+# ╟─4dbc26c0-a569-4ce3-b5f7-31433dd12d6a
+# ╟─1274002f-83dd-4692-b187-93077f46f0f7
+# ╟─dd9f47df-f2a3-4030-9db7-355493bb45bf
+# ╟─54f56621-bc3a-4056-9cae-9554537c1182
+# ╟─579d1d38-7bf0-4601-a839-67c297bd65d8
+# ╟─0015fad2-c7e0-499b-b835-cb826eb237e7
+# ╟─b1a5eea3-93b3-4036-af63-4a8a92d8ab18
+# ╟─d0b202f1-864d-4d5d-bd3f-ade0e640e786
+# ╟─ab2231d4-8dc5-4158-96d1-7498efb6dfcd
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
