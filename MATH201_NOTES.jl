@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.6
 
 using Markdown
 using InteractiveUtils
@@ -7,7 +7,7 @@ using InteractiveUtils
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     #! format: off
-    quote
+    return quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
@@ -1519,7 +1519,7 @@ md"## Double Integrals and Volume of a Solid Region"
 # ╔═╡ 3ccd0629-a678-4072-ac1e-ef7667770067
 let
 	f(x,y) = 1- (1//2)*x^2-(1//2)*y^2
-	n = 4
+	n = 1000
 	Δx = 1//n
 	xs = [(2i-1)//2n for i in 1:n]
 	ys = [(2i-1)//2n for i in 1:n]
@@ -1534,6 +1534,15 @@ md"##  Evaluation of Double Integrals"
 
 # ╔═╡ d0b202f1-864d-4d5d-bd3f-ade0e640e786
 md"##  Average Value of a Function"
+
+# ╔═╡ bab70739-4022-431b-93a2-e3f4eeab2329
+md"""
+# 14.3 Change of Variables: Polar Coordinates
+> 1. Write and evaluate double integrals in polar coordinates.
+"""
+
+# ╔═╡ 786ffab6-f703-48c5-a2db-cd869b36172a
+md"## Double Integrals in Polar Coordinates"
 
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
@@ -3931,6 +3940,96 @@ over the plane region ``R``, where ``R`` is a rectangle with vertices
 ```math
 (0,0),(4,0),(4,3), \quad \text { and } \quad(0,3)
 ```
+"""
+
+# ╔═╡ 0263ed15-1ce4-4cea-aeb7-672624beedd1
+cm"""
+In Section 10.4, you learned that the polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{aligned}
+& x=r \cos \theta \quad \text { and } \quad y=r \sin \theta \\
+& r^2=x^2+y^2 \quad \text { and } \quad \tan \theta=\frac{y}{x}
+\end{aligned}
+```
+
+$(ex(1,"Using Polar Coordinates to Describe a Region"))
+Use polar coordinates to describe each region shown below.
+
+$(post_img("https://www.dropbox.com/scl/fi/5xqj9e61lhwbm1ukw3x1s/fig_14_23.png?rlkey=z0h0t55hzyco3dth6mvme9fac&dl=1"))
+"""
+
+# ╔═╡ 182f0a32-3e15-4c66-89b8-103d241b3bca
+cm"""
+We consider the __polar sector__
+```math
+\mathbf{R}=\left\{(r,\theta): \; r_1\leq r\leq r_2, \quad \theta_1\leq \theta \leq\theta_2\right\}
+```
+as show here
+$(post_img("https://www.dropbox.com/scl/fi/kwu956q8ee8n88pekz85q/fig_14_24.png?rlkey=dwee2k5qjnnudcdp9ambu53zf&dl=1"))
+
+Now, we partition ``\mathbf{R}`` into small polar sectors.
+$(post_img("https://www.dropbox.com/scl/fi/tithh34ltodbkhku4rc5a/fig_14_25.png?rlkey=3fa1volfpqkact18ysez9lrb0&dl=1"))
+
+Note that 
+```math
+\Delta A_i = r_i \Delta r_i\Delta\theta_i
+```
+So, we have
+
+```math
+\int_R \int f(x, y) d A \approx \sum_{i=1}^n f\left(r_i \cos \theta_i, r_i \sin \theta_i\right) r_i \Delta r_i \Delta \theta_i
+```
+
+"""
+
+# ╔═╡ a86ae21a-0737-4487-83e7-55a03782d948
+cm"""
+$(bth("Change of Variables to Polar Form"))
+Let ``R`` be a plane region consisting of all points ``(x, y)=(r \cos \theta, r \sin \theta)`` satisfying the conditions ``0 \leq g_1(\theta) \leq r \leq g_2(\theta), \alpha \leq \theta \leq \beta``, where ``0 \leq(\beta-\alpha) \leq 2 \pi``. If ``g_1`` and ``g_2`` are continuous on ``[\alpha, \beta]`` and ``f`` is continuous on ``R``, then
+```math
+\int_R \int_R f(x, y) d A=\int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos \theta, r \sin \theta) r d r d \theta
+```
+"""
+
+# ╔═╡ 0b19b000-0804-4a5c-935f-d27356967fd1
+cm"""
+$(ex(2,"Evaluating a Double Polar Integral"))
+Let ``R`` be the annular region lying between the two circles ``x^2+y^2=1`` and ``x^2+y^2=5``. Evaluate the integral
+```math
+\int_R \int\left(x^2+y\right) d A
+```
+"""
+
+# ╔═╡ 559967c1-ed9a-4cda-bf72-65335a6ccb9a
+cm"""
+$(ex(3,"Change of Variables to Polar Coordinates"))
+Use polar coordinates to find the volume of the solid region bounded above by the hemisphere
+```math
+z=\sqrt{16-x^2-y^2}\quad \color{red}{\text{Hemisphere forms upper surface.}}
+```
+
+
+and below by the circular region ``R`` given by
+```math
+x^2+y^2 \leq 4 \quad \color{red}{\text{Circular region forms lower surface.}}
+```
+
+
+as shown brlow.
+$(post_img("https://www.dropbox.com/scl/fi/966uofohyhoxpgdvsusc0/fig_14_30.png?rlkey=20elxczfuempbiu24vyhtieyf&dl=1"))
+"""
+
+# ╔═╡ 6048fb5d-563e-4601-b69c-21b096909f82
+cm"""
+$(ex(4,"Finding areas of Polar Regions"))
+Find the area of the shaded region.
+$(post_img("https://www.dropbox.com/scl/fi/wjg5xoy0sm4dlbez8o1n7/fig_14_31.png?rlkey=wmqflrupx0zihz2mjqgui576t&dl=1"))
+"""
+
+# ╔═╡ a025759b-19ab-4025-b090-537dee165bbc
+cm"""
+$(ex(5,"Integrating with Respect to θ First"))
+Find the area of the region bounded above by the spiral ``r=\pi /(3 \theta)`` and below by the polar axis, between ``r=1`` and ``r=2``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -6571,6 +6670,15 @@ version = "1.4.1+2"
 # ╟─b1a5eea3-93b3-4036-af63-4a8a92d8ab18
 # ╟─d0b202f1-864d-4d5d-bd3f-ade0e640e786
 # ╟─ab2231d4-8dc5-4158-96d1-7498efb6dfcd
+# ╟─bab70739-4022-431b-93a2-e3f4eeab2329
+# ╟─786ffab6-f703-48c5-a2db-cd869b36172a
+# ╟─0263ed15-1ce4-4cea-aeb7-672624beedd1
+# ╟─182f0a32-3e15-4c66-89b8-103d241b3bca
+# ╟─a86ae21a-0737-4487-83e7-55a03782d948
+# ╟─0b19b000-0804-4a5c-935f-d27356967fd1
+# ╟─559967c1-ed9a-4cda-bf72-65335a6ccb9a
+# ╠═6048fb5d-563e-4601-b69c-21b096909f82
+# ╠═a025759b-19ab-4025-b090-537dee165bbc
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
