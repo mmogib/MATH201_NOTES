@@ -1544,6 +1544,16 @@ md"""
 # ╔═╡ 786ffab6-f703-48c5-a2db-cd869b36172a
 md"## Double Integrals in Polar Coordinates"
 
+# ╔═╡ dc8edd7f-646b-4a0a-b2bc-991e658eec8c
+md"""
+# 14.6 Triple Integrals and applications
+> 1. Use a triple integral to find the volume of a solid region.
+> 2. Find the center of mass and moments of inertia of a solid region.
+"""
+
+# ╔═╡ 83e00b7a-690b-4c04-9bb0-8131a22adedd
+md"##  Triple Integrals"
+
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
 
@@ -4030,6 +4040,95 @@ $(post_img("https://www.dropbox.com/scl/fi/wjg5xoy0sm4dlbez8o1n7/fig_14_31.png?r
 cm"""
 $(ex(5,"Integrating with Respect to θ First"))
 Find the area of the region bounded above by the spiral ``r=\pi /(3 \theta)`` and below by the polar axis, between ``r=1`` and ``r=2``.
+"""
+
+# ╔═╡ 5431ce24-08cc-41eb-bb9d-d8fab0f96535
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/zf2wz75pe3y12w44peo14/fig_14_52.png?rlkey=7kclyjh0verzyvhr59zh0he5f&dl=1",400))
+"""
+
+# ╔═╡ 1307730a-5404-4aab-99d4-06c1f98c276c
+cm"""
+$(define("Triple Integral"))
+If ``f`` is continuous over a bounded solid region ``Q``, then the triple integral of ``f`` over ``\boldsymbol{Q}`` is defined as
+```math
+\iiint_Q f(x, y, z) d V=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i, z_i\right) \Delta V_i
+```
+provided the limit exists. The volume of the solid region ``Q`` is given by
+```math
+\text { Volume of } Q=\iiint_Q d V \text {. }
+```
+"""
+
+# ╔═╡ 66d2d8dd-0b76-424f-ba95-b1afa965849a
+cm"""
+$(bbl("Remarks",""))
+Some of the properties of double integrals can be restated in terms of triple integrals.
+1. ``\iint_Q \int_Q c f(x, y, z) d V=c \iiint_Q f(x, y, z) d V``
+2. ``\iint_Q \int_Q[f(x, y, z) \pm g(x, y, z)] d V=\iiint_Q f(x, y, z) d V \pm \iint_Q g(x, y, z) d V``
+3. ``\iiint_Q f(x, y, z) d V=\iiint_{Q_1} f(x, y, z) d V+\iiint_{Q_2} f(x, y, z) d V``
+"""
+
+# ╔═╡ 6e2cb5a0-e1c5-427f-a84c-2bd7399af47f
+cm"""
+$(bth("Evaluation by Iterated Integrals"))
+Let ``f`` be continuous on a solid region ``Q`` defined by
+```math
+\begin{aligned}
+& a \leq x \leq b \\
+& h_1(x) \leq y \leq h_2(x) \\
+& g_1(x, y) \leq z \leq g_2(x, y)
+\end{aligned}
+```
+where ``h_1, h_2, g_1``, and ``g_2`` are continuous functions. Then,
+```math
+\iiint_Q f(x, y, z) d V=\int_a^b \int_{h_1(x)}^{h_2(x)} \int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z d y d x
+```
+"""
+
+# ╔═╡ 36fb173d-6904-4886-a8e5-2d5910f3c074
+cm"""
+$(ex(1,"Evaluating a Triple Iterated Integral"))
+
+Evaluate the triple iterated integral
+```math
+\int_0^2 \int_0^x \int_0^{x+y} e^x(y+2 z) d z d y d x .
+```
+"""
+
+# ╔═╡ f0bf8e08-12f8-4fef-9c8b-206a76a9f7b8
+cm"""
+$(bbl("Remark","Solid Between two surfaces"))
+$(post_img("https://www.dropbox.com/scl/fi/3714xtwt50zam9gs7umx5/fig_14_53.png?rlkey=wqo315ryxhasu9q90qmh7q7n6&dl=1"))
+```math
+\iint\left[\int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z\right] d y d x.
+```
+"""
+
+# ╔═╡ f7b41331-b035-4bff-ba30-95308c0c4b38
+cm"""
+$(ex(2,"Using a Triple Integral to Find Volume"))
+
+Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
+"""
+
+# ╔═╡ fb36a0a0-05ce-4e40-a1db-e9987e0375f5
+cm"""
+$(ex(3,"Changing the Order of Integration"))
+Evaluate 
+```math
+\int_0^{\sqrt{\pi / 2}} \int_x^{\sqrt{\pi / 2}} \int_1^3 \sin \left(y^2\right) d z d y d x.
+```
+"""
+
+# ╔═╡ 5ab1ec8c-2aa4-472d-aabd-34b798f02261
+cm"""
+$(ex(4,"Determining the Limits of Integration"))
+
+Set up a triple integral for the volume of each solid region.
+1. The region in the first octant bounded above by the cylinder ``z=1-y^2`` and lying between the vertical planes ``x+y=1`` and ``x+y=3``
+2. The upper hemisphere ``z=\sqrt{1-x^2-y^2}``
+3. The region bounded below by the paraboloid ``z=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=6``
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -6677,8 +6776,19 @@ version = "1.4.1+2"
 # ╟─a86ae21a-0737-4487-83e7-55a03782d948
 # ╟─0b19b000-0804-4a5c-935f-d27356967fd1
 # ╟─559967c1-ed9a-4cda-bf72-65335a6ccb9a
-# ╠═6048fb5d-563e-4601-b69c-21b096909f82
-# ╠═a025759b-19ab-4025-b090-537dee165bbc
+# ╟─6048fb5d-563e-4601-b69c-21b096909f82
+# ╟─a025759b-19ab-4025-b090-537dee165bbc
+# ╟─dc8edd7f-646b-4a0a-b2bc-991e658eec8c
+# ╟─83e00b7a-690b-4c04-9bb0-8131a22adedd
+# ╟─5431ce24-08cc-41eb-bb9d-d8fab0f96535
+# ╟─1307730a-5404-4aab-99d4-06c1f98c276c
+# ╟─66d2d8dd-0b76-424f-ba95-b1afa965849a
+# ╟─6e2cb5a0-e1c5-427f-a84c-2bd7399af47f
+# ╟─36fb173d-6904-4886-a8e5-2d5910f3c074
+# ╟─f0bf8e08-12f8-4fef-9c8b-206a76a9f7b8
+# ╟─f7b41331-b035-4bff-ba30-95308c0c4b38
+# ╟─fb36a0a0-05ce-4e40-a1db-e9987e0375f5
+# ╟─5ab1ec8c-2aa4-472d-aabd-34b798f02261
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
