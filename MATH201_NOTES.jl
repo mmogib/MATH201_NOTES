@@ -1554,6 +1554,42 @@ md"""
 # ╔═╡ 83e00b7a-690b-4c04-9bb0-8131a22adedd
 md"##  Triple Integrals"
 
+# ╔═╡ fd79e9be-6b9d-4fb0-b9be-975e81071f37
+md"""
+# 11.7 Cylindrical and Spherical Coordinates
+# 14.7 Triple Integrals in Other Coordinates
+> 1. Use cylindrical coordinates to represent surfaces in space.
+> 2. Write and evaluate a triple integral in cylindrical coordinates.
+> 2. Use spherical coordinates to represent surfaces in space.
+> 4. Write and evaluate a triple integral in spherical coordinates.
+"""
+
+# ╔═╡ 2618e6a3-a143-4863-9633-342dc481d7aa
+md"## Cylindrical Coordinates"
+
+# ╔═╡ 09ad706e-f3c1-4867-9f7a-17b7383b04b3
+cm"""
+__Cylindrical to rectangular:__
+```math
+x=r \cos \theta, \quad y=r \sin \theta, \quad z=z
+```
+
+__Rectangular to cylindrical:__
+```math
+r^2=x^2+y^2, \quad \tan \theta=\frac{y}{x}, \quad z=z
+```
+"""
+
+# ╔═╡ 0b3752c0-59eb-4eac-8315-5fc5fb720a75
+md"##  Triple Integrals in Cylindrical Coordinates"
+
+# ╔═╡ 83a2cdc8-88cc-4273-aaec-b5584ac7649d
+cm"""
+```math
+\displaystyle\iiint_Q f(x, y, z) d V=\int_{\theta_1}^{\theta_2} \int_{g_1(\theta)}^{g_2(\theta)} \int_{h_1(r \cos \theta, r \sin \theta)}^{h_2(r \cos \theta, r \sin \theta)} f(r \cos \theta, r \sin \theta, z) r d z d r d \theta
+```
+"""
+
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
 
@@ -4110,6 +4146,8 @@ cm"""
 $(ex(2,"Using a Triple Integral to Find Volume"))
 
 Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
+
+$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1"))
 """
 
 # ╔═╡ fb36a0a0-05ce-4e40-a1db-e9987e0375f5
@@ -4129,6 +4167,55 @@ Set up a triple integral for the volume of each solid region.
 1. The region in the first octant bounded above by the cylinder ``z=1-y^2`` and lying between the vertical planes ``x+y=1`` and ``x+y=3``
 2. The upper hemisphere ``z=\sqrt{1-x^2-y^2}``
 3. The region bounded below by the paraboloid ``z=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=6``
+"""
+
+# ╔═╡ aac0b2fd-367c-4b3a-b48f-7b335213e588
+cm"""
+$(bbl("The Cylindrical Coordinate System",""))
+In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
+1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
+2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
+"""
+
+# ╔═╡ 772f2efd-6858-42a8-b4da-e7a93e638f34
+cm"""
+$(ex(1,"Cylindrical-to-Rectangular Conversion"))
+Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
+"""
+
+# ╔═╡ 33fa52cc-3b01-4057-b059-781cd9659579
+cm"""
+$(ex(2,"Rectangular-to-Cylindrical Conversion"))
+
+Convert the point
+```math
+(x, y, z)=(1, \sqrt{3}, 2)
+```
+to cylindrical coordinates.
+"""
+
+# ╔═╡ 06b118fa-b743-4ca3-838e-47b4ce5a6ea8
+cm"""
+$(ex(3," Rectangular-to-Cylindrical Conversion"))
+Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
+- a. ``x^2+y^2=4 z^2``
+- b. ``y^2=x``
+"""
+
+# ╔═╡ 6e16d8e5-5a78-4bb7-bd26-c6c0fe797d4c
+cm"""
+$(ex(4,"Cylindrical-to-Rectangular Conversion"))
+Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
+```math
+r^2 \cos 2 \theta+z^2+1=0
+```
+"""
+
+# ╔═╡ 39eb6ccc-e6a8-4969-832b-b8f76102652a
+cm"""
+$(ex(1,"Finding Volume in Cylindrical Coordinates"))
+Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -6789,6 +6876,17 @@ version = "1.4.1+2"
 # ╟─f7b41331-b035-4bff-ba30-95308c0c4b38
 # ╟─fb36a0a0-05ce-4e40-a1db-e9987e0375f5
 # ╟─5ab1ec8c-2aa4-472d-aabd-34b798f02261
+# ╟─fd79e9be-6b9d-4fb0-b9be-975e81071f37
+# ╟─2618e6a3-a143-4863-9633-342dc481d7aa
+# ╟─aac0b2fd-367c-4b3a-b48f-7b335213e588
+# ╟─09ad706e-f3c1-4867-9f7a-17b7383b04b3
+# ╟─772f2efd-6858-42a8-b4da-e7a93e638f34
+# ╟─33fa52cc-3b01-4057-b059-781cd9659579
+# ╟─06b118fa-b743-4ca3-838e-47b4ce5a6ea8
+# ╟─6e16d8e5-5a78-4bb7-bd26-c6c0fe797d4c
+# ╟─0b3752c0-59eb-4eac-8315-5fc5fb720a75
+# ╟─83a2cdc8-88cc-4273-aaec-b5584ac7649d
+# ╟─39eb6ccc-e6a8-4969-832b-b8f76102652a
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
