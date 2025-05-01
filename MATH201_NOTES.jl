@@ -1590,6 +1590,45 @@ cm"""
 ```
 """
 
+# ╔═╡ 79ee6127-24d6-422a-8eb7-f22cc125619d
+md"##  Spherical Coordinates"
+
+# ╔═╡ 329f1103-055e-428c-b0fa-13a299585611
+cm"""
+
+__Spherical to rectangular:__
+```math
+x=\rho \sin \phi \cos \theta, \quad y=\rho \sin \phi \sin \theta, \quad z=\rho \cos \phi
+```
+
+__Rectangular to spherical:__
+```math
+\rho^2=x^2+y^2+z^2, \quad \tan \theta=\frac{y}{x}, \quad \phi=\arccos \frac{z}{\sqrt{x^2+y^2+z^2}}
+```
+
+To change coordinates between the cylindrical and spherical systems, use the conversion guidelines listed below.
+
+__Spherical to cylindrical ``(r \geq 0)`` :__
+```math
+r^2=\rho^2 \sin ^2 \phi, \quad \theta=\theta, \quad z=\rho \cos \phi
+```
+
+__Cylindrical to spherical ``(r \geq 0)`` :__
+```math
+\rho=\sqrt{r^2+z^2}, \quad \theta=\theta, \quad \phi=\arccos \frac{z}{\sqrt{r^2+z^2}}
+```
+"""
+
+# ╔═╡ 5d6703d0-94f3-402c-b107-f25ed5b271d1
+md"##  Triple Integrals in Spherical Coordinates"
+
+# ╔═╡ 5e0e28f5-178b-420a-a5d0-44510e444fd7
+cm"""
+```math
+\iiint_Q f(x, y, z) d V=\int_{\theta_1}^{\theta_2} \int_{\phi_1}^{\phi_2} \int_{\rho_1}^{\rho_2} f(\rho \sin \phi \cos \theta, \rho \sin \phi \sin \theta, \rho \cos \phi) \rho^2 \sin \phi d \rho d \phi d \theta
+```
+"""
+
 # ╔═╡ faf9928f-8ef8-4cde-9916-a153e505e204
 cm"""
 
@@ -4147,7 +4186,7 @@ $(ex(2,"Using a Triple Integral to Find Volume"))
 
 Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
 
-$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1"))
+$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1",400))
 """
 
 # ╔═╡ fb36a0a0-05ce-4e40-a1db-e9987e0375f5
@@ -4216,6 +4255,39 @@ cm"""
 $(ex(1,"Finding Volume in Cylindrical Coordinates"))
 Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
 $(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
+"""
+
+# ╔═╡ c3cdaf7d-bd63-4c14-95c3-d2d0d6c7e0e9
+cm"""
+$(bbl("The Spherical Coordinate System",""))
+In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
+1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
+2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
+3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
+Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
+"""
+
+# ╔═╡ b24c357d-5b2d-4c71-ab21-2e943d04ce4f
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
+"""
+
+# ╔═╡ faf5d275-b2f9-48ed-80c4-9cfaf3aec3ad
+cm"""
+$(ex(5,"Rectangular-to-Spherical Conversion"))
+
+Find an equation in spherical coordinates for the surface represented by each rectangular equation.
+- a. Cone: ``x^2+y^2=z^2``
+- b. Sphere: ``x^2+y^2+z^2-4 z=0``
+"""
+
+# ╔═╡ a221a8fc-8220-4f76-8196-c065f2392533
+cm"""
+$(ex(4,"Finding Volume in Spherical Coordinates"))
+
+Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
+
+$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -6887,6 +6959,14 @@ version = "1.4.1+2"
 # ╟─0b3752c0-59eb-4eac-8315-5fc5fb720a75
 # ╟─83a2cdc8-88cc-4273-aaec-b5584ac7649d
 # ╟─39eb6ccc-e6a8-4969-832b-b8f76102652a
+# ╟─79ee6127-24d6-422a-8eb7-f22cc125619d
+# ╟─c3cdaf7d-bd63-4c14-95c3-d2d0d6c7e0e9
+# ╟─b24c357d-5b2d-4c71-ab21-2e943d04ce4f
+# ╟─329f1103-055e-428c-b0fa-13a299585611
+# ╟─faf5d275-b2f9-48ed-80c4-9cfaf3aec3ad
+# ╟─5d6703d0-94f3-402c-b107-f25ed5b271d1
+# ╟─5e0e28f5-178b-420a-a5d0-44510e444fd7
+# ╟─a221a8fc-8220-4f76-8196-c065f2392533
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
