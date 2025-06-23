@@ -1,11 +1,11 @@
 services: 
-  t251:
-    container_name: T251MATH582
+  t251m201:
+    container_name: T251MATH201
     build:
       context: .
       args:
         - JULIA_VERSION=1.11.5
     ports: 
-      - "1582:1234"
+      - "1201:1234"
     volumes: 
       - .:/code
