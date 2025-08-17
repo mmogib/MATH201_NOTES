@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.6
+# v0.20.16
 
 using Markdown
 using InteractiveUtils
@@ -834,6 +834,140 @@ md"""
 
 # ╔═╡ 3235aa71-3bb9-4b19-92c5-3026e5dbd1c5
 md"## The Cross Product"
+
+# ╔═╡ 727cbd76-d752-46b8-a7ae-dc0bb369d607
+md"""
+##### The Right-Hand Rule: A Visual Guide
+
+The right-hand rule is essential for determining the direction of cross products, angular velocity, magnetic fields, and many other vector quantities in physics and engineering.
+"""
+
+# ╔═╡ bdc0d3b5-74d5-4e6c-9436-a122d200269c
+md"""
+##### Step-by-Step Right-Hand Rule for Cross Products
+
+For vectors **u** and **v**, the cross product **u × v** direction is found using:
+"""
+
+# ╔═╡ 307e214f-e541-41f3-af1a-318b2b465628
+begin
+    rhr_u_angle = @bind rhr_u_slider Slider(0:15:180, default=45, show_value=true)
+    rhr_v_angle = @bind rhr_v_slider Slider(0:15:180, default=120, show_value=true)
+    rhr_scale = @bind rhr_scale_slider Slider(1:0.5:3, default=2, show_value=true)
+    
+    cm"""
+    **Interactive Right-Hand Rule Demo:**
+    
+    u angle: $rhr_u_angle degrees
+    
+    v angle: $rhr_v_angle degrees  
+    
+    Scale: $rhr_scale_slider
+    """
+end
+
+# ╔═╡ f49f5558-ae2e-47c8-b910-7582f8e0f69c
+let
+    # Convert to radians
+    u_angle = rhr_u_slider * π/180
+    v_angle = rhr_v_slider * π/180
+    
+    # Create vectors in 2D (we'll show the 3D result)
+    u_vec = [rhr_scale_slider * cos(u_angle), rhr_scale_slider * sin(u_angle), 0]
+    v_vec = [rhr_scale_slider * cos(v_angle), rhr_scale_slider * sin(v_angle), 0]
+    
+    # Calculate cross product (will point in z direction)
+    cross_prod = u_vec[1]*v_vec[2] - u_vec[2]*v_vec[1]  # z-component
+    cross_vec = [0, 0, cross_prod]
+    
+    # Create the plot
+    p = plot(aspect_ratio=1, xlims=(-4, 4), ylims=(-4, 4), 
+             title="Right-Hand Rule Demonstration\nCross Product: u × v",
+             legend=:topright)
+    
+    # Plot vectors u and v
+    quiver!(p, [0], [0], quiver=([u_vec[1]], [u_vec[2]]), 
+            color=:blue, linewidth=3, label="u")
+    quiver!(p, [0], [0], quiver=([v_vec[1]], [v_vec[2]]), 
+            color=:red, linewidth=3, label="v")
+    
+    # Add vector labels
+    annotate!(p, u_vec[1]*0.6, u_vec[2]*0.6, text("u", :blue, 12))
+    annotate!(p, v_vec[1]*0.6, v_vec[2]*0.6, text("v", :red, 12))
+    
+    # Show the angle between vectors
+    angle_diff = v_angle - u_angle
+    if angle_diff < 0
+        angle_diff += 2π
+    end
+    
+    # Arc to show angle
+    arc_angles = range(u_angle, v_angle, length=20)
+    arc_x = 0.8 * cos.(arc_angles)
+    arc_y = 0.8 * sin.(arc_angles)
+    plot!(p, arc_x, arc_y, color=:green, linewidth=2, label="")
+    
+    # Show cross product direction
+    if cross_prod > 0
+        direction_text = "u × v points OUT of page ⊙\n(Right-hand rule: thumb up)"
+        color = :green
+    else
+        direction_text = "u × v points INTO page ⊗\n(Right-hand rule: thumb down)"  
+        color = :purple
+    end
+    
+    # Add direction indicator
+    plot!(p, [0], [0], seriestype=:scatter, markersize=15, 
+          color=color, label="")
+    annotate!(p, 0, -3.5, text(direction_text, color, 10, :center))
+    
+    # Add magnitude
+    mag = abs(cross_prod)
+    annotate!(p, 0, 3.5, text("||u × v|| = $(round(mag, digits=2))", :black, 10, :center))
+    
+    p
+end
+
+# ╔═╡ 6cd9be57-f44d-4841-863c-15c3e3c37d24
+md"""
+##### Applications of the Right-Hand Rule
+
+The right-hand rule appears throughout physics and engineering:
+"""
+
+# ╔═╡ d0e90cb9-0a56-49d7-a031-588141c643fa
+md"""
+##### Memory Aids for the Right-Hand Rule
+"""
+
+# ╔═╡ 3c2e14ba-9510-4e3a-bf79-507dd6c97794
+md"""
+##### Quick Verification Tool
+"""
+
+# ╔═╡ 0a45499d-e0f3-4e05-b497-a71a6895a158
+let
+    # Create standard basis verification
+    p1 = plot(title="Standard Basis Vectors", aspect_ratio=1, 
+              xlims=(-2, 2), ylims=(-2, 2))
+    
+    # i vector (red)
+    quiver!(p1, [0], [0], quiver=([1], [0]), 
+            color=:red, linewidth=4, label="i")
+    annotate!(p1, 1.2, 0, text("i", :red, 14))
+    
+    # j vector (blue)  
+    quiver!(p1, [0], [0], quiver=([0], [1]), 
+            color=:blue, linewidth=4, label="j")
+    annotate!(p1, 0, 1.2, text("j", :blue, 14))
+    
+    # Show i × j = k (into page)
+    plot!(p1, [0], [0], seriestype=:scatter, markersize=20, 
+          color=:green, label="i × j = +k")
+    annotate!(p1, 0, -1.5, text("i × j = +k (out of page ⊙)", :green, 12, :center))
+    
+    p1
+end
 
 # ╔═╡ 4d568a88-31ee-415d-9b7a-dd68277e76cc
 let
@@ -1763,7 +1897,7 @@ begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
     md""" # Syllabus
     ## Syallbus
-    See here [Term 242 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/default-document-library/math201-242.pdf?sfvrsn=f665d644_1)
+    See here [Term 251 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/default-document-library/math201-242.pdf?sfvrsn=f665d644_1)
     ## Textbook
     __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
     $text_book
@@ -4293,6 +4427,479 @@ $(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?r
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
+# ╔═╡ 64cdb975-2d61-45fb-9a44-1b793748bfca
+begin
+	# Add this to your existing helper functions section
+	
+	function warning_box(title="⚠️ Common Error", content="")
+	    """
+	    <div style="
+	        border: 2px solid #ff6b6b;
+	        border-radius: 8px;
+	        background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+	        margin: 15px 0;
+	        padding: 0;
+	        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.2);
+	    ">
+	        <div style="
+	            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+	            color: white;
+	            padding: 8px 15px;
+	            font-weight: bold;
+	            font-size: 14px;
+	            border-radius: 6px 6px 0 0;
+	            border-bottom: 1px solid #ff5252;
+	        ">
+	            $title
+	        </div>
+	        <div style="
+	            padding: 15px;
+	            line-height: 1.6;
+	            color: #333;
+	        ">
+	            $content
+	        </div>
+	    </div>
+	    """
+	end
+	
+	# Alternative: Create a tip box for helpful hints
+	function tip_box(title="💡 Helpful Tip", content="")
+	    """
+	    <div style="
+	        border: 2px solid #4CAF50;
+	        border-radius: 8px;
+	        background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+	        margin: 15px 0;
+	        padding: 0;
+	        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+	    ">
+	        <div style="
+	            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+	            color: white;
+	            padding: 8px 15px;
+	            font-weight: bold;
+	            font-size: 14px;
+	            border-radius: 6px 6px 0 0;
+	            border-bottom: 1px solid #45a049;
+	        ">
+	            $title
+	        </div>
+	        <div style="
+	            padding: 15px;
+	            line-height: 1.6;
+	            color: #333;
+	        ">
+	            $content
+	        </div>
+	    </div>
+	    """
+	end
+end
+
+# ╔═╡ 02231ebf-ea93-4286-a9bf-4291f7f8e19b
+HTML(warning_box(
+    "⚠️ Common Errors When Eliminating Parameters",
+    """
+    <strong>Three major mistakes students make:</strong>
+    <ol>
+        <li><strong>Forgetting domain restrictions:</strong> The parameter t might have limits that affect x and y</li>
+        <li><strong>Losing orientation:</strong> Parametric curves have direction; rectangular equations don't</li>
+        <li><strong>Incomplete elimination:</strong> Make sure your final equation has no parameter left!</li>
+    </ol>
+    <em>Always verify: Does your rectangular equation represent the same curve over the same domain?</em>
+    """
+))
+
+# ╔═╡ 45f7f919-bdbe-43dc-91e9-465d166692dd
+HTML(warning_box(
+    "⚠️ Trigonometric Parameter Elimination Mistakes",
+    """
+    When using sin²θ + cos²θ = 1, watch out for these errors:
+    <br><br>
+    <strong>✗ Wrong:</strong> x² + y² = 1<br>
+    <strong>✗ Wrong:</strong> (x/3) + (y/4) = 1<br>
+    <strong>✓ Correct:</strong> (x/3)² + (y/4)² = 1
+    <br><br>
+    <strong>Why?</strong> We have x = 3cos(θ), so cos(θ) = x/3<br>
+    Similarly, y = 4sin(θ), so sin(θ) = y/4<br>
+    Therefore: (x/3)² + (y/4)² = cos²(θ) + sin²(θ) = 1
+    """
+))
+
+# ╔═╡ 5b28d6ec-91f0-485b-b442-e1ac6151f42f
+HTML(tip_box(
+    "💡 Quick Check",
+    """
+    <strong>Verify your elimination:</strong>
+    <ul>
+        <li>Substitute a simple value (like θ = 0) into both forms</li>
+        <li>Do you get the same point? ✓</li>
+        <li>Check the shape: This gives an ellipse with semi-axes 3 and 4</li>
+    </ul>
+    """
+))
+
+# ╔═╡ f406993e-a276-4872-ad80-fff4175894ce
+HTML(warning_box(
+    "⚠️ Don't Forget: Direction Matters!",
+    """
+    <strong>Parametric equations show direction of motion:</strong>
+    <ul>
+        <li>As θ increases from 0 to 2π, the point moves <strong>counterclockwise</strong></li>
+        <li>The rectangular equation x²/9 + y²/16 = 1 just shows the ellipse shape</li>
+        <li>It doesn't tell us the starting point or direction of travel</li>
+    </ul>
+    <strong>Try the slider above:</strong> Watch how the point traces the curve as θ increases!
+    """
+))
+
+# ╔═╡ 611dc409-fb72-41a4-ba99-bce79cb23408
+HTML(warning_box(
+    "⚠️ Common Coordinate Conversion Mistakes",
+    """
+    <strong>Most frequent errors:</strong>
+    <ol>
+        <li><strong>Wrong quadrant:</strong> θ = arctan(y/x) only works in Quadrants I & IV</li>
+        <li><strong>Forgetting absolute value:</strong> r = √(x² + y²), not just √(x² + y²)</li>
+        <li><strong>Angle confusion:</strong> Adding 2π doesn't change the point, but adding π does!</li>
+    </ol>
+    <br>
+    <strong>Safe approach:</strong> Always check which quadrant your point is in before finding θ.
+    """
+))
+
+# ╔═╡ f6fab19a-f27c-45dc-b761-4ba16c686169
+HTML(tip_box(
+    "💡 Polar-to-Rectangular is Easy!",
+    """
+    <strong>Always straightforward:</strong>
+    <ul>
+        <li>x = r cos(θ) ← Just substitute and calculate</li>
+        <li>y = r sin(θ) ← No quadrant worries here!</li>
+        <li>These formulas work for ANY r and θ values</li>
+    </ul>
+    <em>The hard direction is rectangular-to-polar...</em>
+    """
+))
+
+# ╔═╡ 50978496-c9eb-4cb8-b77d-41b730fc31ec
+let
+	warn= HTML(warning_box(
+	    "⚠️ Rectangular-to-Polar: Watch the Quadrant!",
+	    """
+	    <strong>For point (-1, 1) in Quadrant II:</strong>
+	    <br><br>
+	    <strong>✗ Wrong approach:</strong><br>
+	    θ = arctan(y/x) = arctan(1/(-1)) = arctan(-1) = -π/4
+	    <br><br>
+	    <strong>✓ Correct approach:</strong><br>
+	    • Point is in Quadrant II<br>
+	    • θ = π + arctan(y/x) = π + (-π/4) = 3π/4<br>
+	    <br>
+	    <strong>Quick check:</strong> cos(3π/4) = -1/√2 ✓ and sin(3π/4) = 1/√2 ✓
+	    """
+	))
+	
+	tip= HTML(tip_box(
+	    "💡 Quadrant Reference Guide",
+	    """
+	    <table style="border-collapse: collapse; width: 100%;">
+	    <tr style="background-color: #f0f0f0;">
+	        <th style="border: 1px solid #ddd; padding: 8px;">Quadrant</th>
+	        <th style="border: 1px solid #ddd; padding: 8px;">Signs (x,y)</th>
+	        <th style="border: 1px solid #ddd; padding: 8px;">Angle Range</th>
+	        <th style="border: 1px solid #ddd; padding: 8px;">Formula</th>
+	    </tr>
+	    <tr>
+	        <td style="border: 1px solid #ddd; padding: 8px;">I</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">(+,+)</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">0 to π/2</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">θ = arctan(y/x)</td>
+	    </tr>
+	    <tr>
+	        <td style="border: 1px solid #ddd; padding: 8px;">II</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">(-,+)</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">π/2 to π</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">θ = π + arctan(y/x)</td>
+	    </tr>
+	    <tr>
+	        <td style="border: 1px solid #ddd; padding: 8px;">III</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">(-,-)</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">π to 3π/2</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">θ = π + arctan(y/x)</td>
+	    </tr>
+	    <tr>
+	        <td style="border: 1px solid #ddd; padding: 8px;">IV</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">(+,-)</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">3π/2 to 2π</td>
+	        <td style="border: 1px solid #ddd; padding: 8px;">θ = 2π + arctan(y/x)</td>
+	    </tr>
+	    </table>
+	    """
+	))
+
+	md"""
+	$(warn)
+
+	$(tip)
+	"""
+end
+
+# ╔═╡ 8722e8cb-23c4-472c-bfea-0dfbd5518942
+HTML(warning_box(
+    "⚠️ Polar Graphing Mistakes",
+    """
+    <strong>Common graphing errors:</strong>
+    <ul>
+        <li><strong>Negative r values:</strong> r = -2 means go 2 units in the opposite direction</li>
+        <li><strong>Period confusion:</strong> cos(3θ) has period 2π/3, not 2π!</li>
+        <li><strong>Forgetting restrictions:</strong> Some curves need r ≥ 0 constraints</li>
+    </ul>
+    <br>
+    <strong>Pro tip:</strong> Always check a few key points (θ = 0, π/2, π, 3π/2) first!
+    """
+))
+
+# ╔═╡ 36df35fa-9675-493f-ba62-1177e736f0df
+HTML(warning_box(
+    "⚠️ Polar Slope Formula Confusion",
+    """
+    <strong>Don't mix up the formulas!</strong>
+    <br><br>
+    <strong>In rectangular coordinates:</strong><br>
+    dy/dx = f'(x)
+    <br><br>
+    <strong>In polar coordinates:</strong><br>
+    dy/dx = (r cos θ + r' sin θ)/(-r sin θ + r' cos θ)
+    <br><br>
+    <strong>Key difference:</strong> Polar slope depends on BOTH r and θ, not just the rate of change of r!
+    """
+))
+
+# ╔═╡ c3aabed0-c65e-440e-8545-bfe2282b76c2
+HTML(tip_box(
+    "💡 Rose Curve Quick Facts",
+    """
+    <strong>Number of petals:</strong>
+    <ul>
+        <li><strong>n odd:</strong> exactly n petals</li>
+        <li><strong>n even:</strong> exactly 2n petals</li>
+    </ul>
+    <br>
+    <strong>Examples:</strong><br>
+    • r = cos(3θ) → 3 petals<br>
+    • r = cos(4θ) → 8 petals<br>
+    • r = cos(5θ) → 5 petals
+    <br><br>
+    <em>Try changing n in the interactive plot above to see this pattern!</em>
+    """
+))
+
+# ╔═╡ 63218513-07b5-4a71-b837-232e3a85f995
+HTML(tip_box(
+    "💡 Why the Right-Hand Rule Matters",
+    """
+    <strong>The right-hand rule isn't arbitrary - it's a universal convention that:</strong>
+    <ul>
+        <li>Ensures consistent directions across all of mathematics and physics</li>
+        <li>Connects vector algebra to physical phenomena (torque, magnetic fields, etc.)</li>
+        <li>Helps you visualize 3D relationships between vectors</li>
+        <li>Is used in computer graphics, robotics, and engineering</li>
+    </ul>
+    """
+))
+
+
+# ╔═╡ b0146f1d-760a-4de6-86d3-bcca3159dc8a
+HTML(warning_box(
+    "⚠️ Cross Product vs Dot Product - Don't Mix Them Up!",
+    """
+    <strong>The #1 mistake in vector calculus:</strong>
+    <br><br>
+    <table style="border-collapse: collapse; width: 100%;">
+    <tr style="background-color: #f0f0f0;">
+        <th style="border: 1px solid #ddd; padding: 8px;">Operation</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">Symbol</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">Result Type</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">Use For</th>
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><strong>Dot Product</strong></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">u · v</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">Scalar (number)</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">Angles, work, projections</td>
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><strong>Cross Product</strong></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">u × v</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">Vector</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">Areas, normal vectors, torque</td>
+    </tr>
+    </table>
+    <br>
+    <strong>Memory trick:</strong> Cross product gives you a vector that's ⊥ to both original vectors!
+    """
+))
+
+# ╔═╡ 551d1c11-0f1f-45c8-85a3-0c7d4bec36fb
+HTML(warning_box(
+    "⚠️ Right-Hand Rule: Exact Steps",
+    """
+    <strong>Follow these steps IN ORDER:</strong>
+    <ol>
+        <li><strong>Point your fingers</strong> along the direction of the first vector <strong>u</strong></li>
+        <li><strong>Curl your fingers</strong> toward the second vector <strong>v</strong> (through the smaller angle)</li>
+        <li><strong>Your thumb points</strong> in the direction of <strong>u × v</strong></li>
+    </ol>
+    <br>
+    <strong>⚠️ Critical:</strong> 
+    <ul>
+        <li>Use your RIGHT hand (left hand gives opposite direction!)</li>
+        <li>Order matters: u × v ≠ v × u</li>
+        <li>Always curl through the smaller angle between vectors</li>
+    </ul>
+    """
+))
+
+# Interactive demonstration with sliders
+
+# ╔═╡ af862132-5802-47cd-9696-5f36bb112fd9
+HTML(warning_box(
+    "⚠️ Students Often Get These Wrong",
+    """
+    <strong>Mistake #1: Using the left hand</strong><br>
+    ❌ Left hand gives the opposite direction!<br>
+    ✅ Always use your RIGHT hand
+    <br><br>
+    
+    <strong>Mistake #2: Wrong finger assignment</strong><br>
+    ❌ Pointing along v first, then curling to u<br>
+    ✅ Point along u first, then curl toward v
+    <br><br>
+    
+    <strong>Mistake #3: Curling the wrong way</strong><br>
+    ❌ Curling through the larger angle<br>
+    ✅ Always curl through the smaller angle (≤ 180°)
+    <br><br>
+    
+    <strong>Mistake #4: Forgetting order matters</strong><br>
+    ❌ Thinking u × v = v × u<br>
+    ✅ Remember: u × v = -(v × u)
+    """
+))
+
+
+# ╔═╡ 047e6e11-1a81-4889-bff1-2c2eb9b1fff0
+HTML(tip_box(
+    "💡 Practice Exercise",
+    """
+    <strong>Use the right-hand rule to determine the direction of these cross products:</strong>
+    <br><br>
+    1. <strong>i × j =</strong> ? (Should point in +k direction)<br>
+    2. <strong>j × k =</strong> ? (Should point in +i direction)<br>
+    3. <strong>k × i =</strong> ? (Should point in +j direction)<br>
+    4. <strong>j × i =</strong> ? (Should point in -k direction)
+    <br><br>
+    <strong>These form the foundation of the right-handed coordinate system!</strong>
+    """
+))
+
+# ╔═╡ c3213002-4138-4ade-b981-6b3b9cb0823d
+HTML(tip_box(
+    "💡 Where You'll Use the Right-Hand Rule",
+    """
+    <strong>Physics Applications:</strong>
+    <ul>
+        <li><strong>Torque:</strong> τ = r × F (torque direction)</li>
+        <li><strong>Angular velocity:</strong> ω direction for rotating objects</li>
+        <li><strong>Magnetic force:</strong> F = q(v × B) on moving charges</li>
+        <li><strong>Magnetic field:</strong> B field direction around current loops</li>
+    </ul>
+    <br>
+    <strong>Engineering Applications:</strong>
+    <ul>
+        <li><strong>Computer graphics:</strong> Normal vectors for 3D surfaces</li>
+        <li><strong>Robotics:</strong> Joint rotations and orientations</li>
+        <li><strong>Structural analysis:</strong> Moment calculations</li>
+        <li><strong>Fluid mechanics:</strong> Circulation and vorticity</li>
+    </ul>
+    """
+))
+
+# ╔═╡ 14a437b7-4c9a-431a-a275-ea34fc3fcb59
+HTML(tip_box(
+    "💡 Memory Tricks That Work",
+    """
+    <strong>Visual Memory Aids:</strong>
+    <br><br>
+    <strong>1. "Point, Curl, Thumb"</strong><br>
+    Point → Curl → Thumb gives direction
+    <br><br>
+    
+    <strong>2. "First to Second"</strong><br>
+    Point along FIRST vector, curl to SECOND vector
+    <br><br>
+    
+    <strong>3. "Right-Hand Coordinate System"</strong><br>
+    If you point your right hand so fingers curl from +x to +y, thumb points to +z
+    <br><br>
+    
+    <strong>4. "Corkscrew Rule"</strong><br>
+    Turn a right-handed screw from u to v - it advances in the u × v direction
+    """
+))
+
+# Add a quick verification tool
+
+# ╔═╡ e419d363-d9f5-42ab-9f08-ef504b3da7c5
+HTML(warning_box(
+    "⚠️ Final Check: Standard Basis",
+    """
+    <strong>Always verify with the standard basis vectors:</strong>
+    <br><br>
+    • <strong>i × j = +k</strong> (thumb points out of xy-plane)<br>
+    • <strong>j × k = +i</strong> (thumb points along +x axis)<br>
+    • <strong>k × i = +j</strong> (thumb points along +y axis)
+    <br><br>
+    If your right-hand rule gives these results, you're doing it correctly!
+    """
+))
+
+# ╔═╡ 061d22ec-7b14-4af6-bf08-2bf01c10f087
+HTML(warning_box(
+    "⚠️ Cross Product Calculation Errors",
+    """
+    <strong>Most common calculation mistakes:</strong>
+    <ol>
+        <li><strong>Sign errors:</strong> Watch the minus sign in the j component!</li>
+        <li><strong>Component mixing:</strong> Make sure you're using the right components</li>
+        <li><strong>Order matters:</strong> u × v = -(v × u)</li>
+    </ol>
+    <br>
+    <strong>Safe method:</strong> Always use the determinant with i, j, k in the first row.
+    """
+))
+
+# ╔═╡ 541b0aa4-5c1d-446f-9870-de17f430fb1a
+HTML(tip_box(
+    "💡 Cross Product Determinant Memory Aid",
+    """
+    <strong>Set up the determinant like this:</strong>
+    <br><br>
+    <code>
+    u × v = |<strong>i</strong>  <strong>j</strong>  <strong>k</strong> |<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|u₁ u₂ u₃|<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|v₁ v₂ v₃|
+    </code>
+    <br><br>
+    <strong>Expand along first row:</strong><br>
+    = <strong>i</strong>(u₂v₃ - u₃v₂) - <strong>j</strong>(u₁v₃ - u₃v₁) + <strong>k</strong>(u₁v₂ - u₂v₁)
+    <br><br>
+    <em>Notice the minus sign on the j component!</em>
+    """
+))
+
 # ╔═╡ 107407c8-5da0-4833-9965-75a82d84a0fb
 @htl("""
 <style>
@@ -4401,7 +5008,7 @@ Unitful = "~1.22.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.4"
+julia_version = "1.11.6"
 manifest_format = "2.0"
 project_hash = "8b5b050a8b7e722fad9c715ada89154dc4ba1965"
 
@@ -5540,7 +6147,7 @@ version = "2.5.3+0"
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+4"
+version = "0.8.5+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -6571,11 +7178,15 @@ version = "1.4.1+2"
 # ╟─4026f2d0-ec69-4491-b4b7-313c501d7f50
 # ╟─62611550-7596-412e-b492-1cfcab69d942
 # ╟─356e2c2e-b9dd-4988-81a0-c87036998ec6
+# ╟─02231ebf-ea93-4286-a9bf-4291f7f8e19b
 # ╟─b2f647d7-9fe4-4ab7-b251-8ba27485ae35
 # ╟─b4eff26d-d34b-49b4-be8a-64cffaf2f431
 # ╟─8a4f89a9-d0ee-4a4f-9f2e-ed2620247d50
+# ╟─45f7f919-bdbe-43dc-91e9-465d166692dd
+# ╟─5b28d6ec-91f0-485b-b442-e1ac6151f42f
 # ╟─56158e41-0621-413d-958b-afb9939493d2
 # ╟─cb90c129-362b-41c9-aadb-90b89ac1c3c1
+# ╟─f406993e-a276-4872-ad80-fff4175894ce
 # ╟─ed6f28c3-5edc-48a5-9ab6-99fdb660067a
 # ╟─061935b4-9e9b-42ff-926f-e183cbf2de74
 # ╟─109e181f-e208-4e42-8169-16582873f069
@@ -6607,9 +7218,13 @@ version = "1.4.1+2"
 # ╠═7ebe5d0a-e565-4e2a-9fc2-8f2a852bf9c6
 # ╟─3f565a27-fdc0-4209-9105-dc3f3ae3dfc2
 # ╟─056b4af6-c433-497e-81e0-70bb3096bc3c
+# ╟─611dc409-fb72-41a4-ba99-bce79cb23408
 # ╟─ca784670-8225-4c3e-a4ee-8f7ab59adc85
+# ╟─f6fab19a-f27c-45dc-b761-4ba16c686169
 # ╟─f8dcab6d-2926-43d3-ba9f-b4a50316038e
+# ╟─50978496-c9eb-4cb8-b77d-41b730fc31ec
 # ╟─ff6c91b7-d111-4b5b-88c0-a01e42fa3cf8
+# ╟─8722e8cb-23c4-472c-bfea-0dfbd5518942
 # ╟─c602fc93-2bdc-444f-9b2d-d20caf751a8f
 # ╟─78b5718d-6c40-413d-b990-b8bbf6b323ba
 # ╟─519d7317-a639-4d2d-9cb5-8647d6992eb2
@@ -6619,6 +7234,7 @@ version = "1.4.1+2"
 # ╟─b69a0131-c8cd-4ba2-a124-548baa1bc52d
 # ╟─5c4a9aa7-9223-46d7-91f9-f958e3be6eeb
 # ╟─c3b508e4-913c-4e33-b759-7d15d31de0b4
+# ╟─36df35fa-9675-493f-ba62-1177e736f0df
 # ╟─0fe1255e-5df0-477e-8999-4b93750b2a6f
 # ╟─784aad5e-9618-4ab5-ac7a-0d0394abe25d
 # ╟─35220a5b-a101-495e-b617-361510394818
@@ -6627,6 +7243,7 @@ version = "1.4.1+2"
 # ╟─bceaaa97-8e13-45a4-ac8c-90d9e9280a75
 # ╠═b76eefd7-10a2-4f8c-8a6d-57c0506e7df3
 # ╠═1f2859ea-80c9-4918-a4fb-d9db5123cacb
+# ╟─c3aabed0-c65e-440e-8545-bfe2282b76c2
 # ╟─0abd3e51-8fe7-4d35-9d0b-23e03e01ab34
 # ╟─cd2a10a5-9166-4754-b277-02efd8747eb3
 # ╟─ad06e95d-2879-4039-84bc-07b7856e2d89
@@ -6706,7 +7323,25 @@ version = "1.4.1+2"
 # ╟─a75f9328-3c26-4e09-9688-4da4b11aefc5
 # ╟─3235aa71-3bb9-4b19-92c5-3026e5dbd1c5
 # ╟─daea6ac7-a442-4f05-a7bf-192a0a48bfee
+# ╟─727cbd76-d752-46b8-a7ae-dc0bb369d607
+# ╟─63218513-07b5-4a71-b837-232e3a85f995
+# ╟─b0146f1d-760a-4de6-86d3-bcca3159dc8a
+# ╟─bdc0d3b5-74d5-4e6c-9436-a122d200269c
+# ╟─551d1c11-0f1f-45c8-85a3-0c7d4bec36fb
+# ╟─307e214f-e541-41f3-af1a-318b2b465628
+# ╟─f49f5558-ae2e-47c8-b910-7582f8e0f69c
+# ╟─af862132-5802-47cd-9696-5f36bb112fd9
+# ╟─047e6e11-1a81-4889-bff1-2c2eb9b1fff0
+# ╟─6cd9be57-f44d-4841-863c-15c3e3c37d24
+# ╟─c3213002-4138-4ade-b981-6b3b9cb0823d
+# ╟─d0e90cb9-0a56-49d7-a031-588141c643fa
+# ╟─14a437b7-4c9a-431a-a275-ea34fc3fcb59
+# ╟─3c2e14ba-9510-4e3a-bf79-507dd6c97794
+# ╟─0a45499d-e0f3-4e05-b497-a71a6895a158
+# ╟─e419d363-d9f5-42ab-9f08-ef504b3da7c5
 # ╟─0f279112-e03e-403e-b131-6f6a934a427a
+# ╟─061d22ec-7b14-4af6-bf08-2bf01c10f087
+# ╟─541b0aa4-5c1d-446f-9870-de17f430fb1a
 # ╟─68436e91-4c49-4eb9-b744-884b9321feff
 # ╟─3794c467-23d0-472f-9d05-7ddf1fc0d5db
 # ╟─9a1d80e4-8aa8-4216-8f6b-b4eee617d6a8
@@ -6971,6 +7606,7 @@ version = "1.4.1+2"
 # ╟─faf9928f-8ef8-4cde-9916-a153e505e204
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
+# ╠═64cdb975-2d61-45fb-9a44-1b793748bfca
 # ╟─107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
