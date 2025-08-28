@@ -53,6 +53,18 @@ begin
     end
 end
 
+# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+cm"""
+__Course website:__ (Notes, Syllabus)
+$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
+
+---
+
+__ChatGPT:__ (Course AI assistant)
+$(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
+
+"""
+
 # ╔═╡ dc65d765-0bef-4c49-93af-1cd0ebabe632
 md"""# 10.2 Plane Curves and Parametric equations
 
@@ -98,6 +110,34 @@ let
     scatter(p, [x(s10_2_t)], [f(x(s10_2_t))], label="Person")
 end
 
+# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
+## Cell 5
+cm"""
+$(define("a Plane Curve"))
+If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
+"""
+
+
+# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
+## Cell 6
+cm"""
+$(ex(1,"Sketching a Curve"))
+Sketch the curve described by the parametric equations
+```math
+x=f(t)=t^2-4
+```
+and
+```math
+y=g(t)=\frac{t}{2}
+```
+where ``-2 \leq t \leq 3``.
+"""
+
+
 # ╔═╡ 7ab904a8-91e2-4814-9eba-3e55f35f0503
 ## Cell 7
 let
@@ -138,6 +178,27 @@ end
 md"##  Eliminating the Parameter"
 
 
+# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
+## Cell 10
+cm"""
+
+$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
+"""
+
+
+# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
+
+## Cell 11
+cm"""
+$(ex(2,"Adjusting the Domain"))
+Sketch the curve represented by the equations
+```math
+x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
+```
+by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
+"""
+
+
 # ╔═╡ ef07b8c6-a4a8-4daa-8843-39d522f995ef
 begin
     s10_2_t_e2_slider = @bind s10_2_t_e2 Slider(-0.99:1:100, show_value=true)
@@ -155,6 +216,20 @@ let
     p = plot(x.(ts),y.(ts); framestyle=:origin, xlimits=(-0.1, 2), ylimits=(-1,2),label=L"y=1-x^2")
     scatter(p, [x(s10_2_t_e2)], [y(s10_2_t_e2)], label=nothing)
 end
+
+# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
+
+## Cell 12
+cm"""
+$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
+See LarsonCalculus.com for an interactive version of this type of example.
+Sketch the curve represented by
+```math
+x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
+```
+by eliminating the parameter and finding the corresponding rectangular equation.
+"""
+
 
 # ╔═╡ 15a0e2e8-382e-487a-a297-12feaaab6f91
 
@@ -185,6 +260,24 @@ end
 ## Cell 18
 md"##  Finding Parametric Equations"
 
+# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
+## Cell 19
+cm"""
+$(ex(4,"Finding Parametric Equations for a Given Graph"))
+Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
+
+- __(a.)__ ``t=x``
+- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
+
+"""
+
+# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
+## Cell 20
+cm"""
+$(ex(5,"Parametric Equations for a Cycloid"))
+Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a __cycloid__.
+"""
+
 # ╔═╡ efb426c5-ac63-4360-86e4-b579b847b69a
 ## Cell 21
 begin
@@ -213,6 +306,25 @@ let
     annotate!(p, [(5π, 2a + 5, L"x=a(\theta-\sin{\theta})"), (5π, 2a + 3, L"y=a(1-\cos{\theta)}")])
 end
 
+# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
+## Cell 23
+cm"""
+$(define("Smooth Curve"))
+A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+"""
+
+# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
+cm"""
+$(bbl("Hypocycloid", "H(A, B)"))
+The path traced by a fixed point on a circle of radius ``B`` as it rolls around the inside of a circle of radius ``A``
+```math
+\begin{aligned}
+& x=(A-B) \cos t+B \cos \left(\frac{A-B}{B}\right) t \\
+& y=(A-B) \sin t-B \sin \left(\frac{A-B}{B}\right) t
+\end{aligned}
+```
+"""
+
 # ╔═╡ 080c8917-6a7f-46ab-9ce7-4a19d2062375
 let
 	
@@ -238,6 +350,18 @@ let
 	ylabel!("y")
 	title!("Hypocycloid E($A,$B)")
 end
+
+# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
+cm"""
+$(bbl("Epicycloid","E(A, B)"))
+The path traced by a fixed point on a circle of radius ``B`` as it rolls around the outside of a circle of radius ``A``
+```math
+\begin{aligned}
+& x=(A+B) \cos t-B \cos \left(\frac{A+B}{B}\right) t \\
+& y=(A+B) \sin t-B \sin \left(\frac{A+B}{B}\right) t
+\end{aligned}
+```
+"""
 
 # ╔═╡ ebc1271e-0fcf-47bc-bf74-850b1d2ed425
 let
@@ -289,6 +413,66 @@ md"##  Slope and Tangent Lines"
 
 ## Cell 4
 
+# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
+cm"""
+$(bth("Parametric Form of the Derivative"))
+If a smooth curve ``C`` is given by the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+then the slope of ``C`` at ``(x, y)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
+```
+"""
+
+## Cell 5
+
+# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
+cm"""
+$(ex(1,"Differentiation and Parametric Form"))
+Find ``d y / d x`` for the curve given by 
+```math
+x=\sin t\quad \text{and} \quad y=\cos t.
+```
+"""
+
+## Cell 6
+
+# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
+cm"""
+$(bbl("Remark",""))
+```math
+\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
+```
+"""
+
+## Cell 7
+
+# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
+cm"""
+$(ex(2,"Finding Slope and Concavity"))
+For the curve given by
+```math
+x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
+```
+find the slope and concavity at the point ``(2,3)``.
+"""
+
+## Cell 8
+
+# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
+cm"""
+$(ex(3,"A Curve with Two Tangent Lines at a Point"))
+The prolate cycloid given by
+```math
+x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
+```
+crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
+"""
+
+## Cell 9
+
 # ╔═╡ 29c142be-48e3-488f-b8fb-3b9c34de64b0
 begin
     s10_3_ex3_slider = @bind s10_3_ex3_t Slider(-2:0.1:2, show_value=true)
@@ -326,6 +510,31 @@ end
 md"## Arc Length"
 
 ## Cell 12
+
+# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
+cm"""
+$(bth("Arc Length in Parametric Form"))
+If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
+```math
+s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
+```
+"""
+
+## Cell 13
+
+# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
+cm"""
+$(ex(4,"Finding Arc Length"))
+
+A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
+```math
+x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
+```
+
+Find the distance traveled by the point in one complete trip about the larger circle.
+"""
+
+## Cell 14
 
 # ╔═╡ d6ccee4f-40be-429b-860e-f53067077a14
 begin
@@ -366,8 +575,35 @@ md"## Area of a Surface of Revolution"
 
 ## Cell 17
 
+# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
+cm"""
+$(bth("Area of a Surface of Revolution"))
+If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
+
+__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``x``-axis: ``g(t) \geq 0``
+
+__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``y``-axis: ``f(t) \geq 0``
+"""
+
+## Cell 18
+
 # ╔═╡ 46c3a799-1982-419c-9254-9604ad95c926
 sin(π/3), sqrt(3)/2
+
+# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
+cm"""
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+
+Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
+```math
+\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
+```
+Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
+"""
 
 # ╔═╡ b4223dd0-faaa-4508-813f-0a9babbcdc09
 # Section 10.4: Polar coordinates and Polar Graphs - Verbatim Content
@@ -394,6 +630,29 @@ md"## Polar Coordinates"
 
 ## Cell 4
 
+# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
+cm"""
+$(bbl("",""))
+To form the polar coordinate system in the plane, 
+- fix a point ``O``, called __the pole (or origin)__, and 
+- construct from ``O`` an initial ray called the __polar axis__, 
+
+Then each point ``P`` in the plane can be assigned polar coordinates 
+```math
+(r, \theta)
+``` 
+as follows.
+```math
+\begin{aligned}
+& r=\text { directed distance from } O \text { to } P \\
+& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
+\end{aligned}
+```
+
+"""
+
+## Cell 5
+
 # ╔═╡ e5df9962-b908-4219-bfaf-7be799b8c8a8
 let
     n = 0
@@ -410,10 +669,58 @@ md"## Coordinate Conversion"
 
 ## Cell 7
 
+# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
+cm"""
+$(bth("Coordinate Conversion"))
+The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{array}{ll}
+\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
+x=r \cos \theta & \tan \theta=\frac{y}{x} \\
+y=r \sin \theta & r^2=x^2+y^2
+\end{array}
+```
+"""
+
+## Cell 8
+
+# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
+cm"""
+$(ex(1,"Polar-to-Rectangular Conversion"))
+
+
+- (a) For the point ``(r, \theta)=(2, \pi)``,
+- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
+
+"""
+
+## Cell 10
+
+# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
+cm"""
+$(ex(2,"Rectangular-to-Polar Conversion"))
+- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
+- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
+"""
+
+## Cell 12
+
 # ╔═╡ c86f3735-7430-4216-a8e8-d018c844142e
 md"## Polar Graphs"
 
 ## Cell 14
+
+# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
+cm"""
+$(ex(3,"
+Graphing Polar Equations"))
+Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
+- __(a.)__ ``r=2``
+- __(b.)__ ``\theta=\frac{\pi}{2}``
+- __(c.)__ ``r=\sec \theta``
+"""
+
+## Cell 16
 
 # ╔═╡ e1e067d5-5416-4d8e-be65-5c52ae95b24b
 let
@@ -444,6 +751,15 @@ let
 end
 
 ## Cell 17
+
+# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
+cm"""
+$(ex(4,"
+Sketching a Polar Graph"))
+Sketch the graph of ``r=2 \cos 3 \theta``.
+"""
+
+## Cell 18
 
 # ╔═╡ 003f7d8c-b316-4a2b-8170-ff148ccb9f50
 let
@@ -521,6 +837,38 @@ md"##  Slope and Tangent Lines"
 
 ## Cell 22
 
+# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
+cm"""
+$(bth("Slope in Polar Form"))
+If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
+```
+provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``. 
+"""
+
+## Cell 23
+
+# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
+cm"""
+$(bbl("Remarks",""))
+
+- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
+- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
+
+- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
+"""
+
+## Cell 24
+
+# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
+cm"""
+$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
+"""
+
+## Cell 26
+
 # ╔═╡ c3b0bf91-fdf0-4a2b-8309-3728c64421e4
 let
 
@@ -532,6 +880,15 @@ end
 
 ## Cell 27
 
+# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
+cm"""
+$(ex(6,"
+Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
+"""
+
+## Cell 28
+
 # ╔═╡ fae0a60d-8bb5-4be4-a22f-01a951804800
 let
 
@@ -542,6 +899,14 @@ let
 end
 
 ## Cell 29
+
+# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
+cm"""
+$(bth("Tangent Lines at the Pole"))
+If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
+"""
+
+## Cell 30
 
 # ╔═╡ afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
 md"##  Special Polar Graphs"
@@ -626,6 +991,38 @@ md"""
 # ╔═╡ bd3e2109-3aa0-4a9c-9082-d6d196f7932b
 md"##  Area of a Polar Region"
 
+# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
+cm"""
+__What is the area of a sector of a circle?__
+
+$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
+
+__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
+
+$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
+
+
+"""
+
+# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
+cm"""
+$(bth("Area in Polar Coordinates"))
+If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
+```math
+A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
+```
+```math
+=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
+```
+"""
+
+# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
+cm"""
+$(ex(1,"
+Finding the Area of a Polar Region"))
+Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
+"""
+
 # ╔═╡ 6c577bcb-2f01-41e2-b8cc-7593372f4cf6
 let
     r(θ) = 3 * cos(3 * θ)
@@ -651,6 +1048,12 @@ let
    """
 
 end
+
+# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
+cm"""
+$(ex(2,"Finding the Area Bounded by a Single Curve"))
+Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
+"""
 
 # ╔═╡ 65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
 let
@@ -690,6 +1093,20 @@ end
 
 # ╔═╡ 770456f6-fe19-4aec-86d2-482834cc419f
 md"##  Points of Intersection of Polar Graphs"
+
+# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
+cm"""
+$(ex(3,"Finding the Area of a Region Between Two Curves"))
+Find the area of the region common to the two regions bounded by the curves
+```math
+r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
+```
+and
+```math
+r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
+```
+
+"""
 
 # ╔═╡ 2e4f2876-a92d-4b3d-a473-ef12341baacc
 let
@@ -735,6 +1152,21 @@ end
 # ╔═╡ 782bd8fb-e3c7-471a-9bce-668d45b911af
 md"##  Arc Length in Polar Form"
 
+# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
+cm"""
+$(bth("Arc Length of a Polar Curve"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
+```math
+s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
+```
+"""
+
+# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
+cm"""
+$(ex(4,"Finding the Length of a Polar Curve"))
+Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
+"""
+
 # ╔═╡ 8ad44287-5a21-477b-b0fd-0d710440dc25
 let
     r(θ) = 2 - 2cos(θ)
@@ -750,6 +1182,21 @@ end
 
 # ╔═╡ ba8dc58b-5c37-4713-9bef-930c735850bf
 md"## Area of a Surface of Revolution"
+
+# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
+cm"""
+$(bth("Area of a Surface of Revolution"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
+1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
+
+
+
+2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
+$(ebl())
+
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
+"""
 
 # ╔═╡ 0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
 let
@@ -3434,8 +3881,91 @@ md"""
 > 2. Use an iterated integral to find the area of a plane region
 """
 
+# ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
+cm"""
+$(ex(1,"Integrating with Respect to <b>y</b>"))
+Evaluate ``\displaystyle \int_1^x\left(2 x y+3 y^2\right) d y``.
+"""
+
+# ╔═╡ 7e075bce-e784-4a4e-abc2-dad5230eeef7
+cm"""
+$(ex(2,"The Integral of an Integral"))
+Evaluate ``\displaystyle\int_1^2\left[\int_1^x\left(2 x y+3 y^2\right) d y\right] d x``.
+"""
+
 # ╔═╡ f8c684f5-18f1-414b-8ce1-7f654e53272d
 md"## Area of a Plane Region"
+
+# ╔═╡ 67ddb4d2-cbba-4592-ad5a-f9c609d731a8
+cm"""
+$(bbl("Area of a Region in the Plane",""))
+1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then the area of ``R`` is
+```math
+A=\int_a^b \int_{g_1(x)}^{g_2(x)} d y d x
+```
+$(post_img("https://www.dropbox.com/scl/fi/mutpzct04u49o9zr87y50/fig_14_2.png?rlkey=rka697r0ssbpo5kye5j8fv0x0&dl=1",400))
+
+2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then the area of ``R`` is
+```math
+A=\int_c^d \int_{h_1(y)}^{h_2(y)} d x d y
+```
+$(post_img("https://www.dropbox.com/scl/fi/pprmgpabyiquf3hnz1uvi/fig_14_3.png?rlkey=ru0ej4j1rx8w1jh0c7jahg6ph&dl=1",400))
+
+"""
+
+# ╔═╡ 79ac9331-c1c7-4f8b-889a-61c850a6a405
+cm"""
+$(ex(3,"The Area of a Rectangular Region"))
+Use an iterated integral to represent the area of the rectangle shown below
+
+$(post_img("https://www.dropbox.com/scl/fi/ikaofyd7gij7oggtkwsu2/fig_14_4.png?rlkey=50moht6bh0x8y5iot9om9rfmq&dl=1",300))
+"""
+
+# ╔═╡ 3442098f-2588-4169-8afb-893cd97eb812
+cm"""
+$(ex(4,"Finding Area by an Iterated Integral"))
+Use an iterated integral to find the area of the region bounded by the graphs of
+```math
+f(x)=\sin x\quad \color{red}{\text{Sine curve forms upper boundary.}}
+```
+
+
+and
+```math
+g(x)=\cos x\quad \color{red}{\text{Cosine curve forms lower boundary.}}
+```
+
+
+between ``x=\pi / 4`` and ``x=5 \pi / 4``.
+"""
+
+# ╔═╡ c1673254-5543-4836-bb87-8a071607d2bf
+cm"""
+$(ex(5,"Comparing Different Orders of Integration"))
+Sketch the region whose area is represented by the integral
+```math
+\int_0^2 \int_{y^2}^4 d x d y
+```
+
+Then find another iterated integral using the order ``d y d x`` to represent the same area and show that both integrals yield the same value.
+"""
+
+# ╔═╡ 6ef69b15-cbe3-43be-b918-1fb146dcb871
+cm"""
+$(ex(6,"An Area Represented by Two Iterated Integrals"))
+Find the area of the region ``R`` that lies below the parabola
+```math
+y=4 x-x^2\quad\color{red}{\text{Parabola forms upper boundary.}}
+```
+
+
+above the ``x``-axis, and above the line
+```math
+y=-3 x+6\quad\color{red}{\text{Line and x-axis form lower boundary.}}
+```
+
+
+"""
 
 # ╔═╡ 0f57e79f-d33d-4662-802c-e2a6d0ac61f4
 md"""
@@ -3447,6 +3977,28 @@ md"""
 
 # ╔═╡ cc2dca66-af82-4a9c-9229-8fee6e12f620
 md"## Double Integrals and Volume of a Solid Region"
+
+# ╔═╡ b87bf77d-0ac4-4aa4-89f1-c35bd07b2464
+cm"""
+Consider the countinuous function ``f(x,y)\geq 0``
+$(post_img("https://www.dropbox.com/scl/fi/d1r0zhp46g1wd480a7ih6/fig_14_8.png?rlkey=jfmg0gr1u3ytv3txz2m8vpmvt&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/yle6j30u1k0jb6f99wei4/fig_14_9.png?rlkey=3pzli926yppsfxyklmw6jlzrg&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/b0urecj17pzrws2bsw8as/fig_14_10.png?rlkey=o370zqxksdf6baidflsrh53z5&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/klsbozx2cdqs91fsk4awn/fig_14_11.png?rlkey=e92k2ojdyo465h3lqck0n0h49&dl=1",400))
+"""
+
+# ╔═╡ 949a0727-3427-44b9-bca1-cb6c0be55b5a
+cm"""
+$(ex(1,"Approximating the Volume of a Solid"))
+Approximate the volume of the solid lying between the paraboloid
+```math
+f(x, y)=1-\frac{1}{2} x^2-\frac{1}{2} y^2
+```
+and the square region ``R`` given by ``0 \leq x \leq 1,0 \leq y \leq 1``. Use a partition made up of squares whose sides have a length of ``\frac{1}{4}``.
+"""
 
 # ╔═╡ 09cfe910-5060-4b84-b885-5ce0727a65f6
 let
@@ -3461,11 +4013,119 @@ let
     Float64(V)
 end
 
+# ╔═╡ 363b9d8b-6288-46f4-b321-bf2d28d9e7df
+cm"""
+$(define("Double Integral"))
+If ``f`` is defined on a closed, bounded region ``R`` in the ``x y``-plane, then the double integral of ``f`` over ``R`` is
+```math
+\int_R \int f(x, y) d A=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i\right) \Delta A_i
+```
+provided the limit exists. If the limit exists, then ``f`` is integrable over ``R``.
+"""
+
+# ╔═╡ f80da3f2-5272-450c-a6e6-81ba4189b6b5
+cm"""
+$(bbl("Volume of a Solid Region",""))
+If ``f`` is integrable over a plane region ``R`` and ``f(x, y) \geq 0`` for all ``(x, y)`` in ``R``, then the volume of the solid region that lies above ``R`` and below the graph of ``f`` is
+```math
+V=\int_R \int f(x, y) d A
+```
+$(ebl())
+
+$(bth("Properties of Double Integrals"))
+Let ``f`` and ``g`` be continuous over a closed, bounded plane region ``R``, and let ``c`` be a constant.
+1. ``\displaystyle\iint_R c f(x, y) d A=c \int_R \int f(x, y) d A``
+2. ``\displaystyle\iint_R[f(x, y) \pm g(x, y)] d A=\int_R \int f(x, y) d A \pm \int_R \int g(x, y) d A``
+3. ``\displaystyle\iint_R f(x, y) d A \geq 0, \quad`` if ``f(x, y) \geq 0``
+4. ``\displaystyle\iint_R \int f(x, y) d A \geq \int_R \int g(x, y) d A, \quad`` if ``f(x, y) \geq g(x, y)``
+5. ``\displaystyle\iint_R f(x, y) d A=\int_{R_1} \int f(x, y) d A+\int_{R_2} \int f(x, y) d A``, where ``R`` is the union of two nonoverlapping subregions ``R_1`` and ``R_2``.
+"""
+
 # ╔═╡ c53d2dd7-a57c-4688-9682-10cd5947bf03
 md"##  Evaluation of Double Integrals"
 
+# ╔═╡ 9aaa5191-16d2-4af7-981e-697ea50f166f
+cm"""
+$(bth("Fubini's Theorem"))
+Let ``f`` be continuous on a plane region ``R``.
+1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then
+```math
+\iint_R  f(x, y) d A=\int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) d y d x
+```
+2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then
+```math
+\iint_R  f(x, y) d A=\int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) d x d y .
+```
+"""
+
+# ╔═╡ 7df7019e-a9b3-4ae1-bae0-44badb94e6bf
+cm"""
+$(ex(2,"Eevaluating a Double Integral as an Iterated Integral"))
+
+Evaluate
+```math
+\iint_R \left(1-\frac{1}{2} x^2-\frac{1}{2} y^2\right) d A
+```
+where ``R`` is the region given by
+```math
+0 \leq x \leq 1, \quad 0 \leq y \leq 1 .
+```
+"""
+
+# ╔═╡ 1be798c5-b9a4-42c3-a526-8563d25eb246
+cm"""
+$(ex(3,"Finding Volume by a Double Integral"))
+Find the volume of the solid region bounded by the paraboloid ``z=4-x^2-2 y^2`` and the ``x y``-plane seen  [here](https://www.desmos.com/3d/ine3ie6963)
+"""
+
+# ╔═╡ 5c9dc21c-b5ff-422f-9d8e-1d177efb60af
+cm"""
+$(ex(4,"Comparing Different Orders of Integration"))
+Find the volume of the solid region bounded by the surface
+```math
+f(x, y)=e^{-x^2} \quad \text { Surface }
+```
+and the planes ``z=0, y=0, y=x``, and ``x=1``, as shown [Here](https://www.desmos.com/3d/fo6kmsxrdj).
+"""
+
+# ╔═╡ 229b3153-a41f-4acc-af89-89a7fd35a10f
+cm"""
+$(ex(5,"Volume of a Region Bounded by Two Surfaces"))
+Find the volume of the solid region bounded above by the paraboloid
+```math
+z=1-x^2-y^2
+```
+
+and below by the plane
+```math
+z=1-y
+```
+
+"""
+
 # ╔═╡ a09b7496-29dd-4ecd-9ce5-6e21983a1677
 md"##  Average Value of a Function"
+
+# ╔═╡ 6357795f-52f3-4832-8c27-e75f220cd1b5
+cm"""
+$(define("the Average Value of a Function Over a Region"))
+If ``f`` is integrable over the plane region ``R``, then the average value of ``f`` over ``R`` is
+```math
+\text { Average value }=\frac{1}{A} \int_R \int f(x, y) d A
+```
+where ``A`` is the area of ``R``.
+$(ebl())
+
+$(ex(6,"Finding the Average Value of a Function"))
+Find the average value of
+```math
+f(x, y)=\frac{1}{2} x y
+```
+over the plane region ``R``, where ``R`` is a rectangle with vertices
+```math
+(0,0),(4,0),(4,3), \quad \text { and } \quad(0,3)
+```
+"""
 
 # ╔═╡ bebbd462-5a6d-4649-9105-04f511f27287
 md"""
@@ -3476,6 +4136,96 @@ md"""
 # ╔═╡ f0349447-b967-421d-9f86-57e37e0df049
 md"## Double Integrals in Polar Coordinates"
 
+# ╔═╡ 51d70474-def8-4714-854d-2dd69caebdfa
+cm"""
+In Section 10.4, you learned that the polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{aligned}
+& x=r \cos \theta \quad \text { and } \quad y=r \sin \theta \\
+& r^2=x^2+y^2 \quad \text { and } \quad \tan \theta=\frac{y}{x}
+\end{aligned}
+```
+
+$(ex(1,"Using Polar Coordinates to Describe a Region"))
+Use polar coordinates to describe each region shown below.
+
+$(post_img("https://www.dropbox.com/scl/fi/5xqj9e61lhwbm1ukw3x1s/fig_14_23.png?rlkey=z0h0t55hzyco3dth6mvme9fac&dl=1"))
+"""
+
+# ╔═╡ e47b9235-bce9-42e1-b790-acc15042f4dc
+cm"""
+We consider the __polar sector__
+```math
+\mathbf{R}=\left\{(r,\theta): \; r_1\leq r\leq r_2, \quad \theta_1\leq \theta \leq\theta_2\right\}
+```
+as show here
+$(post_img("https://www.dropbox.com/scl/fi/kwu956q8ee8n88pekz85q/fig_14_24.png?rlkey=dwee2k5qjnnudcdp9ambu53zf&dl=1"))
+
+Now, we partition ``\mathbf{R}`` into small polar sectors.
+$(post_img("https://www.dropbox.com/scl/fi/tithh34ltodbkhku4rc5a/fig_14_25.png?rlkey=3fa1volfpqkact18ysez9lrb0&dl=1"))
+
+Note that 
+```math
+\Delta A_i = r_i \Delta r_i\Delta\theta_i
+```
+So, we have
+
+```math
+\int_R \int f(x, y) d A \approx \sum_{i=1}^n f\left(r_i \cos \theta_i, r_i \sin \theta_i\right) r_i \Delta r_i \Delta \theta_i
+```
+
+"""
+
+# ╔═╡ 48b1e580-0502-497f-80e7-b6ade3129272
+cm"""
+$(bth("Change of Variables to Polar Form"))
+Let ``R`` be a plane region consisting of all points ``(x, y)=(r \cos \theta, r \sin \theta)`` satisfying the conditions ``0 \leq g_1(\theta) \leq r \leq g_2(\theta), \alpha \leq \theta \leq \beta``, where ``0 \leq(\beta-\alpha) \leq 2 \pi``. If ``g_1`` and ``g_2`` are continuous on ``[\alpha, \beta]`` and ``f`` is continuous on ``R``, then
+```math
+\int_R \int_R f(x, y) d A=\int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos \theta, r \sin \theta) r d r d \theta
+```
+"""
+
+# ╔═╡ 0c2674a1-89f9-4fde-b10f-13001ce0754e
+cm"""
+$(ex(2,"Evaluating a Double Polar Integral"))
+Let ``R`` be the annular region lying between the two circles ``x^2+y^2=1`` and ``x^2+y^2=5``. Evaluate the integral
+```math
+\int_R \int\left(x^2+y\right) d A
+```
+"""
+
+# ╔═╡ 818d83db-9154-4e13-853a-7dd83d368773
+cm"""
+$(ex(3,"Change of Variables to Polar Coordinates"))
+Use polar coordinates to find the volume of the solid region bounded above by the hemisphere
+```math
+z=\sqrt{16-x^2-y^2}\quad \color{red}{\text{Hemisphere forms upper surface.}}
+```
+
+
+and below by the circular region ``R`` given by
+```math
+x^2+y^2 \leq 4 \quad \color{red}{\text{Circular region forms lower surface.}}
+```
+
+
+as shown brlow.
+$(post_img("https://www.dropbox.com/scl/fi/966uofohyhoxpgdvsusc0/fig_14_30.png?rlkey=20elxczfuempbiu24vyhtieyf&dl=1"))
+"""
+
+# ╔═╡ c2c834d3-c4d8-4313-b1dd-f75dc04c18d9
+cm"""
+$(ex(4,"Finding areas of Polar Regions"))
+Find the area of the shaded region.
+$(post_img("https://www.dropbox.com/scl/fi/wjg5xoy0sm4dlbez8o1n7/fig_14_31.png?rlkey=wmqflrupx0zihz2mjqgui576t&dl=1"))
+"""
+
+# ╔═╡ 059e03c2-d921-42e6-9130-13d37f9f05dc
+cm"""
+$(ex(5,"Integrating with Respect to θ First"))
+Find the area of the region bounded above by the spiral ``r=\pi /(3 \theta)`` and below by the polar axis, between ``r=1`` and ``r=2``.
+"""
+
 # ╔═╡ b8b7c421-cc02-4143-9854-e182648c92d3
 md"""
 # 14.6 Triple Integrals and applications
@@ -3485,6 +4235,97 @@ md"""
 
 # ╔═╡ 2ebac407-bcda-4646-8ac5-19aa50cb866e
 md"##  Triple Integrals"
+
+# ╔═╡ 240b0876-7fa2-4e71-945f-0ffdd017557a
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/zf2wz75pe3y12w44peo14/fig_14_52.png?rlkey=7kclyjh0verzyvhr59zh0he5f&dl=1",400))
+"""
+
+# ╔═╡ 166b293f-cead-4852-b23b-7f6b699b354e
+cm"""
+$(define("Triple Integral"))
+If ``f`` is continuous over a bounded solid region ``Q``, then the triple integral of ``f`` over ``\boldsymbol{Q}`` is defined as
+```math
+\iiint_Q f(x, y, z) d V=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i, z_i\right) \Delta V_i
+```
+provided the limit exists. The volume of the solid region ``Q`` is given by
+```math
+\text { Volume of } Q=\iiint_Q d V \text {. }
+```
+"""
+
+# ╔═╡ 032054f9-1ea2-4265-b3a4-93045f23a45a
+cm"""
+$(bbl("Remarks",""))
+Some of the properties of double integrals can be restated in terms of triple integrals.
+1. ``\iint_Q \int_Q c f(x, y, z) d V=c \iiint_Q f(x, y, z) d V``
+2. ``\iint_Q \int_Q[f(x, y, z) \pm g(x, y, z)] d V=\iiint_Q f(x, y, z) d V \pm \iint_Q g(x, y, z) d V``
+3. ``\iiint_Q f(x, y, z) d V=\iiint_{Q_1} f(x, y, z) d V+\iiint_{Q_2} f(x, y, z) d V``
+"""
+
+# ╔═╡ f5d90c07-6292-4c14-904c-2851fee7ac1f
+cm"""
+$(bth("Evaluation by Iterated Integrals"))
+Let ``f`` be continuous on a solid region ``Q`` defined by
+```math
+\begin{aligned}
+& a \leq x \leq b \\
+& h_1(x) \leq y \leq h_2(x) \\
+& g_1(x, y) \leq z \leq g_2(x, y)
+\end{aligned}
+```
+where ``h_1, h_2, g_1``, and ``g_2`` are continuous functions. Then,
+```math
+\iiint_Q f(x, y, z) d V=\int_a^b \int_{h_1(x)}^{h_2(x)} \int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z d y d x
+```
+"""
+
+# ╔═╡ 020d8181-06fc-4b38-bb8a-990c2337d1ca
+cm"""
+$(ex(1,"Evaluating a Triple Iterated Integral"))
+
+Evaluate the triple iterated integral
+```math
+\int_0^2 \int_0^x \int_0^{x+y} e^x(y+2 z) d z d y d x .
+```
+"""
+
+# ╔═╡ 3dc9bbb0-6cf9-410a-b3d4-aa8e8859c9a9
+cm"""
+$(bbl("Remark","Solid Between two surfaces"))
+$(post_img("https://www.dropbox.com/scl/fi/3714xtwt50zam9gs7umx5/fig_14_53.png?rlkey=wqo315ryxhasu9q90qmh7q7n6&dl=1"))
+```math
+\iint\left[\int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z\right] d y d x.
+```
+"""
+
+# ╔═╡ d75ca2b2-1033-450e-b94d-49fd308c3f5e
+cm"""
+$(ex(2,"Using a Triple Integral to Find Volume"))
+
+Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
+
+$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1",400))
+"""
+
+# ╔═╡ 21fb5570-c41a-4a67-a900-614b4debc7d7
+cm"""
+$(ex(3,"Changing the Order of Integration"))
+Evaluate 
+```math
+\int_0^{\sqrt{\pi / 2}} \int_x^{\sqrt{\pi / 2}} \int_1^3 \sin \left(y^2\right) d z d y d x.
+```
+"""
+
+# ╔═╡ 2a2e4a74-0985-4c23-8da7-1694021aa382
+cm"""
+$(ex(4,"Determining the Limits of Integration"))
+
+Set up a triple integral for the volume of each solid region.
+1. The region in the first octant bounded above by the cylinder ``z=1-y^2`` and lying between the vertical planes ``x+y=1`` and ``x+y=3``
+2. The upper hemisphere ``z=\sqrt{1-x^2-y^2}``
+3. The region bounded below by the paraboloid ``z=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=6``
+"""
 
 # ╔═╡ 2443239f-6d9b-41e1-ae93-f30e784a5073
 md"""
@@ -3499,6 +4340,14 @@ md"""
 # ╔═╡ 301c9794-a8a2-4186-84c9-554de27bded3
 md"## Cylindrical Coordinates"
 
+# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
+cm"""
+$(bbl("The Cylindrical Coordinate System",""))
+In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
+1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
+2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
+"""
+
 # ╔═╡ cb1ce385-d5e7-464f-a551-dd024d016d29
 cm"""
 __Cylindrical to rectangular:__
@@ -3512,6 +4361,40 @@ r^2=x^2+y^2, \quad \tan \theta=\frac{y}{x}, \quad z=z
 ```
 """
 
+# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
+cm"""
+$(ex(1,"Cylindrical-to-Rectangular Conversion"))
+Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
+"""
+
+# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
+cm"""
+$(ex(2,"Rectangular-to-Cylindrical Conversion"))
+
+Convert the point
+```math
+(x, y, z)=(1, \sqrt{3}, 2)
+```
+to cylindrical coordinates.
+"""
+
+# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
+cm"""
+$(ex(3," Rectangular-to-Cylindrical Conversion"))
+Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
+- a. ``x^2+y^2=4 z^2``
+- b. ``y^2=x``
+"""
+
+# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
+cm"""
+$(ex(4,"Cylindrical-to-Rectangular Conversion"))
+Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
+```math
+r^2 \cos 2 \theta+z^2+1=0
+```
+"""
+
 # ╔═╡ c645824c-141c-4236-bf42-d06a9115475c
 md"##  Triple Integrals in Cylindrical Coordinates"
 
@@ -3522,8 +4405,30 @@ cm"""
 ```
 """
 
+# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
+cm"""
+$(ex(1,"Finding Volume in Cylindrical Coordinates"))
+Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
+"""
+
 # ╔═╡ 3d13b289-1bc6-4c79-b60d-abbbc6172cc2
 md"##  Spherical Coordinates"
+
+# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
+cm"""
+$(bbl("The Spherical Coordinate System",""))
+In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
+1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
+2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
+3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
+Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
+"""
+
+# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
+"""
 
 # ╔═╡ 1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
 cm"""
@@ -3551,6 +4456,15 @@ __Cylindrical to spherical ``(r \geq 0)`` :__
 ```
 """
 
+# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
+cm"""
+$(ex(5,"Rectangular-to-Spherical Conversion"))
+
+Find an equation in spherical coordinates for the surface represented by each rectangular equation.
+- a. Cone: ``x^2+y^2=z^2``
+- b. Sphere: ``x^2+y^2+z^2-4 z=0``
+"""
+
 # ╔═╡ e0fa4607-ec15-4751-98db-a8feb04ad558
 md"##  Triple Integrals in Spherical Coordinates"
 
@@ -3559,6 +4473,15 @@ cm"""
 ```math
 \iiint_Q f(x, y, z) d V=\int_{\theta_1}^{\theta_2} \int_{\phi_1}^{\phi_2} \int_{\rho_1}^{\rho_2} f(\rho \sin \phi \cos \theta, \rho \sin \phi \sin \theta, \rho \cos \phi) \rho^2 \sin \phi d \rho d \phi d \theta
 ```
+"""
+
+# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
+cm"""
+$(ex(4,"Finding Volume in Spherical Coordinates"))
+
+Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
+
+$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
 """
 
 # ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
@@ -3750,18 +4673,6 @@ begin
     @htl("")
 end
 
-# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
-cm"""
-__Course website:__ (Notes, Syllabus)
-$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
-
----
-
-__ChatGPT:__ (Course AI assistant)
-$(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
-
-"""
-
 # ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
 begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
@@ -3784,34 +4695,6 @@ begin
     """
 end
 
-# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
-## Cell 5
-cm"""
-$(define("a Plane Curve"))
-If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
-```math
-x=f(t) \quad \text { and } \quad y=g(t)
-```
-are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
-"""
-
-
-# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
-## Cell 6
-cm"""
-$(ex(1,"Sketching a Curve"))
-Sketch the curve described by the parametric equations
-```math
-x=f(t)=t^2-4
-```
-and
-```math
-y=g(t)=\frac{t}{2}
-```
-where ``-2 \leq t \leq 3``.
-"""
-
-
 # ╔═╡ 72eaba37-67d9-4d52-b1a6-e108401aa93e
 
 ## Cell 9
@@ -3828,41 +4711,6 @@ HTML(warning_box(
     """
 ))
 
-
-
-# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
-## Cell 10
-cm"""
-
-$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
-"""
-
-
-# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
-
-## Cell 11
-cm"""
-$(ex(2,"Adjusting the Domain"))
-Sketch the curve represented by the equations
-```math
-x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
-```
-by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
-"""
-
-
-# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
-
-## Cell 12
-cm"""
-$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
-See LarsonCalculus.com for an interactive version of this type of example.
-Sketch the curve represented by
-```math
-x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
-```
-by eliminating the parameter and finding the corresponding rectangular equation.
-"""
 
 
 # ╔═╡ b05fcc39-dad9-4bdf-874e-6dedf75fe36c
@@ -3916,205 +4764,6 @@ HTML(warning_box(
 ))
 
 
-# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
-## Cell 19
-cm"""
-$(ex(4,"Finding Parametric Equations for a Given Graph"))
-Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
-
-- __(a.)__ ``t=x``
-- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
-
-"""
-
-# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
-## Cell 20
-cm"""
-$(ex(5,"Parametric Equations for a Cycloid"))
-Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a __cycloid__.
-"""
-
-# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
-## Cell 23
-cm"""
-$(define("Smooth Curve"))
-A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
-"""
-
-# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
-cm"""
-$(bbl("Hypocycloid", "H(A, B)"))
-The path traced by a fixed point on a circle of radius ``B`` as it rolls around the inside of a circle of radius ``A``
-```math
-\begin{aligned}
-& x=(A-B) \cos t+B \cos \left(\frac{A-B}{B}\right) t \\
-& y=(A-B) \sin t-B \sin \left(\frac{A-B}{B}\right) t
-\end{aligned}
-```
-"""
-
-# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
-cm"""
-$(bbl("Epicycloid","E(A, B)"))
-The path traced by a fixed point on a circle of radius ``B`` as it rolls around the outside of a circle of radius ``A``
-```math
-\begin{aligned}
-& x=(A+B) \cos t-B \cos \left(\frac{A+B}{B}\right) t \\
-& y=(A+B) \sin t-B \sin \left(\frac{A+B}{B}\right) t
-\end{aligned}
-```
-"""
-
-# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
-cm"""
-$(bth("Parametric Form of the Derivative"))
-If a smooth curve ``C`` is given by the equations
-```math
-x=f(t) \quad \text { and } \quad y=g(t)
-```
-then the slope of ``C`` at ``(x, y)`` is
-```math
-\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
-```
-"""
-
-## Cell 5
-
-# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
-cm"""
-$(ex(1,"Differentiation and Parametric Form"))
-Find ``d y / d x`` for the curve given by 
-```math
-x=\sin t\quad \text{and} \quad y=\cos t.
-```
-"""
-
-## Cell 6
-
-# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
-cm"""
-$(bbl("Remark",""))
-```math
-\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
-```
-"""
-
-## Cell 7
-
-# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
-cm"""
-$(ex(2,"Finding Slope and Concavity"))
-For the curve given by
-```math
-x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
-```
-find the slope and concavity at the point ``(2,3)``.
-"""
-
-## Cell 8
-
-# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
-cm"""
-$(ex(3,"A Curve with Two Tangent Lines at a Point"))
-The prolate cycloid given by
-```math
-x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
-```
-crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
-"""
-
-## Cell 9
-
-# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
-cm"""
-$(bth("Arc Length in Parametric Form"))
-If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
-```math
-s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
-```
-"""
-
-## Cell 13
-
-# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
-cm"""
-$(ex(4,"Finding Arc Length"))
-
-A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
-```math
-x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
-```
-
-Find the distance traveled by the point in one complete trip about the larger circle.
-"""
-
-## Cell 14
-
-# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
-cm"""
-$(bth("Area of a Surface of Revolution"))
-If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
-
-__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
-
-Revolution about the ``x``-axis: ``g(t) \geq 0``
-
-__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
-
-Revolution about the ``y``-axis: ``f(t) \geq 0``
-"""
-
-## Cell 18
-
-# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
-cm"""
-$(ex(5,"Finding the Area of a Surface of Revolution"))
-
-Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
-```math
-\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
-```
-Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
-"""
-
-# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
-cm"""
-$(bbl("",""))
-To form the polar coordinate system in the plane, 
-- fix a point ``O``, called __the pole (or origin)__, and 
-- construct from ``O`` an initial ray called the __polar axis__, 
-
-Then each point ``P`` in the plane can be assigned polar coordinates 
-```math
-(r, \theta)
-``` 
-as follows.
-```math
-\begin{aligned}
-& r=\text { directed distance from } O \text { to } P \\
-& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
-\end{aligned}
-```
-
-"""
-
-## Cell 5
-
-# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
-cm"""
-$(bth("Coordinate Conversion"))
-The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
-```math
-\begin{array}{ll}
-\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
-x=r \cos \theta & \tan \theta=\frac{y}{x} \\
-y=r \sin \theta & r^2=x^2+y^2
-\end{array}
-```
-"""
-
-## Cell 8
-
 # ╔═╡ c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
 HTML(warning_box(
     "⚠️ Common Coordinate Conversion Mistakes",
@@ -4132,18 +4781,6 @@ HTML(warning_box(
 
 ## Cell 9
 
-# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
-cm"""
-$(ex(1,"Polar-to-Rectangular Conversion"))
-
-
-- (a) For the point ``(r, \theta)=(2, \pi)``,
-- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
-
-"""
-
-## Cell 10
-
 # ╔═╡ b5699352-1bca-4040-bbd9-2bc64085460c
 HTML(tip_box(
     "💡 Polar-to-Rectangular is Easy!",
@@ -4159,15 +4796,6 @@ HTML(tip_box(
 ))
 
 ## Cell 11
-
-# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
-cm"""
-$(ex(2,"Rectangular-to-Polar Conversion"))
-- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
-- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
-"""
-
-## Cell 12
 
 # ╔═╡ 4564edd1-7611-45b1-8f4c-26088d4c6d97
 let
@@ -4251,51 +4879,6 @@ HTML(warning_box(
 
 ## Cell 15
 
-# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
-cm"""
-$(ex(3,"
-Graphing Polar Equations"))
-Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
-- __(a.)__ ``r=2``
-- __(b.)__ ``\theta=\frac{\pi}{2}``
-- __(c.)__ ``r=\sec \theta``
-"""
-
-## Cell 16
-
-# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
-cm"""
-$(ex(4,"
-Sketching a Polar Graph"))
-Sketch the graph of ``r=2 \cos 3 \theta``.
-"""
-
-## Cell 18
-
-# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
-cm"""
-$(bth("Slope in Polar Form"))
-If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
-```math
-\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
-```
-provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``. 
-"""
-
-## Cell 23
-
-# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
-cm"""
-$(bbl("Remarks",""))
-
-- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
-- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
-
-- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
-"""
-
-## Cell 24
-
 # ╔═╡ 35429393-e411-4ac8-9719-c90523ade5ea
 HTML(warning_box(
     "⚠️ Polar Slope Formula Confusion",
@@ -4313,31 +4896,6 @@ HTML(warning_box(
 ))
 
 ## Cell 25
-
-# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
-cm"""
-$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
-Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
-"""
-
-## Cell 26
-
-# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
-cm"""
-$(ex(6,"
-Finding Horizontal and Vertical Tangent Lines"))
-Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
-"""
-
-## Cell 28
-
-# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
-cm"""
-$(bth("Tangent Lines at the Pole"))
-If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
-"""
-
-## Cell 30
 
 # ╔═╡ 3dbb47a8-9310-4013-a4db-0514614d0d4d
 HTML(tip_box(
@@ -4359,564 +4917,6 @@ HTML(tip_box(
 ))
 
 ## Cell 34
-
-# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
-cm"""
-__What is the area of a sector of a circle?__
-
-$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
-
-__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
-
-$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
-
-
-"""
-
-# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
-cm"""
-$(bth("Area in Polar Coordinates"))
-If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
-```math
-A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
-```
-```math
-=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
-```
-"""
-
-# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
-cm"""
-$(ex(1,"
-Finding the Area of a Polar Region"))
-Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
-"""
-
-# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
-cm"""
-$(ex(2,"Finding the Area Bounded by a Single Curve"))
-Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
-"""
-
-# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
-cm"""
-$(ex(3,"Finding the Area of a Region Between Two Curves"))
-Find the area of the region common to the two regions bounded by the curves
-```math
-r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
-```
-and
-```math
-r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
-```
-
-"""
-
-# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
-cm"""
-$(bth("Arc Length of a Polar Curve"))
-Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
-```math
-s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
-```
-"""
-
-# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
-cm"""
-$(ex(4,"Finding the Length of a Polar Curve"))
-Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
-"""
-
-# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
-cm"""
-$(bth("Area of a Surface of Revolution"))
-Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
-1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
-
-
-
-2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
-$(ebl())
-
-$(ex(5,"Finding the Area of a Surface of Revolution"))
-Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
-"""
-
-# ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
-cm"""
-$(ex(1,"Integrating with Respect to <b>y</b>"))
-Evaluate ``\displaystyle \int_1^x\left(2 x y+3 y^2\right) d y``.
-"""
-
-# ╔═╡ 7e075bce-e784-4a4e-abc2-dad5230eeef7
-cm"""
-$(ex(2,"The Integral of an Integral"))
-Evaluate ``\displaystyle\int_1^2\left[\int_1^x\left(2 x y+3 y^2\right) d y\right] d x``.
-"""
-
-# ╔═╡ 67ddb4d2-cbba-4592-ad5a-f9c609d731a8
-cm"""
-$(bbl("Area of a Region in the Plane",""))
-1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then the area of ``R`` is
-```math
-A=\int_a^b \int_{g_1(x)}^{g_2(x)} d y d x
-```
-$(post_img("https://www.dropbox.com/scl/fi/mutpzct04u49o9zr87y50/fig_14_2.png?rlkey=rka697r0ssbpo5kye5j8fv0x0&dl=1",400))
-
-2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then the area of ``R`` is
-```math
-A=\int_c^d \int_{h_1(y)}^{h_2(y)} d x d y
-```
-$(post_img("https://www.dropbox.com/scl/fi/pprmgpabyiquf3hnz1uvi/fig_14_3.png?rlkey=ru0ej4j1rx8w1jh0c7jahg6ph&dl=1",400))
-
-"""
-
-# ╔═╡ 79ac9331-c1c7-4f8b-889a-61c850a6a405
-cm"""
-$(ex(3,"The Area of a Rectangular Region"))
-Use an iterated integral to represent the area of the rectangle shown below
-
-$(post_img("https://www.dropbox.com/scl/fi/ikaofyd7gij7oggtkwsu2/fig_14_4.png?rlkey=50moht6bh0x8y5iot9om9rfmq&dl=1",300))
-"""
-
-# ╔═╡ 3442098f-2588-4169-8afb-893cd97eb812
-cm"""
-$(ex(4,"Finding Area by an Iterated Integral"))
-Use an iterated integral to find the area of the region bounded by the graphs of
-```math
-f(x)=\sin x\quad \color{red}{\text{Sine curve forms upper boundary.}}
-```
-
-
-and
-```math
-g(x)=\cos x\quad \color{red}{\text{Cosine curve forms lower boundary.}}
-```
-
-
-between ``x=\pi / 4`` and ``x=5 \pi / 4``.
-"""
-
-# ╔═╡ c1673254-5543-4836-bb87-8a071607d2bf
-cm"""
-$(ex(5,"Comparing Different Orders of Integration"))
-Sketch the region whose area is represented by the integral
-```math
-\int_0^2 \int_{y^2}^4 d x d y
-```
-
-Then find another iterated integral using the order ``d y d x`` to represent the same area and show that both integrals yield the same value.
-"""
-
-# ╔═╡ 6ef69b15-cbe3-43be-b918-1fb146dcb871
-cm"""
-$(ex(6,"An Area Represented by Two Iterated Integrals"))
-Find the area of the region ``R`` that lies below the parabola
-```math
-y=4 x-x^2\quad\color{red}{\text{Parabola forms upper boundary.}}
-```
-
-
-above the ``x``-axis, and above the line
-```math
-y=-3 x+6\quad\color{red}{\text{Line and x-axis form lower boundary.}}
-```
-
-
-"""
-
-# ╔═╡ b87bf77d-0ac4-4aa4-89f1-c35bd07b2464
-cm"""
-Consider the countinuous function ``f(x,y)\geq 0``
-$(post_img("https://www.dropbox.com/scl/fi/d1r0zhp46g1wd480a7ih6/fig_14_8.png?rlkey=jfmg0gr1u3ytv3txz2m8vpmvt&dl=1",400))
-
-$(post_img("https://www.dropbox.com/scl/fi/yle6j30u1k0jb6f99wei4/fig_14_9.png?rlkey=3pzli926yppsfxyklmw6jlzrg&dl=1",400))
-
-$(post_img("https://www.dropbox.com/scl/fi/b0urecj17pzrws2bsw8as/fig_14_10.png?rlkey=o370zqxksdf6baidflsrh53z5&dl=1",400))
-
-$(post_img("https://www.dropbox.com/scl/fi/klsbozx2cdqs91fsk4awn/fig_14_11.png?rlkey=e92k2ojdyo465h3lqck0n0h49&dl=1",400))
-"""
-
-# ╔═╡ 949a0727-3427-44b9-bca1-cb6c0be55b5a
-cm"""
-$(ex(1,"Approximating the Volume of a Solid"))
-Approximate the volume of the solid lying between the paraboloid
-```math
-f(x, y)=1-\frac{1}{2} x^2-\frac{1}{2} y^2
-```
-and the square region ``R`` given by ``0 \leq x \leq 1,0 \leq y \leq 1``. Use a partition made up of squares whose sides have a length of ``\frac{1}{4}``.
-"""
-
-# ╔═╡ 363b9d8b-6288-46f4-b321-bf2d28d9e7df
-cm"""
-$(define("Double Integral"))
-If ``f`` is defined on a closed, bounded region ``R`` in the ``x y``-plane, then the double integral of ``f`` over ``R`` is
-```math
-\int_R \int f(x, y) d A=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i\right) \Delta A_i
-```
-provided the limit exists. If the limit exists, then ``f`` is integrable over ``R``.
-"""
-
-# ╔═╡ f80da3f2-5272-450c-a6e6-81ba4189b6b5
-cm"""
-$(bbl("Volume of a Solid Region",""))
-If ``f`` is integrable over a plane region ``R`` and ``f(x, y) \geq 0`` for all ``(x, y)`` in ``R``, then the volume of the solid region that lies above ``R`` and below the graph of ``f`` is
-```math
-V=\int_R \int f(x, y) d A
-```
-$(ebl())
-
-$(bth("Properties of Double Integrals"))
-Let ``f`` and ``g`` be continuous over a closed, bounded plane region ``R``, and let ``c`` be a constant.
-1. ``\displaystyle\iint_R c f(x, y) d A=c \int_R \int f(x, y) d A``
-2. ``\displaystyle\iint_R[f(x, y) \pm g(x, y)] d A=\int_R \int f(x, y) d A \pm \int_R \int g(x, y) d A``
-3. ``\displaystyle\iint_R f(x, y) d A \geq 0, \quad`` if ``f(x, y) \geq 0``
-4. ``\displaystyle\iint_R \int f(x, y) d A \geq \int_R \int g(x, y) d A, \quad`` if ``f(x, y) \geq g(x, y)``
-5. ``\displaystyle\iint_R f(x, y) d A=\int_{R_1} \int f(x, y) d A+\int_{R_2} \int f(x, y) d A``, where ``R`` is the union of two nonoverlapping subregions ``R_1`` and ``R_2``.
-"""
-
-# ╔═╡ 9aaa5191-16d2-4af7-981e-697ea50f166f
-cm"""
-$(bth("Fubini's Theorem"))
-Let ``f`` be continuous on a plane region ``R``.
-1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then
-```math
-\iint_R  f(x, y) d A=\int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) d y d x
-```
-2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then
-```math
-\iint_R  f(x, y) d A=\int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) d x d y .
-```
-"""
-
-# ╔═╡ 7df7019e-a9b3-4ae1-bae0-44badb94e6bf
-cm"""
-$(ex(2,"Eevaluating a Double Integral as an Iterated Integral"))
-
-Evaluate
-```math
-\iint_R \left(1-\frac{1}{2} x^2-\frac{1}{2} y^2\right) d A
-```
-where ``R`` is the region given by
-```math
-0 \leq x \leq 1, \quad 0 \leq y \leq 1 .
-```
-"""
-
-# ╔═╡ 1be798c5-b9a4-42c3-a526-8563d25eb246
-cm"""
-$(ex(3,"Finding Volume by a Double Integral"))
-Find the volume of the solid region bounded by the paraboloid ``z=4-x^2-2 y^2`` and the ``x y``-plane seen  [here](https://www.desmos.com/3d/ine3ie6963)
-"""
-
-# ╔═╡ 5c9dc21c-b5ff-422f-9d8e-1d177efb60af
-cm"""
-$(ex(4,"Comparing Different Orders of Integration"))
-Find the volume of the solid region bounded by the surface
-```math
-f(x, y)=e^{-x^2} \quad \text { Surface }
-```
-and the planes ``z=0, y=0, y=x``, and ``x=1``, as shown [Here](https://www.desmos.com/3d/fo6kmsxrdj).
-"""
-
-# ╔═╡ 229b3153-a41f-4acc-af89-89a7fd35a10f
-cm"""
-$(ex(5,"Volume of a Region Bounded by Two Surfaces"))
-Find the volume of the solid region bounded above by the paraboloid
-```math
-z=1-x^2-y^2
-```
-
-and below by the plane
-```math
-z=1-y
-```
-
-"""
-
-# ╔═╡ 6357795f-52f3-4832-8c27-e75f220cd1b5
-cm"""
-$(define("the Average Value of a Function Over a Region"))
-If ``f`` is integrable over the plane region ``R``, then the average value of ``f`` over ``R`` is
-```math
-\text { Average value }=\frac{1}{A} \int_R \int f(x, y) d A
-```
-where ``A`` is the area of ``R``.
-$(ebl())
-
-$(ex(6,"Finding the Average Value of a Function"))
-Find the average value of
-```math
-f(x, y)=\frac{1}{2} x y
-```
-over the plane region ``R``, where ``R`` is a rectangle with vertices
-```math
-(0,0),(4,0),(4,3), \quad \text { and } \quad(0,3)
-```
-"""
-
-# ╔═╡ 51d70474-def8-4714-854d-2dd69caebdfa
-cm"""
-In Section 10.4, you learned that the polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
-```math
-\begin{aligned}
-& x=r \cos \theta \quad \text { and } \quad y=r \sin \theta \\
-& r^2=x^2+y^2 \quad \text { and } \quad \tan \theta=\frac{y}{x}
-\end{aligned}
-```
-
-$(ex(1,"Using Polar Coordinates to Describe a Region"))
-Use polar coordinates to describe each region shown below.
-
-$(post_img("https://www.dropbox.com/scl/fi/5xqj9e61lhwbm1ukw3x1s/fig_14_23.png?rlkey=z0h0t55hzyco3dth6mvme9fac&dl=1"))
-"""
-
-# ╔═╡ e47b9235-bce9-42e1-b790-acc15042f4dc
-cm"""
-We consider the __polar sector__
-```math
-\mathbf{R}=\left\{(r,\theta): \; r_1\leq r\leq r_2, \quad \theta_1\leq \theta \leq\theta_2\right\}
-```
-as show here
-$(post_img("https://www.dropbox.com/scl/fi/kwu956q8ee8n88pekz85q/fig_14_24.png?rlkey=dwee2k5qjnnudcdp9ambu53zf&dl=1"))
-
-Now, we partition ``\mathbf{R}`` into small polar sectors.
-$(post_img("https://www.dropbox.com/scl/fi/tithh34ltodbkhku4rc5a/fig_14_25.png?rlkey=3fa1volfpqkact18ysez9lrb0&dl=1"))
-
-Note that 
-```math
-\Delta A_i = r_i \Delta r_i\Delta\theta_i
-```
-So, we have
-
-```math
-\int_R \int f(x, y) d A \approx \sum_{i=1}^n f\left(r_i \cos \theta_i, r_i \sin \theta_i\right) r_i \Delta r_i \Delta \theta_i
-```
-
-"""
-
-# ╔═╡ 48b1e580-0502-497f-80e7-b6ade3129272
-cm"""
-$(bth("Change of Variables to Polar Form"))
-Let ``R`` be a plane region consisting of all points ``(x, y)=(r \cos \theta, r \sin \theta)`` satisfying the conditions ``0 \leq g_1(\theta) \leq r \leq g_2(\theta), \alpha \leq \theta \leq \beta``, where ``0 \leq(\beta-\alpha) \leq 2 \pi``. If ``g_1`` and ``g_2`` are continuous on ``[\alpha, \beta]`` and ``f`` is continuous on ``R``, then
-```math
-\int_R \int_R f(x, y) d A=\int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos \theta, r \sin \theta) r d r d \theta
-```
-"""
-
-# ╔═╡ 0c2674a1-89f9-4fde-b10f-13001ce0754e
-cm"""
-$(ex(2,"Evaluating a Double Polar Integral"))
-Let ``R`` be the annular region lying between the two circles ``x^2+y^2=1`` and ``x^2+y^2=5``. Evaluate the integral
-```math
-\int_R \int\left(x^2+y\right) d A
-```
-"""
-
-# ╔═╡ 818d83db-9154-4e13-853a-7dd83d368773
-cm"""
-$(ex(3,"Change of Variables to Polar Coordinates"))
-Use polar coordinates to find the volume of the solid region bounded above by the hemisphere
-```math
-z=\sqrt{16-x^2-y^2}\quad \color{red}{\text{Hemisphere forms upper surface.}}
-```
-
-
-and below by the circular region ``R`` given by
-```math
-x^2+y^2 \leq 4 \quad \color{red}{\text{Circular region forms lower surface.}}
-```
-
-
-as shown brlow.
-$(post_img("https://www.dropbox.com/scl/fi/966uofohyhoxpgdvsusc0/fig_14_30.png?rlkey=20elxczfuempbiu24vyhtieyf&dl=1"))
-"""
-
-# ╔═╡ c2c834d3-c4d8-4313-b1dd-f75dc04c18d9
-cm"""
-$(ex(4,"Finding areas of Polar Regions"))
-Find the area of the shaded region.
-$(post_img("https://www.dropbox.com/scl/fi/wjg5xoy0sm4dlbez8o1n7/fig_14_31.png?rlkey=wmqflrupx0zihz2mjqgui576t&dl=1"))
-"""
-
-# ╔═╡ 059e03c2-d921-42e6-9130-13d37f9f05dc
-cm"""
-$(ex(5,"Integrating with Respect to θ First"))
-Find the area of the region bounded above by the spiral ``r=\pi /(3 \theta)`` and below by the polar axis, between ``r=1`` and ``r=2``.
-"""
-
-# ╔═╡ 240b0876-7fa2-4e71-945f-0ffdd017557a
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/zf2wz75pe3y12w44peo14/fig_14_52.png?rlkey=7kclyjh0verzyvhr59zh0he5f&dl=1",400))
-"""
-
-# ╔═╡ 166b293f-cead-4852-b23b-7f6b699b354e
-cm"""
-$(define("Triple Integral"))
-If ``f`` is continuous over a bounded solid region ``Q``, then the triple integral of ``f`` over ``\boldsymbol{Q}`` is defined as
-```math
-\iiint_Q f(x, y, z) d V=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i, z_i\right) \Delta V_i
-```
-provided the limit exists. The volume of the solid region ``Q`` is given by
-```math
-\text { Volume of } Q=\iiint_Q d V \text {. }
-```
-"""
-
-# ╔═╡ 032054f9-1ea2-4265-b3a4-93045f23a45a
-cm"""
-$(bbl("Remarks",""))
-Some of the properties of double integrals can be restated in terms of triple integrals.
-1. ``\iint_Q \int_Q c f(x, y, z) d V=c \iiint_Q f(x, y, z) d V``
-2. ``\iint_Q \int_Q[f(x, y, z) \pm g(x, y, z)] d V=\iiint_Q f(x, y, z) d V \pm \iint_Q g(x, y, z) d V``
-3. ``\iiint_Q f(x, y, z) d V=\iiint_{Q_1} f(x, y, z) d V+\iiint_{Q_2} f(x, y, z) d V``
-"""
-
-# ╔═╡ f5d90c07-6292-4c14-904c-2851fee7ac1f
-cm"""
-$(bth("Evaluation by Iterated Integrals"))
-Let ``f`` be continuous on a solid region ``Q`` defined by
-```math
-\begin{aligned}
-& a \leq x \leq b \\
-& h_1(x) \leq y \leq h_2(x) \\
-& g_1(x, y) \leq z \leq g_2(x, y)
-\end{aligned}
-```
-where ``h_1, h_2, g_1``, and ``g_2`` are continuous functions. Then,
-```math
-\iiint_Q f(x, y, z) d V=\int_a^b \int_{h_1(x)}^{h_2(x)} \int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z d y d x
-```
-"""
-
-# ╔═╡ 020d8181-06fc-4b38-bb8a-990c2337d1ca
-cm"""
-$(ex(1,"Evaluating a Triple Iterated Integral"))
-
-Evaluate the triple iterated integral
-```math
-\int_0^2 \int_0^x \int_0^{x+y} e^x(y+2 z) d z d y d x .
-```
-"""
-
-# ╔═╡ 3dc9bbb0-6cf9-410a-b3d4-aa8e8859c9a9
-cm"""
-$(bbl("Remark","Solid Between two surfaces"))
-$(post_img("https://www.dropbox.com/scl/fi/3714xtwt50zam9gs7umx5/fig_14_53.png?rlkey=wqo315ryxhasu9q90qmh7q7n6&dl=1"))
-```math
-\iint\left[\int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z\right] d y d x.
-```
-"""
-
-# ╔═╡ d75ca2b2-1033-450e-b94d-49fd308c3f5e
-cm"""
-$(ex(2,"Using a Triple Integral to Find Volume"))
-
-Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
-
-$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1",400))
-"""
-
-# ╔═╡ 21fb5570-c41a-4a67-a900-614b4debc7d7
-cm"""
-$(ex(3,"Changing the Order of Integration"))
-Evaluate 
-```math
-\int_0^{\sqrt{\pi / 2}} \int_x^{\sqrt{\pi / 2}} \int_1^3 \sin \left(y^2\right) d z d y d x.
-```
-"""
-
-# ╔═╡ 2a2e4a74-0985-4c23-8da7-1694021aa382
-cm"""
-$(ex(4,"Determining the Limits of Integration"))
-
-Set up a triple integral for the volume of each solid region.
-1. The region in the first octant bounded above by the cylinder ``z=1-y^2`` and lying between the vertical planes ``x+y=1`` and ``x+y=3``
-2. The upper hemisphere ``z=\sqrt{1-x^2-y^2}``
-3. The region bounded below by the paraboloid ``z=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=6``
-"""
-
-# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
-cm"""
-$(bbl("The Cylindrical Coordinate System",""))
-In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
-1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
-2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
-"""
-
-# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
-cm"""
-$(ex(1,"Cylindrical-to-Rectangular Conversion"))
-Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
-"""
-
-# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
-cm"""
-$(ex(2,"Rectangular-to-Cylindrical Conversion"))
-
-Convert the point
-```math
-(x, y, z)=(1, \sqrt{3}, 2)
-```
-to cylindrical coordinates.
-"""
-
-# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
-cm"""
-$(ex(3," Rectangular-to-Cylindrical Conversion"))
-Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
-- a. ``x^2+y^2=4 z^2``
-- b. ``y^2=x``
-"""
-
-# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
-cm"""
-$(ex(4,"Cylindrical-to-Rectangular Conversion"))
-Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
-```math
-r^2 \cos 2 \theta+z^2+1=0
-```
-"""
-
-# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
-cm"""
-$(ex(1,"Finding Volume in Cylindrical Coordinates"))
-Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
-$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
-"""
-
-# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
-cm"""
-$(bbl("The Spherical Coordinate System",""))
-In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
-1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
-2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
-3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
-Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
-"""
-
-# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
-"""
-
-# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
-cm"""
-$(ex(5,"Rectangular-to-Spherical Conversion"))
-
-Find an equation in spherical coordinates for the surface represented by each rectangular equation.
-- a. Cone: ``x^2+y^2=z^2``
-- b. Sphere: ``x^2+y^2+z^2-4 z=0``
-"""
-
-# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
-cm"""
-$(ex(4,"Finding Volume in Spherical Coordinates"))
-
-Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
-
-$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
-"""
 
 # ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
 @htl("""
@@ -4997,6 +4997,7 @@ PlutoExtras = "ed5d0301-4775-4676-b788-cf71e66ff8ed"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 PrettyTables = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
 QRCoders = "f42e9828-16f3-11ed-2883-9126170b272d"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
@@ -5017,6 +5018,7 @@ Plots = "~1.40.13"
 PlutoExtras = "~0.7.14"
 PlutoUI = "~0.7.60"
 PrettyTables = "~2.4.0"
+PyPlot = "~2.11.2"
 QRCoders = "~1.4.5"
 Symbolics = "~6.38.0"
 Unitful = "~1.24.0"
@@ -5028,7 +5030,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.6"
 manifest_format = "2.0"
-project_hash = "97721c4a9b92451d564b1645ea3633f99236e239"
+project_hash = "b5405d0b79921c43df2ea917ec73601f64755e68"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "e2478490447631aedba0823d4d7a80b2cc8cdb32"
@@ -5308,6 +5310,12 @@ deps = ["Serialization", "Sockets"]
 git-tree-sha1 = "d9d26935a0bcffc87d2613ce14c527c99fc543fd"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
 version = "2.5.0"
+
+[[deps.Conda]]
+deps = ["Downloads", "JSON", "VersionParsing"]
+git-tree-sha1 = "b19db3927f0db4151cb86d073689f2428e524576"
+uuid = "8f4d0f93-b110-5947-807f-2305c1781a2d"
+version = "1.10.2"
 
 [[deps.ConstructionBase]]
 git-tree-sha1 = "b4b092499347b18a015186eae3042f72267106cb"
@@ -6324,6 +6332,18 @@ git-tree-sha1 = "1d36ef11a9aaf1e8b74dacc6a731dd1de8fd493d"
 uuid = "43287f4e-b6f4-7ad1-bb20-aadabca52c3d"
 version = "1.3.0"
 
+[[deps.PyCall]]
+deps = ["Conda", "Dates", "Libdl", "LinearAlgebra", "MacroTools", "Serialization", "VersionParsing"]
+git-tree-sha1 = "9816a3826b0ebf49ab4926e2b18842ad8b5c8f04"
+uuid = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+version = "1.96.4"
+
+[[deps.PyPlot]]
+deps = ["Colors", "LaTeXStrings", "PyCall", "Sockets", "Test", "VersionParsing"]
+git-tree-sha1 = "9220a9dae0369f431168d60adab635f88aca7857"
+uuid = "d330b81b-6aea-500a-939a-2ce795aea3ee"
+version = "2.11.2"
+
 [[deps.QOI]]
 deps = ["ColorTypes", "FileIO", "FixedPointNumbers"]
 git-tree-sha1 = "8b3fc30bc0390abdce15f8822c889f669baed73d"
@@ -6872,6 +6892,11 @@ version = "0.3.0"
 git-tree-sha1 = "ca0969166a028236229f63514992fc073799bb78"
 uuid = "41fe7b60-77ed-43a1-b4f0-825fd5a5650d"
 version = "0.2.0"
+
+[[deps.VersionParsing]]
+git-tree-sha1 = "58d6e80b4ee071f5efd07fda82cb9fbe17200868"
+uuid = "81def892-9a0e-5fdd-b105-ffc91e053289"
+version = "1.3.0"
 
 [[deps.Vulkan_Loader_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Wayland_jll", "Xorg_libX11_jll", "Xorg_libXrandr_jll", "xkbcommon_jll"]
