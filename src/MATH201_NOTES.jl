@@ -765,13 +765,13 @@ let
 end
 
 # ╔═╡ 004e5898-ebff-4e99-a515-a90a09d347ac
-# md"""#  11.1 Vectors in the Plan
-# > __Objectives__
-# > 1. Write the component form of a vector.
-# > 2. Perform vector operations and interpret the results geometrically.
-# > 3. Write a vector as a linear combination of standard unit vectors.
+md"""#  11.1 Vectors in the Plan
+> __Objectives__
+> 1. Write the component form of a vector.
+> 2. Perform vector operations and interpret the results geometrically.
+> 3. Write a vector as a linear combination of standard unit vectors.
 
-# """
+"""
 
 # let
 # 	n = 100
@@ -7235,7 +7235,7 @@ version = "1.4.1+2"
 # ╟─e1e067d5-5416-4d8e-be65-5c52ae95b24b
 # ╟─6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
 # ╟─003f7d8c-b316-4a2b-8170-ff148ccb9f50
-# ╠═2abd04ed-edf8-4bf0-bebf-e9c299927551
+# ╟─2abd04ed-edf8-4bf0-bebf-e9c299927551
 # ╠═5b7101e1-7f13-4825-8e0e-a9725e0e0438
 # ╟─31b384d2-9194-4ddd-8b6c-d1a137692dbc
 # ╟─e303f5bf-f37e-4cb8-abe9-5d4891f08e77
@@ -7250,8 +7250,8 @@ version = "1.4.1+2"
 # ╟─81e9e206-ed9b-4fc6-b936-2307621558f1
 # ╟─7f15a20e-adc7-4028-a5d1-2a1af197f390
 # ╟─3dbb47a8-9310-4013-a4db-0514614d0d4d
-# ╠═efd1ef70-c4ae-4112-8fb5-db0490269102
-# ╠═fac91f7f-4b2b-4576-9435-e2e9b8bae16e
+# ╟─efd1ef70-c4ae-4112-8fb5-db0490269102
+# ╟─fac91f7f-4b2b-4576-9435-e2e9b8bae16e
 # ╟─87dfeb75-613d-49a3-bce2-46dbd0d33429
 # ╟─bd3e2109-3aa0-4a9c-9082-d6d196f7932b
 # ╟─3c52a17c-75e9-4e2f-ae64-afc05fc110d4
@@ -7270,7 +7270,7 @@ version = "1.4.1+2"
 # ╟─ba8dc58b-5c37-4713-9bef-930c735850bf
 # ╟─c970ee3e-53ae-4914-84a1-91091fc9bac8
 # ╟─0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
-# ╟─004e5898-ebff-4e99-a515-a90a09d347ac
+# ╠═004e5898-ebff-4e99-a515-a90a09d347ac
 # ╟─b9fce471-306a-4ba2-9a99-fcb7e14deac7
 # ╟─0a923d1b-4f8a-4622-a418-0e989e4648b9
 # ╟─1785a7a4-ba84-42f8-863c-747b9ec9cd50
