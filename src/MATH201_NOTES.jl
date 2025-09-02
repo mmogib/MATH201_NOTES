@@ -548,10 +548,20 @@ md"##  Special Polar Graphs"
 
 ## Cell 31
 
+# ╔═╡ 135756cf-c917-4974-bb36-eae97ddf00b7
+begin
+	limacons_html_a = @bind limacons_a NumberField(2:2:6, default=2)
+	limacons_html_b = @bind limacons_b NumberField(2:4, default=2)
+	cm"""
+
+	``a = ``$limacons_html_a  ``\qquad``	``b = ``$limacons_html_b
+	"""
+end
+
 # ╔═╡ 81e9e206-ed9b-4fc6-b936-2307621558f1
 let
-    a = 15
-    b = 10
+    a = limacons_a
+    b = limacons_b
     r(θ) = a + b * cos(θ)
     p = plot(r;
         proj=:polar, label=nothing,title=L"r=a+b\cos(\theta); \qquad a/b=%$(round(a/b;digits=2)) ")
@@ -565,13 +575,26 @@ end
 
 ## Cell 32
 
+# ╔═╡ 942ad12e-f0b2-4d1d-b3c6-d664f4293bcc
+md"---"
+
+# ╔═╡ e37317fb-b219-410c-bfc0-653ebe20a632
+begin
+	roses_html_a = @bind roses_a NumberField(2:2:6, default=2)
+	roses_html_n = @bind roses_n NumberField(2:8, default=2)
+	cm"""
+
+	``a = ``$roses_html_a  ``\qquad``	``n = ``$roses_html_n
+	"""
+end
+
 # ╔═╡ 7f15a20e-adc7-4028-a5d1-2a1af197f390
 let
-    a = 1
-    n = 3
+    a = roses_a
+    n = roses_n
     r(θ) = a * cos(n * θ)
     p = plot(r;
-        proj=:polar, label=nothing,title=L"r=a+\cos(n\theta); \qquad n=%$(n), a=%$a ")
+        proj=:polar, label=nothing,title=L"r=%$a+\cos(%$n\theta); \qquad n=%$(n), a=%$a ")
     cm"""
      __Rose Curves__
 
@@ -582,36 +605,61 @@ end
 
 ## Cell 33
 
+# ╔═╡ 9c06bcf6-403e-4da2-a2b1-06bc10af44a8
+md"---"
+
+# ╔═╡ 005bfac2-bf5c-4456-8889-c4cecb7d3228
+begin
+	Lemniscates_html_a = @bind Lemniscates_a NumberField(1:2:6, default=1)
+	Lemniscates_html_n = @bind Lemniscates_n NumberField(2:8, default=2)
+	cm"""
+
+	``a = ``$Lemniscates_html_a  ``\qquad``	``n = ``$Lemniscates_html_n
+	"""
+end
+
 # ╔═╡ efd1ef70-c4ae-4112-8fb5-db0490269102
 let
-    a = 1 / 2
-    n = 2
+    a = Lemniscates_a
+    n = Lemniscates_n
     # θs = range(0,2π,length=200)
     # r(θ) = cos(2*θ)>=0 && abs(a)*abs(cos(n*θ))
-    r(θ) = sin(n * θ) >= 0 && abs(a) * abs(sin(n * θ))
-    p = plot(r;
+    r1(θ) = sin(n * θ) >= 0 && abs(a) * abs(sin(n * θ))
+	r2(θ) = cos(n * θ) >= 0 && abs(a) * abs(cos(n * θ))
+    p1 = plot(r1;
         proj=:polar, label=nothing,
 			 thetaticks=2,
-			 title=L"r^2=a^2\sin(n\theta); \qquad n=%$(n), a=%$a")
+			 title=L"r^2=%$(a==1 ? ' ' : a^2)\sin(%$n\theta); \qquad n=%$(n), a=%$a")
+    p2 = plot(r2;
+        proj=:polar, label=nothing,
+			 thetaticks=2,
+			 title=L"r^2=%$(a==1 ? ' ' : a^2)\cos(%$n\theta); \qquad n=%$(n), a=%$a")
     cm"""
-    __Circles and Lemniscates__
+__Circles and Lemniscates__
 
    ``r^2  = a^2 \sin^2\theta``
 
-   $p
+   $p1
+	
+---
+	
+``r^2  = a^2 \cos^2\theta``
+
+   $p2
+   
    """
 
 end
 
 # ╔═╡ fac91f7f-4b2b-4576-9435-e2e9b8bae16e
-let
-	θ = range(0, 2π, length=500)
-r = 1 .+ sin.(θ)
+# let
+# 	θ = range(0, 2π, length=500)
+# r = 1 .+ sin.(θ)
 
-plot(θ, r, proj=:polar, label="r = 1 + sinθ",
-     xticks=(0:π/6:2π, ["0", "π/6", "π/3", "π/2", "2π/3", "5π/6",
-                        "π", "7π/6", "4π/3", "3π/2", "5π/3", "11π/6", "2π"]))
-end
+# plot(θ, r, proj=:polar, label="r = 1 + sinθ",
+#      xticks=(0:π/6:2π, ["0", "π/6", "π/3", "π/2", "2π/3", "5π/6",
+#                         "π", "7π/6", "4π/3", "3π/2", "5π/3", "11π/6", "2π"]))
+# end
 
 # ╔═╡ 87dfeb75-613d-49a3-bce2-46dbd0d33429
 md"""
@@ -4257,7 +4305,7 @@ $(ex(3,"
 Graphing Polar Equations"))
 Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
 - __(a.)__ ``r=2``
-- __(b.)__ ``\theta=\frac{\pi}{2}``
+- __(b.)__ ``\theta=\frac{\pi}{3}``
 - __(c.)__ ``r=\sec \theta``
 """
 
@@ -7247,9 +7295,14 @@ version = "1.4.1+2"
 # ╟─fae0a60d-8bb5-4be4-a22f-01a951804800
 # ╟─0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
 # ╟─afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
+# ╟─135756cf-c917-4974-bb36-eae97ddf00b7
 # ╟─81e9e206-ed9b-4fc6-b936-2307621558f1
+# ╟─942ad12e-f0b2-4d1d-b3c6-d664f4293bcc
+# ╟─e37317fb-b219-410c-bfc0-653ebe20a632
 # ╟─7f15a20e-adc7-4028-a5d1-2a1af197f390
 # ╟─3dbb47a8-9310-4013-a4db-0514614d0d4d
+# ╟─9c06bcf6-403e-4da2-a2b1-06bc10af44a8
+# ╟─005bfac2-bf5c-4456-8889-c4cecb7d3228
 # ╟─efd1ef70-c4ae-4112-8fb5-db0490269102
 # ╟─fac91f7f-4b2b-4576-9435-e2e9b8bae16e
 # ╟─87dfeb75-613d-49a3-bce2-46dbd0d33429
