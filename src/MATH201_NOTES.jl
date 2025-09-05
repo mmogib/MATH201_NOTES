@@ -580,7 +580,7 @@ md"---"
 
 # ╔═╡ e37317fb-b219-410c-bfc0-653ebe20a632
 begin
-	roses_html_a = @bind roses_a NumberField(2:2:6, default=2)
+	roses_html_a = @bind roses_a NumberField(1:2:6, default=2)
 	roses_html_n = @bind roses_n NumberField(2:8, default=2)
 	cm"""
 
@@ -830,203 +830,94 @@ md"""#  11.1 Vectors in the Plan
 # end
 
 # ╔═╡ b9fce471-306a-4ba2-9a99-fcb7e14deac7
-# md"## Component Form of a Vector"
+md"## Component Form of a Vector"
+
+# ╔═╡ 1c4d70e7-f245-4963-bd97-f0773f9d6588
+cm"""
+
+Quantities in geometry and physics can be divided into two types:  
+
+1. __Scalar quantities:__ These are described by a single real number (with units). Examples: area, volume, temperature, mass, and time.  
+
+2. __Vector quantities:__ These require both \emph{magnitude} and \emph{direction}. Examples: force, velocity, and acceleration.  
+
+A __directed line segment__ is used to represent a vector.  
+- If ``P`` is the initial point and ``Q`` is the terminal point, the vector is denoted as  
+  ``\vec{v} = \overrightarrow{PQ}``.  
+- The magnitude (length) of the vector is written as ``\|\overrightarrow{PQ}\|``.  
+
+Two directed line segments are considered __equivalent__ if they have the same length and direction.  
+
+The set of all equivalent directed segments forms the same vector.  
+
+In typeset notation, vectors are usually denoted by bold lowercase letters (e.g., ``\mathbf{v}``) or with an arrow on top (e.g., ``\vec{v}``).  
+
+"""
 
 # ╔═╡ 0a923d1b-4f8a-4622-a418-0e989e4648b9
-# let
-#     plot(
-#         [0; 1], [0; 1],
-#         frame_style=:none,
-#         label=:none, arrow=true, lw=6, color=:black,
-#         aspect_ratio=1,
-#         annotations=[
-#             (0, 0.1, L"P"),
-#             (0, -0.1, "Initial point"),
-#             (1, 1.1, L"Q"),
-#             (1.3, 0.9, "Terminal point"),
-#             (0.8, 0.5, L"\textbf{v}=\vec{PQ}"),
-#         ],
-#         ylimits=(-0.2, 1.2)
-#     )
-#     scatter!([0; 1], [0; 1], label=:none, m=5, c=:black)
+let
+    plot(
+        [0; 1], [0; 1],
+        frame_style=:none,
+        label=:none, arrow=true, lw=6, color=:black,
+        aspect_ratio=1,
+        annotations=[
+            (0, 0.1, L"P"),
+            (0, -0.1, "Initial point"),
+            (1, 1.1, L"Q"),
+            (1.3, 0.9, "Terminal point"),
+            (0.8, 0.5, L"\textbf{v}=\vec{PQ}"),
+        ],
+        ylimits=(-0.2, 1.2)
+    )
+    scatter!([0; 1], [0; 1], label=:none, m=5, c=:black)
 
-# end
-
-# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
-# cm"""
-# $(ex(1,"Vector Representation: Directed Line Segments"))
-# Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
-# """
-
-# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
-# cm"""
-# $(define("Component Form of a Vector in the Plane"))
-# If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
-
-# Moreover, the length (or magnitude) of ``\textbf{v}`` is
-# ```math
-# \begin{aligned}
-# \|\mathbf{v}\| 
-# & =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
-# \end{aligned}
-# ```
-# """
-
-# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
-# cm"""
-# $(ex(2,"Component Form and Length of a Vector"))
-# Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
-# """
+end
 
 # ╔═╡ 208b862e-da48-4a79-aaee-2df466adfa17
-# md"## Vector Operations"
-
-# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
-# cm"""
-# $(define("Vector Addition and Scalar Multiplication"))
-# Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
-# 1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
-# 2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
-# ```math
-# c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
-# ```
-# 3. The negative of ``\mathbf{v}`` is the vector
-# ```math
-# -\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
-# ```
-# 4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
-# ```math
-# \mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
-# ```
-# """
+md"## Vector Operations"
 
 # ╔═╡ 5ce29b80-bb95-40db-a3c7-4c3d5c94ba0d
-# let
-#     v1 = (2, 0.5)
-#     v2 = (0.5, 1.5)
-#     vs = [v1; v2]
-#     p = plot(; frame_style=:origin, xlimits=(-1, 3), ylimits=(-1, 3))
-#     for (i, v) in enumerate(vs)
-#         plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_%$i")], label=:none, c=:black)
-#     end
-#     v = v1 .+ v2
-#     plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_1+v_2", :red)], label=:none, c=:red)
-#     v = v1 .- v2
-#     plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_1-v_2", :blue)], label=:none, c=:blue)
+let
+    v1 = (2, 0.5)
+    v2 = (0.5, 1.5)
+    vs = [v1; v2]
+    p = plot(; frame_style=:origin, xlimits=(-1, 3), ylimits=(-1, 3))
+    for (i, v) in enumerate(vs)
+        plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_%$i")], label=:none, c=:black)
+    end
+    v = v1 .+ v2
+    plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_1+v_2", :red)], label=:none, c=:red)
+    v = v1 .- v2
+    plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_1-v_2", :blue)], label=:none, c=:blue)
 
-#     p
-# end
-
-# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
-# cm"""
-# $(ex(3,"Vector Operations"))
-# For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
-# - (a.) ``\frac{1}{2} \mathbf{v}``
-# - (b.) ``\mathbf{w}-\mathbf{v}``
-# - (c.) ``\mathbf{v}+2 \mathbf{w}``
-# """
-
-# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
-# cm"""
-# $(bth("Properties of Vector Operations"))
-# Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
-# 1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``  
-
-
-# 2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
-
-# 3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
-
-# 4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
-
-# 5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
-
-# 6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
-
-
-# 7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
-
-
-# 8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
-# """
-
-# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
-# cm"""
-# $(bth("Length of a Scalar Multiple"))
-# Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
-# ```math
-# \|c \mathbf{v}\|=|c|\|\mathbf{v}\|
-# ```
-# ``|c|`` is the absolute value of ``c``.
-# """
-
-# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
-# cm"""
-# $(bth("Unit Vector in the Direction of  v"))
-# If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
-# ```math
-# \mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
-# ```
-# has length 1 and the same direction as ``\mathbf{v}``.
-# """
-
-# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
-# cm"""
-# $(bbl("triangle inequality for vectors",""))
-# ```math
-# \|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
-# ```
-
-# """
-
-# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
-# cm"""
-# $(ex(4,"Finding a Unit Vector"))
-# Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
-# """
+    p
+end
 
 # ╔═╡ c23c83d4-4d34-44c7-8dee-f2aa824eda44
-# md"## Standard Unit Vectors"
+md"## Standard Unit Vectors"
 
 # ╔═╡ 2cfa4e94-e5ff-4eea-a9fb-6db2cf51cf25
-# cm"""
+cm"""
 
-# The unit vectors ``\langle 1,0\rangle`` and ``\langle 0,1\rangle`` are called the standard unit vectors in the plane and are denoted by
-# ```math
-# \mathbf{i}=\langle 1,0\rangle \text { and } \mathbf{j}=\langle 0,1\rangle
-# ```
+The unit vectors ``\langle 1,0\rangle`` and ``\langle 0,1\rangle`` are called the standard unit vectors in the plane and are denoted by
+```math
+\mathbf{i}=\langle 1,0\rangle \text { and } \mathbf{j}=\langle 0,1\rangle
+```
 
-# __Standard unit vectors__
-# """
-
-# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
-# cm"""
-# $(ex(5,"Writing a Linear Combination of Unit Vectors"))
-# Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
-# """
-
-# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
-# cm"""
-# $(ex(6,"Writing a Vector of Given Magnitude and Direction"))
-# The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
-# """
+__Standard unit vectors__
+"""
 
 # ╔═╡ 6419f344-a1b3-4d60-8f27-8469a6e6b022
-# md"""
-# # 11.2 Space Coordinates and Vectors in Space
-# > __Objectives__
-# > 1. Understand the three-dimensional rectangular coordinate system.
-# > 2. Analyze vectors in space.
-# """
+md"""
+# 11.2 Space Coordinates and Vectors in Space
+> __Objectivaes__
+> 1. Understand the three-dimensional rectangular coordinate system.
+> 2. Analyze vectors in space.
+"""
 
 # ╔═╡ f6836f13-5370-4ac3-813a-50fc012bfcab
-# md"## Coordinates in Space"
-
-# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
-# cm"""
-# $(ex(1,"Finding the Distance Between Two Points in Space"))
-# Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
-# """
+md"## Coordinates in Space"
 
 # ╔═╡ 2c4b3a89-8257-48fa-8e3a-30f059e0187d
 # cm"""
@@ -4490,6 +4381,137 @@ $(ex(5,"Finding the Area of a Surface of Revolution"))
 Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
 """
 
+# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
+cm"""
+$(ex(1,"Vector Representation: Directed Line Segments"))
+Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
+"""
+
+# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
+cm"""
+$(define("Component Form of a Vector in the Plane"))
+If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
+
+Moreover, the length (or magnitude) of ``\textbf{v}`` is
+```math
+\begin{aligned}
+\|\mathbf{v}\| 
+& =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
+\end{aligned}
+```
+"""
+
+# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
+cm"""
+$(ex(2,"Component Form and Length of a Vector"))
+Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
+"""
+
+# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
+cm"""
+$(define("Vector Addition and Scalar Multiplication"))
+Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
+1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
+2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
+```math
+c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
+```
+3. The negative of ``\mathbf{v}`` is the vector
+```math
+-\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
+```
+4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
+```math
+\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
+```
+"""
+
+# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
+cm"""
+$(ex(3,"Vector Operations"))
+For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
+- (a.) ``\frac{1}{2} \mathbf{v}``
+- (b.) ``\mathbf{w}-\mathbf{v}``
+- (c.) ``\mathbf{v}+2 \mathbf{w}``
+"""
+
+# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
+cm"""
+$(bth("Properties of Vector Operations"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``  
+
+
+2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
+
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
+
+4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
+
+5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
+
+6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
+"""
+
+# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
+cm"""
+$(bth("Length of a Scalar Multiple"))
+Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
+```math
+\|c \mathbf{v}\|=|c|\|\mathbf{v}\|
+```
+``|c|`` is the absolute value of ``c``.
+"""
+
+# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
+cm"""
+$(bth("Unit Vector in the Direction of  v"))
+If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
+```math
+\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
+```
+has length 1 and the same direction as ``\mathbf{v}``.
+"""
+
+# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
+cm"""
+$(bbl("triangle inequality for vectors",""))
+```math
+\|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
+```
+
+"""
+
+# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
+cm"""
+$(ex(4,"Finding a Unit Vector"))
+Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
+"""
+
+# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
+cm"""
+$(ex(5,"Writing a Linear Combination of Unit Vectors"))
+Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
+"""
+
+# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
+cm"""
+$(ex(6,"Writing a Vector of Given Magnitude and Direction"))
+The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
+"""
+
+# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
+cm"""
+$(ex(1,"Finding the Distance Between Two Points in Space"))
+Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
+"""
+
 # ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
 cm"""
 $(ex(1,"Integrating with Respect to <b>y</b>"))
@@ -7323,8 +7345,9 @@ version = "1.4.1+2"
 # ╟─ba8dc58b-5c37-4713-9bef-930c735850bf
 # ╟─c970ee3e-53ae-4914-84a1-91091fc9bac8
 # ╟─0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
-# ╠═004e5898-ebff-4e99-a515-a90a09d347ac
+# ╟─004e5898-ebff-4e99-a515-a90a09d347ac
 # ╟─b9fce471-306a-4ba2-9a99-fcb7e14deac7
+# ╟─1c4d70e7-f245-4963-bd97-f0773f9d6588
 # ╟─0a923d1b-4f8a-4622-a418-0e989e4648b9
 # ╟─1785a7a4-ba84-42f8-863c-747b9ec9cd50
 # ╟─b6845b47-9f90-4a4b-b439-6eeeb7d9519e
