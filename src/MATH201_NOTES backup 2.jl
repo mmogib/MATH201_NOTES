@@ -53,6 +53,18 @@ begin
     end
 end
 
+# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+cm"""
+__Course website:__ (Notes, Syllabus)
+$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
+
+---
+
+__ChatGPT:__ (Course AI assistant)
+$(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
+
+"""
+
 # ╔═╡ dc65d765-0bef-4c49-93af-1cd0ebabe632
 md"""# 10.2 Plane Curves and Parametric equations
 
@@ -98,6 +110,34 @@ let
     scatter(p, [x(s10_2_t)], [f(x(s10_2_t))], label="Person")
 end
 
+# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
+## Cell 5
+cm"""
+$(define("a Plane Curve"))
+If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
+"""
+
+
+# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
+## Cell 6
+cm"""
+$(ex(1,"Sketching a Curve"))
+Sketch the curve described by the parametric equations
+```math
+x=f(t)=t^2-4
+```
+and
+```math
+y=g(t)=\frac{t}{2}
+```
+where ``-2 \leq t \leq 3``.
+"""
+
+
 # ╔═╡ 7ab904a8-91e2-4814-9eba-3e55f35f0503
 ## Cell 7
 let
@@ -138,6 +178,27 @@ end
 md"##  Eliminating the Parameter"
 
 
+# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
+## Cell 10
+cm"""
+
+$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
+"""
+
+
+# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
+
+## Cell 11
+cm"""
+$(ex(2,"Adjusting the Domain"))
+Sketch the curve represented by the equations
+```math
+x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
+```
+by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
+"""
+
+
 # ╔═╡ ef07b8c6-a4a8-4daa-8843-39d522f995ef
 begin
     s10_2_t_e2_slider = @bind s10_2_t_e2 Slider(-0.99:1:100, show_value=true)
@@ -155,6 +216,20 @@ let
     p = plot(x.(ts),y.(ts); framestyle=:origin, xlimits=(-0.1, 2), ylimits=(-1,2),label=L"y=1-x^2")
     scatter(p, [x(s10_2_t_e2)], [y(s10_2_t_e2)], label=nothing)
 end
+
+# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
+
+## Cell 12
+cm"""
+$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
+See LarsonCalculus.com for an interactive version of this type of example.
+Sketch the curve represented by
+```math
+x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
+```
+by eliminating the parameter and finding the corresponding rectangular equation.
+"""
+
 
 # ╔═╡ 15a0e2e8-382e-487a-a297-12feaaab6f91
 
@@ -185,6 +260,24 @@ end
 ## Cell 18
 md"##  Finding Parametric Equations"
 
+# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
+## Cell 19
+cm"""
+$(ex(4,"Finding Parametric Equations for a Given Graph"))
+Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
+
+- __(a.)__ ``t=x``
+- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
+
+"""
+
+# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
+## Cell 20
+cm"""
+$(ex(5,"Parametric Equations for a Cycloid"))
+Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a __cycloid__.
+"""
+
 # ╔═╡ efb426c5-ac63-4360-86e4-b579b847b69a
 ## Cell 21
 begin
@@ -213,6 +306,25 @@ let
     annotate!(p, [(5π, 2a + 5, L"x=a(\theta-\sin{\theta})"), (5π, 2a + 3, L"y=a(1-\cos{\theta)}")])
 end
 
+# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
+## Cell 23
+cm"""
+$(define("Smooth Curve"))
+A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+"""
+
+# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
+cm"""
+$(bbl("Hypocycloid", "H(A, B)"))
+The path traced by a fixed point on a circle of radius ``B`` as it rolls around the inside of a circle of radius ``A``
+```math
+\begin{aligned}
+& x=(A-B) \cos t+B \cos \left(\frac{A-B}{B}\right) t \\
+& y=(A-B) \sin t-B \sin \left(\frac{A-B}{B}\right) t
+\end{aligned}
+```
+"""
+
 # ╔═╡ 080c8917-6a7f-46ab-9ce7-4a19d2062375
 let
 	
@@ -238,6 +350,18 @@ let
 	ylabel!("y")
 	title!("Hypocycloid E($A,$B)")
 end
+
+# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
+cm"""
+$(bbl("Epicycloid","E(A, B)"))
+The path traced by a fixed point on a circle of radius ``B`` as it rolls around the outside of a circle of radius ``A``
+```math
+\begin{aligned}
+& x=(A+B) \cos t-B \cos \left(\frac{A+B}{B}\right) t \\
+& y=(A+B) \sin t-B \sin \left(\frac{A+B}{B}\right) t
+\end{aligned}
+```
+"""
 
 # ╔═╡ ebc1271e-0fcf-47bc-bf74-850b1d2ed425
 let
@@ -289,6 +413,66 @@ md"##  Slope and Tangent Lines"
 
 ## Cell 4
 
+# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
+cm"""
+$(bth("Parametric Form of the Derivative"))
+If a smooth curve ``C`` is given by the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+then the slope of ``C`` at ``(x, y)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
+```
+"""
+
+## Cell 5
+
+# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
+cm"""
+$(ex(1,"Differentiation and Parametric Form"))
+Find ``d y / d x`` for the curve given by 
+```math
+x=\sin t\quad \text{and} \quad y=\cos t.
+```
+"""
+
+## Cell 6
+
+# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
+cm"""
+$(bbl("Remark",""))
+```math
+\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
+```
+"""
+
+## Cell 7
+
+# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
+cm"""
+$(ex(2,"Finding Slope and Concavity"))
+For the curve given by
+```math
+x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
+```
+find the slope and concavity at the point ``(2,3)``.
+"""
+
+## Cell 8
+
+# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
+cm"""
+$(ex(3,"A Curve with Two Tangent Lines at a Point"))
+The prolate cycloid given by
+```math
+x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
+```
+crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
+"""
+
+## Cell 9
+
 # ╔═╡ 29c142be-48e3-488f-b8fb-3b9c34de64b0
 begin
     s10_3_ex3_slider = @bind s10_3_ex3_t Slider(-2:0.1:2, show_value=true)
@@ -326,6 +510,31 @@ end
 md"## Arc Length"
 
 ## Cell 12
+
+# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
+cm"""
+$(bth("Arc Length in Parametric Form"))
+If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
+```math
+s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
+```
+"""
+
+## Cell 13
+
+# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
+cm"""
+$(ex(4,"Finding Arc Length"))
+
+A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
+```math
+x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
+```
+
+Find the distance traveled by the point in one complete trip about the larger circle.
+"""
+
+## Cell 14
 
 # ╔═╡ d6ccee4f-40be-429b-860e-f53067077a14
 begin
@@ -366,8 +575,35 @@ md"## Area of a Surface of Revolution"
 
 ## Cell 17
 
+# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
+cm"""
+$(bth("Area of a Surface of Revolution"))
+If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
+
+__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``x``-axis: ``g(t) \geq 0``
+
+__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``y``-axis: ``f(t) \geq 0``
+"""
+
+## Cell 18
+
 # ╔═╡ 46c3a799-1982-419c-9254-9604ad95c926
 sin(π/3), sqrt(3)/2
+
+# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
+cm"""
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+
+Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
+```math
+\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
+```
+Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
+"""
 
 # ╔═╡ b4223dd0-faaa-4508-813f-0a9babbcdc09
 # Section 10.4: Polar coordinates and Polar Graphs - Verbatim Content
@@ -394,6 +630,29 @@ md"## Polar Coordinates"
 
 ## Cell 4
 
+# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
+cm"""
+$(bbl("",""))
+To form the polar coordinate system in the plane, 
+- fix a point ``O``, called __the pole (or origin)__, and 
+- construct from ``O`` an initial ray called the __polar axis__, 
+
+Then each point ``P`` in the plane can be assigned polar coordinates 
+```math
+(r, \theta)
+``` 
+as follows.
+```math
+\begin{aligned}
+& r=\text { directed distance from } O \text { to } P \\
+& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
+\end{aligned}
+```
+
+"""
+
+## Cell 5
+
 # ╔═╡ e5df9962-b908-4219-bfaf-7be799b8c8a8
 let
     n = 0
@@ -410,10 +669,58 @@ md"## Coordinate Conversion"
 
 ## Cell 7
 
+# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
+cm"""
+$(bth("Coordinate Conversion"))
+The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{array}{ll}
+\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
+x=r \cos \theta & \tan \theta=\frac{y}{x} \\
+y=r \sin \theta & r^2=x^2+y^2
+\end{array}
+```
+"""
+
+## Cell 8
+
+# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
+cm"""
+$(ex(1,"Polar-to-Rectangular Conversion"))
+
+
+- (a) For the point ``(r, \theta)=(2, \pi)``,
+- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
+
+"""
+
+## Cell 10
+
+# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
+cm"""
+$(ex(2,"Rectangular-to-Polar Conversion"))
+- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
+- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
+"""
+
+## Cell 12
+
 # ╔═╡ c86f3735-7430-4216-a8e8-d018c844142e
 md"## Polar Graphs"
 
 ## Cell 14
+
+# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
+cm"""
+$(ex(3,"
+Graphing Polar Equations"))
+Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
+- __(a.)__ ``r=2``
+- __(b.)__ ``\theta=\frac{\pi}{3}``
+- __(c.)__ ``r=\sec \theta``
+"""
+
+## Cell 16
 
 # ╔═╡ e1e067d5-5416-4d8e-be65-5c52ae95b24b
 let
@@ -444,6 +751,15 @@ let
 end
 
 ## Cell 17
+
+# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
+cm"""
+$(ex(4,"
+Sketching a Polar Graph"))
+Sketch the graph of ``r=2 \cos 3 \theta``.
+"""
+
+## Cell 18
 
 # ╔═╡ 003f7d8c-b316-4a2b-8170-ff148ccb9f50
 let
@@ -521,6 +837,38 @@ md"##  Slope and Tangent Lines"
 
 ## Cell 22
 
+# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
+cm"""
+$(bth("Slope in Polar Form"))
+If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
+```
+provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``. 
+"""
+
+## Cell 23
+
+# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
+cm"""
+$(bbl("Remarks",""))
+
+- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
+- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
+
+- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
+"""
+
+## Cell 24
+
+# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
+cm"""
+$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
+"""
+
+## Cell 26
+
 # ╔═╡ c3b0bf91-fdf0-4a2b-8309-3728c64421e4
 let
 
@@ -532,6 +880,15 @@ end
 
 ## Cell 27
 
+# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
+cm"""
+$(ex(6,"
+Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
+"""
+
+## Cell 28
+
 # ╔═╡ fae0a60d-8bb5-4be4-a22f-01a951804800
 let
 
@@ -542,6 +899,14 @@ let
 end
 
 ## Cell 29
+
+# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
+cm"""
+$(bth("Tangent Lines at the Pole"))
+If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
+"""
+
+## Cell 30
 
 # ╔═╡ afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
 md"##  Special Polar Graphs"
@@ -674,6 +1039,38 @@ md"""
 # ╔═╡ bd3e2109-3aa0-4a9c-9082-d6d196f7932b
 md"##  Area of a Polar Region"
 
+# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
+cm"""
+__What is the area of a sector of a circle?__
+
+$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
+
+__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
+
+$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
+
+
+"""
+
+# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
+cm"""
+$(bth("Area in Polar Coordinates"))
+If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
+```math
+A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
+```
+```math
+=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
+```
+"""
+
+# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
+cm"""
+$(ex(1,"
+Finding the Area of a Polar Region"))
+Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
+"""
+
 # ╔═╡ 6c577bcb-2f01-41e2-b8cc-7593372f4cf6
 let
     r(θ) = 3 * cos(3 * θ)
@@ -699,6 +1096,12 @@ let
    """
 
 end
+
+# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
+cm"""
+$(ex(2,"Finding the Area Bounded by a Single Curve"))
+Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
+"""
 
 # ╔═╡ 65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
 let
@@ -738,6 +1141,20 @@ end
 
 # ╔═╡ 770456f6-fe19-4aec-86d2-482834cc419f
 md"##  Points of Intersection of Polar Graphs"
+
+# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
+cm"""
+$(ex(3,"Finding the Area of a Region Between Two Curves"))
+Find the area of the region common to the two regions bounded by the curves
+```math
+r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
+```
+and
+```math
+r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
+```
+
+"""
 
 # ╔═╡ 2e4f2876-a92d-4b3d-a473-ef12341baacc
 let
@@ -783,6 +1200,21 @@ end
 # ╔═╡ 782bd8fb-e3c7-471a-9bce-668d45b911af
 md"##  Arc Length in Polar Form"
 
+# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
+cm"""
+$(bth("Arc Length of a Polar Curve"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
+```math
+s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
+```
+"""
+
+# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
+cm"""
+$(ex(4,"Finding the Length of a Polar Curve"))
+Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
+"""
+
 # ╔═╡ 8ad44287-5a21-477b-b0fd-0d710440dc25
 let
     r(θ) = 2 - 2cos(θ)
@@ -798,6 +1230,21 @@ end
 
 # ╔═╡ ba8dc58b-5c37-4713-9bef-930c735850bf
 md"## Area of a Surface of Revolution"
+
+# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
+cm"""
+$(bth("Area of a Surface of Revolution"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
+1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
+
+
+
+2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
+$(ebl())
+
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
+"""
 
 # ╔═╡ 0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
 let
@@ -874,8 +1321,53 @@ let
 
 end
 
+# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
+cm"""
+$(ex(1,"Vector Representation: Directed Line Segments"))
+Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
+"""
+
+# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
+cm"""
+$(define("Component Form of a Vector in the Plane"))
+If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
+
+Moreover, the length (or magnitude) of ``\textbf{v}`` is
+```math
+\begin{aligned}
+\|\mathbf{v}\| 
+& =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
+\end{aligned}
+```
+"""
+
+# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
+cm"""
+$(ex(2,"Component Form and Length of a Vector"))
+Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
+"""
+
 # ╔═╡ 208b862e-da48-4a79-aaee-2df466adfa17
 md"## Vector Operations"
+
+# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
+cm"""
+$(define("Vector Addition and Scalar Multiplication"))
+Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
+1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
+2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
+```math
+c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
+```
+3. The negative of ``\mathbf{v}`` is the vector
+```math
+-\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
+```
+4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
+```math
+\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
+```
+"""
 
 # ╔═╡ 5ce29b80-bb95-40db-a3c7-4c3d5c94ba0d
 let
@@ -894,6 +1386,74 @@ let
     p
 end
 
+# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
+cm"""
+$(ex(3,"Vector Operations"))
+For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
+- (a.) ``\frac{1}{2} \mathbf{v}``
+- (b.) ``\mathbf{w}-\mathbf{v}``
+- (c.) ``\mathbf{v}+2 \mathbf{w}``
+"""
+
+# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
+cm"""
+$(bth("Properties of Vector Operations"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``  
+
+
+2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
+
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
+
+4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
+
+5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
+
+6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
+"""
+
+# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
+cm"""
+$(bth("Length of a Scalar Multiple"))
+Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
+```math
+\|c \mathbf{v}\|=|c|\|\mathbf{v}\|
+```
+``|c|`` is the absolute value of ``c``.
+"""
+
+# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
+cm"""
+$(bth("Unit Vector in the Direction of  v"))
+If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
+```math
+\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
+```
+has length 1 and the same direction as ``\mathbf{v}``.
+"""
+
+# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
+cm"""
+$(bbl("triangle inequality for vectors",""))
+```math
+\|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
+```
+
+"""
+
+# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
+cm"""
+$(ex(4,"Finding a Unit Vector"))
+Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
+"""
+
 # ╔═╡ c23c83d4-4d34-44c7-8dee-f2aa824eda44
 md"## Standard Unit Vectors"
 
@@ -908,6 +1468,18 @@ The unit vectors ``\langle 1,0\rangle`` and ``\langle 0,1\rangle`` are called th
 __Standard unit vectors__
 """
 
+# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
+cm"""
+$(ex(5,"Writing a Linear Combination of Unit Vectors"))
+Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
+"""
+
+# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
+cm"""
+$(ex(6,"Writing a Vector of Given Magnitude and Direction"))
+The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
+"""
+
 # ╔═╡ 6419f344-a1b3-4d60-8f27-8469a6e6b022
 md"""
 # 11.2 Space Coordinates and Vectors in Space
@@ -919,21 +1491,69 @@ md"""
 # ╔═╡ f6836f13-5370-4ac3-813a-50fc012bfcab
 md"## Coordinates in Space"
 
-# ╔═╡ e3363ab4-1543-421f-a68c-cb1685a2f06a
-let
-	u=[2;-1;3]
-	v=[1;0;-2]
-	norm(u-v), sqrt(sum((u[i]-v[i])^2 for i in 1:3))
-end
+# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
+cm"""
+$(ex(1,"Finding the Distance Between Two Points in Space"))
+Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
+"""
 
-# ╔═╡ 734ef678-1329-4d59-8753-0797b6a675c7
+# ╔═╡ 2c4b3a89-8257-48fa-8e3a-30f059e0187d
+cm"""
+$(ex(2,"Finding the equation of a Sphere"))
+Find the standard equation of the sphere that has the points
+
+``(5, −2, 3)`` and ``(0, 4, −3)``
+
+ as endpoints of a diameter.
+"""
+
+# ╔═╡ 88cbeb8a-cb64-4e61-ba8b-a04d6ffc6d8b
 let
-	u=[5;-2;3]
-	v=[0;4;-3//1]
-	d_squared = sum((u .- v) .^2)
-	r_squared = d_squared/4
-	center = (u+v)/2
+
+	# --- Step 1: Endpoints of diameter ---
+	P1 = [5.0, -2.0, 3.0]
+	P2 = [0.0,  4.0, -3.0]
 	
+	# --- Step 2: Center and radius ---
+	center = (P1 .+ P2) ./ 2
+	radius = sqrt(sum((P1 .- P2).^2)) / 2
+	
+	println("Center = ", center)
+	println("Radius = ", radius)
+	
+	# --- Step 3: Sphere equation (string form) ---
+	println("Sphere Equation: (x - $(center[1]))^2 + (y - $(center[2]))^2 + (z - $(center[3]))^2 = $(radius^2)")
+	
+	# --- Step 4: Generate sphere mesh ---
+	u = range(0, 2π, length=80)
+	v = range(0, π, length=80)
+	
+	X = [center[1] + radius*cos(uu)*sin(vv) for uu in u, vv in v]
+	Y = [center[2] + radius*sin(uu)*sin(vv) for uu in u, vv in v]
+	Z = [center[3] + radius*cos(vv) for uu in u, vv in v]
+	
+	plotlyjs()  # or pyplot()
+	
+	# Plot sphere surface
+	surface(X, Y, Z, alpha=0.5, color=:skyblue, legend=false)
+	
+	# Plot endpoints
+	scatter!([P1[1], P2[1]], [P1[2], P2[2]], [P1[3], P2[3]],
+	         color=:red, markersize=5, label="Endpoints")
+	
+	# Plot center
+	scatter!([center[1]], [center[2]], [center[3]],
+	         color=:black, markersize=6, label="Center")
+	
+	# Plot diameter line
+	plot!([P1[1], P2[1]], [P1[2], P2[2]], [P1[3], P2[3]],
+	      color=:green, lw=2, label="Diameter")
+	
+	xlabel!("X-axis")
+	ylabel!("Y-axis")
+	zlabel!("Z-axis")
+	title!("Sphere with Diameter Endpoints")
+
 end
 
 # ╔═╡ 0a7b91d0-5ca6-4006-9b59-f9e077a8c3db
@@ -980,201 +1600,473 @@ cm"""
 """
 
 # ╔═╡ 574ab398-71d0-4427-86dc-fd99482feffc
-md"## Vectors in Space"
+# md"## Vectors in Space"
+
+# ╔═╡ 7e3feecd-7106-4591-b22a-97a7aa064b6c
+# cm"""
+# $(bbl("Vectors in Space",""))
+# Let ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` be vectors in space and let ``c`` be a scalar.
+# 1. Equality of Vectors: ``\mathbf{u}=\mathbf{v}`` if and only if ``u_1=v_1, u_2=v_2``, and ``u_3=v_3``.
+# 2. Component Form: If ``\mathbf{v}`` is represented by the directed line segment from ``P\left(p_1, p_2, p_3\right)`` to ``Q\left(q_1, q_2, q_3\right)``, then
+# ```math
+# \mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle=\left\langle q_1-p_1, q_2-p_2, q_3-p_3\right\rangle
+# ```
+# 3. Length: ``\|\mathbf{v}\|=\sqrt{v_1^2+v_2^2+v_3^2}``
+# 4. Unit Vector in the Direction of ``\mathbf{v}: \frac{\mathbf{v}}{\|\mathbf{v}\|}=\left(\frac{1}{\|\mathbf{v}\|}\right)\left\langle v_1, v_2, v_3\right\rangle, \quad \mathbf{v} \neq \mathbf{0}``
+# 5. Vector Addition: ``\mathbf{v}+\mathbf{u}=\left\langle v_1+u_1, v_2+u_2, v_3+u_3\right\rangle``
+# 6. Scalar Multiplication: ``c \mathbf{v}=\left\langle c v_1, c v_2, c v_3\right\rangle``
+# """
+
+# ╔═╡ 108475eb-bae3-426d-88db-f0f5dc177c65
+# cm"""
+# $(ex(3,"Finding the Component Form of a Vector in Space"))
+# Find the component form and magnitude of the vector ``\mathbf{v}`` having initial point ``(-2,3,1)`` and terminal point ``(0,-4,4)``. Then find a unit vector in the direction of ``\mathbf{v}``.
+# """
+
+# ╔═╡ 75e95211-2367-49ed-a1fd-f0ae39870f04
+# cm"""
+# $(define("Parallel Vectors"))
+# Two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}`` are parallel when there is some scalar ``c`` such that ``\mathbf{u}=c \mathbf{v}``.
+# """
+
+# ╔═╡ 847f0197-beab-45d7-ae4c-27385719aeb1
+# cm"""
+# $(ex(4,"Parallel Vectors"))
+# Vector ``\mathbf{w}`` has initial point ``(2,-1,3)`` and terminal point ``(-4,7,5)``. Which of the following vectors is parallel to ``\mathbf{w}`` ?
+# a. ``\mathbf{u}=\langle 3,-4,-1\rangle``
+# b. ``\mathbf{v}=\langle 12,-16,4\rangle``
+# """
+
+# ╔═╡ b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
+# cm"""
+# $(ex(5,"Using Vectors to Determine Collinear Points"))
+# Determine whether the points
+# ```math
+# P(1,-2,3), \quad Q(2,1,0), \quad \text { and } \quad R(4,7,-6)
+# ```
+# are collinear.
+# """
+
+# ╔═╡ 8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
+# cm"""
+# $(ex(6,"Standard Unit Vector Notation"))
+# - __(a.)__ Write the vector ``\mathbf{v}=4 \mathbf{i}-5 \mathbf{k}`` in component form.
+# - __(b.)__ Find the terminal point of the vector ``\mathbf{v}=7 \mathbf{i}-\mathbf{j}+3 \mathbf{k}``, given that the initial point is ``P(-2,3,5)``.
+# c. Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
+# """
+
+# ╔═╡ 1a2c15f9-af65-4fe5-b517-98d26a3998fd
+# cm"""
+# $(ex(7,"Measuring Force"))
+# A television camera weighing ``120`` pounds is supported by a tripod, as shown below. Represent the force exerted on each leg of the tripod as a vector. 
+
+# $(post_img("https://www.dropbox.com/scl/fi/avv2vzzviidm4m8opc3uk/fig_11_23.png?rlkey=o3rnxynprpdg5lt0jkbh6wp9p&dl=1"))
+# """
 
 # ╔═╡ 554f972f-8c43-4b67-845a-5f7e85cabfda
-md"""
-# 11.3 The Dot Product of Two Vectors
-> __Objectives__
-> 1. Use properties of the dot product of two vectors.
-> 1. Find the angle between two vectors using the dot product.
-> 1. Find the direction cosines of a vector in space.
-> 1. Find the projection of a vector onto another vector.
-> 1. Use vectors to find the work done by a constant force.
+# md"""
+# # 11.3 The Dot Product of Two Vectors
+# > __Objectives__
+# > 1. Use properties of the dot product of two vectors.
+# > 1. Find the angle between two vectors using the dot product.
+# > 1. Find the direction cosines of a vector in space.
+# > 1. Find the projection of a vector onto another vector.
+# > 1. Use vectors to find the work done by a constant force.
 
-"""
+# """
 
 # ╔═╡ ce3fdcff-d13d-4224-b394-ae73ca08d7b7
-md"##  The Dot Product"
+# md"##  The Dot Product"
+
+# ╔═╡ e4d12bd7-039a-42a8-b278-05a5e8fe0841
+# cm"""
+# $(define("Dot Product"))
+# The dot product of ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` is
+# ```math
+# \mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2
+# ```
+
+# The dot product of ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` is
+# ```math
+# \mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2+u_3 v_3
+# ```
+# $(ebl())
+
+# $(bth("Properties of the Dot Product"))
+# Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane or in space and let ``c`` be a scalar.
+
+# 1. ``\mathbf{u} \cdot \mathbf{v}=\mathbf{v} \cdot \mathbf{u}\qquad \color{red}{\text{Commutative Property}}``
+
+# 2. ``\mathbf{u} \cdot(\mathbf{v}+\mathbf{w})=\mathbf{u} \cdot \mathbf{v}+\mathbf{u} \cdot \mathbf{w}\qquad \color{red}{\text{Distributive Property}}``
+
+# 3. ``c(\mathbf{u} \cdot \mathbf{v})=c \mathbf{u} \cdot \mathbf{v}=\mathbf{u} \cdot c \mathbf{v}\qquad \qquad\color{red}{\text{Associative Property}}``
+# 4. ``\mathbf{0} \cdot \mathbf{v}=0``
+# 5. ``\mathbf{v} \cdot \mathbf{v}=\|\mathbf{v}\|^2``
+# """
+
+# ╔═╡ 79d33f0f-6b03-420f-a0c1-98108e43ab6b
+# cm"""
+# $(ex(1,"Finding Dot Products"))
+
+# Let ``\mathbf{u}=\langle 2,-2\rangle, \mathbf{v}=\langle 5,8\rangle``, and ``\mathbf{w}=\langle-4,3\rangle``.
+
+# - (a.) ``\mathbf{u} \cdot \mathbf{v}=\langle 2,-2\rangle \cdot\langle 5,8\rangle=2(5)+(-2)(8)=-6``
+# - (b.) ``(\mathbf{u} \cdot \mathbf{v}) \mathbf{w}=-6\langle-4,3\rangle=\langle 24,-18\rangle``
+# - (c.) ``\mathbf{u} \cdot(2 \mathbf{v})=2(\mathbf{u} \cdot \mathbf{v})=2(-6)=-12``
+# - (d.) ``\|\mathbf{w}\|^2=\mathbf{w} \cdot \mathbf{w}=\langle-4,3\rangle \cdot\langle-4,3\rangle=(-4)(-4)+(3)(3)=25``
+# """
 
 # ╔═╡ ebbfa978-69b9-4a06-8747-792cb04992eb
-md"## Angle Between Two Vectors"
+# md"## Angle Between Two Vectors"
+
+# ╔═╡ 66eb4dd6-f558-479a-b193-8e852c345721
+# cm"""
+# $(bth("Angle Between Two Vectors"))
+# If ``\theta`` is the angle between two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}``, where ``0 \leq \theta \leq \pi``, then
+# ```math
+# \cos \theta=\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}
+# ```
+# """
+
+# ╔═╡ 4fc2f92f-3773-4e53-82c6-c4e441f164b3
+# cm"""
+# $(bbl("Remark",""))
+# ```math
+# \mathbf{u} \cdot \mathbf{v}=\|\mathbf{u}\|\|\mathbf{v}\| \cos \theta\qquad \color{red}{\text{Alternative form of dot product}}
+# ```
+# """
+
+# ╔═╡ 788ea369-4509-4970-9a2d-ea887194b790
+# cm"""
+# $(define(" Definition of Orthogonal Vectors"))
+#  The vectors ``u`` and ``v`` are orthogonal when ``u∙v=0``
+# """
+
+# ╔═╡ de23e5af-1d2d-4b22-9743-dd59bc903a9c
+# cm"""
+# $(ex(2,"Finding the Angle Between Two Vectors"))
+# For ``\mathbf{u}=\langle 3,-1,2\rangle, \mathbf{v}=\langle-4,0,2\rangle, \mathbf{w}=\langle 1,-1,-2\rangle``, and ``\mathbf{z}=\langle 2,0,-1\rangle``, find the angle between each pair of vectors.
+
+# - (a.) ``\mathbf{u}`` and ``\mathbf{v}``
+# - (b.) ``\mathbf{u}`` and ``\mathbf{w}``
+# - (c.) ``\mathbf{v}`` and ``\mathbf{z}``
+# """
+
+# ╔═╡ bc67920c-1bee-4fcc-8469-adf01e1d33e8
+# cm"""
+# $(ex(3,"Alternative Form of the Dot Product"))
+# Given that ``\|\mathbf{u}\|=10,\|\mathbf{v}\|=7``, and the angle between ``\mathbf{u}`` and ``\mathbf{v}`` is ``\pi / 4``, find ``\mathbf{u} \cdot \mathbf{v}``.
+# """
 
 # ╔═╡ 70ffdb35-aba3-4b8a-834c-f3e996e5c278
-md"## Direction Cosines"
+# md"## Direction Cosines"
+
+# ╔═╡ bf3af1b5-3959-447f-85ac-b2b0b1ab737f
+# cm"""
+
+# $(post_img("https://www.dropbox.com/scl/fi/yoip1oldetoeth472ju81/fig_11_26.png?rlkey=g71oyxboekwrwumo2znb7mqtg&dl=1",400))
+
+# """
 
 # ╔═╡ eca05d58-1cab-444f-ae15-df4e3177323f
-cm"""
-```math
-\begin{aligned}
-& \cos \alpha=\frac{v_1}{\|\mathbf{v}\|} 
-\qquad\color{red}{ \alpha \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{i}.}
-\\
-& \cos \beta=\frac{v_2}{\|\mathbf{v}\|} 
-\qquad\color{red}{ \alpha \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{i}.}
-\\
-& \cos \gamma=\frac{v_3}{\|\mathbf{v}\|}
-\qquad\color{red}{ \gamma \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{k}.}
-\end{aligned}
-```
+# cm"""
+# ```math
+# \begin{aligned}
+# & \cos \alpha=\frac{v_1}{\|\mathbf{v}\|} 
+# \qquad\color{red}{ \alpha \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{i}.}
+# \\
+# & \cos \beta=\frac{v_2}{\|\mathbf{v}\|} 
+# \qquad\color{red}{ \alpha \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{i}.}
+# \\
+# & \cos \gamma=\frac{v_3}{\|\mathbf{v}\|}
+# \qquad\color{red}{ \gamma \text{ is the angle between } \mathbf{v} \text{ and } \mathbf{k}.}
+# \end{aligned}
+# ```
 
-```math
-\cos^2\alpha +\cos^2\beta +\cos^2\gamma =1
-```
-"""
+# ```math
+# \cos^2\alpha +\cos^2\beta +\cos^2\gamma =1
+# ```
+# """
+
+# ╔═╡ c925f9ff-245f-4d0a-b085-b703adc1daaf
+# cm"""
+# $(ex(4,"Finding Direction Angles"))
+# Find the direction cosines and angles for the vector ``\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}+4 \mathbf{k}``, and show that ``\cos ^2 \alpha+\cos ^2 \beta+\cos ^2 \gamma=1``
+# """
 
 # ╔═╡ 1b9821e9-f325-475a-ba9c-70a889a5504c
-md"## Projections and Vector Components"
+# md"## Projections and Vector Components"
+
+# ╔═╡ c1dee7b3-6118-493e-9c9a-4629cd2af8c3
+# cm"""
+# $(define("Projection and Vector Components"))
+# Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors. Moreover, let
+# ```math
+# \mathbf{u}=\mathbf{w}_1+\mathbf{w}_2
+# ```
+# where ``\mathbf{w}_1`` is parallel to ``\mathbf{v}`` and ``\mathbf{w}_2`` is orthogonal to ``\mathbf{v}``, as shown in Figure below.
+# 1. ``\mathbf{w}_1`` is called the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` or the vector component of ``\mathbf{u}`` along ``\mathbf{v}``, and is denoted by ``\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}``.
+# 2. ``\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1`` is called the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}``.
+
+# $(post_img("https://www.dropbox.com/scl/fi/dek860uer157a294ebkhg/fig_11_29.png?rlkey=yft18nd2xr98ot3s7345x4p6l&dl=1",500))
+# """
+
+# ╔═╡ 8bb57498-9a49-4b45-8d82-fb790465b1ae
+# cm"""
+# $(ex(5,"Finding a Vector Component of <span style='font-style:italic;font-weight:200;'>u</span> Orthogonal to <span style='font-style:italic;font-weight:200;'>v</span>"))
+# Find the vector component of ``\mathbf{u}=\langle 5,10\rangle`` that is orthogonal to ``\mathbf{v}=\langle 4,3\rangle``, given that
+# ```math
+# \mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\langle 8,6\rangle
+# ```
+# and
+# ```math
+# \mathbf{u}=\langle 5,10\rangle=\mathbf{w}_1+\mathbf{w}_2 .
+# ```
+# """
+
+# ╔═╡ aac34993-c94d-4fa1-8f45-e249740c914d
+# cm"""
+# $(bth("Projection Using the Dot Product"))
+# If ``\mathbf{u}`` and ``\mathbf{v}`` are nonzero vectors, then the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` is
+# ```math
+# \operatorname{proj}_{\mathbf{v}} \mathbf{u}=\left(\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{v}\|^2}\right) \mathbf{v}
+# ```
+# """
+
+# ╔═╡ 3eded575-d9c4-424e-8151-3958dababb38
+# cm"""
+# $(ex(6,"Decomposing a Vector into Vector Components"))
+# Find the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` and the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}`` for ``\mathbf{u}=3 \mathbf{i}-5 \mathbf{j}+2 \mathbf{k}`` and ``\quad \mathbf{v}=7 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``.
+# """
+
+# ╔═╡ 97b10d17-61c1-494b-aefe-131a436e374e
+# cm"""
+# $(ex(7,"Finding a Force"))
+# A 600-pound boat sits on a ramp inclined at ``30^{\circ}``, as shown in Figure below. What force is required to keep the boat from rolling down the ramp?
+# $(post_img("https://www.dropbox.com/scl/fi/9h16n07tc8x569rwdx5j7/fig_11_32.png?rlkey=rv5hgssgbggmveuj0tcj81ovk&dl=1",500))
+# """
 
 # ╔═╡ ca13f691-7ec8-4293-b271-8c197b2e0ccf
-md"## Work (Reading)"
+# md"## Work (Reading)"
+
+# ╔═╡ b1c3ec5b-003d-42ab-8c6b-806e083a2047
+# cm"""
+
+# The work ``W`` done by the constant force ``\mathbf{F}`` acting along the line of motion of an object is given by
+# ```math
+# W=(\text { magnitude of force })(\text { distance })=\|\mathbf{F}\|\|\stackrel{\rightharpoonup}{P Q}\|
+# ```
+# as shown in Figure 11.33(a). When the constant force ``\mathbf{F}`` is not directed along the line of motion, you can see from Figure 11.33(b) that the work ``W`` done by the force is
+# ```math
+# W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\|=(\cos \theta)\|\mathbf{F}\|\|\overrightarrow{P Q}\|=\mathbf{F} \cdot \overrightarrow{P Q}
+# ```
+
+# $(post_img("https://www.dropbox.com/scl/fi/qafxufq3s8tcrxnbisru2/fig_11_33.png?rlkey=4uypkytgkkby8yaomav0jszhr&dl=1",400))
+
+# This notion of work is summarized in the next definition.
+
+# $(define("Work"))
+# The work ``W`` done by a constant force ``\mathbf{F}`` as its point of application moves along the vector ``\overrightarrow{P Q}`` is one of the following.
+# 1. ``W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\| \quad`` Projection form
+# 2. ``W=\mathbf{F} \cdot \stackrel{\rightharpoonup}{P Q}`` Dot product form
+# $(ebl())
+
+# $(ex(8,"Finding Work"))
+# To close a sliding door, a person pulls on a rope with a constant force of 50 pounds at a constant angle of ``60^{\circ}``, as shown in Figure below. Find the work done in moving the door 12 feet to its closed position.
+
+# $(post_img("https://www.dropbox.com/scl/fi/8wn5s5kestb1dtzxulldc/fig_11_34.png?rlkey=r0g1mc0s9vakiye1dkxd5oxrd&dl=1",400))
+# """
 
 # ╔═╡ 99b860bf-9374-4e00-8a92-822af52d403f
-md"# 11.4 The Cross Product of Two Vectors in Space"
+# md"# 11.4 The Cross Product of Two Vectors in Space"
 
 # ╔═╡ d49cf3fa-c325-4efd-9ee5-f27eafa6e2bf
-md"""
-> __Objectives__
-> 1. Find the cross product of two vectors in space.
-> 2. Use the triple scalar product of three vectors in space.
-"""
+# md"""
+# > __Objectives__
+# > 1. Find the cross product of two vectors in space.
+# > 2. Use the triple scalar product of three vectors in space.
+# """
 
 # ╔═╡ 495c292f-fbcb-4420-93a3-fbcd6a34d17a
-md"## The Cross Product"
+# md"## The Cross Product"
+
+# ╔═╡ cce4a136-a23c-45c8-a3e4-78f744cc2836
+# cm"""
+# $(define("Cross Product of Two Vectors in Space"))
+# Let
+# ```math
+# \mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k} \quad \text { and } \quad \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}
+# ```
+# be vectors in space. The cross product of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector
+# ```math
+# \mathbf{u} \times \mathbf{v}=\left(u_2 v_3-u_3 v_2\right) \mathbf{i}-\left(u_1 v_3-u_3 v_1\right) \mathbf{j}+\left(u_1 v_2-u_2 v_1\right) \mathbf{k}
+# ```
+# """
 
 # ╔═╡ 1b792a4f-e23e-441d-9f6c-a64465505e2b
-md"""
-##### The Right-Hand Rule: A Visual Guide
+# md"""
+# ##### The Right-Hand Rule: A Visual Guide
 
-The right-hand rule is essential for determining the direction of cross products, angular velocity, magnetic fields, and many other vector quantities in physics and engineering.
-"""
+# The right-hand rule is essential for determining the direction of cross products, angular velocity, magnetic fields, and many other vector quantities in physics and engineering.
+# """
 
 # ╔═╡ a58b8141-f330-46d8-82d2-b4caa5417887
-md"""
-##### Step-by-Step Right-Hand Rule for Cross Products
+# md"""
+# ##### Step-by-Step Right-Hand Rule for Cross Products
 
-For vectors **u** and **v**, the cross product **u × v** direction is found using:
-"""
+# For vectors **u** and **v**, the cross product **u × v** direction is found using:
+# """
 
 # ╔═╡ 771e9a89-d4eb-421b-a19f-a64810766812
-begin
-    rhr_u_angle = @bind rhr_u_slider Slider(0:15:180, default=45, show_value=true)
-    rhr_v_angle = @bind rhr_v_slider Slider(0:15:180, default=120, show_value=true)
-    rhr_scale = @bind rhr_scale_slider Slider(1:0.5:3, default=2, show_value=true)
+# begin
+#     rhr_u_angle = @bind rhr_u_slider Slider(0:15:180, default=45, show_value=true)
+#     rhr_v_angle = @bind rhr_v_slider Slider(0:15:180, default=120, show_value=true)
+#     rhr_scale = @bind rhr_scale_slider Slider(1:0.5:3, default=2, show_value=true)
 
-    cm"""
-    **Interactive Right-Hand Rule Demo:**
+#     cm"""
+#     **Interactive Right-Hand Rule Demo:**
 
-    u angle: $rhr_u_angle degrees
+#     u angle: $rhr_u_angle degrees
 
-    v angle: $rhr_v_angle degrees  
+#     v angle: $rhr_v_angle degrees  
 
-    Scale: $rhr_scale_slider
-    """
-end
+#     Scale: $rhr_scale_slider
+#     """
+# end
 
 # ╔═╡ 1b1f9a05-1792-4004-a1e1-e8b71a1925e9
-let
-    # Convert to radians
-    u_angle = rhr_u_slider * π / 180
-    v_angle = rhr_v_slider * π / 180
+# let
+#     # Convert to radians
+#     u_angle = rhr_u_slider * π / 180
+#     v_angle = rhr_v_slider * π / 180
 
-    # Create vectors in 2D (we'll show the 3D result)
-    u_vec = [rhr_scale_slider * cos(u_angle), rhr_scale_slider * sin(u_angle), 0]
-    v_vec = [rhr_scale_slider * cos(v_angle), rhr_scale_slider * sin(v_angle), 0]
+#     # Create vectors in 2D (we'll show the 3D result)
+#     u_vec = [rhr_scale_slider * cos(u_angle), rhr_scale_slider * sin(u_angle), 0]
+#     v_vec = [rhr_scale_slider * cos(v_angle), rhr_scale_slider * sin(v_angle), 0]
 
-    # Calculate cross product (will point in z direction)
-    cross_prod = u_vec[1] * v_vec[2] - u_vec[2] * v_vec[1]  # z-component
-    cross_vec = [0, 0, cross_prod]
+#     # Calculate cross product (will point in z direction)
+#     cross_prod = u_vec[1] * v_vec[2] - u_vec[2] * v_vec[1]  # z-component
+#     cross_vec = [0, 0, cross_prod]
 
-    # Create the plot
-    p = plot(aspect_ratio=1, xlims=(-4, 4), ylims=(-4, 4),
-        title="Right-Hand Rule Demonstration\nCross Product: u × v",
-        legend=:topright)
+#     # Create the plot
+#     p = plot(aspect_ratio=1, xlims=(-4, 4), ylims=(-4, 4),
+#         title="Right-Hand Rule Demonstration\nCross Product: u × v",
+#         legend=:topright)
 
-    # Plot vectors u and v
-    quiver!(p, [0], [0], quiver=([u_vec[1]], [u_vec[2]]),
-        color=:blue, linewidth=3, label="u")
-    quiver!(p, [0], [0], quiver=([v_vec[1]], [v_vec[2]]),
-        color=:red, linewidth=3, label="v")
+#     # Plot vectors u and v
+#     quiver!(p, [0], [0], quiver=([u_vec[1]], [u_vec[2]]),
+#         color=:blue, linewidth=3, label="u")
+#     quiver!(p, [0], [0], quiver=([v_vec[1]], [v_vec[2]]),
+#         color=:red, linewidth=3, label="v")
 
-    # Add vector labels
-    annotate!(p, u_vec[1] * 0.6, u_vec[2] * 0.6, text("u", :blue, 12))
-    annotate!(p, v_vec[1] * 0.6, v_vec[2] * 0.6, text("v", :red, 12))
+#     # Add vector labels
+#     annotate!(p, u_vec[1] * 0.6, u_vec[2] * 0.6, text("u", :blue, 12))
+#     annotate!(p, v_vec[1] * 0.6, v_vec[2] * 0.6, text("v", :red, 12))
 
-    # Show the angle between vectors
-    angle_diff = v_angle - u_angle
-    if angle_diff < 0
-        angle_diff += 2π
-    end
+#     # Show the angle between vectors
+#     angle_diff = v_angle - u_angle
+#     if angle_diff < 0
+#         angle_diff += 2π
+#     end
 
-    # Arc to show angle
-    arc_angles = range(u_angle, v_angle, length=20)
-    arc_x = 0.8 * cos.(arc_angles)
-    arc_y = 0.8 * sin.(arc_angles)
-    plot!(p, arc_x, arc_y, color=:green, linewidth=2, label="")
+#     # Arc to show angle
+#     arc_angles = range(u_angle, v_angle, length=20)
+#     arc_x = 0.8 * cos.(arc_angles)
+#     arc_y = 0.8 * sin.(arc_angles)
+#     plot!(p, arc_x, arc_y, color=:green, linewidth=2, label="")
 
-    # Show cross product direction
-    if cross_prod > 0
-        direction_text = "u × v points OUT of page ⊙\n(Right-hand rule: thumb up)"
-        color = :green
-    else
-        direction_text = "u × v points INTO page ⊗\n(Right-hand rule: thumb down)"
-        color = :purple
-    end
+#     # Show cross product direction
+#     if cross_prod > 0
+#         direction_text = "u × v points OUT of page ⊙\n(Right-hand rule: thumb up)"
+#         color = :green
+#     else
+#         direction_text = "u × v points INTO page ⊗\n(Right-hand rule: thumb down)"
+#         color = :purple
+#     end
 
-    # Add direction indicator
-    plot!(p, [0], [0], seriestype=:scatter, markersize=15,
-        color=color, label="")
-    annotate!(p, 0, -3.5, text(direction_text, color, 10, :center))
+#     # Add direction indicator
+#     plot!(p, [0], [0], seriestype=:scatter, markersize=15,
+#         color=color, label="")
+#     annotate!(p, 0, -3.5, text(direction_text, color, 10, :center))
 
-    # Add magnitude
-    mag = abs(cross_prod)
-    annotate!(p, 0, 3.5, text("||u × v|| = $(round(mag, digits=2))", :black, 10, :center))
+#     # Add magnitude
+#     mag = abs(cross_prod)
+#     annotate!(p, 0, 3.5, text("||u × v|| = $(round(mag, digits=2))", :black, 10, :center))
 
-    p
-end
+#     p
+# end
 
 # ╔═╡ 1b3fb3c8-c5fb-4a33-9630-211e4e29dc87
-md"""
-##### Applications of the Right-Hand Rule
+# md"""
+# ##### Applications of the Right-Hand Rule
 
-The right-hand rule appears throughout physics and engineering:
-"""
+# The right-hand rule appears throughout physics and engineering:
+# """
 
 # ╔═╡ 3018f183-3db6-48e5-90fa-f0ff37d8f216
-md"""
-##### Memory Aids for the Right-Hand Rule
-"""
+# md"""
+# ##### Memory Aids for the Right-Hand Rule
+# """
 
 # ╔═╡ 5121dfa0-5f6a-453a-9795-dddc8d6bdbfb
-md"""
-##### Quick Verification Tool
-"""
+# md"""
+# ##### Quick Verification Tool
+# """
 
 # ╔═╡ e0ffce55-f749-439e-8399-7d67cf7ef0c9
-let
-    # Create standard basis verification
-    p1 = plot(title="Standard Basis Vectors", aspect_ratio=1,
-        xlims=(-2, 2), ylims=(-2, 2))
+# let
+#     # Create standard basis verification
+#     p1 = plot(title="Standard Basis Vectors", aspect_ratio=1,
+#         xlims=(-2, 2), ylims=(-2, 2))
 
-    # i vector (red)
-    quiver!(p1, [0], [0], quiver=([1], [0]),
-        color=:red, linewidth=4, label="i")
-    annotate!(p1, 1.2, 0, text("i", :red, 14))
+#     # i vector (red)
+#     quiver!(p1, [0], [0], quiver=([1], [0]),
+#         color=:red, linewidth=4, label="i")
+#     annotate!(p1, 1.2, 0, text("i", :red, 14))
 
-    # j vector (blue)  
-    quiver!(p1, [0], [0], quiver=([0], [1]),
-        color=:blue, linewidth=4, label="j")
-    annotate!(p1, 0, 1.2, text("j", :blue, 14))
+#     # j vector (blue)  
+#     quiver!(p1, [0], [0], quiver=([0], [1]),
+#         color=:blue, linewidth=4, label="j")
+#     annotate!(p1, 0, 1.2, text("j", :blue, 14))
 
-    # Show i × j = k (into page)
-    plot!(p1, [0], [0], seriestype=:scatter, markersize=20,
-        color=:green, label="i × j = +k")
-    annotate!(p1, 0, -1.5, text("i × j = +k (out of page ⊙)", :green, 12, :center))
+#     # Show i × j = k (into page)
+#     plot!(p1, [0], [0], seriestype=:scatter, markersize=20,
+#         color=:green, label="i × j = +k")
+#     annotate!(p1, 0, -1.5, text("i × j = +k (out of page ⊙)", :green, 12, :center))
 
-    p1
-end
+#     p1
+# end
+
+# ╔═╡ b18adead-c917-450c-9a3c-7253d6d91442
+# cm"""
+# $(ex(1,"Finding the Cross Product"))
+# For ``\mathbf{u}=\mathbf{i}-2 \mathbf{j}+\mathbf{k}`` and ``\mathbf{v}=3 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``, find each of the following.
+# - (a.) ``\mathbf{u} \times \mathbf{v}``
+# - (b.) ``\mathbf{v} \times \mathbf{u}``
+# - (c.) ``\mathbf{v} \times \mathbf{v}``
+# """
+
+# ╔═╡ 79735eb1-16e1-4cf3-a43a-88d1ade37279
+# cm"""
+# $(bth("Algebraic Properties of the Cross Product"))
+# Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in space, and let ``c`` be a scalar.
+# 1. ``\mathbf{u} \times \mathbf{v}=-(\mathbf{v} \times \mathbf{u})``
+# 2. ``\mathbf{u} \times(\mathbf{v}+\mathbf{w})=(\mathbf{u} \times \mathbf{v})+(\mathbf{u} \times \mathbf{w})``
+# 3. ``c(\mathbf{u} \times \mathbf{v})=(c \mathbf{u}) \times \mathbf{v}=\mathbf{u} \times(c \mathbf{v})``
+# 4. ``\mathbf{u} \times \mathbf{0}=\mathbf{0} \times \mathbf{u}=\mathbf{0}``
+# 5. ``\mathbf{u} \times \mathbf{u}=\mathbf{0}``
+# 6. ``\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=(\mathbf{u} \times \mathbf{v}) \cdot \mathbf{w}``
+# """
+
+# ╔═╡ f85ad3e4-f7ba-4563-b548-ceb803d13d2c
+# cm"""
+# $(bth("Geometric Properties of the Cross Product"))
+# Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors in space, and let ``\theta`` be the angle between ``\mathbf{u}`` and ``\mathbf{v}``.
+# 1. ``\mathbf{u} \times \mathbf{v}`` is orthogonal to both ``\mathbf{u}`` and ``\mathbf{v}``.
+# 2. ``\|\mathbf{u} \times \mathbf{v}\|=\|\mathbf{u}\|\|\mathbf{v}\| \sin \theta``
+# 3. ``\mathbf{u} \times \mathbf{v}=\mathbf{0}`` if and only if ``\mathbf{u}`` and ``\mathbf{v}`` are scalar multiples of each other.
+# 4. ``\|\mathbf{u} \times \mathbf{v}\|=`` area of parallelogram having ``\mathbf{u}`` and ``\mathbf{v}`` as adjacent sides.
+# """
 
 # ╔═╡ 1fb44f1d-547e-4bea-b7ad-f171ebed5b20
 # cm"""
@@ -3108,8 +4000,91 @@ md"""
 > 2. Use an iterated integral to find the area of a plane region
 """
 
+# ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
+cm"""
+$(ex(1,"Integrating with Respect to <b>y</b>"))
+Evaluate ``\displaystyle \int_1^x\left(2 x y+3 y^2\right) d y``.
+"""
+
+# ╔═╡ 7e075bce-e784-4a4e-abc2-dad5230eeef7
+cm"""
+$(ex(2,"The Integral of an Integral"))
+Evaluate ``\displaystyle\int_1^2\left[\int_1^x\left(2 x y+3 y^2\right) d y\right] d x``.
+"""
+
 # ╔═╡ f8c684f5-18f1-414b-8ce1-7f654e53272d
 md"## Area of a Plane Region"
+
+# ╔═╡ 67ddb4d2-cbba-4592-ad5a-f9c609d731a8
+cm"""
+$(bbl("Area of a Region in the Plane",""))
+1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then the area of ``R`` is
+```math
+A=\int_a^b \int_{g_1(x)}^{g_2(x)} d y d x
+```
+$(post_img("https://www.dropbox.com/scl/fi/mutpzct04u49o9zr87y50/fig_14_2.png?rlkey=rka697r0ssbpo5kye5j8fv0x0&dl=1",400))
+
+2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then the area of ``R`` is
+```math
+A=\int_c^d \int_{h_1(y)}^{h_2(y)} d x d y
+```
+$(post_img("https://www.dropbox.com/scl/fi/pprmgpabyiquf3hnz1uvi/fig_14_3.png?rlkey=ru0ej4j1rx8w1jh0c7jahg6ph&dl=1",400))
+
+"""
+
+# ╔═╡ 79ac9331-c1c7-4f8b-889a-61c850a6a405
+cm"""
+$(ex(3,"The Area of a Rectangular Region"))
+Use an iterated integral to represent the area of the rectangle shown below
+
+$(post_img("https://www.dropbox.com/scl/fi/ikaofyd7gij7oggtkwsu2/fig_14_4.png?rlkey=50moht6bh0x8y5iot9om9rfmq&dl=1",300))
+"""
+
+# ╔═╡ 3442098f-2588-4169-8afb-893cd97eb812
+cm"""
+$(ex(4,"Finding Area by an Iterated Integral"))
+Use an iterated integral to find the area of the region bounded by the graphs of
+```math
+f(x)=\sin x\quad \color{red}{\text{Sine curve forms upper boundary.}}
+```
+
+
+and
+```math
+g(x)=\cos x\quad \color{red}{\text{Cosine curve forms lower boundary.}}
+```
+
+
+between ``x=\pi / 4`` and ``x=5 \pi / 4``.
+"""
+
+# ╔═╡ c1673254-5543-4836-bb87-8a071607d2bf
+cm"""
+$(ex(5,"Comparing Different Orders of Integration"))
+Sketch the region whose area is represented by the integral
+```math
+\int_0^2 \int_{y^2}^4 d x d y
+```
+
+Then find another iterated integral using the order ``d y d x`` to represent the same area and show that both integrals yield the same value.
+"""
+
+# ╔═╡ 6ef69b15-cbe3-43be-b918-1fb146dcb871
+cm"""
+$(ex(6,"An Area Represented by Two Iterated Integrals"))
+Find the area of the region ``R`` that lies below the parabola
+```math
+y=4 x-x^2\quad\color{red}{\text{Parabola forms upper boundary.}}
+```
+
+
+above the ``x``-axis, and above the line
+```math
+y=-3 x+6\quad\color{red}{\text{Line and x-axis form lower boundary.}}
+```
+
+
+"""
 
 # ╔═╡ 0f57e79f-d33d-4662-802c-e2a6d0ac61f4
 md"""
@@ -3121,6 +4096,28 @@ md"""
 
 # ╔═╡ cc2dca66-af82-4a9c-9229-8fee6e12f620
 md"## Double Integrals and Volume of a Solid Region"
+
+# ╔═╡ b87bf77d-0ac4-4aa4-89f1-c35bd07b2464
+cm"""
+Consider the countinuous function ``f(x,y)\geq 0``
+$(post_img("https://www.dropbox.com/scl/fi/d1r0zhp46g1wd480a7ih6/fig_14_8.png?rlkey=jfmg0gr1u3ytv3txz2m8vpmvt&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/yle6j30u1k0jb6f99wei4/fig_14_9.png?rlkey=3pzli926yppsfxyklmw6jlzrg&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/b0urecj17pzrws2bsw8as/fig_14_10.png?rlkey=o370zqxksdf6baidflsrh53z5&dl=1",400))
+
+$(post_img("https://www.dropbox.com/scl/fi/klsbozx2cdqs91fsk4awn/fig_14_11.png?rlkey=e92k2ojdyo465h3lqck0n0h49&dl=1",400))
+"""
+
+# ╔═╡ 949a0727-3427-44b9-bca1-cb6c0be55b5a
+cm"""
+$(ex(1,"Approximating the Volume of a Solid"))
+Approximate the volume of the solid lying between the paraboloid
+```math
+f(x, y)=1-\frac{1}{2} x^2-\frac{1}{2} y^2
+```
+and the square region ``R`` given by ``0 \leq x \leq 1,0 \leq y \leq 1``. Use a partition made up of squares whose sides have a length of ``\frac{1}{4}``.
+"""
 
 # ╔═╡ 09cfe910-5060-4b84-b885-5ce0727a65f6
 let
@@ -3135,11 +4132,119 @@ let
     Float64(V)
 end
 
+# ╔═╡ 363b9d8b-6288-46f4-b321-bf2d28d9e7df
+cm"""
+$(define("Double Integral"))
+If ``f`` is defined on a closed, bounded region ``R`` in the ``x y``-plane, then the double integral of ``f`` over ``R`` is
+```math
+\int_R \int f(x, y) d A=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i\right) \Delta A_i
+```
+provided the limit exists. If the limit exists, then ``f`` is integrable over ``R``.
+"""
+
+# ╔═╡ f80da3f2-5272-450c-a6e6-81ba4189b6b5
+cm"""
+$(bbl("Volume of a Solid Region",""))
+If ``f`` is integrable over a plane region ``R`` and ``f(x, y) \geq 0`` for all ``(x, y)`` in ``R``, then the volume of the solid region that lies above ``R`` and below the graph of ``f`` is
+```math
+V=\int_R \int f(x, y) d A
+```
+$(ebl())
+
+$(bth("Properties of Double Integrals"))
+Let ``f`` and ``g`` be continuous over a closed, bounded plane region ``R``, and let ``c`` be a constant.
+1. ``\displaystyle\iint_R c f(x, y) d A=c \int_R \int f(x, y) d A``
+2. ``\displaystyle\iint_R[f(x, y) \pm g(x, y)] d A=\int_R \int f(x, y) d A \pm \int_R \int g(x, y) d A``
+3. ``\displaystyle\iint_R f(x, y) d A \geq 0, \quad`` if ``f(x, y) \geq 0``
+4. ``\displaystyle\iint_R \int f(x, y) d A \geq \int_R \int g(x, y) d A, \quad`` if ``f(x, y) \geq g(x, y)``
+5. ``\displaystyle\iint_R f(x, y) d A=\int_{R_1} \int f(x, y) d A+\int_{R_2} \int f(x, y) d A``, where ``R`` is the union of two nonoverlapping subregions ``R_1`` and ``R_2``.
+"""
+
 # ╔═╡ c53d2dd7-a57c-4688-9682-10cd5947bf03
 md"##  Evaluation of Double Integrals"
 
+# ╔═╡ 9aaa5191-16d2-4af7-981e-697ea50f166f
+cm"""
+$(bth("Fubini's Theorem"))
+Let ``f`` be continuous on a plane region ``R``.
+1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then
+```math
+\iint_R  f(x, y) d A=\int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) d y d x
+```
+2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then
+```math
+\iint_R  f(x, y) d A=\int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) d x d y .
+```
+"""
+
+# ╔═╡ 7df7019e-a9b3-4ae1-bae0-44badb94e6bf
+cm"""
+$(ex(2,"Eevaluating a Double Integral as an Iterated Integral"))
+
+Evaluate
+```math
+\iint_R \left(1-\frac{1}{2} x^2-\frac{1}{2} y^2\right) d A
+```
+where ``R`` is the region given by
+```math
+0 \leq x \leq 1, \quad 0 \leq y \leq 1 .
+```
+"""
+
+# ╔═╡ 1be798c5-b9a4-42c3-a526-8563d25eb246
+cm"""
+$(ex(3,"Finding Volume by a Double Integral"))
+Find the volume of the solid region bounded by the paraboloid ``z=4-x^2-2 y^2`` and the ``x y``-plane seen  [here](https://www.desmos.com/3d/ine3ie6963)
+"""
+
+# ╔═╡ 5c9dc21c-b5ff-422f-9d8e-1d177efb60af
+cm"""
+$(ex(4,"Comparing Different Orders of Integration"))
+Find the volume of the solid region bounded by the surface
+```math
+f(x, y)=e^{-x^2} \quad \text { Surface }
+```
+and the planes ``z=0, y=0, y=x``, and ``x=1``, as shown [Here](https://www.desmos.com/3d/fo6kmsxrdj).
+"""
+
+# ╔═╡ 229b3153-a41f-4acc-af89-89a7fd35a10f
+cm"""
+$(ex(5,"Volume of a Region Bounded by Two Surfaces"))
+Find the volume of the solid region bounded above by the paraboloid
+```math
+z=1-x^2-y^2
+```
+
+and below by the plane
+```math
+z=1-y
+```
+
+"""
+
 # ╔═╡ a09b7496-29dd-4ecd-9ce5-6e21983a1677
 md"##  Average Value of a Function"
+
+# ╔═╡ 6357795f-52f3-4832-8c27-e75f220cd1b5
+cm"""
+$(define("the Average Value of a Function Over a Region"))
+If ``f`` is integrable over the plane region ``R``, then the average value of ``f`` over ``R`` is
+```math
+\text { Average value }=\frac{1}{A} \int_R \int f(x, y) d A
+```
+where ``A`` is the area of ``R``.
+$(ebl())
+
+$(ex(6,"Finding the Average Value of a Function"))
+Find the average value of
+```math
+f(x, y)=\frac{1}{2} x y
+```
+over the plane region ``R``, where ``R`` is a rectangle with vertices
+```math
+(0,0),(4,0),(4,3), \quad \text { and } \quad(0,3)
+```
+"""
 
 # ╔═╡ bebbd462-5a6d-4649-9105-04f511f27287
 md"""
@@ -3150,6 +4255,96 @@ md"""
 # ╔═╡ f0349447-b967-421d-9f86-57e37e0df049
 md"## Double Integrals in Polar Coordinates"
 
+# ╔═╡ 51d70474-def8-4714-854d-2dd69caebdfa
+cm"""
+In Section 10.4, you learned that the polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{aligned}
+& x=r \cos \theta \quad \text { and } \quad y=r \sin \theta \\
+& r^2=x^2+y^2 \quad \text { and } \quad \tan \theta=\frac{y}{x}
+\end{aligned}
+```
+
+$(ex(1,"Using Polar Coordinates to Describe a Region"))
+Use polar coordinates to describe each region shown below.
+
+$(post_img("https://www.dropbox.com/scl/fi/5xqj9e61lhwbm1ukw3x1s/fig_14_23.png?rlkey=z0h0t55hzyco3dth6mvme9fac&dl=1"))
+"""
+
+# ╔═╡ e47b9235-bce9-42e1-b790-acc15042f4dc
+cm"""
+We consider the __polar sector__
+```math
+\mathbf{R}=\left\{(r,\theta): \; r_1\leq r\leq r_2, \quad \theta_1\leq \theta \leq\theta_2\right\}
+```
+as show here
+$(post_img("https://www.dropbox.com/scl/fi/kwu956q8ee8n88pekz85q/fig_14_24.png?rlkey=dwee2k5qjnnudcdp9ambu53zf&dl=1"))
+
+Now, we partition ``\mathbf{R}`` into small polar sectors.
+$(post_img("https://www.dropbox.com/scl/fi/tithh34ltodbkhku4rc5a/fig_14_25.png?rlkey=3fa1volfpqkact18ysez9lrb0&dl=1"))
+
+Note that 
+```math
+\Delta A_i = r_i \Delta r_i\Delta\theta_i
+```
+So, we have
+
+```math
+\int_R \int f(x, y) d A \approx \sum_{i=1}^n f\left(r_i \cos \theta_i, r_i \sin \theta_i\right) r_i \Delta r_i \Delta \theta_i
+```
+
+"""
+
+# ╔═╡ 48b1e580-0502-497f-80e7-b6ade3129272
+cm"""
+$(bth("Change of Variables to Polar Form"))
+Let ``R`` be a plane region consisting of all points ``(x, y)=(r \cos \theta, r \sin \theta)`` satisfying the conditions ``0 \leq g_1(\theta) \leq r \leq g_2(\theta), \alpha \leq \theta \leq \beta``, where ``0 \leq(\beta-\alpha) \leq 2 \pi``. If ``g_1`` and ``g_2`` are continuous on ``[\alpha, \beta]`` and ``f`` is continuous on ``R``, then
+```math
+\int_R \int_R f(x, y) d A=\int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos \theta, r \sin \theta) r d r d \theta
+```
+"""
+
+# ╔═╡ 0c2674a1-89f9-4fde-b10f-13001ce0754e
+cm"""
+$(ex(2,"Evaluating a Double Polar Integral"))
+Let ``R`` be the annular region lying between the two circles ``x^2+y^2=1`` and ``x^2+y^2=5``. Evaluate the integral
+```math
+\int_R \int\left(x^2+y\right) d A
+```
+"""
+
+# ╔═╡ 818d83db-9154-4e13-853a-7dd83d368773
+cm"""
+$(ex(3,"Change of Variables to Polar Coordinates"))
+Use polar coordinates to find the volume of the solid region bounded above by the hemisphere
+```math
+z=\sqrt{16-x^2-y^2}\quad \color{red}{\text{Hemisphere forms upper surface.}}
+```
+
+
+and below by the circular region ``R`` given by
+```math
+x^2+y^2 \leq 4 \quad \color{red}{\text{Circular region forms lower surface.}}
+```
+
+
+as shown brlow.
+$(post_img("https://www.dropbox.com/scl/fi/966uofohyhoxpgdvsusc0/fig_14_30.png?rlkey=20elxczfuempbiu24vyhtieyf&dl=1"))
+"""
+
+# ╔═╡ c2c834d3-c4d8-4313-b1dd-f75dc04c18d9
+cm"""
+$(ex(4,"Finding areas of Polar Regions"))
+Find the area of the shaded region.
+$(post_img("https://www.dropbox.com/scl/fi/wjg5xoy0sm4dlbez8o1n7/fig_14_31.png?rlkey=wmqflrupx0zihz2mjqgui576t&dl=1"))
+"""
+
+# ╔═╡ 059e03c2-d921-42e6-9130-13d37f9f05dc
+cm"""
+$(ex(5,"Integrating with Respect to θ First"))
+Find the area of the region bounded above by the spiral ``r=\pi /(3 \theta)`` and below by the polar axis, between ``r=1`` and ``r=2``.
+"""
+
 # ╔═╡ b8b7c421-cc02-4143-9854-e182648c92d3
 md"""
 # 14.6 Triple Integrals and applications
@@ -3159,6 +4354,97 @@ md"""
 
 # ╔═╡ 2ebac407-bcda-4646-8ac5-19aa50cb866e
 md"##  Triple Integrals"
+
+# ╔═╡ 240b0876-7fa2-4e71-945f-0ffdd017557a
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/zf2wz75pe3y12w44peo14/fig_14_52.png?rlkey=7kclyjh0verzyvhr59zh0he5f&dl=1",400))
+"""
+
+# ╔═╡ 166b293f-cead-4852-b23b-7f6b699b354e
+cm"""
+$(define("Triple Integral"))
+If ``f`` is continuous over a bounded solid region ``Q``, then the triple integral of ``f`` over ``\boldsymbol{Q}`` is defined as
+```math
+\iiint_Q f(x, y, z) d V=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i, z_i\right) \Delta V_i
+```
+provided the limit exists. The volume of the solid region ``Q`` is given by
+```math
+\text { Volume of } Q=\iiint_Q d V \text {. }
+```
+"""
+
+# ╔═╡ 032054f9-1ea2-4265-b3a4-93045f23a45a
+cm"""
+$(bbl("Remarks",""))
+Some of the properties of double integrals can be restated in terms of triple integrals.
+1. ``\iint_Q \int_Q c f(x, y, z) d V=c \iiint_Q f(x, y, z) d V``
+2. ``\iint_Q \int_Q[f(x, y, z) \pm g(x, y, z)] d V=\iiint_Q f(x, y, z) d V \pm \iint_Q g(x, y, z) d V``
+3. ``\iiint_Q f(x, y, z) d V=\iiint_{Q_1} f(x, y, z) d V+\iiint_{Q_2} f(x, y, z) d V``
+"""
+
+# ╔═╡ f5d90c07-6292-4c14-904c-2851fee7ac1f
+cm"""
+$(bth("Evaluation by Iterated Integrals"))
+Let ``f`` be continuous on a solid region ``Q`` defined by
+```math
+\begin{aligned}
+& a \leq x \leq b \\
+& h_1(x) \leq y \leq h_2(x) \\
+& g_1(x, y) \leq z \leq g_2(x, y)
+\end{aligned}
+```
+where ``h_1, h_2, g_1``, and ``g_2`` are continuous functions. Then,
+```math
+\iiint_Q f(x, y, z) d V=\int_a^b \int_{h_1(x)}^{h_2(x)} \int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z d y d x
+```
+"""
+
+# ╔═╡ 020d8181-06fc-4b38-bb8a-990c2337d1ca
+cm"""
+$(ex(1,"Evaluating a Triple Iterated Integral"))
+
+Evaluate the triple iterated integral
+```math
+\int_0^2 \int_0^x \int_0^{x+y} e^x(y+2 z) d z d y d x .
+```
+"""
+
+# ╔═╡ 3dc9bbb0-6cf9-410a-b3d4-aa8e8859c9a9
+cm"""
+$(bbl("Remark","Solid Between two surfaces"))
+$(post_img("https://www.dropbox.com/scl/fi/3714xtwt50zam9gs7umx5/fig_14_53.png?rlkey=wqo315ryxhasu9q90qmh7q7n6&dl=1"))
+```math
+\iint\left[\int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z\right] d y d x.
+```
+"""
+
+# ╔═╡ d75ca2b2-1033-450e-b94d-49fd308c3f5e
+cm"""
+$(ex(2,"Using a Triple Integral to Find Volume"))
+
+Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
+
+$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1",400))
+"""
+
+# ╔═╡ 21fb5570-c41a-4a67-a900-614b4debc7d7
+cm"""
+$(ex(3,"Changing the Order of Integration"))
+Evaluate 
+```math
+\int_0^{\sqrt{\pi / 2}} \int_x^{\sqrt{\pi / 2}} \int_1^3 \sin \left(y^2\right) d z d y d x.
+```
+"""
+
+# ╔═╡ 2a2e4a74-0985-4c23-8da7-1694021aa382
+cm"""
+$(ex(4,"Determining the Limits of Integration"))
+
+Set up a triple integral for the volume of each solid region.
+1. The region in the first octant bounded above by the cylinder ``z=1-y^2`` and lying between the vertical planes ``x+y=1`` and ``x+y=3``
+2. The upper hemisphere ``z=\sqrt{1-x^2-y^2}``
+3. The region bounded below by the paraboloid ``z=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=6``
+"""
 
 # ╔═╡ 2443239f-6d9b-41e1-ae93-f30e784a5073
 md"""
@@ -3173,6 +4459,14 @@ md"""
 # ╔═╡ 301c9794-a8a2-4186-84c9-554de27bded3
 md"## Cylindrical Coordinates"
 
+# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
+cm"""
+$(bbl("The Cylindrical Coordinate System",""))
+In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
+1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
+2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
+"""
+
 # ╔═╡ cb1ce385-d5e7-464f-a551-dd024d016d29
 cm"""
 __Cylindrical to rectangular:__
@@ -3186,6 +4480,40 @@ r^2=x^2+y^2, \quad \tan \theta=\frac{y}{x}, \quad z=z
 ```
 """
 
+# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
+cm"""
+$(ex(1,"Cylindrical-to-Rectangular Conversion"))
+Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
+"""
+
+# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
+cm"""
+$(ex(2,"Rectangular-to-Cylindrical Conversion"))
+
+Convert the point
+```math
+(x, y, z)=(1, \sqrt{3}, 2)
+```
+to cylindrical coordinates.
+"""
+
+# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
+cm"""
+$(ex(3," Rectangular-to-Cylindrical Conversion"))
+Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
+- a. ``x^2+y^2=4 z^2``
+- b. ``y^2=x``
+"""
+
+# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
+cm"""
+$(ex(4,"Cylindrical-to-Rectangular Conversion"))
+Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
+```math
+r^2 \cos 2 \theta+z^2+1=0
+```
+"""
+
 # ╔═╡ c645824c-141c-4236-bf42-d06a9115475c
 md"##  Triple Integrals in Cylindrical Coordinates"
 
@@ -3196,8 +4524,30 @@ cm"""
 ```
 """
 
+# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
+cm"""
+$(ex(1,"Finding Volume in Cylindrical Coordinates"))
+Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
+"""
+
 # ╔═╡ 3d13b289-1bc6-4c79-b60d-abbbc6172cc2
 md"##  Spherical Coordinates"
+
+# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
+cm"""
+$(bbl("The Spherical Coordinate System",""))
+In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
+1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
+2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
+3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
+Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
+"""
+
+# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
+"""
 
 # ╔═╡ 1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
 cm"""
@@ -3225,6 +4575,15 @@ __Cylindrical to spherical ``(r \geq 0)`` :__
 ```
 """
 
+# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
+cm"""
+$(ex(5,"Rectangular-to-Spherical Conversion"))
+
+Find an equation in spherical coordinates for the surface represented by each rectangular equation.
+- a. Cone: ``x^2+y^2=z^2``
+- b. Sphere: ``x^2+y^2+z^2-4 z=0``
+"""
+
 # ╔═╡ e0fa4607-ec15-4751-98db-a8feb04ad558
 md"##  Triple Integrals in Spherical Coordinates"
 
@@ -3233,6 +4592,15 @@ cm"""
 ```math
 \iiint_Q f(x, y, z) d V=\int_{\theta_1}^{\theta_2} \int_{\phi_1}^{\phi_2} \int_{\rho_1}^{\rho_2} f(\rho \sin \phi \cos \theta, \rho \sin \phi \sin \theta, \rho \cos \phi) \rho^2 \sin \phi d \rho d \phi d \theta
 ```
+"""
+
+# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
+cm"""
+$(ex(4,"Finding Volume in Spherical Coordinates"))
+
+Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
+
+$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
 """
 
 # ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
@@ -3424,18 +4792,6 @@ begin
     @htl("")
 end
 
-# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
-cm"""
-__Course website:__ (Notes, Syllabus)
-$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
-
----
-
-__ChatGPT:__ (Course AI assistant)
-$(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
-
-"""
-
 # ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
 begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
@@ -3458,34 +4814,6 @@ begin
     """
 end
 
-# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
-## Cell 5
-cm"""
-$(define("a Plane Curve"))
-If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
-```math
-x=f(t) \quad \text { and } \quad y=g(t)
-```
-are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
-"""
-
-
-# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
-## Cell 6
-cm"""
-$(ex(1,"Sketching a Curve"))
-Sketch the curve described by the parametric equations
-```math
-x=f(t)=t^2-4
-```
-and
-```math
-y=g(t)=\frac{t}{2}
-```
-where ``-2 \leq t \leq 3``.
-"""
-
-
 # ╔═╡ 72eaba37-67d9-4d52-b1a6-e108401aa93e
 
 ## Cell 9
@@ -3502,41 +4830,6 @@ HTML(warning_box(
     """
 ))
 
-
-
-# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
-## Cell 10
-cm"""
-
-$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
-"""
-
-
-# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
-
-## Cell 11
-cm"""
-$(ex(2,"Adjusting the Domain"))
-Sketch the curve represented by the equations
-```math
-x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
-```
-by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
-"""
-
-
-# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
-
-## Cell 12
-cm"""
-$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
-See LarsonCalculus.com for an interactive version of this type of example.
-Sketch the curve represented by
-```math
-x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
-```
-by eliminating the parameter and finding the corresponding rectangular equation.
-"""
 
 
 # ╔═╡ b05fcc39-dad9-4bdf-874e-6dedf75fe36c
@@ -3590,205 +4883,6 @@ HTML(warning_box(
 ))
 
 
-# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
-## Cell 19
-cm"""
-$(ex(4,"Finding Parametric Equations for a Given Graph"))
-Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
-
-- __(a.)__ ``t=x``
-- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
-
-"""
-
-# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
-## Cell 20
-cm"""
-$(ex(5,"Parametric Equations for a Cycloid"))
-Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a __cycloid__.
-"""
-
-# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
-## Cell 23
-cm"""
-$(define("Smooth Curve"))
-A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
-"""
-
-# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
-cm"""
-$(bbl("Hypocycloid", "H(A, B)"))
-The path traced by a fixed point on a circle of radius ``B`` as it rolls around the inside of a circle of radius ``A``
-```math
-\begin{aligned}
-& x=(A-B) \cos t+B \cos \left(\frac{A-B}{B}\right) t \\
-& y=(A-B) \sin t-B \sin \left(\frac{A-B}{B}\right) t
-\end{aligned}
-```
-"""
-
-# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
-cm"""
-$(bbl("Epicycloid","E(A, B)"))
-The path traced by a fixed point on a circle of radius ``B`` as it rolls around the outside of a circle of radius ``A``
-```math
-\begin{aligned}
-& x=(A+B) \cos t-B \cos \left(\frac{A+B}{B}\right) t \\
-& y=(A+B) \sin t-B \sin \left(\frac{A+B}{B}\right) t
-\end{aligned}
-```
-"""
-
-# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
-cm"""
-$(bth("Parametric Form of the Derivative"))
-If a smooth curve ``C`` is given by the equations
-```math
-x=f(t) \quad \text { and } \quad y=g(t)
-```
-then the slope of ``C`` at ``(x, y)`` is
-```math
-\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
-```
-"""
-
-## Cell 5
-
-# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
-cm"""
-$(ex(1,"Differentiation and Parametric Form"))
-Find ``d y / d x`` for the curve given by 
-```math
-x=\sin t\quad \text{and} \quad y=\cos t.
-```
-"""
-
-## Cell 6
-
-# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
-cm"""
-$(bbl("Remark",""))
-```math
-\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
-```
-"""
-
-## Cell 7
-
-# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
-cm"""
-$(ex(2,"Finding Slope and Concavity"))
-For the curve given by
-```math
-x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
-```
-find the slope and concavity at the point ``(2,3)``.
-"""
-
-## Cell 8
-
-# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
-cm"""
-$(ex(3,"A Curve with Two Tangent Lines at a Point"))
-The prolate cycloid given by
-```math
-x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
-```
-crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
-"""
-
-## Cell 9
-
-# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
-cm"""
-$(bth("Arc Length in Parametric Form"))
-If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
-```math
-s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
-```
-"""
-
-## Cell 13
-
-# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
-cm"""
-$(ex(4,"Finding Arc Length"))
-
-A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
-```math
-x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
-```
-
-Find the distance traveled by the point in one complete trip about the larger circle.
-"""
-
-## Cell 14
-
-# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
-cm"""
-$(bth("Area of a Surface of Revolution"))
-If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
-
-__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
-
-Revolution about the ``x``-axis: ``g(t) \geq 0``
-
-__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
-
-Revolution about the ``y``-axis: ``f(t) \geq 0``
-"""
-
-## Cell 18
-
-# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
-cm"""
-$(ex(5,"Finding the Area of a Surface of Revolution"))
-
-Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
-```math
-\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
-```
-Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
-"""
-
-# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
-cm"""
-$(bbl("",""))
-To form the polar coordinate system in the plane, 
-- fix a point ``O``, called __the pole (or origin)__, and 
-- construct from ``O`` an initial ray called the __polar axis__, 
-
-Then each point ``P`` in the plane can be assigned polar coordinates 
-```math
-(r, \theta)
-``` 
-as follows.
-```math
-\begin{aligned}
-& r=\text { directed distance from } O \text { to } P \\
-& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
-\end{aligned}
-```
-
-"""
-
-## Cell 5
-
-# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
-cm"""
-$(bth("Coordinate Conversion"))
-The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
-```math
-\begin{array}{ll}
-\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
-x=r \cos \theta & \tan \theta=\frac{y}{x} \\
-y=r \sin \theta & r^2=x^2+y^2
-\end{array}
-```
-"""
-
-## Cell 8
-
 # ╔═╡ c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
 HTML(warning_box(
     "⚠️ Common Coordinate Conversion Mistakes",
@@ -3806,18 +4900,6 @@ HTML(warning_box(
 
 ## Cell 9
 
-# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
-cm"""
-$(ex(1,"Polar-to-Rectangular Conversion"))
-
-
-- (a) For the point ``(r, \theta)=(2, \pi)``,
-- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
-
-"""
-
-## Cell 10
-
 # ╔═╡ b5699352-1bca-4040-bbd9-2bc64085460c
 HTML(tip_box(
     "💡 Polar-to-Rectangular is Easy!",
@@ -3833,15 +4915,6 @@ HTML(tip_box(
 ))
 
 ## Cell 11
-
-# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
-cm"""
-$(ex(2,"Rectangular-to-Polar Conversion"))
-- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
-- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
-"""
-
-## Cell 12
 
 # ╔═╡ 4564edd1-7611-45b1-8f4c-26088d4c6d97
 let
@@ -3925,51 +4998,6 @@ HTML(warning_box(
 
 ## Cell 15
 
-# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
-cm"""
-$(ex(3,"
-Graphing Polar Equations"))
-Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
-- __(a.)__ ``r=2``
-- __(b.)__ ``\theta=\frac{\pi}{3}``
-- __(c.)__ ``r=\sec \theta``
-"""
-
-## Cell 16
-
-# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
-cm"""
-$(ex(4,"
-Sketching a Polar Graph"))
-Sketch the graph of ``r=2 \cos 3 \theta``.
-"""
-
-## Cell 18
-
-# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
-cm"""
-$(bth("Slope in Polar Form"))
-If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
-```math
-\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
-```
-provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``. 
-"""
-
-## Cell 23
-
-# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
-cm"""
-$(bbl("Remarks",""))
-
-- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
-- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
-
-- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
-"""
-
-## Cell 24
-
 # ╔═╡ 35429393-e411-4ac8-9719-c90523ade5ea
 HTML(warning_box(
     "⚠️ Polar Slope Formula Confusion",
@@ -3987,31 +5015,6 @@ HTML(warning_box(
 ))
 
 ## Cell 25
-
-# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
-cm"""
-$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
-Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
-"""
-
-## Cell 26
-
-# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
-cm"""
-$(ex(6,"
-Finding Horizontal and Vertical Tangent Lines"))
-Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
-"""
-
-## Cell 28
-
-# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
-cm"""
-$(bth("Tangent Lines at the Pole"))
-If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
-"""
-
-## Cell 30
 
 # ╔═╡ 3dbb47a8-9310-4013-a4db-0514614d0d4d
 HTML(tip_box(
@@ -4033,988 +5036,6 @@ HTML(tip_box(
 ))
 
 ## Cell 34
-
-# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
-cm"""
-__What is the area of a sector of a circle?__
-
-$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
-
-__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
-
-$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
-
-
-"""
-
-# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
-cm"""
-$(bth("Area in Polar Coordinates"))
-If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
-```math
-A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
-```
-```math
-=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
-```
-"""
-
-# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
-cm"""
-$(ex(1,"
-Finding the Area of a Polar Region"))
-Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
-"""
-
-# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
-cm"""
-$(ex(2,"Finding the Area Bounded by a Single Curve"))
-Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
-"""
-
-# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
-cm"""
-$(ex(3,"Finding the Area of a Region Between Two Curves"))
-Find the area of the region common to the two regions bounded by the curves
-```math
-r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
-```
-and
-```math
-r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
-```
-
-"""
-
-# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
-cm"""
-$(bth("Arc Length of a Polar Curve"))
-Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
-```math
-s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
-```
-"""
-
-# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
-cm"""
-$(ex(4,"Finding the Length of a Polar Curve"))
-Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
-"""
-
-# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
-cm"""
-$(bth("Area of a Surface of Revolution"))
-Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
-1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
-
-
-
-2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
-$(ebl())
-
-$(ex(5,"Finding the Area of a Surface of Revolution"))
-Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
-"""
-
-# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
-cm"""
-$(ex(1,"Vector Representation: Directed Line Segments"))
-Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
-"""
-
-# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
-cm"""
-$(define("Component Form of a Vector in the Plane"))
-If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
-
-Moreover, the length (or magnitude) of ``\textbf{v}`` is
-```math
-\begin{aligned}
-\|\mathbf{v}\| 
-& =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
-\end{aligned}
-```
-"""
-
-# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
-cm"""
-$(ex(2,"Component Form and Length of a Vector"))
-Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
-"""
-
-# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
-cm"""
-$(define("Vector Addition and Scalar Multiplication"))
-Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
-1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
-2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
-```math
-c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
-```
-3. The negative of ``\mathbf{v}`` is the vector
-```math
--\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
-```
-4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
-```math
-\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
-```
-"""
-
-# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
-cm"""
-$(ex(3,"Vector Operations"))
-For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
-- (a.) ``\frac{1}{2} \mathbf{v}``
-- (b.) ``\mathbf{w}-\mathbf{v}``
-- (c.) ``\mathbf{v}+2 \mathbf{w}``
-"""
-
-# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
-cm"""
-$(bth("Properties of Vector Operations"))
-Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
-1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``  
-
-
-2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
-
-3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
-
-4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
-
-5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
-
-6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
-
-
-7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
-
-
-8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
-"""
-
-# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
-cm"""
-$(bth("Length of a Scalar Multiple"))
-Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
-```math
-\|c \mathbf{v}\|=|c|\|\mathbf{v}\|
-```
-``|c|`` is the absolute value of ``c``.
-"""
-
-# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
-cm"""
-$(bth("Unit Vector in the Direction of  v"))
-If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
-```math
-\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
-```
-has length 1 and the same direction as ``\mathbf{v}``.
-"""
-
-# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
-cm"""
-$(bbl("triangle inequality for vectors",""))
-```math
-\|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
-```
-
-"""
-
-# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
-cm"""
-$(ex(4,"Finding a Unit Vector"))
-Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
-"""
-
-# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
-cm"""
-$(ex(5,"Writing a Linear Combination of Unit Vectors"))
-Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
-"""
-
-# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
-cm"""
-$(ex(6,"Writing a Vector of Given Magnitude and Direction"))
-The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
-"""
-
-# ╔═╡ 571a0a6a-b0f2-4899-9b22-4e7948f358e2
-cm"""
-
-
-$(ex(7,"Finding the Resultant Force"))
-
-Two tugboats are pushing an ocean liner, as shown in Figure below. Each boat is exerting a force of 400 pounds. What is the resultant force on the ocean liner?
-
-$(post_img("https://www.dropbox.com/scl/fi/y479puutvr1z41k7aqy70/fig11.12.png?rlkey=f1kwce8m1vsrmdk2kim9l4d18&dl=1"))
-"""
-
-# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
-cm"""
-$(ex(1,"Finding the Distance Between Two Points in Space"))
-Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
-"""
-
-# ╔═╡ 2c4b3a89-8257-48fa-8e3a-30f059e0187d
-cm"""
-$(ex(2,"Finding the equation of a Sphere"))
-Find the standard equation of the sphere that has the points
-
-``(5, −2, 3)`` and ``(0, 4, −3)``
-
- as endpoints of a diameter.
-"""
-
-# ╔═╡ 7e3feecd-7106-4591-b22a-97a7aa064b6c
-cm"""
-$(bbl("Vectors in Space",""))
-Let ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` be vectors in space and let ``c`` be a scalar.
-1. Equality of Vectors: ``\mathbf{u}=\mathbf{v}`` if and only if ``u_1=v_1, u_2=v_2``, and ``u_3=v_3``.
-2. Component Form: If ``\mathbf{v}`` is represented by the directed line segment from ``P\left(p_1, p_2, p_3\right)`` to ``Q\left(q_1, q_2, q_3\right)``, then
-```math
-\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle=\left\langle q_1-p_1, q_2-p_2, q_3-p_3\right\rangle
-```
-3. Length: ``\|\mathbf{v}\|=\sqrt{v_1^2+v_2^2+v_3^2}``
-4. Unit Vector in the Direction of ``\mathbf{v}: \frac{\mathbf{v}}{\|\mathbf{v}\|}=\left(\frac{1}{\|\mathbf{v}\|}\right)\left\langle v_1, v_2, v_3\right\rangle, \quad \mathbf{v} \neq \mathbf{0}``
-5. Vector Addition: ``\mathbf{v}+\mathbf{u}=\left\langle v_1+u_1, v_2+u_2, v_3+u_3\right\rangle``
-6. Scalar Multiplication: ``c \mathbf{v}=\left\langle c v_1, c v_2, c v_3\right\rangle``
-"""
-
-# ╔═╡ 108475eb-bae3-426d-88db-f0f5dc177c65
-cm"""
-$(ex(3,"Finding the Component Form of a Vector in Space"))
-Find the component form and magnitude of the vector ``\mathbf{v}`` having initial point ``(-2,3,1)`` and terminal point ``(0,-4,4)``. Then find a unit vector in the direction of ``\mathbf{v}``.
-"""
-
-# ╔═╡ 75e95211-2367-49ed-a1fd-f0ae39870f04
-cm"""
-$(define("Parallel Vectors"))
-Two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}`` are parallel when there is some scalar ``c`` such that ``\mathbf{u}=c \mathbf{v}``.
-"""
-
-# ╔═╡ 847f0197-beab-45d7-ae4c-27385719aeb1
-cm"""
-$(ex(4,"Parallel Vectors"))
-Vector ``\mathbf{w}`` has initial point ``(2,-1,3)`` and terminal point ``(-4,7,5)``. Which of the following vectors is parallel to ``\mathbf{w}`` ?
-a. ``\mathbf{u}=\langle 3,-4,-1\rangle``
-b. ``\mathbf{v}=\langle 12,-16,4\rangle``
-"""
-
-# ╔═╡ b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
-cm"""
-$(ex(5,"Using Vectors to Determine Collinear Points"))
-Determine whether the points
-```math
-P(1,-2,3), \quad Q(2,1,0), \quad \text { and } \quad R(4,7,-6)
-```
-are collinear.
-"""
-
-# ╔═╡ 8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
-cm"""
-$(ex(6,"Standard Unit Vector Notation"))
-- __(a.)__ Write the vector ``\mathbf{v}=4 \mathbf{i}-5 \mathbf{k}`` in component form.
-- __(b.)__ Find the terminal point of the vector ``\mathbf{v}=7 \mathbf{i}-\mathbf{j}+3 \mathbf{k}``, given that the initial point is ``P(-2,3,5)``.
-c. Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
-"""
-
-# ╔═╡ 1a2c15f9-af65-4fe5-b517-98d26a3998fd
-cm"""
-$(ex(7,"Measuring Force"))
-A television camera weighing ``120`` pounds is supported by a tripod, as shown below. Represent the force exerted on each leg of the tripod as a vector. 
-
-$(post_img("https://www.dropbox.com/scl/fi/avv2vzzviidm4m8opc3uk/fig_11_23.png?rlkey=o3rnxynprpdg5lt0jkbh6wp9p&dl=1"))
-"""
-
-# ╔═╡ e4d12bd7-039a-42a8-b278-05a5e8fe0841
-cm"""
-$(define("Dot Product"))
-The dot product of ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` is
-```math
-\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2
-```
-
-The dot product of ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` is
-```math
-\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2+u_3 v_3
-```
-$(ebl())
-
-$(bth("Properties of the Dot Product"))
-Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane or in space and let ``c`` be a scalar.
-
-1. ``\mathbf{u} \cdot \mathbf{v}=\mathbf{v} \cdot \mathbf{u}\qquad \color{red}{\text{Commutative Property}}``
-
-2. ``\mathbf{u} \cdot(\mathbf{v}+\mathbf{w})=\mathbf{u} \cdot \mathbf{v}+\mathbf{u} \cdot \mathbf{w}\qquad \color{red}{\text{Distributive Property}}``
-
-3. ``c(\mathbf{u} \cdot \mathbf{v})=c \mathbf{u} \cdot \mathbf{v}=\mathbf{u} \cdot c \mathbf{v}\qquad \qquad\color{red}{\text{Associative Property}}``
-4. ``\mathbf{0} \cdot \mathbf{v}=0``
-5. ``\mathbf{v} \cdot \mathbf{v}=\|\mathbf{v}\|^2``
-"""
-
-# ╔═╡ 79d33f0f-6b03-420f-a0c1-98108e43ab6b
-cm"""
-$(ex(1,"Finding Dot Products"))
-
-Let ``\mathbf{u}=\langle 2,-2\rangle, \mathbf{v}=\langle 5,8\rangle``, and ``\mathbf{w}=\langle-4,3\rangle``.
-
-- (a.) ``\mathbf{u} \cdot \mathbf{v}=\langle 2,-2\rangle \cdot\langle 5,8\rangle=2(5)+(-2)(8)=-6``
-- (b.) ``(\mathbf{u} \cdot \mathbf{v}) \mathbf{w}=-6\langle-4,3\rangle=\langle 24,-18\rangle``
-- (c.) ``\mathbf{u} \cdot(2 \mathbf{v})=2(\mathbf{u} \cdot \mathbf{v})=2(-6)=-12``
-- (d.) ``\|\mathbf{w}\|^2=\mathbf{w} \cdot \mathbf{w}=\langle-4,3\rangle \cdot\langle-4,3\rangle=(-4)(-4)+(3)(3)=25``
-"""
-
-# ╔═╡ 66eb4dd6-f558-479a-b193-8e852c345721
-cm"""
-$(bth("Angle Between Two Vectors"))
-If ``\theta`` is the angle between two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}``, where ``0 \leq \theta \leq \pi``, then
-```math
-\cos \theta=\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}
-```
-"""
-
-# ╔═╡ 4fc2f92f-3773-4e53-82c6-c4e441f164b3
-cm"""
-$(bbl("Remark",""))
-```math
-\mathbf{u} \cdot \mathbf{v}=\|\mathbf{u}\|\|\mathbf{v}\| \cos \theta\qquad \color{red}{\text{Alternative form of dot product}}
-```
-"""
-
-# ╔═╡ 788ea369-4509-4970-9a2d-ea887194b790
-cm"""
-$(define(" Definition of Orthogonal Vectors"))
- The vectors ``u`` and ``v`` are orthogonal when ``u∙v=0``
-"""
-
-# ╔═╡ de23e5af-1d2d-4b22-9743-dd59bc903a9c
-cm"""
-$(ex(2,"Finding the Angle Between Two Vectors"))
-For ``\mathbf{u}=\langle 3,-1,2\rangle, \mathbf{v}=\langle-4,0,2\rangle, \mathbf{w}=\langle 1,-1,-2\rangle``, and ``\mathbf{z}=\langle 2,0,-1\rangle``, find the angle between each pair of vectors.
-
-- (a.) ``\mathbf{u}`` and ``\mathbf{v}``
-- (b.) ``\mathbf{u}`` and ``\mathbf{w}``
-- (c.) ``\mathbf{v}`` and ``\mathbf{z}``
-"""
-
-# ╔═╡ bc67920c-1bee-4fcc-8469-adf01e1d33e8
-cm"""
-$(ex(3,"Alternative Form of the Dot Product"))
-Given that ``\|\mathbf{u}\|=10,\|\mathbf{v}\|=7``, and the angle between ``\mathbf{u}`` and ``\mathbf{v}`` is ``\pi / 4``, find ``\mathbf{u} \cdot \mathbf{v}``.
-"""
-
-# ╔═╡ bf3af1b5-3959-447f-85ac-b2b0b1ab737f
-cm"""
-
-$(post_img("https://www.dropbox.com/scl/fi/yoip1oldetoeth472ju81/fig_11_26.png?rlkey=g71oyxboekwrwumo2znb7mqtg&dl=1",400))
-
-"""
-
-# ╔═╡ c925f9ff-245f-4d0a-b085-b703adc1daaf
-cm"""
-$(ex(4,"Finding Direction Angles"))
-Find the direction cosines and angles for the vector ``\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}+4 \mathbf{k}``, and show that ``\cos ^2 \alpha+\cos ^2 \beta+\cos ^2 \gamma=1``
-"""
-
-# ╔═╡ c1dee7b3-6118-493e-9c9a-4629cd2af8c3
-cm"""
-$(define("Projection and Vector Components"))
-Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors. Moreover, let
-```math
-\mathbf{u}=\mathbf{w}_1+\mathbf{w}_2
-```
-where ``\mathbf{w}_1`` is parallel to ``\mathbf{v}`` and ``\mathbf{w}_2`` is orthogonal to ``\mathbf{v}``, as shown in Figure below.
-1. ``\mathbf{w}_1`` is called the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` or the vector component of ``\mathbf{u}`` along ``\mathbf{v}``, and is denoted by ``\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}``.
-2. ``\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1`` is called the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}``.
-
-$(post_img("https://www.dropbox.com/scl/fi/dek860uer157a294ebkhg/fig_11_29.png?rlkey=yft18nd2xr98ot3s7345x4p6l&dl=1",500))
-"""
-
-# ╔═╡ 8bb57498-9a49-4b45-8d82-fb790465b1ae
-cm"""
-$(ex(5,"Finding a Vector Component of <span style='font-style:italic;font-weight:200;'>u</span> Orthogonal to <span style='font-style:italic;font-weight:200;'>v</span>"))
-Find the vector component of ``\mathbf{u}=\langle 5,10\rangle`` that is orthogonal to ``\mathbf{v}=\langle 4,3\rangle``, given that
-```math
-\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\langle 8,6\rangle
-```
-and
-```math
-\mathbf{u}=\langle 5,10\rangle=\mathbf{w}_1+\mathbf{w}_2 .
-```
-"""
-
-# ╔═╡ aac34993-c94d-4fa1-8f45-e249740c914d
-cm"""
-$(bth("Projection Using the Dot Product"))
-If ``\mathbf{u}`` and ``\mathbf{v}`` are nonzero vectors, then the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` is
-```math
-\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\left(\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{v}\|^2}\right) \mathbf{v}
-```
-"""
-
-# ╔═╡ 3eded575-d9c4-424e-8151-3958dababb38
-cm"""
-$(ex(6,"Decomposing a Vector into Vector Components"))
-Find the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` and the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}`` for ``\mathbf{u}=3 \mathbf{i}-5 \mathbf{j}+2 \mathbf{k}`` and ``\quad \mathbf{v}=7 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``.
-"""
-
-# ╔═╡ 97b10d17-61c1-494b-aefe-131a436e374e
-cm"""
-$(ex(7,"Finding a Force"))
-A 600-pound boat sits on a ramp inclined at ``30^{\circ}``, as shown in Figure below. What force is required to keep the boat from rolling down the ramp?
-$(post_img("https://www.dropbox.com/scl/fi/9h16n07tc8x569rwdx5j7/fig_11_32.png?rlkey=rv5hgssgbggmveuj0tcj81ovk&dl=1",500))
-"""
-
-# ╔═╡ b1c3ec5b-003d-42ab-8c6b-806e083a2047
-cm"""
-
-The work ``W`` done by the constant force ``\mathbf{F}`` acting along the line of motion of an object is given by
-```math
-W=(\text { magnitude of force })(\text { distance })=\|\mathbf{F}\|\|\stackrel{\rightharpoonup}{P Q}\|
-```
-as shown in Figure 11.33(a). When the constant force ``\mathbf{F}`` is not directed along the line of motion, you can see from Figure 11.33(b) that the work ``W`` done by the force is
-```math
-W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\|=(\cos \theta)\|\mathbf{F}\|\|\overrightarrow{P Q}\|=\mathbf{F} \cdot \overrightarrow{P Q}
-```
-
-$(post_img("https://www.dropbox.com/scl/fi/qafxufq3s8tcrxnbisru2/fig_11_33.png?rlkey=4uypkytgkkby8yaomav0jszhr&dl=1",400))
-
-This notion of work is summarized in the next definition.
-
-$(define("Work"))
-The work ``W`` done by a constant force ``\mathbf{F}`` as its point of application moves along the vector ``\overrightarrow{P Q}`` is one of the following.
-1. ``W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\| \quad`` Projection form
-2. ``W=\mathbf{F} \cdot \stackrel{\rightharpoonup}{P Q}`` Dot product form
-$(ebl())
-
-$(ex(8,"Finding Work"))
-To close a sliding door, a person pulls on a rope with a constant force of 50 pounds at a constant angle of ``60^{\circ}``, as shown in Figure below. Find the work done in moving the door 12 feet to its closed position.
-
-$(post_img("https://www.dropbox.com/scl/fi/8wn5s5kestb1dtzxulldc/fig_11_34.png?rlkey=r0g1mc0s9vakiye1dkxd5oxrd&dl=1",400))
-"""
-
-# ╔═╡ cce4a136-a23c-45c8-a3e4-78f744cc2836
-cm"""
-$(define("Cross Product of Two Vectors in Space"))
-Let
-```math
-\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k} \quad \text { and } \quad \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}
-```
-be vectors in space. The cross product of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector
-```math
-\mathbf{u} \times \mathbf{v}=\left(u_2 v_3-u_3 v_2\right) \mathbf{i}-\left(u_1 v_3-u_3 v_1\right) \mathbf{j}+\left(u_1 v_2-u_2 v_1\right) \mathbf{k}
-```
-"""
-
-# ╔═╡ b18adead-c917-450c-9a3c-7253d6d91442
-cm"""
-$(ex(1,"Finding the Cross Product"))
-For ``\mathbf{u}=\mathbf{i}-2 \mathbf{j}+\mathbf{k}`` and ``\mathbf{v}=3 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``, find each of the following.
-- (a.) ``\mathbf{u} \times \mathbf{v}``
-- (b.) ``\mathbf{v} \times \mathbf{u}``
-- (c.) ``\mathbf{v} \times \mathbf{v}``
-"""
-
-# ╔═╡ 79735eb1-16e1-4cf3-a43a-88d1ade37279
-cm"""
-$(bth("Algebraic Properties of the Cross Product"))
-Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in space, and let ``c`` be a scalar.
-1. ``\mathbf{u} \times \mathbf{v}=-(\mathbf{v} \times \mathbf{u})``
-2. ``\mathbf{u} \times(\mathbf{v}+\mathbf{w})=(\mathbf{u} \times \mathbf{v})+(\mathbf{u} \times \mathbf{w})``
-3. ``c(\mathbf{u} \times \mathbf{v})=(c \mathbf{u}) \times \mathbf{v}=\mathbf{u} \times(c \mathbf{v})``
-4. ``\mathbf{u} \times \mathbf{0}=\mathbf{0} \times \mathbf{u}=\mathbf{0}``
-5. ``\mathbf{u} \times \mathbf{u}=\mathbf{0}``
-6. ``\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=(\mathbf{u} \times \mathbf{v}) \cdot \mathbf{w}``
-"""
-
-# ╔═╡ f85ad3e4-f7ba-4563-b548-ceb803d13d2c
-cm"""
-$(bth("Geometric Properties of the Cross Product"))
-Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors in space, and let ``\theta`` be the angle between ``\mathbf{u}`` and ``\mathbf{v}``.
-1. ``\mathbf{u} \times \mathbf{v}`` is orthogonal to both ``\mathbf{u}`` and ``\mathbf{v}``.
-2. ``\|\mathbf{u} \times \mathbf{v}\|=\|\mathbf{u}\|\|\mathbf{v}\| \sin \theta``
-3. ``\mathbf{u} \times \mathbf{v}=\mathbf{0}`` if and only if ``\mathbf{u}`` and ``\mathbf{v}`` are scalar multiples of each other.
-4. ``\|\mathbf{u} \times \mathbf{v}\|=`` area of parallelogram having ``\mathbf{u}`` and ``\mathbf{v}`` as adjacent sides.
-"""
-
-# ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
-cm"""
-$(ex(1,"Integrating with Respect to <b>y</b>"))
-Evaluate ``\displaystyle \int_1^x\left(2 x y+3 y^2\right) d y``.
-"""
-
-# ╔═╡ 7e075bce-e784-4a4e-abc2-dad5230eeef7
-cm"""
-$(ex(2,"The Integral of an Integral"))
-Evaluate ``\displaystyle\int_1^2\left[\int_1^x\left(2 x y+3 y^2\right) d y\right] d x``.
-"""
-
-# ╔═╡ 67ddb4d2-cbba-4592-ad5a-f9c609d731a8
-cm"""
-$(bbl("Area of a Region in the Plane",""))
-1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then the area of ``R`` is
-```math
-A=\int_a^b \int_{g_1(x)}^{g_2(x)} d y d x
-```
-$(post_img("https://www.dropbox.com/scl/fi/mutpzct04u49o9zr87y50/fig_14_2.png?rlkey=rka697r0ssbpo5kye5j8fv0x0&dl=1",400))
-
-2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then the area of ``R`` is
-```math
-A=\int_c^d \int_{h_1(y)}^{h_2(y)} d x d y
-```
-$(post_img("https://www.dropbox.com/scl/fi/pprmgpabyiquf3hnz1uvi/fig_14_3.png?rlkey=ru0ej4j1rx8w1jh0c7jahg6ph&dl=1",400))
-
-"""
-
-# ╔═╡ 79ac9331-c1c7-4f8b-889a-61c850a6a405
-cm"""
-$(ex(3,"The Area of a Rectangular Region"))
-Use an iterated integral to represent the area of the rectangle shown below
-
-$(post_img("https://www.dropbox.com/scl/fi/ikaofyd7gij7oggtkwsu2/fig_14_4.png?rlkey=50moht6bh0x8y5iot9om9rfmq&dl=1",300))
-"""
-
-# ╔═╡ 3442098f-2588-4169-8afb-893cd97eb812
-cm"""
-$(ex(4,"Finding Area by an Iterated Integral"))
-Use an iterated integral to find the area of the region bounded by the graphs of
-```math
-f(x)=\sin x\quad \color{red}{\text{Sine curve forms upper boundary.}}
-```
-
-
-and
-```math
-g(x)=\cos x\quad \color{red}{\text{Cosine curve forms lower boundary.}}
-```
-
-
-between ``x=\pi / 4`` and ``x=5 \pi / 4``.
-"""
-
-# ╔═╡ c1673254-5543-4836-bb87-8a071607d2bf
-cm"""
-$(ex(5,"Comparing Different Orders of Integration"))
-Sketch the region whose area is represented by the integral
-```math
-\int_0^2 \int_{y^2}^4 d x d y
-```
-
-Then find another iterated integral using the order ``d y d x`` to represent the same area and show that both integrals yield the same value.
-"""
-
-# ╔═╡ 6ef69b15-cbe3-43be-b918-1fb146dcb871
-cm"""
-$(ex(6,"An Area Represented by Two Iterated Integrals"))
-Find the area of the region ``R`` that lies below the parabola
-```math
-y=4 x-x^2\quad\color{red}{\text{Parabola forms upper boundary.}}
-```
-
-
-above the ``x``-axis, and above the line
-```math
-y=-3 x+6\quad\color{red}{\text{Line and x-axis form lower boundary.}}
-```
-
-
-"""
-
-# ╔═╡ b87bf77d-0ac4-4aa4-89f1-c35bd07b2464
-cm"""
-Consider the countinuous function ``f(x,y)\geq 0``
-$(post_img("https://www.dropbox.com/scl/fi/d1r0zhp46g1wd480a7ih6/fig_14_8.png?rlkey=jfmg0gr1u3ytv3txz2m8vpmvt&dl=1",400))
-
-$(post_img("https://www.dropbox.com/scl/fi/yle6j30u1k0jb6f99wei4/fig_14_9.png?rlkey=3pzli926yppsfxyklmw6jlzrg&dl=1",400))
-
-$(post_img("https://www.dropbox.com/scl/fi/b0urecj17pzrws2bsw8as/fig_14_10.png?rlkey=o370zqxksdf6baidflsrh53z5&dl=1",400))
-
-$(post_img("https://www.dropbox.com/scl/fi/klsbozx2cdqs91fsk4awn/fig_14_11.png?rlkey=e92k2ojdyo465h3lqck0n0h49&dl=1",400))
-"""
-
-# ╔═╡ 949a0727-3427-44b9-bca1-cb6c0be55b5a
-cm"""
-$(ex(1,"Approximating the Volume of a Solid"))
-Approximate the volume of the solid lying between the paraboloid
-```math
-f(x, y)=1-\frac{1}{2} x^2-\frac{1}{2} y^2
-```
-and the square region ``R`` given by ``0 \leq x \leq 1,0 \leq y \leq 1``. Use a partition made up of squares whose sides have a length of ``\frac{1}{4}``.
-"""
-
-# ╔═╡ 363b9d8b-6288-46f4-b321-bf2d28d9e7df
-cm"""
-$(define("Double Integral"))
-If ``f`` is defined on a closed, bounded region ``R`` in the ``x y``-plane, then the double integral of ``f`` over ``R`` is
-```math
-\int_R \int f(x, y) d A=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i\right) \Delta A_i
-```
-provided the limit exists. If the limit exists, then ``f`` is integrable over ``R``.
-"""
-
-# ╔═╡ f80da3f2-5272-450c-a6e6-81ba4189b6b5
-cm"""
-$(bbl("Volume of a Solid Region",""))
-If ``f`` is integrable over a plane region ``R`` and ``f(x, y) \geq 0`` for all ``(x, y)`` in ``R``, then the volume of the solid region that lies above ``R`` and below the graph of ``f`` is
-```math
-V=\int_R \int f(x, y) d A
-```
-$(ebl())
-
-$(bth("Properties of Double Integrals"))
-Let ``f`` and ``g`` be continuous over a closed, bounded plane region ``R``, and let ``c`` be a constant.
-1. ``\displaystyle\iint_R c f(x, y) d A=c \int_R \int f(x, y) d A``
-2. ``\displaystyle\iint_R[f(x, y) \pm g(x, y)] d A=\int_R \int f(x, y) d A \pm \int_R \int g(x, y) d A``
-3. ``\displaystyle\iint_R f(x, y) d A \geq 0, \quad`` if ``f(x, y) \geq 0``
-4. ``\displaystyle\iint_R \int f(x, y) d A \geq \int_R \int g(x, y) d A, \quad`` if ``f(x, y) \geq g(x, y)``
-5. ``\displaystyle\iint_R f(x, y) d A=\int_{R_1} \int f(x, y) d A+\int_{R_2} \int f(x, y) d A``, where ``R`` is the union of two nonoverlapping subregions ``R_1`` and ``R_2``.
-"""
-
-# ╔═╡ 9aaa5191-16d2-4af7-981e-697ea50f166f
-cm"""
-$(bth("Fubini's Theorem"))
-Let ``f`` be continuous on a plane region ``R``.
-1. If ``R`` is defined by ``a \leq x \leq b`` and ``g_1(x) \leq y \leq g_2(x)``, where ``g_1`` and ``g_2`` are continuous on ``[a, b]``, then
-```math
-\iint_R  f(x, y) d A=\int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) d y d x
-```
-2. If ``R`` is defined by ``c \leq y \leq d`` and ``h_1(y) \leq x \leq h_2(y)``, where ``h_1`` and ``h_2`` are continuous on ``[c, d]``, then
-```math
-\iint_R  f(x, y) d A=\int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) d x d y .
-```
-"""
-
-# ╔═╡ 7df7019e-a9b3-4ae1-bae0-44badb94e6bf
-cm"""
-$(ex(2,"Eevaluating a Double Integral as an Iterated Integral"))
-
-Evaluate
-```math
-\iint_R \left(1-\frac{1}{2} x^2-\frac{1}{2} y^2\right) d A
-```
-where ``R`` is the region given by
-```math
-0 \leq x \leq 1, \quad 0 \leq y \leq 1 .
-```
-"""
-
-# ╔═╡ 1be798c5-b9a4-42c3-a526-8563d25eb246
-cm"""
-$(ex(3,"Finding Volume by a Double Integral"))
-Find the volume of the solid region bounded by the paraboloid ``z=4-x^2-2 y^2`` and the ``x y``-plane seen  [here](https://www.desmos.com/3d/ine3ie6963)
-"""
-
-# ╔═╡ 5c9dc21c-b5ff-422f-9d8e-1d177efb60af
-cm"""
-$(ex(4,"Comparing Different Orders of Integration"))
-Find the volume of the solid region bounded by the surface
-```math
-f(x, y)=e^{-x^2} \quad \text { Surface }
-```
-and the planes ``z=0, y=0, y=x``, and ``x=1``, as shown [Here](https://www.desmos.com/3d/fo6kmsxrdj).
-"""
-
-# ╔═╡ 229b3153-a41f-4acc-af89-89a7fd35a10f
-cm"""
-$(ex(5,"Volume of a Region Bounded by Two Surfaces"))
-Find the volume of the solid region bounded above by the paraboloid
-```math
-z=1-x^2-y^2
-```
-
-and below by the plane
-```math
-z=1-y
-```
-
-"""
-
-# ╔═╡ 6357795f-52f3-4832-8c27-e75f220cd1b5
-cm"""
-$(define("the Average Value of a Function Over a Region"))
-If ``f`` is integrable over the plane region ``R``, then the average value of ``f`` over ``R`` is
-```math
-\text { Average value }=\frac{1}{A} \int_R \int f(x, y) d A
-```
-where ``A`` is the area of ``R``.
-$(ebl())
-
-$(ex(6,"Finding the Average Value of a Function"))
-Find the average value of
-```math
-f(x, y)=\frac{1}{2} x y
-```
-over the plane region ``R``, where ``R`` is a rectangle with vertices
-```math
-(0,0),(4,0),(4,3), \quad \text { and } \quad(0,3)
-```
-"""
-
-# ╔═╡ 51d70474-def8-4714-854d-2dd69caebdfa
-cm"""
-In Section 10.4, you learned that the polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
-```math
-\begin{aligned}
-& x=r \cos \theta \quad \text { and } \quad y=r \sin \theta \\
-& r^2=x^2+y^2 \quad \text { and } \quad \tan \theta=\frac{y}{x}
-\end{aligned}
-```
-
-$(ex(1,"Using Polar Coordinates to Describe a Region"))
-Use polar coordinates to describe each region shown below.
-
-$(post_img("https://www.dropbox.com/scl/fi/5xqj9e61lhwbm1ukw3x1s/fig_14_23.png?rlkey=z0h0t55hzyco3dth6mvme9fac&dl=1"))
-"""
-
-# ╔═╡ e47b9235-bce9-42e1-b790-acc15042f4dc
-cm"""
-We consider the __polar sector__
-```math
-\mathbf{R}=\left\{(r,\theta): \; r_1\leq r\leq r_2, \quad \theta_1\leq \theta \leq\theta_2\right\}
-```
-as show here
-$(post_img("https://www.dropbox.com/scl/fi/kwu956q8ee8n88pekz85q/fig_14_24.png?rlkey=dwee2k5qjnnudcdp9ambu53zf&dl=1"))
-
-Now, we partition ``\mathbf{R}`` into small polar sectors.
-$(post_img("https://www.dropbox.com/scl/fi/tithh34ltodbkhku4rc5a/fig_14_25.png?rlkey=3fa1volfpqkact18ysez9lrb0&dl=1"))
-
-Note that 
-```math
-\Delta A_i = r_i \Delta r_i\Delta\theta_i
-```
-So, we have
-
-```math
-\int_R \int f(x, y) d A \approx \sum_{i=1}^n f\left(r_i \cos \theta_i, r_i \sin \theta_i\right) r_i \Delta r_i \Delta \theta_i
-```
-
-"""
-
-# ╔═╡ 48b1e580-0502-497f-80e7-b6ade3129272
-cm"""
-$(bth("Change of Variables to Polar Form"))
-Let ``R`` be a plane region consisting of all points ``(x, y)=(r \cos \theta, r \sin \theta)`` satisfying the conditions ``0 \leq g_1(\theta) \leq r \leq g_2(\theta), \alpha \leq \theta \leq \beta``, where ``0 \leq(\beta-\alpha) \leq 2 \pi``. If ``g_1`` and ``g_2`` are continuous on ``[\alpha, \beta]`` and ``f`` is continuous on ``R``, then
-```math
-\int_R \int_R f(x, y) d A=\int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos \theta, r \sin \theta) r d r d \theta
-```
-"""
-
-# ╔═╡ 0c2674a1-89f9-4fde-b10f-13001ce0754e
-cm"""
-$(ex(2,"Evaluating a Double Polar Integral"))
-Let ``R`` be the annular region lying between the two circles ``x^2+y^2=1`` and ``x^2+y^2=5``. Evaluate the integral
-```math
-\int_R \int\left(x^2+y\right) d A
-```
-"""
-
-# ╔═╡ 818d83db-9154-4e13-853a-7dd83d368773
-cm"""
-$(ex(3,"Change of Variables to Polar Coordinates"))
-Use polar coordinates to find the volume of the solid region bounded above by the hemisphere
-```math
-z=\sqrt{16-x^2-y^2}\quad \color{red}{\text{Hemisphere forms upper surface.}}
-```
-
-
-and below by the circular region ``R`` given by
-```math
-x^2+y^2 \leq 4 \quad \color{red}{\text{Circular region forms lower surface.}}
-```
-
-
-as shown brlow.
-$(post_img("https://www.dropbox.com/scl/fi/966uofohyhoxpgdvsusc0/fig_14_30.png?rlkey=20elxczfuempbiu24vyhtieyf&dl=1"))
-"""
-
-# ╔═╡ c2c834d3-c4d8-4313-b1dd-f75dc04c18d9
-cm"""
-$(ex(4,"Finding areas of Polar Regions"))
-Find the area of the shaded region.
-$(post_img("https://www.dropbox.com/scl/fi/wjg5xoy0sm4dlbez8o1n7/fig_14_31.png?rlkey=wmqflrupx0zihz2mjqgui576t&dl=1"))
-"""
-
-# ╔═╡ 059e03c2-d921-42e6-9130-13d37f9f05dc
-cm"""
-$(ex(5,"Integrating with Respect to θ First"))
-Find the area of the region bounded above by the spiral ``r=\pi /(3 \theta)`` and below by the polar axis, between ``r=1`` and ``r=2``.
-"""
-
-# ╔═╡ 240b0876-7fa2-4e71-945f-0ffdd017557a
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/zf2wz75pe3y12w44peo14/fig_14_52.png?rlkey=7kclyjh0verzyvhr59zh0he5f&dl=1",400))
-"""
-
-# ╔═╡ 166b293f-cead-4852-b23b-7f6b699b354e
-cm"""
-$(define("Triple Integral"))
-If ``f`` is continuous over a bounded solid region ``Q``, then the triple integral of ``f`` over ``\boldsymbol{Q}`` is defined as
-```math
-\iiint_Q f(x, y, z) d V=\lim _{\|\Delta\| \rightarrow 0} \sum_{i=1}^n f\left(x_i, y_i, z_i\right) \Delta V_i
-```
-provided the limit exists. The volume of the solid region ``Q`` is given by
-```math
-\text { Volume of } Q=\iiint_Q d V \text {. }
-```
-"""
-
-# ╔═╡ 032054f9-1ea2-4265-b3a4-93045f23a45a
-cm"""
-$(bbl("Remarks",""))
-Some of the properties of double integrals can be restated in terms of triple integrals.
-1. ``\iint_Q \int_Q c f(x, y, z) d V=c \iiint_Q f(x, y, z) d V``
-2. ``\iint_Q \int_Q[f(x, y, z) \pm g(x, y, z)] d V=\iiint_Q f(x, y, z) d V \pm \iint_Q g(x, y, z) d V``
-3. ``\iiint_Q f(x, y, z) d V=\iiint_{Q_1} f(x, y, z) d V+\iiint_{Q_2} f(x, y, z) d V``
-"""
-
-# ╔═╡ f5d90c07-6292-4c14-904c-2851fee7ac1f
-cm"""
-$(bth("Evaluation by Iterated Integrals"))
-Let ``f`` be continuous on a solid region ``Q`` defined by
-```math
-\begin{aligned}
-& a \leq x \leq b \\
-& h_1(x) \leq y \leq h_2(x) \\
-& g_1(x, y) \leq z \leq g_2(x, y)
-\end{aligned}
-```
-where ``h_1, h_2, g_1``, and ``g_2`` are continuous functions. Then,
-```math
-\iiint_Q f(x, y, z) d V=\int_a^b \int_{h_1(x)}^{h_2(x)} \int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z d y d x
-```
-"""
-
-# ╔═╡ 020d8181-06fc-4b38-bb8a-990c2337d1ca
-cm"""
-$(ex(1,"Evaluating a Triple Iterated Integral"))
-
-Evaluate the triple iterated integral
-```math
-\int_0^2 \int_0^x \int_0^{x+y} e^x(y+2 z) d z d y d x .
-```
-"""
-
-# ╔═╡ 3dc9bbb0-6cf9-410a-b3d4-aa8e8859c9a9
-cm"""
-$(bbl("Remark","Solid Between two surfaces"))
-$(post_img("https://www.dropbox.com/scl/fi/3714xtwt50zam9gs7umx5/fig_14_53.png?rlkey=wqo315ryxhasu9q90qmh7q7n6&dl=1"))
-```math
-\iint\left[\int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z) d z\right] d y d x.
-```
-"""
-
-# ╔═╡ d75ca2b2-1033-450e-b94d-49fd308c3f5e
-cm"""
-$(ex(2,"Using a Triple Integral to Find Volume"))
-
-Find the volume of the ellipsoid given by ``4 x^2+4 y^2+z^2=16``.
-
-$(post_img("https://www.dropbox.com/scl/fi/qlwwpf8803wfagzsjjpwr/fig_14_54.png?rlkey=je050lc0u42sc7ecxn3vieavn&dl=1",400))
-"""
-
-# ╔═╡ 21fb5570-c41a-4a67-a900-614b4debc7d7
-cm"""
-$(ex(3,"Changing the Order of Integration"))
-Evaluate 
-```math
-\int_0^{\sqrt{\pi / 2}} \int_x^{\sqrt{\pi / 2}} \int_1^3 \sin \left(y^2\right) d z d y d x.
-```
-"""
-
-# ╔═╡ 2a2e4a74-0985-4c23-8da7-1694021aa382
-cm"""
-$(ex(4,"Determining the Limits of Integration"))
-
-Set up a triple integral for the volume of each solid region.
-1. The region in the first octant bounded above by the cylinder ``z=1-y^2`` and lying between the vertical planes ``x+y=1`` and ``x+y=3``
-2. The upper hemisphere ``z=\sqrt{1-x^2-y^2}``
-3. The region bounded below by the paraboloid ``z=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=6``
-"""
-
-# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
-cm"""
-$(bbl("The Cylindrical Coordinate System",""))
-In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
-1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
-2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
-"""
-
-# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
-cm"""
-$(ex(1,"Cylindrical-to-Rectangular Conversion"))
-Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
-"""
-
-# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
-cm"""
-$(ex(2,"Rectangular-to-Cylindrical Conversion"))
-
-Convert the point
-```math
-(x, y, z)=(1, \sqrt{3}, 2)
-```
-to cylindrical coordinates.
-"""
-
-# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
-cm"""
-$(ex(3," Rectangular-to-Cylindrical Conversion"))
-Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
-- a. ``x^2+y^2=4 z^2``
-- b. ``y^2=x``
-"""
-
-# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
-cm"""
-$(ex(4,"Cylindrical-to-Rectangular Conversion"))
-Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
-```math
-r^2 \cos 2 \theta+z^2+1=0
-```
-"""
-
-# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
-cm"""
-$(ex(1,"Finding Volume in Cylindrical Coordinates"))
-Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
-$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
-"""
-
-# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
-cm"""
-$(bbl("The Spherical Coordinate System",""))
-In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
-1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
-2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
-3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
-Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
-"""
-
-# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
-"""
-
-# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
-cm"""
-$(ex(5,"Rectangular-to-Spherical Conversion"))
-
-Find an equation in spherical coordinates for the surface represented by each rectangular equation.
-- a. Cone: ``x^2+y^2=z^2``
-- b. Sphere: ``x^2+y^2+z^2-4 z=0``
-"""
-
-# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
-cm"""
-$(ex(4,"Finding Volume in Spherical Coordinates"))
-
-Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
-
-$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
-"""
 
 # ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
 @htl("""
@@ -7393,15 +7414,13 @@ version = "1.4.1+2"
 # ╟─2cfa4e94-e5ff-4eea-a9fb-6db2cf51cf25
 # ╟─9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
 # ╟─a6f3a648-a960-414b-8bca-e52ec129881c
-# ╟─571a0a6a-b0f2-4899-9b22-4e7948f358e2
 # ╟─6419f344-a1b3-4d60-8f27-8469a6e6b022
 # ╟─f6836f13-5370-4ac3-813a-50fc012bfcab
 # ╟─94194246-ad29-43d1-9925-126fe9e5e696
-# ╠═e3363ab4-1543-421f-a68c-cb1685a2f06a
-# ╟─2c4b3a89-8257-48fa-8e3a-30f059e0187d
-# ╠═734ef678-1329-4d59-8753-0797b6a675c7
+# ╠═2c4b3a89-8257-48fa-8e3a-30f059e0187d
+# ╠═88cbeb8a-cb64-4e61-ba8b-a04d6ffc6d8b
 # ╟─0a7b91d0-5ca6-4006-9b59-f9e077a8c3db
-# ╟─7bb3abcb-525c-45a4-9989-74c42fee5fe2
+# ╠═7bb3abcb-525c-45a4-9989-74c42fee5fe2
 # ╟─574ab398-71d0-4427-86dc-fd99482feffc
 # ╟─7e3feecd-7106-4591-b22a-97a7aa064b6c
 # ╟─108475eb-bae3-426d-88db-f0f5dc177c65
