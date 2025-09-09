@@ -1176,533 +1176,211 @@ let
     p1
 end
 
-# ╔═╡ 1fb44f1d-547e-4bea-b7ad-f171ebed5b20
-# cm"""
-# $(ex(2," Using the Cross Product"))
-# Find a unit vector that is orthogonal to both
-# ```math
-# \mathbf{u}=\mathbf{i}-4 \mathbf{j}+\mathbf{k}
-# ```
-# and
-# ```math
-# \mathbf{v}=2 \mathbf{i}+3 \mathbf{j}
-# ```
-# """
-
 # ╔═╡ 4fb037ae-7f8e-40a7-9988-26da22529d2e
-# let
-#     u = [1; -4; 1]
-#     v = [2; 3; 0]
-#     u × v
-# end
-
-# ╔═╡ 948bbe03-1560-4b79-904f-133256b6423f
-# cm"""
-# $(ex(3,"Geometric Application of the Cross Product"))
-# The vertices of a quadrilateral are listed below. Show that the quadrilateral is a parallelogram and find its area.
-# ```math
-# \begin{array}{ll}
-# A=(5,2,0) & B=(2,6,1) \\
-# C=(2,4,7) & D=(5,0,6)
-# \end{array}
-# ```
-# """
+let
+    u = [1; -4; 1]
+    v = [2; 3; 0]
+    u × v
+end
 
 # ╔═╡ 12d1fa2a-9a6c-4edc-821e-2f54b4da454e
-# let
-#     A = [5; 2; 0.0]
-#     B = [2; 6; 1.0]
-#     C = [2; 4; 7.0]
-#     D = [5; 0; 6.0]
-#     AB = B - A
-#     AD = D - A
-#     area = norm(AB × AD)
-# end
+let
+    A = [5; 2; 0.0]
+    B = [2; 6; 1.0]
+    C = [2; 4; 7.0]
+    D = [5; 0; 6.0]
+    AB = B - A
+    AD = D - A
+    area = norm(AB × AD)
+end
 
 # ╔═╡ bb8ca18e-ecba-40e0-b1c9-caf920ff7586
-# cm"""
+cm"""
 
-# [Geogebra Graph](https://www.geogebra.org/classic/k64hdfn9?embed)
+[Geogebra Graph](https://www.geogebra.org/classic/k64hdfn9?embed)
 
 
-# """
+"""
 
 # ╔═╡ d6fc1ea1-f463-46a5-94e6-9a4e6f914fc8
-# md"## Application"
-
-# ╔═╡ f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
-# cm"""
-# $(bbl("Torque",""))
-# In physics, the cross product can be used to measure torque-the moment M of a force ``\mathbf{F}`` about a point ``\boldsymbol{P}``, as shown below
-# $(post_img("https://www.dropbox.com/scl/fi/691imwz7wog1wxr2vx3jt/fig_11_39.png?rlkey=v4e50kju4mvmy8zd0vjy4v1ef&dl=1",300))
-
-# If the point of application of the force is ``Q``, then the moment of ``\mathbf{F}`` about ``P`` is
-# ```math
-# \mathbf{M}=\stackrel{\rightharpoonup}{P Q} \times \mathbf{F} . \quad \text { Moment of } \mathbf{F} \text { about } P
-# ```
-
-# The magnitude of the moment ``\mathbf{M}`` measures the tendency of the vector ``\overrightarrow{P Q}`` to rotate counterclockwise (using the right-hand rule) about an axis directed along the vector ``\mathbf{M}``.
-# """
-
-# ╔═╡ 6f42f537-305f-4e0a-b593-5071e1d7af7b
-# cm"""
-# $(ex(4,"An Application of the Cross Product"))
-# A vertical force of 50 pounds is applied to the end of a one-foot lever that is attached to an axle at point ``P``, as shown below. 
-
-# $(post_img("https://www.dropbox.com/scl/fi/9sqxf39xyyukd1zbqjv8o/fig_11_40.png?rlkey=szapu3urbrqd9pe9gfl7qfyai&dl=1",300))
-
-# Find the moment of this force about the point ``P`` when ``\theta=60^{\circ}``.
-# """
+md"## Application"
 
 # ╔═╡ 30596df7-5297-4369-ae8c-1970df3da531
-# md"## The Triple Scalar Product"
-
-# ╔═╡ 183998e1-735f-4c38-ae61-7f2471fa1ae5
-# cm"""
-# For vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in space, the dot product of ``\mathbf{u}`` and ``\mathbf{v} \times \mathbf{w}``
-# ```math
-# \mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})
-# ```
-# is called the __triple scalar product__,
-
-# $(bth("The Triple Scalar Product"))
-# For ``\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k}, \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}``, and ``\mathbf{w}=w_1 \mathbf{i}+w_2 \mathbf{j}+w_3 \mathbf{k}``, the triple scalar product is
-# ```math
-# \mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{rrr}
-# u_1 & u_2 & u_3 \\
-# v_1 & v_2 & v_3 \\
-# w_1 & w_2 & w_3
-# \end{array}\right|
-# ```
-# """
-
-# ╔═╡ ece4c6d9-8393-43c9-b60d-93df66a95999
-# cm"""
-# $(bth("Geometric Property of the Triple Scalar Product"))
-# The volume ``V`` of a parallelepiped with vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` as adjacent edges is
-# ```math
-# V=|\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})| .
-# ```
-# $(ebl())
-
-# $(post_img("https://www.dropbox.com/scl/fi/5hf3ibte2ppgtlx0vegr1/fig_11_41.png?rlkey=z0qrbw2p1z30iyhae0mf2xdfo&dl=1",300))
-# """
-
-# ╔═╡ 8b67f393-e954-4b33-9cc9-c382d7a41b37
-# cm"""
-# $(ex(5,"Volume by the Triple Scalar Product"))
-# Find the volume of the parallelepiped shown below having
-# ```math
-# \begin{aligned}
-# \mathbf{u} & =3 \mathbf{i}-5 \mathbf{j}+\mathbf{k} \\
-# \mathbf{v} & =2 \mathbf{j}-2 \mathbf{k}
-# \end{aligned}
-# ```
-# and
-# ```math
-# \mathbf{w}=3 \mathbf{i}+\mathbf{j}+\mathbf{k}
-# ```
-# as adjacent edges.
-
-# """
+md"## The Triple Scalar Product"
 
 # ╔═╡ b35ca1c3-621d-40af-afb7-a96b6fae35a8
-# let
-#     u = [3; -5; 1]
-#     v = [0; 2; -2]
-#     w = [3; 1; 1]
-#     volume = abs(u ⋅ (w × v))
-# end
+let
+    u = [3; -5; 1]
+    v = [0; 2; -2]
+    w = [3; 1; 1]
+    volume = abs(u ⋅ (w × v))
+end
 
 # ╔═╡ 4d59ce5f-85f1-4d35-8fdb-e6b3f9040eb5
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/b5xwbxrg?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/b5xwbxrg?embed)
 
-# """
-
-# ╔═╡ b1a879f4-3d78-4309-9f4f-117bcb0765da
-# cm"""
-# $(bbl("Remark",""))
-
-# The volume of the parallelepiped is ``0`` if and only if the three vectors are __coplanar__. 
-
-# That is, when the vectors ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle``, ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle``, and ``\mathbf{w}=\left\langle w_1, w_2, w_3\right\rangle`` have the same initial point, they lie in the same plane if and only if
-# ```math
-# \mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{ccc}
-# u_1 & u_2 & u_3 \\
-# v_1 & v_2 & v_3 \\
-# w_1 & w_2 & w_3
-# \end{array}\right|=0
-# ```
-# """
+"""
 
 # ╔═╡ c9fdf367-035b-4716-9f45-e62d82ec8a6e
-# md"""
-# # 11.5 Lines and Planes in Space
-# > __Objectives__
-# > 1. Write a set of parametric equations for a line in space.
-# > 1. Write a linear equation to represent a plane in space.
-# > 1. Sketch the plane given by a linear equation.
-# > 1. Find the distances between points, planes, and lines in space.
-# """
+md"""
+# 11.5 Lines and Planes in Space
+> __Objectives__
+> 1. Write a set of parametric equations for a line in space.
+> 1. Write a linear equation to represent a plane in space.
+> 1. Sketch the plane given by a linear equation.
+> 1. Find the distances between points, planes, and lines in space.
+"""
 
 # ╔═╡ 07ffeef2-9434-49d5-b77b-072c00a80d76
-# md"## Lines in Space"
+md"## Lines in Space"
 
 # ╔═╡ b3cc1aa3-6360-4f59-9a30-ac5e44f133bc
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
 
-# """
-
-# ╔═╡ 0e941631-0e52-4dc3-bdf1-056f36e77499
-# cm"""
-# $(bth("Parametric Equations of a Line in Space"))
-
-# A line ``L`` parallel to the vector ``\mathbf{v}=\langle a, b, c\rangle`` and passing through the point ``P\left(x_1, y_1, z_1\right)`` is represented by the parametric equations
-# ```math
-# x=x_1+a t, \quad y=y_1+b t, \quad \text { and } \quad z=z_1+c t .
-# ```
-# $(ebl())
-
-# If the direction numbers ``a, b``, and ``c`` are all nonzero, then you can eliminate the parameter ``t`` in the parametric equations to obtain symmetric equations of the line.
-# ```math
-# \frac{x-x_1}{a}=\frac{y-y_1}{b}=\frac{z-z_1}{c} \quad \color{red}{\text{Symmetric equations}}
-# ```
-
-
-# $(ex(1,"Finding Parametric and Symmetric Equations"))
-# Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Below.
-
-# """
+"""
 
 # ╔═╡ ca27664a-8f75-4131-9d61-044ea96979de
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
 
 
-# """
+"""
 
 # ╔═╡ 44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
-# md"##  Planes in Space"
-
-# ╔═╡ 23a92df7-77d9-4804-86a5-08cdfea8651c
-# cm"""
-# $(post_img("https://www.dropbox.com/scl/fi/9vzo9clna5s3ugrufyons/fig_11_45.png?rlkey=dyblrdq5uvbjp1wmdl8y5mryl&dl=1",400))
-
-# $(bth("Standard Equation of a Plane in Space"))
-# The plane containing the point ``\left(x_1, y_1, z_1\right)`` and having normal vector
-# ```math
-# \mathbf{n}=\langle a, b, c\rangle
-# ```
-# can be represented by the standard form of the equation of a plane
-# ```math
-# a\left(x-x_1\right)+b\left(y-y_1\right)+c\left(z-z_1\right)=0 .
-# ```
-# """
-
-# ╔═╡ 391ff8aa-056a-4867-90db-3d9f4537fe80
-# cm"""
-# $(bbl("Remark",""))
-# ```math
-# a x+b y+c z+d=0 \qquad \color{red}{\text{General form of equation of plane}}
-# ```
-# """
-
-# ╔═╡ 8e46e68e-0099-430b-864e-683b14ed2fbd
-# cm"""
-# $(ex(3,"Finding an Equation of a Plane in Three-Space"))
-# Find an equation (in standard form and in general form) of the plane containing the points ``(2,1,1), \quad(1,4,1), \quad`` and ``\quad(-2,0,4)``.
-# """
+md"##  Planes in Space"
 
 # ╔═╡ 71a93732-10ff-480f-aacf-6ea729d636b9
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
 
-# """
-
-# ╔═╡ 902fbee4-194f-499d-9e9d-ad7bfb08131e
-# cm"""
-# $(bbl("Angle between two planes",""))
-# ```math
-# \cos \theta=\frac{\left|\mathbf{n}_1 \cdot \mathbf{n}_2\right|}{\left\|\mathbf{n}_1\right\|\left\|\mathbf{n}_2\right\|}
-# ```
-
-
-# """
-
-# ╔═╡ 6e53795f-016a-4113-ae5d-5dc2a02758a7
-# cm"""
-# $(ex(4,"Finding the Line of Intersection of Two Planes"))
-# Find the angle between the two planes ``x-2 y+z=0`` and ``2 x+3 y-2 z=0``. Then find parametric equations of their line of intersection.
-# """
+"""
 
 # ╔═╡ 21b654c3-e9e3-4277-914d-32c81dc86604
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/tg4tezst?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/tg4tezst?embed)
 
-# """
+"""
 
 # ╔═╡ d041d81f-b61f-4dfe-9fc0-472cef882098
-# let
-#     n1 = [1; -2; 1]
-#     n2 = [2; 3; -2]
-#     α = acos(abs(n1 ⋅ n2) / (norm(n1) * norm(n2))) |> u"°"
+let
+    n1 = [1; -2; 1]
+    n2 = [2; 3; -2]
+    α = acos(abs(n1 ⋅ n2) / (norm(n1) * norm(n2))) |> u"°"
 
-# end
+end
 
 # ╔═╡ 99fddbde-28de-4a43-977b-a8d9559fe997
-# md"## Sketching Planes in Space"
+md"## Sketching Planes in Space"
 
 # ╔═╡ 7ebe69ae-4d5a-4f4f-a114-15dc3ddd6876
-# cm"""
-# Sketch the plane
-# ```math
-# 3x+2y+4z=12
-# ```
-# """
+cm"""
+Sketch the plane
+```math
+3x+2y+4z=12
+```
+"""
 
 # ╔═╡ 5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
-# md"## Distances Between Points, Planes, and Lines"
-
-# ╔═╡ 9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
-# cm"""
-# $(bth("Distance Between a Point and a Plane"))
-# $(post_img("https://www.dropbox.com/scl/fi/5l5deuushije2ffszddg4/fig_11_52.png?rlkey=gz5llqi698cjwz5iuwwfruap4&dl=1",300))
-# The distance between a plane and a point ``Q`` (not in the plane) is
-# ```math
-# D=\left\|\operatorname{proj}_{\mathbf{n}} \stackrel{\rightharpoonup}{P Q}\right\|=\frac{|\stackrel{\rightharpoonup}{P Q} \cdot \mathbf{n}|}{\|\mathbf{n}\|}
-# ```
-# where ``P`` is a point in the plane and ``\mathbf{n}`` is normal to the plane.
-
-
-# $(ebl())
-
-# $(ex(5,"Finding the Distance Between a Point and a Plane"))
-# Find the distance between the point ``Q(1,5,-4)`` and the plane ``3 x-y+2 z=6``.
-# """
+md"## Distances Between Points, Planes, and Lines"
 
 # ╔═╡ 1b6deda2-a68d-4684-8741-275628b24ecf
-# let
-#     Q = (1, 5, -4)
-#     P = (2, 0, 0)
-#     n = (3, -1, 2)
-#     on_plane(P) = n ⋅ P == 6
-#     PQ = Q .- P
-#     D = abs(PQ ⋅ n) / norm(n)
-# end
-
-# ╔═╡ 1aca8a3e-feb4-4665-a059-8a0c2171198a
-# cm"""
-# $(bbl("Distance between a point and a plane"))
-# Let ``Q(x_0,y_0,z_0)`` be any point. The distance between ``Q`` and the plane ``ax+by+cz+d=0`` is given by
-# ```math
-# D=\frac{\left|a x_0+b y_0+c z_0+d\right|}{\sqrt{a^2+b^2+c^2}}
-# ```
-# where ``P(x_1.y_1,z_2)`` on the plane.
-
-# """
-
-# ╔═╡ bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
-# cm"""
-# $(ex(6,"Finding the Distance Between Two Parallel Planes"))
-# Two parallel planes, ``3 x-y+2 z-6=0`` and ``6 x-2 y+4 z+4=0``, find the distance between them.
-# """
+let
+    Q = (1, 5, -4)
+    P = (2, 0, 0)
+    n = (3, -1, 2)
+    on_plane(P) = n ⋅ P == 6
+    PQ = Q .- P
+    D = abs(PQ ⋅ n) / norm(n)
+end
 
 # ╔═╡ 7932b9ab-1041-44ee-8e31-f10870a58d90
-# let
-#     f1(x, y, z) = 3x - y + 2z - 6
-#     f2(x, y, z) = 6x - 2y + 4z + 4
-#     Q = (0, -6, 0)
-#     P = (0, 0, -1)
-#     PQ = Q .- P
-#     n = (6, -2, 4)
-#     D = abs(PQ ⋅ n) / norm(n)
+let
+    f1(x, y, z) = 3x - y + 2z - 6
+    f2(x, y, z) = 6x - 2y + 4z + 4
+    Q = (0, -6, 0)
+    P = (0, 0, -1)
+    PQ = Q .- P
+    n = (6, -2, 4)
+    D = abs(PQ ⋅ n) / norm(n)
 
 
-# end
-
-# ╔═╡ b829aed8-9618-44ea-9a2d-2c5d36416e62
-# cm"""
-# $(bth("Distance Between a Point and a Line in Space"))
-# The distance between a point ``Q`` and a line in space is
-# ```math
-# D=\frac{\|\overrightarrow{P Q} \times \mathbf{u}\|}{\|\mathbf{u}\|}
-# ```
-# where ``\mathbf{u}`` is a direction vector for the line and ``P`` is a point on the line.
-
-# $(post_img("https://www.dropbox.com/scl/fi/y9ty0d9njoshc2ki0skey/fig_11_54.png?rlkey=wicvn44wlqvc72niqy28dfs1w&dl=1",300))
-# $(ebl())
-
-# $(ex(7,"Finding the Distance Between a Point and a Line"))
-# Find the distance between the point ``Q(3,-1,4)`` and the line
-# ```math
-# x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
-# ```
-# """
+end
 
 # ╔═╡ 8934159d-2dc6-4e4d-a5c4-2125831e0c52
-# let
-#     Q = (3, -1, 4)
-#     P = (-2, 0, 1)
-#     u = (3, -2, 4)
-#     PQ = Q .- P
-#     norm(cross(vcat(PQ...), vcat(u...))) / norm(u)
-# end
+let
+    Q = (3, -1, 4)
+    P = (-2, 0, 1)
+    u = (3, -2, 4)
+    PQ = Q .- P
+    norm(cross(vcat(PQ...), vcat(u...))) / norm(u)
+end
 
 # ╔═╡ 2407b715-09cd-4568-bf81-4b9f5cf4065e
-# md"## Skew lines"
-
-# ╔═╡ 037e8495-26d6-45d9-a855-4d1c88917561
-# cm"""
-# $(define("Skew Lines"))
-# Two lines in space are __skew__ if they are neither parallel nor intersecting.
-# """
-
-# ╔═╡ 5e96be6d-4801-4056-ae2c-0b1b95307ac4
-# cm"""
-# $(ex())
-# Consider the following two lines in space.
-# ```math
-# \begin{aligned}
-# & L_1: x=4+5 t, y=5+5 t, z=1-4 t \\
-# & L_2: x=4+s, y=-6+8 s, z=7-3 s
-# \end{aligned}
-# ```
-# - (i) Show that these lines are not parallel.
-# - (ii) Show that these lines do not intersect and therefore are skew lines.
-# - (iii) Show that the two lines lie in parallel planes.
-# - (iv) Find the distance between the parallel planes from part (iii). This is the distance between the original skew lines.
-# """
+md"## Skew lines"
 
 # ╔═╡ eacf6145-a437-45e9-8eee-fb587077be60
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/r488tpxz?embed)
-# """
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/r488tpxz?embed)
+"""
 
 # ╔═╡ 8143a2ac-b6dc-42b3-95a7-79006bc8916c
-# let
-#     @variables x::Real, y::Real, z::Real, t::Real, s::Real
-#     P1 = [4; 5; 1]
-#     P2 = [4; -6; 7]
-#     v1 = [5; 5; -4]
-#     v2 = [1; 8; -3]
+let
+    @variables x::Real, y::Real, z::Real, t::Real, s::Real
+    P1 = [4; 5; 1]
+    P2 = [4; -6; 7]
+    v1 = [5; 5; -4]
+    v2 = [1; 8; -3]
 
-#     L1(t) = P1 + v1 * t
-#     L2(s) = P2 + v2 * s
-#     n1 = v1 × v2
-#     f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
-#     PL1 = f1([x; y; z]) ~ 0
-#     # # # L1(t)
-#     f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
-#     PL2 = f2([x; y; z]) ~ 0
-#     PL1, PL2
-#     P1P2 = L2(0) - L1(5)
-#     D = abs(n1 ⋅ P1P2) / norm(n1)
-#     # expand(f1(L1(t)))
-#     # expand(f2(L2(t)))
-# end
+    L1(t) = P1 + v1 * t
+    L2(s) = P2 + v2 * s
+    n1 = v1 × v2
+    f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
+    PL1 = f1([x; y; z]) ~ 0
+    # # # L1(t)
+    f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
+    PL2 = f2([x; y; z]) ~ 0
+    PL1, PL2
+    P1P2 = L2(0) - L1(5)
+    D = abs(n1 ⋅ P1P2) / norm(n1)
+    # expand(f1(L1(t)))
+    # expand(f2(L2(t)))
+end
 
 # ╔═╡ b1f8da27-e3d9-4253-b481-071b5722d1a1
-# md"""
-# # 11.6 Surfaces in Space
-# > __Ovjectives__ 
-# > 1. Recognize and write equations of cylindrical surfaces.
-# > 2. Recognize and write equations of quadric surfaces.
-# > 3. Recognize and write equations of surfaces of revolution __(X)__
-# """
+md"""
+# 11.6 Surfaces in Space
+> __Ovjectives__ 
+> 1. Recognize and write equations of cylindrical surfaces.
+> 2. Recognize and write equations of quadric surfaces.
+> 3. Recognize and write equations of surfaces of revolution __(X)__
+"""
 
 # ╔═╡ cfbda53f-da9b-422b-b888-28f6acb96ee0
-# md"## Cylindrical Surfaces"
-
-# ╔═╡ 203ef45b-a6c3-4d04-a773-43ee348eaabd
-# cm"""
-# $(define("Cylinder"))
-# Let ``C`` be a curve in a plane and let ``L`` be a line not in a parallel plane. The set of all lines parallel to ``L`` and intersecting ``C`` is a __cylinder__. The curve ``C`` is the __generating curve__ (or __directrix__) of the cylinder, and the parallel lines are __rulings__.
-
-# $(post_img("https://www.dropbox.com/scl/fi/q0pbnl6g4n9ouhf0kbf4v/fig_11_57.png?rlkey=k0julsbb28j2liez5723p4hz7&dl=1"))
-# """
+md"## Cylindrical Surfaces"
 
 # ╔═╡ fcb7503a-7145-44ce-9354-80631b966912
-# cm"""
-# __Equations of Cylinders__
-# The equation of a cylinder whose rulings are parallel to one of the coordinate 
-# axes contains only the variables corresponding to the other two axes.
-# """
+cm"""
+__Equations of Cylinders__
+The equation of a cylinder whose rulings are parallel to one of the coordinate 
+axes contains only the variables corresponding to the other two axes.
+"""
 
 # ╔═╡ 3bae6577-7e58-4423-a954-e40eceeceab8
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/fm9cnxfr?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/fm9cnxfr?embed)
 
-# """
-
-# ╔═╡ f91da06c-b2ed-4b31-9fa6-af1e79c2167a
-# cm"""
-# $(ex(1,"Sketching a Cylinder"))
-# Sketch the surface represented by each equation.
-# - (a.) ``z=y^2``
-# - (b.) ``z=\sin x, \quad 0 \leq x \leq 2 \pi``
-# """
+"""
 
 # ╔═╡ 8054a733-294a-49f6-881c-938c0e032484
-# cm"""
-# [Geogebra Graph](https://www.geogebra.org/classic/bjkrnchk?embed)
+cm"""
+[Geogebra Graph](https://www.geogebra.org/classic/bjkrnchk?embed)
 
-# """
+"""
 
 # ╔═╡ 58d41760-0c3d-4512-9829-7553ba5cc8a1
-# md"## Quadric Surfaces"
-
-# ╔═╡ 11ce75b3-0867-441d-958d-1ff5ed3d9eaf
-# cm"""
-# $(define("Quadric Surface"))
-# The equation of a quadric surface in space is a second-degree equation in three variables. The general form of the equation is
-# ```math
-# A x^2+B y^2+C z^2+D x y+E x z+F y z+G x+H y+I z+J=0
-# ```
-
-# There are six basic types of quadric surfaces: 
-# 1. __ellipsoid__, 
-# 2. __hyperboloid of one sheet__, 
-# 3. __hyperboloid of two sheets__, 
-# 4. __elliptic cone__, 
-# 5. __elliptic paraboloid__, and 
-# 6. __hyperbolic paraboloid__.
-# """
-
-# ╔═╡ 2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
-# cm"""
-# $(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",800))
-
-# $(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",800))
-# """
-
-# ╔═╡ d936afce-e80d-49c9-9e55-cd4432c6e392
-# cm"""
-# $(ex(2,"Sketching a Quadric Surface"))
-# Classify and sketch the surface
-# ```math
-# 4 x^2-3 y^2+12 z^2+12=0
-# ```
-# """
-
-# ╔═╡ bd9cb96f-ab81-4bb8-82a8-56577a0412a6
-# cm"""
-# $(ex(3,"Sketching a Quadric Surface"))
-# Classify and sketch the surface
-# ```math
-# x-y^2-4 z^2=0
-# ```
-# """
-
-# ╔═╡ ba23c565-f547-4df9-9027-d623bacf8fa6
-# cm"""
-# $(ex(4,"A Quadric Surface Not Centered at the Origin"))
-# Classify and sketch the surface
-# ```math
-# x^2+2 y^2+z^2-4 x+4 y-2 z+3=0
-# ```
-# """
+md"## Quadric Surfaces"
 
 # ╔═╡ 0c5c4f1e-2145-4333-bed0-9b1d53c665db
 md""" # 13.1 Introduction to Functions of Several Variables
@@ -1714,128 +1392,42 @@ md""" # 13.1 Introduction to Functions of Several Variables
 > 1. Use computer graphics to graph a function of two variables.
  """
 
-# ╔═╡ 0658ce85-2ae3-4595-9105-5a2a187a1d73
-# cm"""
-# $(define("Function of Two Variables"))
-# Let ``D`` be a set of ordered pairs of real numbers. If to each ordered pair ``(x, y)`` in ``D`` there corresponds a unique real number ``f(x, y)``, then ``f`` is a function of ``\boldsymbol{x}`` and ``\boldsymbol{y}``. The set ``D`` is the domain of ``f``, and the corresponding set of values for ``f(x, y)`` is the range of ``f``. For the function
-# ```math
-# z=f(x, y)
-# ```
-# ``x`` and ``y`` are called the independent variables and ``z`` is called the dependent variable.
-# """
-
-# ╔═╡ 441227fb-8b43-402e-a3ec-976c3fcd266f
-# cm"""
-# $(ex(1,"Domains of Functions of Several Variables"))
-# Find the domain of each function.
-# - (a.) ``f(x, y)=\frac{\sqrt{x^2+y^2-9}}{x}``
-# - (b.) ``g(x, y, z)=\frac{x}{\sqrt{9-x^2-y^2-z^2}}``
-# """
-
 # ╔═╡ a7e74141-12a3-43c5-81d6-887df215d3c4
-# md"## The Graph of a Function of Two Variables"
-
-# ╔═╡ 46462c56-05b0-4efb-aa16-54672b0bf1d4
-# cm"""
-# $(ex(2,"Describing the Graph of a Function of Two Variables"))
-
-# Consider the function given by
-# ```math
-# f(x, y)=\sqrt{16-4 x^2-y^2} .
-# ```
-# - (a.) Find the domain and range of the function.
-# - (b.) Describe the graph of ``f``.
-# """
+md"## The Graph of a Function of Two Variables"
 
 # ╔═╡ 6a6ff203-3789-4a1a-8c62-e9628239e0c4
-# cm"""
-# [Geogebra Plot](https://www.geogebra.org/classic/p2pwhv6k?embed)
-# """
+cm"""
+[Geogebra Plot](https://www.geogebra.org/classic/p2pwhv6k?embed)
+"""
 
 # ╔═╡ 8f59471c-fd22-4337-ae80-088b2fb84bf4
-# md"## Level Curves"
-
-# ╔═╡ e65f9504-8096-4d04-add3-b000929fea8d
-# cm"""
-# We use __a scalar field__ in which the scalar
-# ```math
-# z =f(x, y)
-# ```
-# is assigned to the point (x, y). 
-
-# - A scalar field can be characterized by __level curves__ (or 
-# __contour lines__) along which the value of f(x, y) is constant. 
-
-# $(post_img("https://www.dropbox.com/scl/fi/hwccmtn3kckbo8orqxodc/fig_13_5.png?rlkey=7o7qgkgwtxpexc9efihxq0mpd&dl=1"))
-# """
-
-# ╔═╡ b0312347-074e-4d02-9541-827625366a1f
-# cm"""
-# $(ex(3,"Sketching a Contour Map"))
-# Consider the hemisphere
-# ```math
-# f(x, y)=\sqrt{64-x^2-y^2}
-# ```
-# Sketch a contour map of this surface using level curves corresponding to ``c=0,1,2, \ldots, 8``.
-# """
+md"## Level Curves"
 
 # ╔═╡ 0980c680-12bf-45bb-8b51-9af548d75809
-# let
-#     # Define the function f(x, y)
-#     g(x, y) = 64 - x^2 - y^2
-#     f(x, y) = sqrt(g(x, y))
+let
+    # Define the function f(x, y)
+    g(x, y) = 64 - x^2 - y^2
+    f(x, y) = sqrt(g(x, y))
 
-#     # Define ranges for x and y
-#     # x in [-2, 2] and y in [-2, 2]
-#     xs = range(-2, 2, length=300)
-#     ys = range(-2, 2, length=300)
+    # Define ranges for x and y
+    # x in [-2, 2] and y in [-2, 2]
+    xs = range(-2, 2, length=300)
+    ys = range(-2, 2, length=300)
 
-#     # Compute function values over the grid.
-#     # Use a ternary operator to ensure that the function is evaluated only when the argument is nonnegative.
-#     Z = [(g(x, y) >= 0 ? f(x, y) : NaN) for x in xs, y in ys]
+    # Compute function values over the grid.
+    # Use a ternary operator to ensure that the function is evaluated only when the argument is nonnegative.
+    Z = [(g(x, y) >= 0 ? f(x, y) : NaN) for x in xs, y in ys]
 
-#     # Plot the contour lines
-#     contour(xs, ys, Z,
-#         title="Contour Plot of f(x,y) = √(16-4x²-y²)",
-#         xlabel="x", ylabel="y",
-#         fill=true,
-#         colorbar=true)
-# end
-
-# ╔═╡ 48130cd8-69ad-4b14-b4a5-84aeb560aae0
-# cm"""
-# $(ex(4,"Sketching a Contour Map"))
-# Sketch a contour map of the hyperbolic paraboloid
-# ```math
-# z=y^2-x^2
-# ```
-
-# """
+    # Plot the contour lines
+    contour(xs, ys, Z,
+        title="Contour Plot of f(x,y) = √(16-4x²-y²)",
+        xlabel="x", ylabel="y",
+        fill=true,
+        colorbar=true)
+end
 
 # ╔═╡ 52ef6ea9-888c-48b3-a2d4-5ca86c5e6b1b
-# md"## Level Surfaces"
-
-# ╔═╡ fa71c9a5-1d30-49e3-930e-757c681e5028
-# cm"""
-# The concept of a __level curve__ can be extended by one dimension to define a __level surface__. 
-# If f is a function of three variables and c is a constant, then the graph of the 
-# equation
-# ```math
-# f(x, y, z) = c
-# ```
-# is a level surface of ``f``, as shown in
-# $(post_img("https://www.dropbox.com/scl/fi/ulqs8j9cnilxdmiuqtvnh/fig_13_14.png?rlkey=vub0vzuj1effvid8gnhh7cllh&dl=1"))
-# """
-
-# ╔═╡ 7222448d-c176-4441-bb0d-46203177d93a
-# cm"""
-# $(ex(6,"Level Surfaces"))
-# Describe the level surfaces of
-# ```math
-# f(x, y, z)=4 x^2+y^2+z^2
-# ```
-
-# """
+md"## Level Surfaces"
 
 # ╔═╡ 62e49e96-01b0-447a-a742-9b8491b35fcc
 md"""
@@ -1848,106 +1440,18 @@ md"""
 """
 
 # ╔═╡ 1e13cf69-7303-4086-90b9-fe2232a08327
-# md"## Neighborhoods in the Plane"
+md"## Neighborhoods in the Plane"
 
 # ╔═╡ 959ca089-7ed7-44aa-b4a1-9321cf1d2ce4
-# md"## Limit of a Function of Two Variables"
-
-# ╔═╡ 1915cc7d-1d34-480e-a413-fcd64b4e76bf
-# cm"""
-# $(define("the Limit of a Function of Two Variables"))
-# Let ``f`` be a function of two variables defined, except possibly at ``\left(x_0, y_0\right)``, on an open disk centered at ``\left(x_0, y_0\right)``, and let ``L`` be a real number. Then
-# ```math
-# \lim _{(x, y) \rightarrow\left(x_0, y_0\right)} f(x, y)=L
-# ```
-# if for each ``\varepsilon>0`` there corresponds a ``\delta>0`` such that
-# ```math
-# |f(x, y)-L|<\varepsilon \quad \text { whenever } \quad 0<\sqrt{\left(x-x_0\right)^2+\left(y-y_0\right)^2}<\delta
-# ```
-# """
+md"## Limit of a Function of Two Variables"
 
 # ╔═╡ 9779271b-19cf-4034-9901-0983454edef1
-# cm"""
-# <iframe src="https://www.geogebra.org/classic/a3zakjet?embed" width="600" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
-# """
-
-# ╔═╡ 837b01a0-948d-472f-b17c-c9763f2e5f0e
-# cm"""
-# $(bbl("Remark","")) 
-
-# Limits of functions of several variables have the same properties regarding sums, 
-# differences, products, and quotients as do limits of functions of single variables.
-# """
-
-# ╔═╡ c5270de3-1db9-4dbb-87e5-0e9f18ea34b2
-# cm"""
-# $(ex(2,"Finding a Limit"))
-# Find the limit.
-# ```math
-# \lim _{(x, y) \rightarrow(1,2)} \frac{5 x^2 y}{x^2+y^2}
-# ```
-# """
-
-# ╔═╡ e125198b-ea6e-4703-8b0b-8ec2b191fc39
-# cm"""
-# $(ex(3,"Finding a Limit"))
-# Find the limit: 
-# ```math
-# \lim _{(x, y) \rightarrow(0,0)} \frac{5 x^2 y}{x^2+y^2}
-# ```
-# """
-
-# ╔═╡ 04442eaa-9336-4ebd-865b-7e1fdbe4b8bc
-# cm"""
-# $(ex(4,"A Limit That Does Not Exist"))
-# Show that the limit does not exist.
-# ```math
-# \lim _{(x, y) \rightarrow(0,0)}\left(\frac{x^2-y^2}{x^2+y^2}\right)^2
-# ```
-# """
+cm"""
+[Geogebra Plot](https://www.geogebra.org/classic/a3zakjet?embed)
+"""
 
 # ╔═╡ 4b19a3ac-1f97-40e3-a8ff-cd57a3f14fdc
-# md"## Continuity of a Function of Two Variables"
-
-# ╔═╡ d8fc27f5-de91-4bc3-83b5-c48ae17acf97
-# cm"""
-# $(define("Continuity of a Function of Two Variables"))
-# A function ``f`` of two variables is continuous at a point ``\left(\boldsymbol{x}_{\mathbf{0}}, \boldsymbol{y}_{\mathbf{0}}\right)`` in an open region ``R`` if ``f\left(x_0, y_0\right)`` is defined and is equal to the limit of ``f(x, y)`` as ``(x, y)`` approaches ``\left(x_0, y_0\right)``. That is,
-# ```math
-# \lim _{(x, y) \rightarrow\left(x_0, y_0\right)} f(x, y)=f\left(x_0, y_0\right)
-# ```
-
-# The function ``f`` is continuous in the open region ``\boldsymbol{R}`` if it is continuous at every point in ``R``.
-# """
-
-# ╔═╡ 69528b92-41b9-4a90-a809-dfd86c3feb04
-# cm"""
-# $(bth("Continuity of a Composite Function"))
-
-# If ``h`` is continuous at ``\left(x_0, y_0\right)`` and ``g`` is continuous at ``h\left(x_0, y_0\right)``, then the composite function given by ``(g \circ h)(x, y)=g(h(x, y))`` is continuous at ``\left(x_0, y_0\right)``. That is,
-# ```math
-# \lim _{(x, y) \rightarrow\left(x_0, y_0\right)} g(h(x, y))=g\left(h\left(x_0, y_0\right)\right)
-# ```
-# """
-
-# ╔═╡ 85b9bece-47e3-4de1-b21c-650b8b841e0d
-# cm"""
-# $(ex(5,"Testing for Continuity"))
-# Discuss the continuity of each function.
-# - (a.) ``\displaystyle f(x, y)=\frac{x-2 y}{x^2+y^2}``
-# - (b.) ``\displaystyle g(x, y)=\frac{2}{y-x^2}``
-
-
-# """
-
-# ╔═╡ c982e7a9-9563-4ad6-8bde-2baa9c538650
-# cm"""
-# $(ex(6,"Testing Continuity of a Function of Three Variables"))
-# Discuss the continuity of
-# ```math
-# f(x, y, z)=\frac{1}{x^2+y^2-z}
-# ```
-# """
+md"## Continuity of a Function of Two Variables"
 
 # ╔═╡ 450ae414-927f-4497-8a05-0a1c0f7290b6
 md"""
@@ -1959,180 +1463,40 @@ md"""
 """
 
 # ╔═╡ 39226cb1-d58a-4bac-8d2c-dfa0b916aada
-# cm"## Partial Derivatives of a Function of Two Variables"
-
-# ╔═╡ b15b1448-9b88-4b70-91ad-0d00d8e9aeb0
-# cm"""
-# $(define("Partial Derivatives of a Function of Two Variables"))
-# If ``z=f(x, y)``, then the first partial derivatives of ``f`` with respect to ``x`` and ``y`` are the functions ``f_x`` and ``f_y`` defined by
-# ```math
-# f_x(x, y)=\lim _{\Delta x \rightarrow 0} \frac{f(x+\Delta x, y)-f(x, y)}{\Delta x}
-# ```
-
-# Partial derivative with respect to ``x``
-# and
-# ```math
-# f_y(x, y)=\lim _{\Delta y \rightarrow 0} \frac{f(x, y+\Delta y)-f(x, y)}{\Delta y}
-# ```
-
-# Partial derivative with respect to ``y``
-# provided the limits exist.
-# """
-
-# ╔═╡ f5e000db-7586-47b9-a673-1829f8e47fd7
-# cm"""
-# $(ex(1,"Finding Partial Derivatives"))
-# __(a)__ Consider 
-# ```math
-# f(x, y)=3 x-x^2 y^2+2 x^3 y
-# ```
-# Find ``f_x`` and ``f_y``.
-
-# __(b)__ Consider 
-# ```math
-# f(x, y)=(\ln x)\left(\sin x^2 y\right),
-# ```
-
-# Find ``f_x`` and ``f_y``.
-# """
-
-# ╔═╡ 2cc5584a-586a-4ae7-bfc3-71ff77fbf3d9
-# cm"""
-# $(bbl("Notation for First Partial Derivatives"))
-# For ``z=f(x, y)``, the partial derivatives ``f_x`` and ``f_y`` are denoted by
-# ```math
-# \frac{\partial}{\partial x} f(x, y)=f_x(x, y)=z_x=\frac{\partial z}{\partial x} \quad \text { Partial derivative with respect to } x
-# ```
-# and
-# ```math
-# \frac{\partial}{\partial y} f(x, y)=f_y(x, y)=z_y=\frac{\partial z}{\partial y} . \quad \text { Partial derivative with respect to } y
-# ```
-
-# The first partials evaluated at the point ``(a, b)`` are denoted by
-# ```math
-# \left.\frac{\partial z}{\partial x}\right|_{(a, b)}=f_x(a, b)
-# ```
-# and
-# ```math
-# \left.\frac{\partial z}{\partial y}\right|_{(a, b)}=f_y(a, b)
-# ```
-# """
-
-# ╔═╡ 7a1c7ca9-659d-4f66-ab27-21a02201e60d
-# cm"""
-# $(ex(2,"Finding and Evaluating Partial Derivatives"))
-# For ``f(x, y)=x e^{x^2 y}``, find ``f_x`` and ``f_y``, and evaluate each at the point ``(1, \ln 2)``.
-# """
-
-# ╔═╡ 4ed53690-acca-4128-90ee-d935afc71e7c
-# cm"""
-# $(ex(3,"Finding the Slopes of a Surface"))
-# Find the slopes in the ``x``-direction and in the ``y``-direction of the surface
-# ```math
-# f(x, y)=-\frac{x^2}{2}-y^2+\frac{25}{8}
-# ```
-# at the point ``\left(\frac{1}{2}, 1,2\right)``.
-# """
-
-# ╔═╡ baa0d2e0-ac0d-4371-803e-9cc22d016af7
-# cm"""
-# $(ex(4,"Finding the Slopes of a Surface"))
-# Find the slopes of the surface
-# ```math
-# f(x, y)=1-(x-1)^2-(y-2)^2
-# ```
-# at the point ``(1,2,1)`` in the ``x``-direction and in the ``y``-direction.
-# """
+cm"## Partial Derivatives of a Function of Two Variables"
 
 # ╔═╡ 4bf026b7-7a1c-4134-a4b1-4c8a9069a73d
-# md"## Partial Derivatives of a Function of Three or More Variables"
-
-# ╔═╡ 64acd27c-8af7-4051-b018-2f8dd0615b34
-# cm"""
-# $(ex(6,"Finding Partial Derivative"))
-# __(a)__
-# ```math
-#  f(x, y, z) = xy + yz^2 + xz 
-# ```
-# __(b)__
-# ```math
-#  f(x, y, z) =  z sin(xy^2 + 2z) 
-# ```
-
-# """
+md"## Partial Derivatives of a Function of Three or More Variables"
 
 # ╔═╡ 0cd9a65d-1d2b-42a4-85b6-a5c2541889d8
-# md"## Higher-Order Partial Derivatives"
+md"## Higher-Order Partial Derivatives"
 
 # ╔═╡ 853380dd-f790-4462-bcec-e0744274dc2e
-# cm"""
-# Let 
-# ```math
-# z = f(x,y)
-# ```
-# 1. Differentiate twice with respect to ``x`` :
-# ```math
-# \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)=\frac{\partial^2 f}{\partial x^2}=f_{x x}
-# ```
-# 2. Differentiate twice with respect to ``y`` :
-# ```math
-# \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right)=\frac{\partial^2 f}{\partial y^2}=f_{y y}
-# ```
-# 3. Differentiate first with respect to ``x`` and then with respect to ``y`` :
-# ```math
-# \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right)=\frac{\partial^2 f}{\partial y \partial x}=f_{x y} .
-# ```
-# 4. Differentiate first with respect to ``y`` and then with respect to ``x`` :
-# ```math
-# \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right)=\frac{\partial^2 f}{\partial x \partial y}=f_{y x}
-# ```
+cm"""
+Let 
+```math
+z = f(x,y)
+```
+1. Differentiate twice with respect to ``x`` :
+```math
+\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)=\frac{\partial^2 f}{\partial x^2}=f_{x x}
+```
+2. Differentiate twice with respect to ``y`` :
+```math
+\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right)=\frac{\partial^2 f}{\partial y^2}=f_{y y}
+```
+3. Differentiate first with respect to ``x`` and then with respect to ``y`` :
+```math
+\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right)=\frac{\partial^2 f}{\partial y \partial x}=f_{x y} .
+```
+4. Differentiate first with respect to ``y`` and then with respect to ``x`` :
+```math
+\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right)=\frac{\partial^2 f}{\partial x \partial y}=f_{y x}
+```
 
-# The third and fourth cases are called __mixed partial derivatives__.
+The third and fourth cases are called __mixed partial derivatives__.
 
-# """
-
-# ╔═╡ 256acb74-41ef-4352-b14a-f74a9a723deb
-# cm"""
-# $(ex(7,"Finding Second Partial Derivatives"))
-
-# Find the second partial derivatives of
-# ```math
-# f(x, y)=3 x y^2-2 y+5 x^2 y^2
-# ```
-# and determine the value of ``f_{x y}(-1,2)``.
-# """
-
-# ╔═╡ 4b5c59b6-7670-482c-a4de-795530e38b75
-# cm"""
-# $(bth("Equality of Mixed Partial Derivatives"))
-# If ``f`` is a function of ``x`` and ``y`` such that ``f_{x y}`` and ``f_{y x}`` are continuous on an open disk ``R``, then, for every ``(x, y)`` in ``R``,
-# ```math
-# f_{x y}(x, y)=f_{y x}(x, y)
-# ```
-# """
-
-# ╔═╡ 235057bb-ea29-4b9a-8665-f750cde0d002
-# cm"""
-# $(ex())
-# Consider the function defined by
-# ```math
-# f(x, y)= \begin{cases}\frac{x y\left(x^2-y^2\right)}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)^{-}\end{cases}
-# ```
-# - (a) Find ``f_x(x, y)`` and ``f_y(x, y)`` for ``(x, y) \neq(0,0)``.
-# - (b) Use the definition of partial derivatives to find ``f_x(0,0)`` and ``f_y(0,0)``.
-
-# - (c) Use the definition of partial derivatives to find ``f_{\mathrm{xy}}(0,0)`` and ``f_{yx}(0,0)``.
-# - (d) Using Theorem 13.3 and the result of part (c), what can be said about ``f_{x y}`` or ``f_{y x}`` ?
-# """
-
-# ╔═╡ a57476c4-7f42-40aa-a453-b7b29e7b9f7d
-# cm"""
-# $(ex(8,"Finding Higher-Order Partial Derivatives"))
-# Show that ``f_{x z}=f_{z x}`` and ``f_{x z z}=f_{z z z}=f_{z z x}`` for the function
-# ```math
-# f(x, y, z)=y e^x+x \ln z .
-# ```
-# """
+"""
 
 # ╔═╡ 068a3704-aa26-47ea-8f4a-ed4aacbb1985
 md"""
@@ -2144,20 +1508,7 @@ md"""
 """
 
 # ╔═╡ b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
-# md"## Increments and Differentialsp"
-
-# ╔═╡ 17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
-# cm"""
-# $(define("Total Differential"))
-# If ``z=f(x, y)`` and ``\Delta x`` and ``\Delta y`` are increments of ``x`` and ``y``, then the differentials of the independent variables ``x`` and ``y`` are
-# ```math
-# d x=\Delta x \quad \text { and } \quad d y=\Delta y
-# ```
-# and the total differential of the dependent variable ``z`` is
-# ```math
-# d z=\frac{\partial z}{\partial x} d x+\frac{\partial z}{\partial y} d y=f_x(x, y) d x+f_y(x, y) d y
-# ```
-# """
+md"## Increments and Differentialsp"
 
 # ╔═╡ ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
 # cm"""
@@ -4233,6 +3584,8 @@ Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and ver
 cm"""
 $(ex(5,"Writing a Linear Combination of Unit Vectors"))
 Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
+1. ``u``
+2. ``w = 2u − 3v``
 """
 
 # ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
@@ -4299,8 +3652,9 @@ Two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}`` are parallel when there is
 cm"""
 $(ex(4,"Parallel Vectors"))
 Vector ``\mathbf{w}`` has initial point ``(2,-1,3)`` and terminal point ``(-4,7,5)``. Which of the following vectors is parallel to ``\mathbf{w}`` ?
-a. ``\mathbf{u}=\langle 3,-4,-1\rangle``
-b. ``\mathbf{v}=\langle 12,-16,4\rangle``
+
+1. ``\mathbf{u}=\langle 3,-4,-1\rangle``
+2. ``\mathbf{v}=\langle 12,-16,4\rangle``
 """
 
 # ╔═╡ b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
@@ -4316,9 +3670,11 @@ are collinear.
 # ╔═╡ 8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
 cm"""
 $(ex(6,"Standard Unit Vector Notation"))
+
 - __(a.)__ Write the vector ``\mathbf{v}=4 \mathbf{i}-5 \mathbf{k}`` in component form.
 - __(b.)__ Find the terminal point of the vector ``\mathbf{v}=7 \mathbf{i}-\mathbf{j}+3 \mathbf{k}``, given that the initial point is ``P(-2,3,5)``.
-c. Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
+
+- __(c.)__ Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
 """
 
 # ╔═╡ 1a2c15f9-af65-4fe5-b517-98d26a3998fd
@@ -4538,6 +3894,655 @@ Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors in space, and let ``\th
 2. ``\|\mathbf{u} \times \mathbf{v}\|=\|\mathbf{u}\|\|\mathbf{v}\| \sin \theta``
 3. ``\mathbf{u} \times \mathbf{v}=\mathbf{0}`` if and only if ``\mathbf{u}`` and ``\mathbf{v}`` are scalar multiples of each other.
 4. ``\|\mathbf{u} \times \mathbf{v}\|=`` area of parallelogram having ``\mathbf{u}`` and ``\mathbf{v}`` as adjacent sides.
+"""
+
+# ╔═╡ 1fb44f1d-547e-4bea-b7ad-f171ebed5b20
+cm"""
+$(ex(2," Using the Cross Product"))
+Find a unit vector that is orthogonal to both
+```math
+\mathbf{u}=\mathbf{i}-4 \mathbf{j}+\mathbf{k}
+```
+and
+```math
+\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}
+```
+"""
+
+# ╔═╡ 948bbe03-1560-4b79-904f-133256b6423f
+cm"""
+$(ex(3,"Geometric Application of the Cross Product"))
+The vertices of a quadrilateral are listed below. Show that the quadrilateral is a parallelogram and find its area.
+```math
+\begin{array}{ll}
+A=(5,2,0) & B=(2,6,1) \\
+C=(2,4,7) & D=(5,0,6)
+\end{array}
+```
+"""
+
+# ╔═╡ f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
+cm"""
+$(bbl("Torque",""))
+In physics, the cross product can be used to measure torque-the moment M of a force ``\mathbf{F}`` about a point ``\boldsymbol{P}``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/691imwz7wog1wxr2vx3jt/fig_11_39.png?rlkey=v4e50kju4mvmy8zd0vjy4v1ef&dl=1",300))
+
+If the point of application of the force is ``Q``, then the moment of ``\mathbf{F}`` about ``P`` is
+```math
+\mathbf{M}=\stackrel{\rightharpoonup}{P Q} \times \mathbf{F} . \quad \text { Moment of } \mathbf{F} \text { about } P
+```
+
+The magnitude of the moment ``\mathbf{M}`` measures the tendency of the vector ``\overrightarrow{P Q}`` to rotate counterclockwise (using the right-hand rule) about an axis directed along the vector ``\mathbf{M}``.
+"""
+
+# ╔═╡ 6f42f537-305f-4e0a-b593-5071e1d7af7b
+cm"""
+$(ex(4,"An Application of the Cross Product"))
+A vertical force of 50 pounds is applied to the end of a one-foot lever that is attached to an axle at point ``P``, as shown below. 
+
+$(post_img("https://www.dropbox.com/scl/fi/9sqxf39xyyukd1zbqjv8o/fig_11_40.png?rlkey=szapu3urbrqd9pe9gfl7qfyai&dl=1",300))
+
+Find the moment of this force about the point ``P`` when ``\theta=60^{\circ}``.
+"""
+
+# ╔═╡ 183998e1-735f-4c38-ae61-7f2471fa1ae5
+cm"""
+For vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in space, the dot product of ``\mathbf{u}`` and ``\mathbf{v} \times \mathbf{w}``
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})
+```
+is called the __triple scalar product__,
+
+$(bth("The Triple Scalar Product"))
+For ``\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k}, \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}``, and ``\mathbf{w}=w_1 \mathbf{i}+w_2 \mathbf{j}+w_3 \mathbf{k}``, the triple scalar product is
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{rrr}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{array}\right|
+```
+"""
+
+# ╔═╡ ece4c6d9-8393-43c9-b60d-93df66a95999
+cm"""
+$(bth("Geometric Property of the Triple Scalar Product"))
+The volume ``V`` of a parallelepiped with vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` as adjacent edges is
+```math
+V=|\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})| .
+```
+$(ebl())
+
+$(post_img("https://www.dropbox.com/scl/fi/5hf3ibte2ppgtlx0vegr1/fig_11_41.png?rlkey=z0qrbw2p1z30iyhae0mf2xdfo&dl=1",300))
+"""
+
+# ╔═╡ 8b67f393-e954-4b33-9cc9-c382d7a41b37
+cm"""
+$(ex(5,"Volume by the Triple Scalar Product"))
+Find the volume of the parallelepiped shown below having
+```math
+\begin{aligned}
+\mathbf{u} & =3 \mathbf{i}-5 \mathbf{j}+\mathbf{k} \\
+\mathbf{v} & =2 \mathbf{j}-2 \mathbf{k}
+\end{aligned}
+```
+and
+```math
+\mathbf{w}=3 \mathbf{i}+\mathbf{j}+\mathbf{k}
+```
+as adjacent edges.
+
+"""
+
+# ╔═╡ b1a879f4-3d78-4309-9f4f-117bcb0765da
+cm"""
+$(bbl("Remark",""))
+
+The volume of the parallelepiped is ``0`` if and only if the three vectors are __coplanar__. 
+
+That is, when the vectors ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle``, ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle``, and ``\mathbf{w}=\left\langle w_1, w_2, w_3\right\rangle`` have the same initial point, they lie in the same plane if and only if
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{ccc}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{array}\right|=0
+```
+"""
+
+# ╔═╡ 0e941631-0e52-4dc3-bdf1-056f36e77499
+cm"""
+$(bth("Parametric Equations of a Line in Space"))
+
+A line ``L`` parallel to the vector ``\mathbf{v}=\langle a, b, c\rangle`` and passing through the point ``P\left(x_1, y_1, z_1\right)`` is represented by the parametric equations
+```math
+x=x_1+a t, \quad y=y_1+b t, \quad \text { and } \quad z=z_1+c t .
+```
+$(ebl())
+
+If the direction numbers ``a, b``, and ``c`` are all nonzero, then you can eliminate the parameter ``t`` in the parametric equations to obtain symmetric equations of the line.
+```math
+\frac{x-x_1}{a}=\frac{y-y_1}{b}=\frac{z-z_1}{c} \quad \color{red}{\text{Symmetric equations}}
+```
+
+
+$(ex(1,"Finding Parametric and Symmetric Equations"))
+Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Below.
+
+"""
+
+# ╔═╡ 23a92df7-77d9-4804-86a5-08cdfea8651c
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/9vzo9clna5s3ugrufyons/fig_11_45.png?rlkey=dyblrdq5uvbjp1wmdl8y5mryl&dl=1",400))
+
+$(bth("Standard Equation of a Plane in Space"))
+The plane containing the point ``\left(x_1, y_1, z_1\right)`` and having normal vector
+```math
+\mathbf{n}=\langle a, b, c\rangle
+```
+can be represented by the standard form of the equation of a plane
+```math
+a\left(x-x_1\right)+b\left(y-y_1\right)+c\left(z-z_1\right)=0 .
+```
+"""
+
+# ╔═╡ 391ff8aa-056a-4867-90db-3d9f4537fe80
+cm"""
+$(bbl("Remark",""))
+```math
+a x+b y+c z+d=0 \qquad \color{red}{\text{General form of equation of plane}}
+```
+"""
+
+# ╔═╡ 8e46e68e-0099-430b-864e-683b14ed2fbd
+cm"""
+$(ex(3,"Finding an Equation of a Plane in Three-Space"))
+Find an equation (in standard form and in general form) of the plane containing the points ``(2,1,1), \quad(1,4,1), \quad`` and ``\quad(-2,0,4)``.
+"""
+
+# ╔═╡ 902fbee4-194f-499d-9e9d-ad7bfb08131e
+cm"""
+$(bbl("Angle between two planes",""))
+```math
+\cos \theta=\frac{\left|\mathbf{n}_1 \cdot \mathbf{n}_2\right|}{\left\|\mathbf{n}_1\right\|\left\|\mathbf{n}_2\right\|}
+```
+
+
+"""
+
+# ╔═╡ 6e53795f-016a-4113-ae5d-5dc2a02758a7
+cm"""
+$(ex(4,"Finding the Line of Intersection of Two Planes"))
+Find the angle between the two planes ``x-2 y+z=0`` and ``2 x+3 y-2 z=0``. Then find parametric equations of their line of intersection.
+"""
+
+# ╔═╡ 9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
+cm"""
+$(bth("Distance Between a Point and a Plane"))
+$(post_img("https://www.dropbox.com/scl/fi/5l5deuushije2ffszddg4/fig_11_52.png?rlkey=gz5llqi698cjwz5iuwwfruap4&dl=1",300))
+The distance between a plane and a point ``Q`` (not in the plane) is
+```math
+D=\left\|\operatorname{proj}_{\mathbf{n}} \stackrel{\rightharpoonup}{P Q}\right\|=\frac{|\stackrel{\rightharpoonup}{P Q} \cdot \mathbf{n}|}{\|\mathbf{n}\|}
+```
+where ``P`` is a point in the plane and ``\mathbf{n}`` is normal to the plane.
+
+
+$(ebl())
+
+$(ex(5,"Finding the Distance Between a Point and a Plane"))
+Find the distance between the point ``Q(1,5,-4)`` and the plane ``3 x-y+2 z=6``.
+"""
+
+# ╔═╡ 1aca8a3e-feb4-4665-a059-8a0c2171198a
+cm"""
+$(bbl("Distance between a point and a plane"))
+Let ``Q(x_0,y_0,z_0)`` be any point. The distance between ``Q`` and the plane ``ax+by+cz+d=0`` is given by
+```math
+D=\frac{\left|a x_0+b y_0+c z_0+d\right|}{\sqrt{a^2+b^2+c^2}}
+```
+where ``P(x_1.y_1,z_2)`` on the plane.
+
+"""
+
+# ╔═╡ bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
+cm"""
+$(ex(6,"Finding the Distance Between Two Parallel Planes"))
+Two parallel planes, ``3 x-y+2 z-6=0`` and ``6 x-2 y+4 z+4=0``, find the distance between them.
+"""
+
+# ╔═╡ b829aed8-9618-44ea-9a2d-2c5d36416e62
+cm"""
+$(bth("Distance Between a Point and a Line in Space"))
+The distance between a point ``Q`` and a line in space is
+```math
+D=\frac{\|\overrightarrow{P Q} \times \mathbf{u}\|}{\|\mathbf{u}\|}
+```
+where ``\mathbf{u}`` is a direction vector for the line and ``P`` is a point on the line.
+
+$(post_img("https://www.dropbox.com/scl/fi/y9ty0d9njoshc2ki0skey/fig_11_54.png?rlkey=wicvn44wlqvc72niqy28dfs1w&dl=1",300))
+$(ebl())
+
+$(ex(7,"Finding the Distance Between a Point and a Line"))
+Find the distance between the point ``Q(3,-1,4)`` and the line
+```math
+x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
+```
+"""
+
+# ╔═╡ 037e8495-26d6-45d9-a855-4d1c88917561
+cm"""
+$(define("Skew Lines"))
+Two lines in space are __skew__ if they are neither parallel nor intersecting.
+"""
+
+# ╔═╡ 5e96be6d-4801-4056-ae2c-0b1b95307ac4
+cm"""
+$(ex())
+Consider the following two lines in space.
+```math
+\begin{aligned}
+& L_1: x=4+5 t, y=5+5 t, z=1-4 t \\
+& L_2: x=4+s, y=-6+8 s, z=7-3 s
+\end{aligned}
+```
+- (i) Show that these lines are not parallel.
+- (ii) Show that these lines do not intersect and therefore are skew lines.
+- (iii) Show that the two lines lie in parallel planes.
+- (iv) Find the distance between the parallel planes from part (iii). This is the distance between the original skew lines.
+"""
+
+# ╔═╡ 203ef45b-a6c3-4d04-a773-43ee348eaabd
+cm"""
+$(define("Cylinder"))
+Let ``C`` be a curve in a plane and let ``L`` be a line not in a parallel plane. The set of all lines parallel to ``L`` and intersecting ``C`` is a __cylinder__. The curve ``C`` is the __generating curve__ (or __directrix__) of the cylinder, and the parallel lines are __rulings__.
+
+$(post_img("https://www.dropbox.com/scl/fi/q0pbnl6g4n9ouhf0kbf4v/fig_11_57.png?rlkey=k0julsbb28j2liez5723p4hz7&dl=1"))
+"""
+
+# ╔═╡ f91da06c-b2ed-4b31-9fa6-af1e79c2167a
+cm"""
+$(ex(1,"Sketching a Cylinder"))
+Sketch the surface represented by each equation.
+- (a.) ``z=y^2``
+- (b.) ``z=\sin x, \quad 0 \leq x \leq 2 \pi``
+"""
+
+# ╔═╡ 11ce75b3-0867-441d-958d-1ff5ed3d9eaf
+cm"""
+$(define("Quadric Surface"))
+The equation of a quadric surface in space is a second-degree equation in three variables. The general form of the equation is
+```math
+A x^2+B y^2+C z^2+D x y+E x z+F y z+G x+H y+I z+J=0
+```
+
+There are six basic types of quadric surfaces: 
+1. __ellipsoid__, 
+2. __hyperboloid of one sheet__, 
+3. __hyperboloid of two sheets__, 
+4. __elliptic cone__, 
+5. __elliptic paraboloid__, and 
+6. __hyperbolic paraboloid__.
+"""
+
+# ╔═╡ 2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",800))
+
+$(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",800))
+"""
+
+# ╔═╡ d936afce-e80d-49c9-9e55-cd4432c6e392
+cm"""
+$(ex(2,"Sketching a Quadric Surface"))
+Classify and sketch the surface
+```math
+4 x^2-3 y^2+12 z^2+12=0
+```
+"""
+
+# ╔═╡ bd9cb96f-ab81-4bb8-82a8-56577a0412a6
+cm"""
+$(ex(3,"Sketching a Quadric Surface"))
+Classify and sketch the surface
+```math
+x-y^2-4 z^2=0
+```
+"""
+
+# ╔═╡ ba23c565-f547-4df9-9027-d623bacf8fa6
+cm"""
+$(ex(4,"A Quadric Surface Not Centered at the Origin"))
+Classify and sketch the surface
+```math
+x^2+2 y^2+z^2-4 x+4 y-2 z+3=0
+```
+"""
+
+# ╔═╡ 0658ce85-2ae3-4595-9105-5a2a187a1d73
+cm"""
+$(define("Function of Two Variables"))
+Let ``D`` be a set of ordered pairs of real numbers. If to each ordered pair ``(x, y)`` in ``D`` there corresponds a unique real number ``f(x, y)``, then ``f`` is a function of ``\boldsymbol{x}`` and ``\boldsymbol{y}``. The set ``D`` is the domain of ``f``, and the corresponding set of values for ``f(x, y)`` is the range of ``f``. For the function
+```math
+z=f(x, y)
+```
+``x`` and ``y`` are called the independent variables and ``z`` is called the dependent variable.
+"""
+
+# ╔═╡ 441227fb-8b43-402e-a3ec-976c3fcd266f
+cm"""
+$(ex(1,"Domains of Functions of Several Variables"))
+Find the domain of each function.
+- (a.) ``f(x, y)=\frac{\sqrt{x^2+y^2-9}}{x}``
+- (b.) ``g(x, y, z)=\frac{x}{\sqrt{9-x^2-y^2-z^2}}``
+"""
+
+# ╔═╡ 46462c56-05b0-4efb-aa16-54672b0bf1d4
+cm"""
+$(ex(2,"Describing the Graph of a Function of Two Variables"))
+
+Consider the function given by
+```math
+f(x, y)=\sqrt{16-4 x^2-y^2} .
+```
+- (a.) Find the domain and range of the function.
+- (b.) Describe the graph of ``f``.
+"""
+
+# ╔═╡ e65f9504-8096-4d04-add3-b000929fea8d
+cm"""
+We use __a scalar field__ in which the scalar
+```math
+z =f(x, y)
+```
+is assigned to the point (x, y). 
+
+- A scalar field can be characterized by __level curves__ (or 
+__contour lines__) along which the value of f(x, y) is constant. 
+
+$(post_img("https://www.dropbox.com/scl/fi/hwccmtn3kckbo8orqxodc/fig_13_5.png?rlkey=7o7qgkgwtxpexc9efihxq0mpd&dl=1"))
+"""
+
+# ╔═╡ b0312347-074e-4d02-9541-827625366a1f
+cm"""
+$(ex(3,"Sketching a Contour Map"))
+Consider the hemisphere
+```math
+f(x, y)=\sqrt{64-x^2-y^2}
+```
+Sketch a contour map of this surface using level curves corresponding to ``c=0,1,2, \ldots, 8``.
+"""
+
+# ╔═╡ 48130cd8-69ad-4b14-b4a5-84aeb560aae0
+cm"""
+$(ex(4,"Sketching a Contour Map"))
+Sketch a contour map of the hyperbolic paraboloid
+```math
+z=y^2-x^2
+```
+
+"""
+
+# ╔═╡ fa71c9a5-1d30-49e3-930e-757c681e5028
+cm"""
+The concept of a __level curve__ can be extended by one dimension to define a __level surface__. 
+If f is a function of three variables and c is a constant, then the graph of the 
+equation
+```math
+f(x, y, z) = c
+```
+is a level surface of ``f``, as shown in
+$(post_img("https://www.dropbox.com/scl/fi/ulqs8j9cnilxdmiuqtvnh/fig_13_14.png?rlkey=vub0vzuj1effvid8gnhh7cllh&dl=1"))
+"""
+
+# ╔═╡ 7222448d-c176-4441-bb0d-46203177d93a
+cm"""
+$(ex(6,"Level Surfaces"))
+Describe the level surfaces of
+```math
+f(x, y, z)=4 x^2+y^2+z^2
+```
+
+"""
+
+# ╔═╡ 1915cc7d-1d34-480e-a413-fcd64b4e76bf
+cm"""
+$(define("the Limit of a Function of Two Variables"))
+Let ``f`` be a function of two variables defined, except possibly at ``\left(x_0, y_0\right)``, on an open disk centered at ``\left(x_0, y_0\right)``, and let ``L`` be a real number. Then
+```math
+\lim _{(x, y) \rightarrow\left(x_0, y_0\right)} f(x, y)=L
+```
+if for each ``\varepsilon>0`` there corresponds a ``\delta>0`` such that
+```math
+|f(x, y)-L|<\varepsilon \quad \text { whenever } \quad 0<\sqrt{\left(x-x_0\right)^2+\left(y-y_0\right)^2}<\delta
+```
+"""
+
+# ╔═╡ 837b01a0-948d-472f-b17c-c9763f2e5f0e
+cm"""
+$(bbl("Remark","")) 
+
+Limits of functions of several variables have the same properties regarding sums, 
+differences, products, and quotients as do limits of functions of single variables.
+"""
+
+# ╔═╡ c5270de3-1db9-4dbb-87e5-0e9f18ea34b2
+cm"""
+$(ex(2,"Finding a Limit"))
+Find the limit.
+```math
+\lim _{(x, y) \rightarrow(1,2)} \frac{5 x^2 y}{x^2+y^2}
+```
+"""
+
+# ╔═╡ e125198b-ea6e-4703-8b0b-8ec2b191fc39
+cm"""
+$(ex(3,"Finding a Limit"))
+Find the limit: 
+```math
+\lim _{(x, y) \rightarrow(0,0)} \frac{5 x^2 y}{x^2+y^2}
+```
+"""
+
+# ╔═╡ 04442eaa-9336-4ebd-865b-7e1fdbe4b8bc
+cm"""
+$(ex(4,"A Limit That Does Not Exist"))
+Show that the limit does not exist.
+```math
+\lim _{(x, y) \rightarrow(0,0)}\left(\frac{x^2-y^2}{x^2+y^2}\right)^2
+```
+"""
+
+# ╔═╡ d8fc27f5-de91-4bc3-83b5-c48ae17acf97
+cm"""
+$(define("Continuity of a Function of Two Variables"))
+A function ``f`` of two variables is continuous at a point ``\left(\boldsymbol{x}_{\mathbf{0}}, \boldsymbol{y}_{\mathbf{0}}\right)`` in an open region ``R`` if ``f\left(x_0, y_0\right)`` is defined and is equal to the limit of ``f(x, y)`` as ``(x, y)`` approaches ``\left(x_0, y_0\right)``. That is,
+```math
+\lim _{(x, y) \rightarrow\left(x_0, y_0\right)} f(x, y)=f\left(x_0, y_0\right)
+```
+
+The function ``f`` is continuous in the open region ``\boldsymbol{R}`` if it is continuous at every point in ``R``.
+"""
+
+# ╔═╡ 69528b92-41b9-4a90-a809-dfd86c3feb04
+cm"""
+$(bth("Continuity of a Composite Function"))
+
+If ``h`` is continuous at ``\left(x_0, y_0\right)`` and ``g`` is continuous at ``h\left(x_0, y_0\right)``, then the composite function given by ``(g \circ h)(x, y)=g(h(x, y))`` is continuous at ``\left(x_0, y_0\right)``. That is,
+```math
+\lim _{(x, y) \rightarrow\left(x_0, y_0\right)} g(h(x, y))=g\left(h\left(x_0, y_0\right)\right)
+```
+"""
+
+# ╔═╡ 85b9bece-47e3-4de1-b21c-650b8b841e0d
+cm"""
+$(ex(5,"Testing for Continuity"))
+Discuss the continuity of each function.
+- (a.) ``\displaystyle f(x, y)=\frac{x-2 y}{x^2+y^2}``
+- (b.) ``\displaystyle g(x, y)=\frac{2}{y-x^2}``
+
+
+"""
+
+# ╔═╡ c982e7a9-9563-4ad6-8bde-2baa9c538650
+cm"""
+$(ex(6,"Testing Continuity of a Function of Three Variables"))
+Discuss the continuity of
+```math
+f(x, y, z)=\frac{1}{x^2+y^2-z}
+```
+"""
+
+# ╔═╡ b15b1448-9b88-4b70-91ad-0d00d8e9aeb0
+cm"""
+$(define("Partial Derivatives of a Function of Two Variables"))
+If ``z=f(x, y)``, then the first partial derivatives of ``f`` with respect to ``x`` and ``y`` are the functions ``f_x`` and ``f_y`` defined by
+```math
+f_x(x, y)=\lim _{\Delta x \rightarrow 0} \frac{f(x+\Delta x, y)-f(x, y)}{\Delta x}
+```
+
+Partial derivative with respect to ``x``
+and
+```math
+f_y(x, y)=\lim _{\Delta y \rightarrow 0} \frac{f(x, y+\Delta y)-f(x, y)}{\Delta y}
+```
+
+Partial derivative with respect to ``y``
+provided the limits exist.
+"""
+
+# ╔═╡ f5e000db-7586-47b9-a673-1829f8e47fd7
+cm"""
+$(ex(1,"Finding Partial Derivatives"))
+__(a)__ Consider 
+```math
+f(x, y)=3 x-x^2 y^2+2 x^3 y
+```
+Find ``f_x`` and ``f_y``.
+
+__(b)__ Consider 
+```math
+f(x, y)=(\ln x)\left(\sin x^2 y\right),
+```
+
+Find ``f_x`` and ``f_y``.
+"""
+
+# ╔═╡ 2cc5584a-586a-4ae7-bfc3-71ff77fbf3d9
+cm"""
+$(bbl("Notation for First Partial Derivatives"))
+For ``z=f(x, y)``, the partial derivatives ``f_x`` and ``f_y`` are denoted by
+```math
+\frac{\partial}{\partial x} f(x, y)=f_x(x, y)=z_x=\frac{\partial z}{\partial x} \quad \text { Partial derivative with respect to } x
+```
+and
+```math
+\frac{\partial}{\partial y} f(x, y)=f_y(x, y)=z_y=\frac{\partial z}{\partial y} . \quad \text { Partial derivative with respect to } y
+```
+
+The first partials evaluated at the point ``(a, b)`` are denoted by
+```math
+\left.\frac{\partial z}{\partial x}\right|_{(a, b)}=f_x(a, b)
+```
+and
+```math
+\left.\frac{\partial z}{\partial y}\right|_{(a, b)}=f_y(a, b)
+```
+"""
+
+# ╔═╡ 7a1c7ca9-659d-4f66-ab27-21a02201e60d
+cm"""
+$(ex(2,"Finding and Evaluating Partial Derivatives"))
+For ``f(x, y)=x e^{x^2 y}``, find ``f_x`` and ``f_y``, and evaluate each at the point ``(1, \ln 2)``.
+"""
+
+# ╔═╡ 4ed53690-acca-4128-90ee-d935afc71e7c
+cm"""
+$(ex(3,"Finding the Slopes of a Surface"))
+Find the slopes in the ``x``-direction and in the ``y``-direction of the surface
+```math
+f(x, y)=-\frac{x^2}{2}-y^2+\frac{25}{8}
+```
+at the point ``\left(\frac{1}{2}, 1,2\right)``.
+"""
+
+# ╔═╡ baa0d2e0-ac0d-4371-803e-9cc22d016af7
+cm"""
+$(ex(4,"Finding the Slopes of a Surface"))
+Find the slopes of the surface
+```math
+f(x, y)=1-(x-1)^2-(y-2)^2
+```
+at the point ``(1,2,1)`` in the ``x``-direction and in the ``y``-direction.
+"""
+
+# ╔═╡ 64acd27c-8af7-4051-b018-2f8dd0615b34
+cm"""
+$(ex(6,"Finding Partial Derivative"))
+__(a)__
+```math
+ f(x, y, z) = xy + yz^2 + xz 
+```
+__(b)__
+```math
+ f(x, y, z) =  z sin(xy^2 + 2z) 
+```
+
+"""
+
+# ╔═╡ 256acb74-41ef-4352-b14a-f74a9a723deb
+cm"""
+$(ex(7,"Finding Second Partial Derivatives"))
+
+Find the second partial derivatives of
+```math
+f(x, y)=3 x y^2-2 y+5 x^2 y^2
+```
+and determine the value of ``f_{x y}(-1,2)``.
+"""
+
+# ╔═╡ 4b5c59b6-7670-482c-a4de-795530e38b75
+cm"""
+$(bth("Equality of Mixed Partial Derivatives"))
+If ``f`` is a function of ``x`` and ``y`` such that ``f_{x y}`` and ``f_{y x}`` are continuous on an open disk ``R``, then, for every ``(x, y)`` in ``R``,
+```math
+f_{x y}(x, y)=f_{y x}(x, y)
+```
+"""
+
+# ╔═╡ 235057bb-ea29-4b9a-8665-f750cde0d002
+cm"""
+$(ex())
+Consider the function defined by
+```math
+f(x, y)= \begin{cases}\frac{x y\left(x^2-y^2\right)}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)^{-}\end{cases}
+```
+- (a) Find ``f_x(x, y)`` and ``f_y(x, y)`` for ``(x, y) \neq(0,0)``.
+- (b) Use the definition of partial derivatives to find ``f_x(0,0)`` and ``f_y(0,0)``.
+
+- (c) Use the definition of partial derivatives to find ``f_{\mathrm{xy}}(0,0)`` and ``f_{yx}(0,0)``.
+- (d) Using Theorem 13.3 and the result of part (c), what can be said about ``f_{x y}`` or ``f_{y x}`` ?
+"""
+
+# ╔═╡ a57476c4-7f42-40aa-a453-b7b29e7b9f7d
+cm"""
+$(ex(8,"Finding Higher-Order Partial Derivatives"))
+Show that ``f_{x z}=f_{z x}`` and ``f_{x z z}=f_{z z z}=f_{z z x}`` for the function
+```math
+f(x, y, z)=y e^x+x \ln z .
+```
+"""
+
+# ╔═╡ 17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
+cm"""
+$(define("Total Differential"))
+If ``z=f(x, y)`` and ``\Delta x`` and ``\Delta y`` are increments of ``x`` and ``y``, then the differentials of the independent variables ``x`` and ``y`` are
+```math
+d x=\Delta x \quad \text { and } \quad d y=\Delta y
+```
+and the total differential of the dependent variable ``z`` is
+```math
+d z=\frac{\partial z}{\partial x} d x+\frac{\partial z}{\partial y} d y=f_x(x, y) d x+f_y(x, y) d y
+```
 """
 
 # ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
@@ -7448,9 +7453,9 @@ version = "1.4.1+2"
 # ╟─79735eb1-16e1-4cf3-a43a-88d1ade37279
 # ╟─f85ad3e4-f7ba-4563-b548-ceb803d13d2c
 # ╟─1fb44f1d-547e-4bea-b7ad-f171ebed5b20
-# ╟─4fb037ae-7f8e-40a7-9988-26da22529d2e
+# ╠═4fb037ae-7f8e-40a7-9988-26da22529d2e
 # ╟─948bbe03-1560-4b79-904f-133256b6423f
-# ╟─12d1fa2a-9a6c-4edc-821e-2f54b4da454e
+# ╠═12d1fa2a-9a6c-4edc-821e-2f54b4da454e
 # ╟─bb8ca18e-ecba-40e0-b1c9-caf920ff7586
 # ╟─d6fc1ea1-f463-46a5-94e6-9a4e6f914fc8
 # ╟─f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
@@ -7459,7 +7464,7 @@ version = "1.4.1+2"
 # ╟─183998e1-735f-4c38-ae61-7f2471fa1ae5
 # ╟─ece4c6d9-8393-43c9-b60d-93df66a95999
 # ╟─8b67f393-e954-4b33-9cc9-c382d7a41b37
-# ╟─b35ca1c3-621d-40af-afb7-a96b6fae35a8
+# ╠═b35ca1c3-621d-40af-afb7-a96b6fae35a8
 # ╟─4d59ce5f-85f1-4d35-8fdb-e6b3f9040eb5
 # ╟─b1a879f4-3d78-4309-9f4f-117bcb0765da
 # ╟─c9fdf367-035b-4716-9f45-e62d82ec8a6e
@@ -7485,7 +7490,7 @@ version = "1.4.1+2"
 # ╟─bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
 # ╠═7932b9ab-1041-44ee-8e31-f10870a58d90
 # ╟─b829aed8-9618-44ea-9a2d-2c5d36416e62
-# ╟─8934159d-2dc6-4e4d-a5c4-2125831e0c52
+# ╠═8934159d-2dc6-4e4d-a5c4-2125831e0c52
 # ╟─2407b715-09cd-4568-bf81-4b9f5cf4065e
 # ╟─037e8495-26d6-45d9-a855-4d1c88917561
 # ╟─5e96be6d-4801-4056-ae2c-0b1b95307ac4
@@ -7504,53 +7509,53 @@ version = "1.4.1+2"
 # ╟─d936afce-e80d-49c9-9e55-cd4432c6e392
 # ╟─bd9cb96f-ab81-4bb8-82a8-56577a0412a6
 # ╟─ba23c565-f547-4df9-9027-d623bacf8fa6
-# ╠═0c5c4f1e-2145-4333-bed0-9b1d53c665db
-# ╠═0658ce85-2ae3-4595-9105-5a2a187a1d73
-# ╠═441227fb-8b43-402e-a3ec-976c3fcd266f
-# ╠═a7e74141-12a3-43c5-81d6-887df215d3c4
-# ╠═46462c56-05b0-4efb-aa16-54672b0bf1d4
-# ╠═6a6ff203-3789-4a1a-8c62-e9628239e0c4
-# ╠═8f59471c-fd22-4337-ae80-088b2fb84bf4
-# ╠═e65f9504-8096-4d04-add3-b000929fea8d
-# ╠═b0312347-074e-4d02-9541-827625366a1f
-# ╠═0980c680-12bf-45bb-8b51-9af548d75809
-# ╠═48130cd8-69ad-4b14-b4a5-84aeb560aae0
-# ╠═52ef6ea9-888c-48b3-a2d4-5ca86c5e6b1b
-# ╠═fa71c9a5-1d30-49e3-930e-757c681e5028
-# ╠═7222448d-c176-4441-bb0d-46203177d93a
-# ╠═62e49e96-01b0-447a-a742-9b8491b35fcc
-# ╠═1e13cf69-7303-4086-90b9-fe2232a08327
-# ╠═959ca089-7ed7-44aa-b4a1-9321cf1d2ce4
-# ╠═1915cc7d-1d34-480e-a413-fcd64b4e76bf
-# ╠═9779271b-19cf-4034-9901-0983454edef1
-# ╠═837b01a0-948d-472f-b17c-c9763f2e5f0e
-# ╠═c5270de3-1db9-4dbb-87e5-0e9f18ea34b2
-# ╠═e125198b-ea6e-4703-8b0b-8ec2b191fc39
-# ╠═04442eaa-9336-4ebd-865b-7e1fdbe4b8bc
-# ╠═4b19a3ac-1f97-40e3-a8ff-cd57a3f14fdc
-# ╠═d8fc27f5-de91-4bc3-83b5-c48ae17acf97
-# ╠═69528b92-41b9-4a90-a809-dfd86c3feb04
-# ╠═85b9bece-47e3-4de1-b21c-650b8b841e0d
-# ╠═c982e7a9-9563-4ad6-8bde-2baa9c538650
-# ╠═450ae414-927f-4497-8a05-0a1c0f7290b6
-# ╠═39226cb1-d58a-4bac-8d2c-dfa0b916aada
-# ╠═b15b1448-9b88-4b70-91ad-0d00d8e9aeb0
-# ╠═f5e000db-7586-47b9-a673-1829f8e47fd7
-# ╠═2cc5584a-586a-4ae7-bfc3-71ff77fbf3d9
-# ╠═7a1c7ca9-659d-4f66-ab27-21a02201e60d
-# ╠═4ed53690-acca-4128-90ee-d935afc71e7c
-# ╠═baa0d2e0-ac0d-4371-803e-9cc22d016af7
-# ╠═4bf026b7-7a1c-4134-a4b1-4c8a9069a73d
-# ╠═64acd27c-8af7-4051-b018-2f8dd0615b34
-# ╠═0cd9a65d-1d2b-42a4-85b6-a5c2541889d8
-# ╠═853380dd-f790-4462-bcec-e0744274dc2e
-# ╠═256acb74-41ef-4352-b14a-f74a9a723deb
-# ╠═4b5c59b6-7670-482c-a4de-795530e38b75
-# ╠═235057bb-ea29-4b9a-8665-f750cde0d002
-# ╠═a57476c4-7f42-40aa-a453-b7b29e7b9f7d
-# ╠═068a3704-aa26-47ea-8f4a-ed4aacbb1985
-# ╠═b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
-# ╠═17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
+# ╟─0c5c4f1e-2145-4333-bed0-9b1d53c665db
+# ╟─0658ce85-2ae3-4595-9105-5a2a187a1d73
+# ╟─441227fb-8b43-402e-a3ec-976c3fcd266f
+# ╟─a7e74141-12a3-43c5-81d6-887df215d3c4
+# ╟─46462c56-05b0-4efb-aa16-54672b0bf1d4
+# ╟─6a6ff203-3789-4a1a-8c62-e9628239e0c4
+# ╟─8f59471c-fd22-4337-ae80-088b2fb84bf4
+# ╟─e65f9504-8096-4d04-add3-b000929fea8d
+# ╟─b0312347-074e-4d02-9541-827625366a1f
+# ╟─0980c680-12bf-45bb-8b51-9af548d75809
+# ╟─48130cd8-69ad-4b14-b4a5-84aeb560aae0
+# ╟─52ef6ea9-888c-48b3-a2d4-5ca86c5e6b1b
+# ╟─fa71c9a5-1d30-49e3-930e-757c681e5028
+# ╟─7222448d-c176-4441-bb0d-46203177d93a
+# ╟─62e49e96-01b0-447a-a742-9b8491b35fcc
+# ╟─1e13cf69-7303-4086-90b9-fe2232a08327
+# ╟─959ca089-7ed7-44aa-b4a1-9321cf1d2ce4
+# ╟─1915cc7d-1d34-480e-a413-fcd64b4e76bf
+# ╟─9779271b-19cf-4034-9901-0983454edef1
+# ╟─837b01a0-948d-472f-b17c-c9763f2e5f0e
+# ╟─c5270de3-1db9-4dbb-87e5-0e9f18ea34b2
+# ╟─e125198b-ea6e-4703-8b0b-8ec2b191fc39
+# ╟─04442eaa-9336-4ebd-865b-7e1fdbe4b8bc
+# ╟─4b19a3ac-1f97-40e3-a8ff-cd57a3f14fdc
+# ╟─d8fc27f5-de91-4bc3-83b5-c48ae17acf97
+# ╟─69528b92-41b9-4a90-a809-dfd86c3feb04
+# ╟─85b9bece-47e3-4de1-b21c-650b8b841e0d
+# ╟─c982e7a9-9563-4ad6-8bde-2baa9c538650
+# ╟─450ae414-927f-4497-8a05-0a1c0f7290b6
+# ╟─39226cb1-d58a-4bac-8d2c-dfa0b916aada
+# ╟─b15b1448-9b88-4b70-91ad-0d00d8e9aeb0
+# ╟─f5e000db-7586-47b9-a673-1829f8e47fd7
+# ╟─2cc5584a-586a-4ae7-bfc3-71ff77fbf3d9
+# ╟─7a1c7ca9-659d-4f66-ab27-21a02201e60d
+# ╟─4ed53690-acca-4128-90ee-d935afc71e7c
+# ╟─baa0d2e0-ac0d-4371-803e-9cc22d016af7
+# ╟─4bf026b7-7a1c-4134-a4b1-4c8a9069a73d
+# ╟─64acd27c-8af7-4051-b018-2f8dd0615b34
+# ╟─0cd9a65d-1d2b-42a4-85b6-a5c2541889d8
+# ╟─853380dd-f790-4462-bcec-e0744274dc2e
+# ╟─256acb74-41ef-4352-b14a-f74a9a723deb
+# ╟─4b5c59b6-7670-482c-a4de-795530e38b75
+# ╟─235057bb-ea29-4b9a-8665-f750cde0d002
+# ╟─a57476c4-7f42-40aa-a453-b7b29e7b9f7d
+# ╟─068a3704-aa26-47ea-8f4a-ed4aacbb1985
+# ╟─b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
+# ╟─17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
 # ╠═ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
 # ╠═14852a74-f0a5-41c7-a9ef-d110a4bd8807
 # ╠═a54bcc59-6b84-4553-878f-4a4abfd6e9d6
