@@ -931,8 +931,8 @@ let
 	u=[5;-2;3]
 	v=[0;4;-3//1]
 	d_squared = sum((u .- v) .^2)
-	r_squared = d_squared/4
-	center = (u+v)/2
+	# r_squared = d_squared/4
+	# center = (u+v)/2
 	
 end
 
@@ -1000,6 +1000,14 @@ md"##  The Dot Product"
 # ╔═╡ ebbfa978-69b9-4a06-8747-792cb04992eb
 md"## Angle Between Two Vectors"
 
+# ╔═╡ 4fe2dba9-e764-4f30-a41a-75da08728858
+let
+	u,v,w,z = [3,-1,2],[-4,0,2],[1,-1,-2],[2,0,-1]
+	get_angle(v1,v2) = acos(v1⋅v2/(norm(v1)*norm(v2)))
+	get_angle(u,v)
+	get_angle(u,w)≈π/2
+end
+
 # ╔═╡ 70ffdb35-aba3-4b8a-834c-f3e996e5c278
 md"## Direction Cosines"
 
@@ -1023,8 +1031,28 @@ cm"""
 ```
 """
 
+# ╔═╡ c27df0f0-d524-4193-8188-271ea5779d04
+let
+	get_dir_angles(v) = begin
+		ln = norm(v)
+		map(i->acos(v[i]/ln),1:3)
+	end
+	v =[2,3,4]
+	get_dir_angles(v) |> a->map(v->v*180/π,a)
+	get_dir_angles(v) |> a->map(v->(cos(v))^2,a) |> sum
+	sum(map(v->(cos(v))^2,get_dir_angles(v)))
+end
+
 # ╔═╡ 1b9821e9-f325-475a-ba9c-70a889a5504c
 md"## Projections and Vector Components"
+
+# ╔═╡ 29a43516-0209-4a2e-930b-0157237c981f
+let
+	u = [3,-5,2]
+	v = [7,1,-2]
+	w1 = (u⋅v) * v/(v⋅v)
+	# w2 = u-w1
+end
 
 # ╔═╡ ca13f691-7ec8-4293-b271-8c197b2e0ccf
 md"## Work (Reading)"
@@ -1042,139 +1070,131 @@ md"""
 # ╔═╡ 495c292f-fbcb-4420-93a3-fbcd6a34d17a
 md"## The Cross Product"
 
-# ╔═╡ 1b792a4f-e23e-441d-9f6c-a64465505e2b
-md"""
-##### The Right-Hand Rule: A Visual Guide
-
-The right-hand rule is essential for determining the direction of cross products, angular velocity, magnetic fields, and many other vector quantities in physics and engineering.
-"""
-
 # ╔═╡ a58b8141-f330-46d8-82d2-b4caa5417887
 md"""
-##### Step-by-Step Right-Hand Rule for Cross Products
+##### Right-Hand Rule for Cross Products
 
-For vectors **u** and **v**, the cross product **u × v** direction is found using:
 """
 
 # ╔═╡ 771e9a89-d4eb-421b-a19f-a64810766812
-begin
-    rhr_u_angle = @bind rhr_u_slider Slider(0:15:180, default=45, show_value=true)
-    rhr_v_angle = @bind rhr_v_slider Slider(0:15:180, default=120, show_value=true)
-    rhr_scale = @bind rhr_scale_slider Slider(1:0.5:3, default=2, show_value=true)
+# begin
+#     rhr_u_angle = @bind rhr_u_slider Slider(0:15:180, default=45, show_value=true)
+#     rhr_v_angle = @bind rhr_v_slider Slider(0:15:180, default=120, show_value=true)
+#     rhr_scale = @bind rhr_scale_slider Slider(1:0.5:3, default=2, show_value=true)
 
-    cm"""
-    **Interactive Right-Hand Rule Demo:**
+#     cm"""
+#     **Interactive Right-Hand Rule Demo:**
 
-    u angle: $rhr_u_angle degrees
+#     u angle: $rhr_u_angle degrees
 
-    v angle: $rhr_v_angle degrees  
+#     v angle: $rhr_v_angle degrees  
 
-    Scale: $rhr_scale_slider
-    """
-end
+#     Scale: $rhr_scale_slider
+#     """
+# end
 
 # ╔═╡ 1b1f9a05-1792-4004-a1e1-e8b71a1925e9
-let
-    # Convert to radians
-    u_angle = rhr_u_slider * π / 180
-    v_angle = rhr_v_slider * π / 180
+# let
+#     # Convert to radians
+#     u_angle = rhr_u_slider * π / 180
+#     v_angle = rhr_v_slider * π / 180
 
-    # Create vectors in 2D (we'll show the 3D result)
-    u_vec = [rhr_scale_slider * cos(u_angle), rhr_scale_slider * sin(u_angle), 0]
-    v_vec = [rhr_scale_slider * cos(v_angle), rhr_scale_slider * sin(v_angle), 0]
+#     # Create vectors in 2D (we'll show the 3D result)
+#     u_vec = [rhr_scale_slider * cos(u_angle), rhr_scale_slider * sin(u_angle), 0]
+#     v_vec = [rhr_scale_slider * cos(v_angle), rhr_scale_slider * sin(v_angle), 0]
 
-    # Calculate cross product (will point in z direction)
-    cross_prod = u_vec[1] * v_vec[2] - u_vec[2] * v_vec[1]  # z-component
-    cross_vec = [0, 0, cross_prod]
+#     # Calculate cross product (will point in z direction)
+#     cross_prod = u_vec[1] * v_vec[2] - u_vec[2] * v_vec[1]  # z-component
+#     cross_vec = [0, 0, cross_prod]
 
-    # Create the plot
-    p = plot(aspect_ratio=1, xlims=(-4, 4), ylims=(-4, 4),
-        title="Right-Hand Rule Demonstration\nCross Product: u × v",
-        legend=:topright)
+#     # Create the plot
+#     p = plot(aspect_ratio=1, xlims=(-4, 4), ylims=(-4, 4),
+#         title="Right-Hand Rule Demonstration\nCross Product: u × v",
+#         legend=:topright)
 
-    # Plot vectors u and v
-    quiver!(p, [0], [0], quiver=([u_vec[1]], [u_vec[2]]),
-        color=:blue, linewidth=3, label="u")
-    quiver!(p, [0], [0], quiver=([v_vec[1]], [v_vec[2]]),
-        color=:red, linewidth=3, label="v")
+#     # Plot vectors u and v
+#     quiver!(p, [0], [0], quiver=([u_vec[1]], [u_vec[2]]),
+#         color=:blue, linewidth=3, label="u")
+#     quiver!(p, [0], [0], quiver=([v_vec[1]], [v_vec[2]]),
+#         color=:red, linewidth=3, label="v")
 
-    # Add vector labels
-    annotate!(p, u_vec[1] * 0.6, u_vec[2] * 0.6, text("u", :blue, 12))
-    annotate!(p, v_vec[1] * 0.6, v_vec[2] * 0.6, text("v", :red, 12))
+#     # Add vector labels
+#     annotate!(p, u_vec[1] * 0.6, u_vec[2] * 0.6, text("u", :blue, 12))
+#     annotate!(p, v_vec[1] * 0.6, v_vec[2] * 0.6, text("v", :red, 12))
 
-    # Show the angle between vectors
-    angle_diff = v_angle - u_angle
-    if angle_diff < 0
-        angle_diff += 2π
-    end
+#     # Show the angle between vectors
+#     angle_diff = v_angle - u_angle
+#     if angle_diff < 0
+#         angle_diff += 2π
+#     end
 
-    # Arc to show angle
-    arc_angles = range(u_angle, v_angle, length=20)
-    arc_x = 0.8 * cos.(arc_angles)
-    arc_y = 0.8 * sin.(arc_angles)
-    plot!(p, arc_x, arc_y, color=:green, linewidth=2, label="")
+#     # Arc to show angle
+#     arc_angles = range(u_angle, v_angle, length=20)
+#     arc_x = 0.8 * cos.(arc_angles)
+#     arc_y = 0.8 * sin.(arc_angles)
+#     plot!(p, arc_x, arc_y, color=:green, linewidth=2, label="")
 
-    # Show cross product direction
-    if cross_prod > 0
-        direction_text = "u × v points OUT of page ⊙\n(Right-hand rule: thumb up)"
-        color = :green
-    else
-        direction_text = "u × v points INTO page ⊗\n(Right-hand rule: thumb down)"
-        color = :purple
-    end
+#     # Show cross product direction
+#     if cross_prod > 0
+#         direction_text = "u × v points OUT of page ⊙\n(Right-hand rule: thumb up)"
+#         color = :green
+#     else
+#         direction_text = "u × v points INTO page ⊗\n(Right-hand rule: thumb down)"
+#         color = :purple
+#     end
 
-    # Add direction indicator
-    plot!(p, [0], [0], seriestype=:scatter, markersize=15,
-        color=color, label="")
-    annotate!(p, 0, -3.5, text(direction_text, color, 10, :center))
+#     # Add direction indicator
+#     plot!(p, [0], [0], seriestype=:scatter, markersize=15,
+#         color=color, label="")
+#     annotate!(p, 0, -3.5, text(direction_text, color, 10, :center))
 
-    # Add magnitude
-    mag = abs(cross_prod)
-    annotate!(p, 0, 3.5, text("||u × v|| = $(round(mag, digits=2))", :black, 10, :center))
+#     # Add magnitude
+#     mag = abs(cross_prod)
+#     annotate!(p, 0, 3.5, text("||u × v|| = $(round(mag, digits=2))", :black, 10, :center))
 
-    p
-end
+#     p
+# end
 
 # ╔═╡ 1b3fb3c8-c5fb-4a33-9630-211e4e29dc87
-md"""
-##### Applications of the Right-Hand Rule
+# md"""
+# ##### Applications of the Right-Hand Rule
 
-The right-hand rule appears throughout physics and engineering:
-"""
+# The right-hand rule appears throughout physics and engineering:
+# """
 
 # ╔═╡ 3018f183-3db6-48e5-90fa-f0ff37d8f216
-md"""
-##### Memory Aids for the Right-Hand Rule
-"""
+# md"""
+# ##### Memory Aids for the Right-Hand Rule
+# """
 
 # ╔═╡ 5121dfa0-5f6a-453a-9795-dddc8d6bdbfb
-md"""
-##### Quick Verification Tool
-"""
+# md"""
+# ##### Quick Verification Tool
+# """
 
 # ╔═╡ e0ffce55-f749-439e-8399-7d67cf7ef0c9
-let
-    # Create standard basis verification
-    p1 = plot(title="Standard Basis Vectors", aspect_ratio=1,
-        xlims=(-2, 2), ylims=(-2, 2))
+# let
+#     # Create standard basis verification
+#     p1 = plot(title="Standard Basis Vectors", aspect_ratio=1,
+#         xlims=(-2, 2), ylims=(-2, 2))
 
-    # i vector (red)
-    quiver!(p1, [0], [0], quiver=([1], [0]),
-        color=:red, linewidth=4, label="i")
-    annotate!(p1, 1.2, 0, text("i", :red, 14))
+#     # i vector (red)
+#     quiver!(p1, [0], [0], quiver=([1], [0]),
+#         color=:red, linewidth=4, label="i")
+#     annotate!(p1, 1.2, 0, text("i", :red, 14))
 
-    # j vector (blue)  
-    quiver!(p1, [0], [0], quiver=([0], [1]),
-        color=:blue, linewidth=4, label="j")
-    annotate!(p1, 0, 1.2, text("j", :blue, 14))
+#     # j vector (blue)  
+#     quiver!(p1, [0], [0], quiver=([0], [1]),
+#         color=:blue, linewidth=4, label="j")
+#     annotate!(p1, 0, 1.2, text("j", :blue, 14))
 
-    # Show i × j = k (into page)
-    plot!(p1, [0], [0], seriestype=:scatter, markersize=20,
-        color=:green, label="i × j = +k")
-    annotate!(p1, 0, -1.5, text("i × j = +k (out of page ⊙)", :green, 12, :center))
+#     # Show i × j = k (into page)
+#     plot!(p1, [0], [0], seriestype=:scatter, markersize=20,
+#         color=:green, label="i × j = +k")
+#     annotate!(p1, 0, -1.5, text("i × j = +k (out of page ⊙)", :green, 12, :center))
 
-    p1
-end
+#     p1
+# end
 
 # ╔═╡ 4fb037ae-7f8e-40a7-9988-26da22529d2e
 let
@@ -3863,6 +3883,25 @@ be vectors in space. The cross product of ``\mathbf{u}`` and ``\mathbf{v}`` is t
 ```math
 \mathbf{u} \times \mathbf{v}=\left(u_2 v_3-u_3 v_2\right) \mathbf{i}-\left(u_1 v_3-u_3 v_1\right) \mathbf{j}+\left(u_1 v_2-u_2 v_1\right) \mathbf{k}
 ```
+"""
+
+# ╔═╡ 1b792a4f-e23e-441d-9f6c-a64465505e2b
+cm"""
+$(bbl("Remark",""))
+A convenient way to calculate ``\mathbf{u} \times \mathbf{v}`` is to use the determinant form with cofactor expansion shown below. (This ``3 \times 3`` determinant form is used simply to help remember the formula for the cross product. The corresponding array is technically not a matrix because its entries are not all numbers.)
+```math
+\mathbf{u} \times \mathbf{v}=
+\left|\begin{array}{ccc}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3
+\end{array}\right| \begin{array}{ll}
+\text{}\\
+\longleftarrow \text { Put "u" in Row } 2 .\\
+\longleftarrow \text { Put "v" in Row } 3 .
+\end{array}
+```
+
 """
 
 # ╔═╡ b18adead-c917-450c-9a3c-7253d6d91442
@@ -7424,16 +7463,19 @@ version = "1.4.1+2"
 # ╟─4fc2f92f-3773-4e53-82c6-c4e441f164b3
 # ╟─788ea369-4509-4970-9a2d-ea887194b790
 # ╟─de23e5af-1d2d-4b22-9743-dd59bc903a9c
+# ╠═4fe2dba9-e764-4f30-a41a-75da08728858
 # ╟─bc67920c-1bee-4fcc-8469-adf01e1d33e8
 # ╟─70ffdb35-aba3-4b8a-834c-f3e996e5c278
 # ╟─bf3af1b5-3959-447f-85ac-b2b0b1ab737f
 # ╟─eca05d58-1cab-444f-ae15-df4e3177323f
 # ╟─c925f9ff-245f-4d0a-b085-b703adc1daaf
+# ╠═c27df0f0-d524-4193-8188-271ea5779d04
 # ╟─1b9821e9-f325-475a-ba9c-70a889a5504c
 # ╟─c1dee7b3-6118-493e-9c9a-4629cd2af8c3
 # ╟─8bb57498-9a49-4b45-8d82-fb790465b1ae
 # ╟─aac34993-c94d-4fa1-8f45-e249740c914d
 # ╟─3eded575-d9c4-424e-8151-3958dababb38
+# ╠═29a43516-0209-4a2e-930b-0157237c981f
 # ╟─97b10d17-61c1-494b-aefe-131a436e374e
 # ╟─ca13f691-7ec8-4293-b271-8c197b2e0ccf
 # ╟─b1c3ec5b-003d-42ab-8c6b-806e083a2047
