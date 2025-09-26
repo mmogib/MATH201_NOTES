@@ -1050,7 +1050,8 @@ md"## Projections and Vector Components"
 let
 	u = [3,-5,2]
 	v = [7,1,-2]
-	w1 = (u⋅v) * v/(v⋅v)
+	u ⋅ v
+	# w1 = (u⋅v) * v/(v⋅v)
 	# w2 = u-w1
 end
 
@@ -1200,7 +1201,8 @@ md"""
 let
     u = [1; -4; 1]
     v = [2; 3; 0]
-    u × v
+    w = u × v
+	w = w/norm(w)
 end
 
 # ╔═╡ 12d1fa2a-9a6c-4edc-821e-2f54b4da454e
@@ -1234,6 +1236,9 @@ let
     v = [0; 2; -2]
     w = [3; 1; 1]
     volume = abs(u ⋅ (w × v))
+	A = [u';v';w']
+	det(A)
+    volume = abs(w ⋅ (u × v))
 end
 
 # ╔═╡ 4d59ce5f-85f1-4d35-8fdb-e6b3f9040eb5
@@ -1277,6 +1282,22 @@ cm"""
 
 """
 
+# ╔═╡ 1809ee14-dd65-40f4-8efa-92554a5398ea
+let
+	A=[2,1,1]
+	B=[1,4,1]
+	C=[-2,0,4]
+	AB=B-A
+	AC=C-A
+	n = AB × AC
+	@variables x::Real, y::Real, z::Real
+	P = B
+	Q = [x,y,z]
+	PQ = Q-P
+	n ⋅ PQ ~ 0
+	# n ⋅ ([x,y,z]) - n⋅A ~ 0
+end
+
 # ╔═╡ 21b654c3-e9e3-4277-914d-32c81dc86604
 cm"""
 [Geogebra Graph](https://www.geogebra.org/classic/tg4tezst?embed)
@@ -1288,7 +1309,9 @@ let
     n1 = [1; -2; 1]
     n2 = [2; 3; -2]
     α = acos(abs(n1 ⋅ n2) / (norm(n1) * norm(n2))) |> u"°"
-
+	# acos(sqrt(6/17)) |> u"°"
+	u = n1 × n2
+	
 end
 
 # ╔═╡ 99fddbde-28de-4a43-977b-a8d9559fe997
@@ -1355,16 +1378,16 @@ let
 
     L1(t) = P1 + v1 * t
     L2(s) = P2 + v2 * s
-    n1 = v1 × v2
-    f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
-    PL1 = f1([x; y; z]) ~ 0
-    # # # L1(t)
-    f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
-    PL2 = f2([x; y; z]) ~ 0
-    PL1, PL2
-    P1P2 = L2(0) - L1(5)
-    D = abs(n1 ⋅ P1P2) / norm(n1)
-    # expand(f1(L1(t)))
+    # n1 = v1 × v2
+    # f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
+    # PL1 = f1([x; y; z]) ~ 0
+    # # # # L1(t)
+    # f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
+    # PL2 = f2([x; y; z]) ~ 0
+    # PL1, PL2
+    # P1P2 = L2(0) - L1(5)
+    # D = abs(n1 ⋅ P1P2) / norm(n1)
+    # # expand(f1(L1(t)))
     # expand(f2(L2(t)))
 end
 
@@ -4107,6 +4130,14 @@ $(bbl("Angle between two planes",""))
 ```
 
 
+"""
+
+# ╔═╡ 772af978-5d7d-467d-bfc5-98dcf5bdd872
+cm"""
+$(bbl("Remark",""))
+Two planes with normal vectors ``\bf n_1`` and ``\bf n_2`` are
+* __perpendicular__ when ``{\bf n_1} \cdot {\bf n_2} = 0``.
+* __parallel__ when ``\bf n_1`` is a scalar multiple of ``\bf n_2``.
 """
 
 # ╔═╡ 6e53795f-016a-4113-ae5d-5dc2a02758a7
@@ -7519,7 +7550,9 @@ version = "1.4.1+2"
 # ╟─391ff8aa-056a-4867-90db-3d9f4537fe80
 # ╟─8e46e68e-0099-430b-864e-683b14ed2fbd
 # ╟─71a93732-10ff-480f-aacf-6ea729d636b9
+# ╠═1809ee14-dd65-40f4-8efa-92554a5398ea
 # ╟─902fbee4-194f-499d-9e9d-ad7bfb08131e
+# ╟─772af978-5d7d-467d-bfc5-98dcf5bdd872
 # ╟─6e53795f-016a-4113-ae5d-5dc2a02758a7
 # ╟─21b654c3-e9e3-4277-914d-32c81dc86604
 # ╠═d041d81f-b61f-4dfe-9fc0-472cef882098
