@@ -1343,21 +1343,22 @@ let
     f1(x, y, z) = 3x - y + 2z - 6
     f2(x, y, z) = 6x - 2y + 4z + 4
     Q = (0, -6, 0)
-    P = (0, 0, -1)
-    PQ = Q .- P
+    # P = (0, 0, -1)
+    # PQ = Q .- P
     n = (6, -2, 4)
-    D = abs(PQ ⋅ n) / norm(n)
-
+    # D = abs(PQ ⋅ n) / norm(n)
+	d = abs(12+4)/norm(n)
 
 end
 
 # ╔═╡ 8934159d-2dc6-4e4d-a5c4-2125831e0c52
 let
-    Q = (3, -1, 4)
-    P = (-2, 0, 1)
-    u = (3, -2, 4)
-    PQ = Q .- P
-    norm(cross(vcat(PQ...), vcat(u...))) / norm(u)
+    Q = [3,-1, 4]
+	P = [-2,0, 1]
+	u = [3,-2,4]
+	PQ = Q-P
+	norm(PQ × u)/norm(u)
+	
 end
 
 # ╔═╡ 2407b715-09cd-4568-bf81-4b9f5cf4065e
@@ -1378,16 +1379,16 @@ let
 
     L1(t) = P1 + v1 * t
     L2(s) = P2 + v2 * s
-    # n1 = v1 × v2
-    # f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
-    # PL1 = f1([x; y; z]) ~ 0
-    # # # # L1(t)
-    # f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
-    # PL2 = f2([x; y; z]) ~ 0
+    n1 = v1 × v2
+    f1(x::Vector) = x ⋅ n1 - P1 ⋅ n1
+    PL1 = f1([x; y; z]) ~ 0
+    # # # # # L1(t)
+    f2(x::Vector) = x ⋅ n1 - P2 ⋅ n1
+    PL2 = f2([x; y; z]) ~ 0
     # PL1, PL2
     # P1P2 = L2(0) - L1(5)
     # D = abs(n1 ⋅ P1P2) / norm(n1)
-    # # expand(f1(L1(t)))
+    # # # expand(f1(L1(t)))
     # expand(f2(L2(t)))
 end
 
@@ -1447,27 +1448,190 @@ cm"""
 md"## Level Curves"
 
 # ╔═╡ 0980c680-12bf-45bb-8b51-9af548d75809
-let
-    # Define the function f(x, y)
-    g(x, y) = 64 - x^2 - y^2
-    f(x, y) = sqrt(g(x, y))
+# let
+#     # Define the function f(x, y)
+#     g(x, y) = 64 - x^2 - y^2
+#     f(x, y) = sqrt(g(x, y))
 
-    # Define ranges for x and y
-    # x in [-2, 2] and y in [-2, 2]
-    xs = range(-2, 2, length=300)
-    ys = range(-2, 2, length=300)
+#     # Define ranges for x and y
+#     # x in [-2, 2] and y in [-2, 2]
+#     xs = range(-2, 2, length=300)
+#     ys = range(-2, 2, length=300)
 
-    # Compute function values over the grid.
-    # Use a ternary operator to ensure that the function is evaluated only when the argument is nonnegative.
-    Z = [(g(x, y) >= 0 ? f(x, y) : NaN) for x in xs, y in ys]
+#     # Compute function values over the grid.
+#     # Use a ternary operator to ensure that the function is evaluated only when the argument is nonnegative.
+#     Z = [(g(x, y) >= 0 ? f(x, y) : NaN) for x in xs, y in ys]
 
-    # Plot the contour lines
-    contour(xs, ys, Z,
-        title="Contour Plot of f(x,y) = √(16-4x²-y²)",
-        xlabel="x", ylabel="y",
-        fill=true,
-        colorbar=true)
+#     # Plot the contour lines
+#     contour(xs, ys, Z,
+#         title="Contour Plot of f(x,y) = √(16-4x²-y²)",
+#         xlabel="x", ylabel="y",
+#         fill=true,
+#         colorbar=true)
+# end
+
+# ╔═╡ e33d3119-d369-48b1-b298-d381d0f56539
+cm"""
+**Plot Backend:**
+$(@bind backend_choice Select(["gr" => "GR (Fast)", 
+                                "plotly" => "Plotly (Interactive)"]))
+
+**Select which level curves to display:** 
+$(@bind show_levels MultiCheckBox(0:8, default=[0,2,4,6,8]))
+
+
+**View Mode:**
+$(@bind view_mode Select(["contour"=>"Contour Only", 
+                          "surface" => "3D Surface Only",
+                          "both" => "Side by Side",
+                          "overlay" => "Overlay"]))
+
+**Show Grid:** $(@bind show_grid CheckBox(default=true))
+
+**Show Labels:** $(@bind show_labels CheckBox(default=true))
+"""
+
+
+# ╔═╡ abe05e1f-f4de-4ff3-ae24-baca1163e808
+let 
+	f(x, y) = sqrt(max(0, 64 - x^2 - y^2))
+
+	# Switch backend based on user selection
+	if backend_choice == "plotly"
+		plotly()
+	else
+		gr()
+	end
+	# Create coordinate grid
+	x_range = -8:0.1:8
+	y_range = -8:0.1:8
+	
+	# Contour plot
+	function create_contour_plot()
+		levels =  if backend_choice == "plotly" 
+					(0:1:8) 
+				else
+					[i for i in 0:8]
+				end
+			
+		p = contour(x_range, y_range, f,
+			levels=levels,
+			fill = true,
+			linewidth = 2,
+			color = :viridis,
+			xlabel = "x",
+			ylabel = "y",
+			title = "Contour Map (Top View)",
+			aspect_ratio = :equal,
+			size = (500, 500),
+			xlims = (-9, 9),
+			ylims = (-9, 9),
+			grid = show_grid,
+			clims = (0, 8),
+			colorbar_title = "Height (z)")
+		
+		# Add circle annotations for level curves up to animation_frame
+		for c in show_levels
+			r = sqrt(64 - c^2)
+			θ = 0:0.01:2π
+			plot!(p, r.*cos.(θ), r.*sin.(θ), 
+				color = :black, 
+				linewidth = 2,
+				label = show_labels ? "c = $c" : "",
+				linestyle = :solid)
+		end
+		
+		return p
+	end
+	
+	# 3D surface plot
+	function create_3d_plot()
+		x_3d = -8:0.3:8
+		y_3d = -8:0.3:8
+		z_surface = [f(x, y) for y in y_3d, x in x_3d]
+		
+		p = surface(x_3d, y_3d, z_surface,
+			color = :viridis,
+			xlabel = "x",
+			ylabel = "y",
+			zlabel = "z = f(x,y)",
+			title = "3D Hemisphere",
+			camera = (30, 30),
+			size = (500, 500),
+			colorbar_title = "Height",
+			clims = (0, 8),
+			zlims = (0, 9),
+			xlims = (-9, 9),
+			ylims = (-9, 9)
+		)
+		# Add level curve rings on the surface
+		for c in show_levels
+			if c > 0
+				r = sqrt(64 - c^2)
+				θ = 0:0.05:2π
+				x_circle = r.*cos.(θ)
+				y_circle = r.*sin.(θ)
+				z_circle = fill(Float64(c), length(θ))
+				plot!(p, x_circle, y_circle, z_circle,
+					color = :red,
+					linewidth = 3,
+					label = "")
+			end
+		end
+		# Add major axes
+	# plot!(p, [-10, 10], [0, 0], [0, 0], color = :black, linewidth = 2, label = "x-axis")
+	# plot!(p, [0, 0], [-10, 10], [0, 0], color = :black, linewidth = 2, label = "y-axis")
+	# plot!(p, [0, 0], [0, 0], [-12, 12], color = :black, linewidth = 4, label = "z-axis")
+		return p
+	end
+	
+	# Overlay plot
+	function create_overlay_plot()
+		p = plot(legend = :topright, size = (600, 600))
+		
+		# Draw filled contours
+		contourf!(p, x_range, y_range, f,
+			levels = 0:0.5:8,
+			color = :viridis,
+			alpha = 0.6,
+			xlabel = "x",
+			ylabel = "y",
+			title = "Contour Map with Level Curve Radii",
+			aspect_ratio = :equal,
+			xlims = (-9, 9),
+			ylims = (-9, 9),
+			colorbar_title = "Height (z)")
+		
+		# Highlight selected level curves
+		for c in sort(show_levels)
+			r = sqrt(64 - c^2)
+			θ = 0:0.01:2π
+			plot!(p, r.*cos.(θ), r.*sin.(θ),
+				color = :red,
+				linewidth = 3,
+				label = show_labels ? "r = $(round(r, digits=2)) (c=$c)" : "")
+		
+		end
+		
+		return p
+	end
+	
+	# Display based on selected view mode
+	if view_mode == "contour"
+		create_contour_plot()
+	elseif view_mode == "surface"
+		create_3d_plot()
+		
+	elseif view_mode == "both"
+		plot(create_3d_plot(), create_contour_plot(), 
+			layout = (1, 2), size = (1000, 500))
+		
+	else  # overlay
+		create_overlay_plot()
+		
+	end
 end
+
 
 # ╔═╡ 52ef6ea9-888c-48b3-a2d4-5ca86c5e6b1b
 md"## Level Surfaces"
@@ -4420,6 +4584,7 @@ Show that the limit does not exist.
 ```math
 \lim _{(x, y) \rightarrow(0,0)}\left(\frac{x^2-y^2}{x^2+y^2}\right)^2
 ```
+[See Graph](https://www.geogebra.org/calculator/w96w7g6w)
 """
 
 # ╔═╡ d8fc27f5-de91-4bc3-83b5-c48ae17acf97
@@ -4431,6 +4596,16 @@ A function ``f`` of two variables is continuous at a point ``\left(\boldsymbol{x
 ```
 
 The function ``f`` is continuous in the open region ``\boldsymbol{R}`` if it is continuous at every point in ``R``.
+"""
+
+# ╔═╡ 3f146078-120b-4f4a-bf9b-392ef6afb5c4
+cm"""
+$(bth("Continuous Functions of Two Variables"))
+If ``k`` is a real number and ``f(x, y)`` and ``g(x, y)`` are continuous at ``\left(x_0, y_0\right)``, then the following functions are also continuous at ``\left(x_0, y_0\right)``.
+1. Scalar multiple: ``k f``
+2. Sum or difference: ``f \pm g``
+3. Product: ``f g``
+4. Quotient: ``f / g, g\left(x_0, y_0\right) \neq 0``
 """
 
 # ╔═╡ 69528b92-41b9-4a90-a809-dfd86c3feb04
@@ -4543,6 +4718,13 @@ Find the slopes of the surface
 f(x, y)=1-(x-1)^2-(y-2)^2
 ```
 at the point ``(1,2,1)`` in the ``x``-direction and in the ``y``-direction.
+"""
+
+# ╔═╡ ae48b156-e2e5-43e1-bd8d-ab995cc393a0
+cm"""
+$(ex(5,"Using Partial Derivatives to Find Rates of Change"))
+The area of a parallelogram with adjacent sides ``a`` and ``b`` and included angle ``\theta`` is given by ``A=a b \sin \theta``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/jahlir2ftz4fz3ngbwpkh/fig13.33.png?rlkey=2iaac1h3pmm0qmwwzejhr8rfm&dl=1"))
 """
 
 # ╔═╡ 64acd27c-8af7-4051-b018-2f8dd0615b34
@@ -7594,6 +7776,8 @@ version = "1.4.1+2"
 # ╟─e65f9504-8096-4d04-add3-b000929fea8d
 # ╟─b0312347-074e-4d02-9541-827625366a1f
 # ╟─0980c680-12bf-45bb-8b51-9af548d75809
+# ╟─e33d3119-d369-48b1-b298-d381d0f56539
+# ╟─abe05e1f-f4de-4ff3-ae24-baca1163e808
 # ╟─48130cd8-69ad-4b14-b4a5-84aeb560aae0
 # ╟─52ef6ea9-888c-48b3-a2d4-5ca86c5e6b1b
 # ╟─fa71c9a5-1d30-49e3-930e-757c681e5028
@@ -7609,6 +7793,7 @@ version = "1.4.1+2"
 # ╟─04442eaa-9336-4ebd-865b-7e1fdbe4b8bc
 # ╟─4b19a3ac-1f97-40e3-a8ff-cd57a3f14fdc
 # ╟─d8fc27f5-de91-4bc3-83b5-c48ae17acf97
+# ╟─3f146078-120b-4f4a-bf9b-392ef6afb5c4
 # ╟─69528b92-41b9-4a90-a809-dfd86c3feb04
 # ╟─85b9bece-47e3-4de1-b21c-650b8b841e0d
 # ╟─c982e7a9-9563-4ad6-8bde-2baa9c538650
@@ -7620,6 +7805,7 @@ version = "1.4.1+2"
 # ╟─7a1c7ca9-659d-4f66-ab27-21a02201e60d
 # ╟─4ed53690-acca-4128-90ee-d935afc71e7c
 # ╟─baa0d2e0-ac0d-4371-803e-9cc22d016af7
+# ╟─ae48b156-e2e5-43e1-bd8d-ab995cc393a0
 # ╟─4bf026b7-7a1c-4134-a4b1-4c8a9069a73d
 # ╟─64acd27c-8af7-4051-b018-2f8dd0615b34
 # ╟─0cd9a65d-1d2b-42a4-85b6-a5c2541889d8
