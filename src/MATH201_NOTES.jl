@@ -1717,124 +1717,50 @@ md"""
 # ╔═╡ b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
 md"## Increments and Differentialsp"
 
-# ╔═╡ ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
-# cm"""
-# $(ex(1,"Finding the Total Differential"))
-# Find the total differential for each function.
-# - (a.) ``z=2 x \sin y-3 x^2 y^2``
-# - (b.) ``w=x^2+y^2+z^2``
-# """
-
 # ╔═╡ 14852a74-f0a5-41c7-a9ef-d110a4bd8807
-# md"## Differentiability"
-
-# ╔═╡ a54bcc59-6b84-4553-878f-4a4abfd6e9d6
-# cm"""
-# $(define("Differentiability"))
-# A function ``f`` given by ``z=f(x, y)`` is differentiable at ``\left(x_0, y_0\right)`` if ``\Delta z`` can be written in the form
-# ```math
-# \Delta z=f_x\left(x_0, y_0\right) \Delta x+f_y\left(x_0, y_0\right) \Delta y+\varepsilon_1 \Delta x+\varepsilon_2 \Delta y
-# ```
-# where both ``\varepsilon_1`` and ``\varepsilon_2 \rightarrow 0`` as
-# ```math
-# (\Delta x, \Delta y) \rightarrow(0,0)
-# ```
-
-# The function ``f`` is differentiable in a region ``\boldsymbol{R}`` if it is differentiable at each point in ``R``.
-# """
-
-# ╔═╡ fdbca96e-0f9c-4edb-8f60-cb53c1dad95e
-# cm"""
-# $(ex(2,"Showing that a Function Is Differentiable"))
-# Show that the function
-# ```math
-# f(x, y)=x^2+3 y
-# ```
-# is differentiable at every point in the plane.
-# """
-
-# ╔═╡ 9fe522bd-dfdb-4d65-a8d1-3d2d4618e4f7
-# cm"""
-# $(bth("Sufficient Condition for Differentiability"))
-# If ``f`` is a function of ``x`` and ``y``, where ``f_x`` and ``f_y`` are continuous in an open region ``R``, then ``f`` is differentiable on ``R``.
-
-# """
+md"## Differentiability"
 
 # ╔═╡ de197844-f3d6-469c-b41c-995d5ba542ca
-# md"## Approximation by Differentials"
+md"## Approximation by Differentials"
 
 # ╔═╡ 957e0ca3-72b6-4687-a7c5-69b6da416f5b
-# cm"""
-# For small ``\Delta x`` and ``\Delta y``, you can use the approximation
-# ```math
-# \Delta z \approx d z . \quad \color{red}{\text { Approximate change in } z}
-# ```
-# """
-
-# ╔═╡ d859bc8d-fce7-4eb6-9e0a-12750dc76275
-# cm"""
-# $(ex(3,"Using a Differential as an Approximation"))
-# Use the differential ``d z`` to approximate the change in
-# ```math
-# z=\sqrt{4-x^2-y^2}
-# ```
-# as ``(x, y)`` moves from the point ``(1,1)`` to the point ``(1.01,0.97)``. Compare this approximation with the exact change in ``z``.
-# """
+cm"""
+For small ``\Delta x`` and ``\Delta y``, you can use the approximation
+```math
+\Delta z \approx d z . \quad \color{red}{\text { Approximate change in } z}
+```
+"""
 
 # ╔═╡ e08331c1-1e6c-48be-a570-e33a908d830f
-# let
-#     @variables x::Real, y::Real, z::Real
-#     @variables dx::Real, dy::Real, dz::Real
-#     Δx, Δy = (1.01, 0.97) .- (1, 1)
-#     f(x, y) = sqrt(4 - x^2 - y^2)
-#     z ~ f(x, y)
-#     E = dz ~ ForwardDiff.gradient(x -> f(x...), [x; y]) ⋅ [dx; dy]
-#     substitute(E, Dict([x => 1, y => 1, dx => Δx, dy => Δy])), f(1.01, 0.97) - f(1, 1)
+let
+    @variables x::Real, y::Real, z::Real
+    @variables dx::Real, dy::Real, dz::Real
+    Δx, Δy = (1.01, 0.97) .- (1, 1)
+    f(x, y) = sqrt(4 - x^2 - y^2)
+    z ~ f(x, y)
+    E = dz ~ ForwardDiff.gradient(x -> f(x...), [x; y]) ⋅ [dx; dy]
+    substitute(E, Dict([x => 1, y => 1, dx => Δx, dy => Δy])), f(1.01, 0.97) - f(1, 1)
 
-# end
-
-# ╔═╡ d444124f-7afa-4de4-bdcd-f9667f3e9732
-# cm"""
-# $(ex(4,"Error Analysis"))
-# The possible error involved in measuring each dimension of a rectangular box is ``\pm 0.1`` millimeter. The dimensions of the box are ``x=50`` centimeters, ``y=20`` centimeters, and ``z=15`` centimeters, as shown below. Use ``d V`` to estimate the propagated error and the relative error in the calculated volume of the box.
-
-# $(post_img("https://www.dropbox.com/scl/fi/1y1dnb0lijtqu1p8vl8z5/fig_13_37.png?rlkey=4xpdeaxy3lcn940i0y3vwyq31&dl=1"))
-# """
+end
 
 # ╔═╡ e53f41aa-45cd-488a-9123-7dfa22ec3ef7
-# let
-#     @variables x::Real, y::Real, z::Real, dx::Real, dy::Real, dz::Real, dV::Real, V::Real
-#     v(x, y, z) = x * y * z
-#     Volume = V ~ v(x, y, z)
-#     E = dV ~ ForwardDiff.gradient(x -> v(x...), [x; y; z]) ⋅ [dx; dy; dz]
-#     dv = substitute(E, Dict([
-#         x => 50,
-#         y => 20,
-#         z => 15,
-#         dx => 0.01,
-#         dy => 0.01,
-#         dz => 0.01,
-#     ]))
-#     v_value = 50 * 20 * 15
-#     # dv = 20
-#     100 * dv.rhs / v_value
-# end
-
-# ╔═╡ cc9031ef-476d-498b-8850-2b355125f98a
-# cm"""
-# $(bth("Differentiability Implies Continuity"))
-# If a function of ``x`` and ``y`` is differentiable at ``\left(x_0, y_0\right)``, then it is continuous at ``\left(x_0, y_0\right)``.
-# """
-
-# ╔═╡ 108a234a-2272-4971-b762-f7f665133955
-# cm"""
-# $(ex(5,"A Function That Is Not Differentiable"))
-# For the function
-# ```math
-# f(x, y)= \begin{cases}\frac{-3 x y}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)\end{cases}
-# ```
-# show that ``f_x(0,0)`` and ``f_y(0,0)`` both exist but that ``f`` is not differentiable at ``(0,0)``.
-# """
+let
+    @variables x::Real, y::Real, z::Real, dx::Real, dy::Real, dz::Real, dV::Real, V::Real
+    v(x, y, z) = x * y * z
+    Volume = V ~ v(x, y, z)
+    E = dV ~ ForwardDiff.gradient(x -> v(x...), [x; y; z]) ⋅ [dx; dy; dz]
+    dv = substitute(E, Dict([
+        x => 50,
+        y => 20,
+        z => 15,
+        dx => 0.01,
+        dy => 0.01,
+        dz => 0.01,
+    ]))
+    v_value = 50 * 20 * 15
+    # dv = 20
+    100 * dv.rhs / v_value
+end
 
 # ╔═╡ 3de8b2fd-5d34-4a02-b821-a969b439e571
 md"""
@@ -4795,6 +4721,80 @@ and the total differential of the dependent variable ``z`` is
 ```math
 d z=\frac{\partial z}{\partial x} d x+\frac{\partial z}{\partial y} d y=f_x(x, y) d x+f_y(x, y) d y
 ```
+"""
+
+# ╔═╡ ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
+cm"""
+$(ex(1,"Finding the Total Differential"))
+Find the total differential for each function.
+- (a.) ``z=2 x \sin y-3 x^2 y^2``
+- (b.) ``w=x^2+y^2+z^2``
+# """
+
+# ╔═╡ a54bcc59-6b84-4553-878f-4a4abfd6e9d6
+cm"""
+$(define("Differentiability"))
+A function ``f`` given by ``z=f(x, y)`` is differentiable at ``\left(x_0, y_0\right)`` if ``\Delta z`` can be written in the form
+```math
+\Delta z=f_x\left(x_0, y_0\right) \Delta x+f_y\left(x_0, y_0\right) \Delta y+\varepsilon_1 \Delta x+\varepsilon_2 \Delta y
+```
+where both ``\varepsilon_1`` and ``\varepsilon_2 \rightarrow 0`` as
+```math
+(\Delta x, \Delta y) \rightarrow(0,0)
+```
+
+The function ``f`` is differentiable in a region ``\boldsymbol{R}`` if it is differentiable at each point in ``R``.
+"""
+
+# ╔═╡ fdbca96e-0f9c-4edb-8f60-cb53c1dad95e
+cm"""
+$(ex(2,"Showing that a Function Is Differentiable"))
+Show that the function
+```math
+f(x, y)=x^2+3 y
+```
+is differentiable at every point in the plane.
+"""
+
+# ╔═╡ 9fe522bd-dfdb-4d65-a8d1-3d2d4618e4f7
+cm"""
+$(bth("Sufficient Condition for Differentiability"))
+If ``f`` is a function of ``x`` and ``y``, where ``f_x`` and ``f_y`` are continuous in an open region ``R``, then ``f`` is differentiable on ``R``.
+
+"""
+
+# ╔═╡ d859bc8d-fce7-4eb6-9e0a-12750dc76275
+cm"""
+$(ex(3,"Using a Differential as an Approximation"))
+Use the differential ``d z`` to approximate the change in
+```math
+z=\sqrt{4-x^2-y^2}
+```
+as ``(x, y)`` moves from the point ``(1,1)`` to the point ``(1.01,0.97)``. Compare this approximation with the exact change in ``z``.
+"""
+
+# ╔═╡ d444124f-7afa-4de4-bdcd-f9667f3e9732
+cm"""
+$(ex(4,"Error Analysis"))
+The possible error involved in measuring each dimension of a rectangular box is ``\pm 0.1`` millimeter. The dimensions of the box are ``x=50`` centimeters, ``y=20`` centimeters, and ``z=15`` centimeters, as shown below. Use ``d V`` to estimate the propagated error and the relative error in the calculated volume of the box.
+
+$(post_img("https://www.dropbox.com/scl/fi/1y1dnb0lijtqu1p8vl8z5/fig_13_37.png?rlkey=4xpdeaxy3lcn940i0y3vwyq31&dl=1"))
+"""
+
+# ╔═╡ cc9031ef-476d-498b-8850-2b355125f98a
+cm"""
+$(bth("Differentiability Implies Continuity"))
+If a function of ``x`` and ``y`` is differentiable at ``\left(x_0, y_0\right)``, then it is continuous at ``\left(x_0, y_0\right)``.
+"""
+
+# ╔═╡ 108a234a-2272-4971-b762-f7f665133955
+cm"""
+$(ex(5,"A Function That Is Not Differentiable"))
+For the function
+```math
+f(x, y)= \begin{cases}\frac{-3 x y}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)\end{cases}
+```
+show that ``f_x(0,0)`` and ``f_y(0,0)`` both exist but that ``f`` is not differentiable at ``(0,0)``.
 """
 
 # ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
@@ -7817,19 +7817,19 @@ version = "1.4.1+2"
 # ╟─068a3704-aa26-47ea-8f4a-ed4aacbb1985
 # ╟─b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
 # ╟─17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
-# ╠═ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
-# ╠═14852a74-f0a5-41c7-a9ef-d110a4bd8807
-# ╠═a54bcc59-6b84-4553-878f-4a4abfd6e9d6
-# ╠═fdbca96e-0f9c-4edb-8f60-cb53c1dad95e
-# ╠═9fe522bd-dfdb-4d65-a8d1-3d2d4618e4f7
-# ╠═de197844-f3d6-469c-b41c-995d5ba542ca
-# ╠═957e0ca3-72b6-4687-a7c5-69b6da416f5b
-# ╠═d859bc8d-fce7-4eb6-9e0a-12750dc76275
-# ╠═e08331c1-1e6c-48be-a570-e33a908d830f
-# ╠═d444124f-7afa-4de4-bdcd-f9667f3e9732
+# ╟─ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
+# ╟─14852a74-f0a5-41c7-a9ef-d110a4bd8807
+# ╟─a54bcc59-6b84-4553-878f-4a4abfd6e9d6
+# ╟─fdbca96e-0f9c-4edb-8f60-cb53c1dad95e
+# ╟─9fe522bd-dfdb-4d65-a8d1-3d2d4618e4f7
+# ╟─de197844-f3d6-469c-b41c-995d5ba542ca
+# ╟─957e0ca3-72b6-4687-a7c5-69b6da416f5b
+# ╟─d859bc8d-fce7-4eb6-9e0a-12750dc76275
+# ╟─e08331c1-1e6c-48be-a570-e33a908d830f
+# ╟─d444124f-7afa-4de4-bdcd-f9667f3e9732
 # ╠═e53f41aa-45cd-488a-9123-7dfa22ec3ef7
-# ╠═cc9031ef-476d-498b-8850-2b355125f98a
-# ╠═108a234a-2272-4971-b762-f7f665133955
+# ╟─cc9031ef-476d-498b-8850-2b355125f98a
+# ╟─108a234a-2272-4971-b762-f7f665133955
 # ╠═3de8b2fd-5d34-4a02-b821-a969b439e571
 # ╠═d850bcda-5bf4-4db6-b920-ca87514bfbc6
 # ╠═47fe0a92-3fb5-4a1b-9618-87eec99c068e
