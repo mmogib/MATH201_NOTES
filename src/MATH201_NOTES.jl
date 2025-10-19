@@ -1734,12 +1734,13 @@ For small ``\Delta x`` and ``\Delta y``, you can use the approximation
 # ╔═╡ e08331c1-1e6c-48be-a570-e33a908d830f
 let
     @variables x::Real, y::Real, z::Real
-    @variables dx::Real, dy::Real, dz::Real
+    @variables dx::Real, dy::Real, dz::Real, Δz::Real
     Δx, Δy = (1.01, 0.97) .- (1, 1)
     f(x, y) = sqrt(4 - x^2 - y^2)
     z ~ f(x, y)
     E = dz ~ ForwardDiff.gradient(x -> f(x...), [x; y]) ⋅ [dx; dy]
-    substitute(E, Dict([x => 1, y => 1, dx => Δx, dy => Δy])), f(1.01, 0.97) - f(1, 1)
+	E1 = Δz ~ f(1.01, 0.97) - f(1, 1)
+    substitute(E, Dict([x => 1, y =>1, dy=> Δy, dx => Δx, dy => Δy])), E1
 
 end
 
@@ -1759,7 +1760,7 @@ let
     ]))
     v_value = 50 * 20 * 15
     # dv = 20
-    100 * dv.rhs / v_value
+    dv.rhs/v_value 
 end
 
 # ╔═╡ 3de8b2fd-5d34-4a02-b821-a969b439e571
@@ -1770,85 +1771,8 @@ md"""
 > 2. Find partial derivatives implicitly.
 """
 
-# ╔═╡ d850bcda-5bf4-4db6-b920-ca87514bfbc6
-# cm"""
-# $(bth("Chain Rule: One Independent Variable"))
-# Let ``w=f(x, y)``, where ``f`` is a differentiable function of ``x`` and ``y``. If ``x=g(t)`` and ``y=h(t)``, where ``g`` and ``h`` are differentiable functions of ``t``, then ``w`` is a differentiable function of ``t``, and
-# ```math
-# \frac{d w}{d t}=\frac{\partial w}{\partial x} \frac{d x}{d t}+\frac{\partial w}{\partial y} \frac{d y}{d t}
-# ```
-# $(ebl())
-
-# $(ex(1,"Chain Rule: One Independent Variable"))
-# Let ``w=x^2 y-y^2``, where ``x=\sin t`` and ``y=e^t``. Find ``d w / d t`` when ``t=0``.
-# """
-
-# ╔═╡ 47fe0a92-3fb5-4a1b-9618-87eec99c068e
-# cm"""
-# $(ex(3,"Finding Partial Derivatives by Substitution"))
-# Find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
-# """
-
-# ╔═╡ 69abaecb-13d5-4e81-a401-567b581e8eda
-# cm"""
-# $(bth("Chain Rule: Two Independent Variables"))
-# Let ``w=f(x, y)``, where ``f`` is a differentiable function of ``x`` and ``y``. If ``x=g(s, t)`` and ``y=h(s, t)`` such that the first partials ``\partial x / \partial s, \partial x / \partial t, \partial y / \partial s``, and ``\partial y / \partial t`` all exist, then ``\partial w / \partial s`` and ``\partial w / \partial t`` exist and are given by
-# ```math
-# \frac{\partial w}{\partial s}=\frac{\partial w}{\partial x} \frac{\partial x}{\partial s}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial s}
-# ```
-# and
-# ```math
-# \frac{\partial w}{\partial t}=\frac{\partial w}{\partial x} \frac{\partial x}{\partial t}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial t}
-# ```
-# """
-
-# ╔═╡ ab0c80dd-8916-499d-aa3e-c01984a2c0d7
-# cm"""
-# $(ex(4,"The Chain Rule with Two Independent Variables"))
-#  Use the Chain Rule to find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
-# """
-
-# ╔═╡ 81fad03e-4540-460c-a149-7681a0c61fb4
-# cm"""
-# $(ex(5,"The Chain Rule for a Function of Three Variables"))
-# Find ``\partial w / \partial s`` and ``\partial w / \partial t`` when ``s=1`` and ``t=2 \pi`` for
-# ```math
-# w=x y+y z+x z
-# ```
-# where ``x=s \cos t, y=s \sin t``, and ``z=t``.
-# """
-
 # ╔═╡ 2127153a-edfd-49dc-8c45-8743629af637
-# md"## Implicit Partial Differentiation"
-
-# ╔═╡ 21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
-# cm"""
-# $(bth("Chain Rule: Implicit Differentiation"))
-# If the equation ``F(x, y)=0`` defines ``y`` implicitly as a differentiable function of ``x``, then
-# ```math
-# \frac{d y}{d x}=-\frac{F_x(x, y)}{F_y(x, y)}, \quad F_y(x, y) \neq 0 .
-# ```
-
-# If the equation ``F(x, y, z)=0`` defines ``z`` implicitly as a differentiable function of ``x`` and ``y``, then
-# ```math
-# \frac{\partial z}{\partial x}=-\frac{F_x(x, y, z)}{F_z(x, y, z)} \quad \text { and } \quad \frac{\partial z}{\partial y}=-\frac{F_y(x, y, z)}{F_z(x, y, z)}, \quad F_z(x, y, z) \neq 0
-# ```
-# """
-
-# ╔═╡ 47cdd95c-53a5-4e07-9b26-c91b3b1706d9
-# cm"""
-# $(ex(6,"Finding a Derivative Implicitly"))
-# Find ``d y / d x`` for
-# ```math
-# y^3+y^2-5 y-x^2+4=0
-# ```
-
-# $(ex(7,"Finding Partial Derivatives Implicitly"))
-# Find ``\partial z / \partial x`` and ``\partial z / \partial y`` for
-# ```math
-# 3 x^2 z-x^2 y^2+2 z^3+3 y z-5=0
-# ```
-# """
+md"## Implicit Partial Differentiation"
 
 # ╔═╡ 7e4fb221-9750-4abd-b4f8-5b511629d7f5
 md"""
@@ -4795,6 +4719,97 @@ For the function
 f(x, y)= \begin{cases}\frac{-3 x y}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=(0,0)\end{cases}
 ```
 show that ``f_x(0,0)`` and ``f_y(0,0)`` both exist but that ``f`` is not differentiable at ``(0,0)``.
+"""
+
+# ╔═╡ d850bcda-5bf4-4db6-b920-ca87514bfbc6
+cm"""
+$(bth("Chain Rule: One Independent Variable"))
+Let ``w=f(x, y)``, where ``f`` is a differentiable function of ``x`` and ``y``. If ``x=g(t)`` and ``y=h(t)``, where ``g`` and ``h`` are differentiable functions of ``t``, then ``w`` is a differentiable function of ``t``, and
+```math
+\frac{d w}{d t}=\frac{\partial w}{\partial x} \frac{d x}{d t}+\frac{\partial w}{\partial y} \frac{d y}{d t}
+```
+$(ebl())
+
+$(ex(1,"Chain Rule: One Independent Variable"))
+Let ``w=x^2 y-y^2``, where ``x=\sin t`` and ``y=e^t``. Find ``d w / d t`` when ``t=0``.
+"""
+
+# ╔═╡ d8943cd3-6930-4447-a5a0-6c6cf8797e81
+cm"""
+$(ex(2,"An Application of a Chain Rule to Related Rates"))
+Two objects are traveling in elliptical paths given by the following parametric equations.
+```math
+\begin{array}{lllr}
+x_1=4 \cos t & \text{and} & y_1=2 \sin t & \color{red}{\text{first object}}\\
+x_2=2 \sin 2 t& \text{and} & y_2=3 \cos 2 t & \color{red}{\text{second object}}
+\end{array}
+``` 
+
+At what rate is the distance between the two objects changing when ``t=\pi`` ?
+"""
+
+# ╔═╡ 47fe0a92-3fb5-4a1b-9618-87eec99c068e
+cm"""
+$(ex(3,"Finding Partial Derivatives by Substitution"))
+Find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
+"""
+
+# ╔═╡ 69abaecb-13d5-4e81-a401-567b581e8eda
+cm"""
+$(bth("Chain Rule: Two Independent Variables"))
+Let ``w=f(x, y)``, where ``f`` is a differentiable function of ``x`` and ``y``. If ``x=g(s, t)`` and ``y=h(s, t)`` such that the first partials ``\partial x / \partial s, \partial x / \partial t, \partial y / \partial s``, and ``\partial y / \partial t`` all exist, then ``\partial w / \partial s`` and ``\partial w / \partial t`` exist and are given by
+```math
+\frac{\partial w}{\partial s}=\frac{\partial w}{\partial x} \frac{\partial x}{\partial s}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial s}
+```
+and
+```math
+\frac{\partial w}{\partial t}=\frac{\partial w}{\partial x} \frac{\partial x}{\partial t}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial t}
+```
+"""
+
+# ╔═╡ ab0c80dd-8916-499d-aa3e-c01984a2c0d7
+cm"""
+$(ex(4,"The Chain Rule with Two Independent Variables"))
+ Use the Chain Rule to find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
+"""
+
+# ╔═╡ 81fad03e-4540-460c-a149-7681a0c61fb4
+cm"""
+$(ex(5,"The Chain Rule for a Function of Three Variables"))
+Find ``\partial w / \partial s`` and ``\partial w / \partial t`` when ``s=1`` and ``t=2 \pi`` for
+```math
+w=x y+y z+x z
+```
+where ``x=s \cos t, y=s \sin t``, and ``z=t``.
+"""
+
+# ╔═╡ 21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
+cm"""
+$(bth("Chain Rule: Implicit Differentiation"))
+If the equation ``F(x, y)=0`` defines ``y`` implicitly as a differentiable function of ``x``, then
+```math
+\frac{d y}{d x}=-\frac{F_x(x, y)}{F_y(x, y)}, \quad F_y(x, y) \neq 0 .
+```
+
+If the equation ``F(x, y, z)=0`` defines ``z`` implicitly as a differentiable function of ``x`` and ``y``, then
+```math
+\frac{\partial z}{\partial x}=-\frac{F_x(x, y, z)}{F_z(x, y, z)} \quad \text { and } \quad \frac{\partial z}{\partial y}=-\frac{F_y(x, y, z)}{F_z(x, y, z)}, \quad F_z(x, y, z) \neq 0
+```
+"""
+
+# ╔═╡ 47cdd95c-53a5-4e07-9b26-c91b3b1706d9
+cm"""
+$(ex(6,"Finding a Derivative Implicitly"))
+Find ``d y / d x`` for
+```math
+y^3+y^2-5 y-x^2+4=0
+```
+
+$(ex(7,"Finding Partial Derivatives Implicitly"))
+Find ``\partial z / \partial x`` and ``\partial z / \partial y`` for
+```math
+3 x^2 z-x^2 y^2+2 z^3+3 y z-5=0
+```
 """
 
 # ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
@@ -7830,15 +7845,16 @@ version = "1.4.1+2"
 # ╠═e53f41aa-45cd-488a-9123-7dfa22ec3ef7
 # ╟─cc9031ef-476d-498b-8850-2b355125f98a
 # ╟─108a234a-2272-4971-b762-f7f665133955
-# ╠═3de8b2fd-5d34-4a02-b821-a969b439e571
-# ╠═d850bcda-5bf4-4db6-b920-ca87514bfbc6
-# ╠═47fe0a92-3fb5-4a1b-9618-87eec99c068e
-# ╠═69abaecb-13d5-4e81-a401-567b581e8eda
-# ╠═ab0c80dd-8916-499d-aa3e-c01984a2c0d7
-# ╠═81fad03e-4540-460c-a149-7681a0c61fb4
-# ╠═2127153a-edfd-49dc-8c45-8743629af637
-# ╠═21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
-# ╠═47cdd95c-53a5-4e07-9b26-c91b3b1706d9
+# ╟─3de8b2fd-5d34-4a02-b821-a969b439e571
+# ╟─d850bcda-5bf4-4db6-b920-ca87514bfbc6
+# ╟─d8943cd3-6930-4447-a5a0-6c6cf8797e81
+# ╟─47fe0a92-3fb5-4a1b-9618-87eec99c068e
+# ╟─69abaecb-13d5-4e81-a401-567b581e8eda
+# ╟─ab0c80dd-8916-499d-aa3e-c01984a2c0d7
+# ╟─81fad03e-4540-460c-a149-7681a0c61fb4
+# ╟─2127153a-edfd-49dc-8c45-8743629af637
+# ╟─21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
+# ╟─47cdd95c-53a5-4e07-9b26-c91b3b1706d9
 # ╠═7e4fb221-9750-4abd-b4f8-5b511629d7f5
 # ╠═e3d38fd9-0997-4286-aa2e-762c70b360d1
 # ╠═6aa7ee9d-263f-4768-ac9b-67d0692d0e66
