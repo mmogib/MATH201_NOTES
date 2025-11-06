@@ -1968,118 +1968,20 @@ md"""
 """
 
 # ╔═╡ 19940b6b-901c-4175-84e4-ca151dc49841
-# md"## Absolute Extrema and Relative Extrema"
-
-# ╔═╡ bc58fba0-a0b2-45c7-a415-6edc6af3a315
-# cm"""
-# $(bth("Extreme Value Theorem"))
-# Let ``f`` be a continuous function of two variables ``x`` and ``y`` defined on a closed bounded region ``R`` in the ``x y``-plane.
-# 1. There is at least one point in ``R`` at which ``f`` takes on a minimum value.
-# 2. There is at least one point in ``R`` at which ``f`` takes on a maximum value.
-# """
-
-# ╔═╡ 2de29067-b788-4419-bddd-f6092e8b5307
-# cm"""
-# $(define("Relative Extrema"))
-# Let ``f`` be a function defined on a region ``R`` containing ``\left(x_0, y_0\right)``.
-# 1. The function ``f`` has a relative minimum at ``\left(x_0, y_0\right)`` if
-# ```math
-# f(x, y) \geq f\left(x_0, y_0\right)
-# ```
-# $(add_space(10))for all ``(x, y)`` in an open disk containing ``\left(x_0, y_0\right)``.
-
-# 2. The function ``f`` has a relative maximum at ``\left(x_0, y_0\right)`` if
-# ```math
-# f(x, y) \leq f\left(x_0, y_0\right)
-# ```
-# $(add_space(10))for all ``(x, y)`` in an open disk containing ``\left(x_0, y_0\right)``.
-# """
-
-# ╔═╡ a3ac719d-a13d-4f92-8395-8f95bd8f0ded
-# cm"""
-# $(define("Critical Point"))
-# Let ``f`` be defined on an open region ``R`` containing ``\left(x_0, y_0\right)``. The point ``\left(x_0, y_0\right)`` is a __critical point__ of ``f`` if one of the following is true.
-# 1. ``f_x\left(x_0, y_0\right)=0`` and ``f_y\left(x_0, y_0\right)=0``
-# 2. ``f_x\left(x_0, y_0\right)`` or ``f_y\left(x_0, y_0\right)`` does not exist.
-# """
-
-# ╔═╡ 1d703048-9186-4dc6-af7e-94f3f03d4f15
-# cm"""
-# $(bth("Relative Extrema Occur Only at Critical Points"))
-# If ``f`` has a relative extremum at ``\left(x_0, y_0\right)`` on an open region ``R``, then ``\left(x_0, y_0\right)`` is a critical point of ``f``.
-# """
-
-# ╔═╡ 28be8f50-1905-481e-ace4-ee1682f11514
-# cm"""
-# $(ex(1,"Finding a Relative Extremum"))
-# Determine the relative extrema of
-# ```math
-# f(x, y)=2 x^2+y^2+8 x-6 y+20
-# ```
-# """
-
-# ╔═╡ 66c8f04d-cada-4eaf-b41e-b16966735c4e
-# cm"""
-# $(ex(2,"Finding a Relative Extremum"))
-# Determine the relative extrema of
-# ```math
-# f(x, y)=1-\left(x^2+y^2\right)^{1 / 3}
-# ```
-# """
+md"## Absolute Extrema and Relative Extrema"
 
 # ╔═╡ 63ac5301-28e2-4551-bb2f-8e8ad7987a9f
-# md"## The Second Partials Test"
+md"## The Second Partials Test"
 
 # ╔═╡ 789955de-1f40-4b07-9abf-994437e3685f
-# cm"""
-# Consider the surface ``z=y^2-x^2``
-# """
+cm"""
+Consider the surface ``z=y^2-x^2``
+"""
 
 # ╔═╡ dfb5b0ec-6cf3-4233-8b2d-6ef8834d6441
-# cm"""
-# <iframe src="https://www.geogebra.org/classic/j52tbtke?embed" width="600" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
-# """
-
-# ╔═╡ 51dbf095-a024-4f99-ab90-330d4b18b8eb
-# cm"""
-# $(bth("Second Partials Test"))
-# Let ``f`` have continuous second partial derivatives on an open region containing a point ``(a, b)`` for which
-# ```math
-# f_x(a, b)=0 \quad \text { and } \quad f_y(a, b)=0
-# ```
-
-# To test for relative extrema of ``f``, consider the quantity
-# ```math
-# d=f_{x x}(a, b) f_{y y}(a, b)-\left[f_{x y}(a, b)\right]^2
-# ```
-# 1. If ``d>0`` and ``f_{x x}(a, b)>0``, then ``f`` has a relative minimum at ``(a, b)``.
-# 2. If ``d>0`` and ``f_{x x}(a, b)<0``, then ``f`` has a relative maximum at ``(a, b)``.
-# 3. If ``d<0``, then ``(a, b, f(a, b))`` is a saddle point.
-# 4. The test is inconclusive if ``d=0``.
-# """
-
-# ╔═╡ a0997724-2959-43c1-9fc0-3ee68f8c6b2a
-# cm"""
-# $(ex(3,"Using the Second Partials Test"))
-# Find the relative extrema of ``f(x, y)=-x^3+4 x y-2 y^2+1``.
-# """
-
-# ╔═╡ a8fc5873-2add-4061-8977-c6cd6a1d2433
-# cm"""
-# $(ex(4,"Failure of the Second Partials Test"))
-# Find the relative extrema of ``f(x, y)=x^2 y^2``. (See Graph [Here](https://www.desmos.com/3d/sv7uie6qrq))
-
-# $(ex(5,"Finding Absolute Extrema"))
-# Find the absolute extrema of the function
-# ```math
-# f(x, y)=\sin x y
-# ```
-# on the closed region given by
-# ```math
-# 0 \leq x \leq \pi \quad \text { and } \quad 0 \leq y \leq 1
-# ```
-# See Graph [Here](https://www.desmos.com/3d/s8ebq9wjeq)
-# """
+cm"""
+[GeoGebra](https://www.geogebra.org/classic/j52tbtke?embed)
+"""
 
 # ╔═╡ 7d633d24-9d0a-472b-8fbe-9ce7f6a14447
 md"""
@@ -2090,57 +1992,34 @@ md"""
 ##  Applied Optimization Problems
 """
 
-# ╔═╡ 64acf4d6-8655-44cb-b3ea-5e09b829912b
-# cm"""
-# $(ex(1,"Finding Maximum Volume"))
-# A rectangular box is resting on the ``x y``-plane with one vertex at the origin. The opposite vertex lies in the plane
-# ```math
-# 6 x+4 y+3 z=24
-# ```
-# as shown below. Find the maximum volume of the box.
-
-# $(post_img("https://www.dropbox.com/scl/fi/pzs7r1nm6s7mtig8lydl4/fig_13_73.png?rlkey=7nxhtml9cmplq47x5mrpgwj8v&dl=1"))
-# """
-
 # ╔═╡ d07c578c-1386-45ce-9fec-9bf20632333c
-# let
-#     V(x, y) = x * y * (24 - 6x - 4y) / 3
-#     Vxx(x, y) = -4y
-#     Vyy(x, y) = -8x / 3
-#     Vxy(x, y) = (1 / 3) * (24 - 12x - 8y)
-#     d_Det(x) = Vxx(x...) * Vyy(x...) - (Vxy(x...))^2
-#     A = [0.0; 0.0]
-#     B = [4.0; 0.0]
-#     C = [0.0; 6.0]
-#     D = [4 // 3; 2 // 1]
-#     # d_Det(A) # saddale point
-#     # d_Det(B) # saddale point
-#     # d_Det(C) # saddale point
-#     d_Det(D), Vxx(D...) # relative max
-#     V(D...)
+let
+    V(x, y) = x * y * (24 - 6x - 4y) / 3
+    Vxx(x, y) = -4y
+    Vyy(x, y) = -8x / 3
+    Vxy(x, y) = (1 / 3) * (24 - 12x - 8y)
+    d_Det(x) = Vxx(x...) * Vyy(x...) - (Vxy(x...))^2
+    A = [0.0; 0.0]
+    B = [4.0; 0.0]
+    C = [0.0; 6.0]
+    D = [4 // 3; 2 // 1]
+    # d_Det(A) # saddale point
+    # d_Det(B) # saddale point
+    # d_Det(C) # saddale point
+    d_Det(D), Vxx(D...) # relative max
+    V(D...)
 
-# end
-
-# ╔═╡ 1a572f06-ae70-44fa-af1f-95415a05d7be
-# cm"""
-# $(ex(2,"Finding the Maximum Profit"))
-# A manufacturer determines that the profit ``P`` (in dollars) obtained by producing and selling ``x`` units of Product 1 and ``y`` units of Product 2 is approximated by the model
-# ```math
-# P(x, y)=8 x+10 y-(0.001)\left(x^2+x y+y^2\right)-10,000 .
-# ```
-
-# Find the production level that produces a maximum profit. What is the maximum profit?
-# """
+end
 
 # ╔═╡ 028284e2-e901-4c25-bdc6-cde904279799
-# let
-#     @variables x::Real, y::Real
-#     Dx, Dy = Differential(x), Differential(y)
-#     P(x, y) = 8x + 10y - (1 // 1000) * (x^2 + x * y + y^2) - 10_000
-#     Px = expand_derivatives(Dx(P(x, y))) ~ 0
-#     Py = expand_derivatives(Dy(P(x, y))) ~ 0
-#     # symbolic_solve([Px,Py],[x,y])
-# end
+let
+    @variables x::Real, y::Real
+    Dx, Dy = Differential(x), Differential(y)
+    P(x, y) = 8x + 10y - (1 // 1000) * (x^2 + x * y + y^2) - 10_000
+    Px = expand_derivatives(Dx(P(x, y))) ~ 0
+    Py = expand_derivatives(Dy(P(x, y))) ~ 0
+    # symbolic_solve([Px,Py],[x,y])
+end
 
 # ╔═╡ 11db793f-dabc-4b76-bf50-c6d40eb4d497
 md"""
@@ -2152,95 +2031,22 @@ md"""
 """
 
 # ╔═╡ e2afac2b-f375-49ec-a020-e934aaa104a9
-# md"## Lagrange Multipliers"
-
-# ╔═╡ 6941cc03-75e1-48cb-bde1-837f8f809132
-# cm"""
-# $(bth("Lagrange's Theorem"))
-# Let ``f`` and ``g`` have continuous first partial derivatives such that ``f`` has an extremum at a point ``\left(x_0, y_0\right)`` on the smooth constraint curve ``g(x, y)=c``. If ``\nabla g\left(x_0, y_0\right) \neq \mathbf{0}``, then there is a real number ``\lambda`` such that
-# ```math
-# \nabla f\left(x_0, y_0\right)=\lambda \nabla g\left(x_0, y_0\right)
-# ```
-# """
-
-# ╔═╡ 9fc8e26a-c45f-41c6-bcf4-bb065fcfc70b
-# cm"""
-# $(bbl("Method of Lagrange Multipliers",""))
-# Let ``f`` and ``g`` satisfy the hypothesis of Lagrange's Theorem, and let ``f`` have a minimum or maximum subject to the constraint ``g(x, y)=c``. To find the minimum or maximum of ``f``, use these steps.
-# 1. Simultaneously solve the equations ``\nabla f(x, y)=\lambda \nabla g(x, y)`` and ``g(x, y)=c`` by solving the following system of equations.
-# ```math
-# \begin{aligned}
-# f_x(x, y) & =\lambda g_x(x, y) \\
-# f_y(x, y) & =\lambda g_y(x, y) \\
-# g(x, y) & =c
-# \end{aligned}
-# ```
-# 2. Evaluate ``f`` at each solution point obtained in the first step. The greatest value yields the maximum of ``f`` subject to the constraint ``g(x, y)=c``, and the least value yields the minimum of ``f`` subject to the constraint ``g(x, y)=c``.
-# """
+md"## Lagrange Multipliers"
 
 # ╔═╡ ff678064-7f1e-4c70-a269-980fbb16daf4
-# md"## Constrained Optimization Problems"
-
-# ╔═╡ 98a8402d-0d73-4223-b565-9f1861753b25
-# cm"""
-# $(ex(1,"Using a Lagrange Multiplier with One Constraint"))
-# Find the maximum value of ``f(x, y)=4 x y``, where ``x>0`` and ``y>0``, subject to the constraint ``\left(x^2 / 3^2\right)+\left(y^2 / 4^2\right)=1``.
-# """
-
-# ╔═╡ 75ab0065-074b-466e-9230-228c33696a81
-# cm"""
-# $(ex(2,"A Business Application"))
-# The Cobb-Douglas production function (see Section 13.1) for a manufacturer is given by
-# ```math
-# f(x, y)=100 x^{3 / 4} y^{1 / 4}
-# ```
-
-# Objective function
-# where ``x`` represents the units of labor (at ``\$ 150`` per unit) and ``y`` represents the units of capital (at ``\$ 250`` per unit). The total cost of labor and capital is limited to ``\$ 50,000``. Find the maximum production level for this manufacturer.
-# """
-
-# ╔═╡ 75fa570d-37d4-4fe0-be67-e765b4db8a06
-# cm"""
-# $(ex(3,"Lagrange Multipliers and Three Variables"))
-# Find the minimum value of
-# ```math
-# f(x, y, z)=2 x^2+y^2+3 z^2 \quad \text { Objective function }
-# ```
-# subject to the constraint ``2 x-3 y-4 z=49``.
-# """
-
-# ╔═╡ d5863d29-8a7d-4042-b9b3-ced734168e0e
-# cm"""
-# $(ex(4,"Optimization Inside a Region"))
-# Find the extreme values of
-# ```math
-# f(x, y)=x^2+2 y^2-2 x+3 \quad \text { Objective function }
-# ```
-# subject to the constraint ``x^2+y^2 \leq 10``.
-# """
+md"## Constrained Optimization Problems"
 
 # ╔═╡ 6e770f8d-b25d-4263-abc0-97dbd6d421ac
-# md"## The Method of Lagrange Multipliers with Two Constraints"
-
-# ╔═╡ 5f7365cc-ee95-41f1-b402-f7953fb20535
-# cm"""
-# $(ex(5,"Optimization with Two Constraints"))
-# Let ``T(x, y, z)=20+2 x+2 y+z^2`` represent the temperature at each point on the sphere
-# ```math
-# x^2+y^2+z^2=11 .
-# ```
-
-# Find the extreme temperatures on the curve formed by the intersection of the plane ``x+y+z=3`` and the sphere.
-# """
+md"## The Method of Lagrange Multipliers with Two Constraints"
 
 # ╔═╡ 9c7dcf4d-5cf7-4b5c-a3a6-cc4c5e07d1c3
-# let
-#     T(x, y, z) = 20 + 2x + 2y + z^2
-#     A, B = [3; -1; 1], [-1; 3; 1]
-#     C, D = [3 - 2 * sqrt(3); 3 - 2 * sqrt(3); 3 + 4sqrt(3)] / 3, [3 + 2 * sqrt(3); 3 + 2 * sqrt(3); 3 - 4sqrt(3)] / 3
-#     T(A...), T(B...)
-#     T(C...), T(D...) # 91/3
-# end
+let
+    T(x, y, z) = 20 + 2x + 2y + z^2
+    A, B = [3; -1; 1], [-1; 3; 1]
+    C, D = [3 - 2 * sqrt(3); 3 - 2 * sqrt(3); 3 + 4sqrt(3)] / 3, [3 + 2 * sqrt(3); 3 + 2 * sqrt(3); 3 - 4sqrt(3)] / 3
+    T(A...), T(B...)
+    T(C...), T(D...) # 91/3
+end
 
 # ╔═╡ bbad76b9-34d2-4c7a-8b38-0684a92f10ed
 md"""
@@ -4813,6 +4619,200 @@ If ``F`` is differentiable at ``\left(x_0, y_0, z_0\right)`` and
 \nabla F\left(x_0, y_0, z_0\right) \neq \mathbf{0}
 ```
 then ``\nabla F\left(x_0, y_0, z_0\right)`` is normal to the level surface through ``\left(x_0, y_0, z_0\right)``.
+"""
+
+# ╔═╡ bc58fba0-a0b2-45c7-a415-6edc6af3a315
+cm"""
+$(bth("Extreme Value Theorem"))
+Let ``f`` be a continuous function of two variables ``x`` and ``y`` defined on a closed bounded region ``R`` in the ``x y``-plane.
+1. There is at least one point in ``R`` at which ``f`` takes on a minimum value.
+2. There is at least one point in ``R`` at which ``f`` takes on a maximum value.
+"""
+
+# ╔═╡ 2de29067-b788-4419-bddd-f6092e8b5307
+cm"""
+$(define("Relative Extrema"))
+Let ``f`` be a function defined on a region ``R`` containing ``\left(x_0, y_0\right)``.
+1. The function ``f`` has a relative minimum at ``\left(x_0, y_0\right)`` if
+```math
+f(x, y) \geq f\left(x_0, y_0\right)
+```
+$(add_space(10))for all ``(x, y)`` in an open disk containing ``\left(x_0, y_0\right)``.
+
+2. The function ``f`` has a relative maximum at ``\left(x_0, y_0\right)`` if
+```math
+f(x, y) \leq f\left(x_0, y_0\right)
+```
+$(add_space(10))for all ``(x, y)`` in an open disk containing ``\left(x_0, y_0\right)``.
+"""
+
+# ╔═╡ a3ac719d-a13d-4f92-8395-8f95bd8f0ded
+cm"""
+$(define("Critical Point"))
+Let ``f`` be defined on an open region ``R`` containing ``\left(x_0, y_0\right)``. The point ``\left(x_0, y_0\right)`` is a __critical point__ of ``f`` if one of the following is true.
+1. ``f_x\left(x_0, y_0\right)=0`` and ``f_y\left(x_0, y_0\right)=0``
+2. ``f_x\left(x_0, y_0\right)`` or ``f_y\left(x_0, y_0\right)`` does not exist.
+"""
+
+# ╔═╡ 1d703048-9186-4dc6-af7e-94f3f03d4f15
+cm"""
+$(bth("Relative Extrema Occur Only at Critical Points"))
+If ``f`` has a relative extremum at ``\left(x_0, y_0\right)`` on an open region ``R``, then ``\left(x_0, y_0\right)`` is a critical point of ``f``.
+"""
+
+# ╔═╡ 28be8f50-1905-481e-ace4-ee1682f11514
+cm"""
+$(ex(1,"Finding a Relative Extremum"))
+Determine the relative extrema of
+```math
+f(x, y)=2 x^2+y^2+8 x-6 y+20
+```
+"""
+
+# ╔═╡ 66c8f04d-cada-4eaf-b41e-b16966735c4e
+cm"""
+$(ex(2,"Finding a Relative Extremum"))
+Determine the relative extrema of
+```math
+f(x, y)=1-\left(x^2+y^2\right)^{1 / 3}
+```
+"""
+
+# ╔═╡ 51dbf095-a024-4f99-ab90-330d4b18b8eb
+cm"""
+$(bth("Second Partials Test"))
+Let ``f`` have continuous second partial derivatives on an open region containing a point ``(a, b)`` for which
+```math
+f_x(a, b)=0 \quad \text { and } \quad f_y(a, b)=0
+```
+
+To test for relative extrema of ``f``, consider the quantity
+```math
+d=f_{x x}(a, b) f_{y y}(a, b)-\left[f_{x y}(a, b)\right]^2
+```
+1. If ``d>0`` and ``f_{x x}(a, b)>0``, then ``f`` has a relative minimum at ``(a, b)``.
+2. If ``d>0`` and ``f_{x x}(a, b)<0``, then ``f`` has a relative maximum at ``(a, b)``.
+3. If ``d<0``, then ``(a, b, f(a, b))`` is a saddle point.
+4. The test is inconclusive if ``d=0``.
+"""
+
+# ╔═╡ a0997724-2959-43c1-9fc0-3ee68f8c6b2a
+cm"""
+$(ex(3,"Using the Second Partials Test"))
+Find the relative extrema of ``f(x, y)=-x^3+4 x y-2 y^2+1``.
+"""
+
+# ╔═╡ a8fc5873-2add-4061-8977-c6cd6a1d2433
+cm"""
+$(ex(4,"Failure of the Second Partials Test"))
+Find the relative extrema of ``f(x, y)=x^2 y^2``. (See Graph [Here](https://www.desmos.com/3d/sv7uie6qrq))
+
+$(ex(5,"Finding Absolute Extrema"))
+Find the absolute extrema of the function
+```math
+f(x, y)=\sin x y
+```
+on the closed region given by
+```math
+0 \leq x \leq \pi \quad \text { and } \quad 0 \leq y \leq 1
+```
+See Graph [Here](https://www.desmos.com/3d/s8ebq9wjeq)
+"""
+
+# ╔═╡ 64acf4d6-8655-44cb-b3ea-5e09b829912b
+cm"""
+$(ex(1,"Finding Maximum Volume"))
+A rectangular box is resting on the ``x y``-plane with one vertex at the origin. The opposite vertex lies in the plane
+```math
+6 x+4 y+3 z=24
+```
+as shown below. Find the maximum volume of the box.
+
+$(post_img("https://www.dropbox.com/scl/fi/pzs7r1nm6s7mtig8lydl4/fig_13_73.png?rlkey=7nxhtml9cmplq47x5mrpgwj8v&dl=1"))
+"""
+
+# ╔═╡ 1a572f06-ae70-44fa-af1f-95415a05d7be
+cm"""
+$(ex(2,"Finding the Maximum Profit"))
+A manufacturer determines that the profit ``P`` (in dollars) obtained by producing and selling ``x`` units of Product 1 and ``y`` units of Product 2 is approximated by the model
+```math
+P(x, y)=8 x+10 y-(0.001)\left(x^2+x y+y^2\right)-10,000 .
+```
+
+Find the production level that produces a maximum profit. What is the maximum profit?
+"""
+
+# ╔═╡ 6941cc03-75e1-48cb-bde1-837f8f809132
+cm"""
+$(bth("Lagrange's Theorem"))
+Let ``f`` and ``g`` have continuous first partial derivatives such that ``f`` has an extremum at a point ``\left(x_0, y_0\right)`` on the smooth constraint curve ``g(x, y)=c``. If ``\nabla g\left(x_0, y_0\right) \neq \mathbf{0}``, then there is a real number ``\lambda`` such that
+```math
+\nabla f\left(x_0, y_0\right)=\lambda \nabla g\left(x_0, y_0\right)
+```
+"""
+
+# ╔═╡ 9fc8e26a-c45f-41c6-bcf4-bb065fcfc70b
+cm"""
+$(bbl("Method of Lagrange Multipliers",""))
+Let ``f`` and ``g`` satisfy the hypothesis of Lagrange's Theorem, and let ``f`` have a minimum or maximum subject to the constraint ``g(x, y)=c``. To find the minimum or maximum of ``f``, use these steps.
+1. Simultaneously solve the equations ``\nabla f(x, y)=\lambda \nabla g(x, y)`` and ``g(x, y)=c`` by solving the following system of equations.
+```math
+\begin{aligned}
+f_x(x, y) & =\lambda g_x(x, y) \\
+f_y(x, y) & =\lambda g_y(x, y) \\
+g(x, y) & =c
+\end{aligned}
+```
+2. Evaluate ``f`` at each solution point obtained in the first step. The greatest value yields the maximum of ``f`` subject to the constraint ``g(x, y)=c``, and the least value yields the minimum of ``f`` subject to the constraint ``g(x, y)=c``.
+"""
+
+# ╔═╡ 98a8402d-0d73-4223-b565-9f1861753b25
+cm"""
+$(ex(1,"Using a Lagrange Multiplier with One Constraint"))
+Find the maximum value of ``f(x, y)=4 x y``, where ``x>0`` and ``y>0``, subject to the constraint ``\left(x^2 / 3^2\right)+\left(y^2 / 4^2\right)=1``.
+"""
+
+# ╔═╡ 75ab0065-074b-466e-9230-228c33696a81
+cm"""
+$(ex(2,"A Business Application"))
+The Cobb-Douglas production function (see Section 13.1) for a manufacturer is given by
+```math
+f(x, y)=100 x^{3 / 4} y^{1 / 4}
+```
+
+Objective function
+where ``x`` represents the units of labor (at ``\$ 150`` per unit) and ``y`` represents the units of capital (at ``\$ 250`` per unit). The total cost of labor and capital is limited to ``\$ 50,000``. Find the maximum production level for this manufacturer.
+"""
+
+# ╔═╡ 75fa570d-37d4-4fe0-be67-e765b4db8a06
+cm"""
+$(ex(3,"Lagrange Multipliers and Three Variables"))
+Find the minimum value of
+```math
+f(x, y, z)=2 x^2+y^2+3 z^2 \quad \text { Objective function }
+```
+subject to the constraint ``2 x-3 y-4 z=49``.
+"""
+
+# ╔═╡ d5863d29-8a7d-4042-b9b3-ced734168e0e
+cm"""
+$(ex(4,"Optimization Inside a Region"))
+Find the extreme values of
+```math
+f(x, y)=x^2+2 y^2-2 x+3 \quad \text { Objective function }
+```
+subject to the constraint ``x^2+y^2 \leq 10``.
+"""
+
+# ╔═╡ 5f7365cc-ee95-41f1-b402-f7953fb20535
+cm"""
+$(ex(5,"Optimization with Two Constraints"))
+Let ``T(x, y, z)=20+2 x+2 y+z^2`` represent the temperature at each point on the sphere
+```math
+x^2+y^2+z^2=11 .
+```
+
+Find the extreme temperatures on the curve formed by the intersection of the plane ``x+y+z=3`` and the sphere.
 """
 
 # ╔═╡ ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
@@ -7901,36 +7901,36 @@ version = "1.4.1+2"
 # ╟─e2ebeec5-e944-4fde-8230-d431a674cb52
 # ╟─6d392830-65ff-4c10-83d1-20e320341735
 # ╟─6a9f17ae-f24d-492b-a540-a9f0e7424c09
-# ╠═399b4977-95ff-431d-84b1-c57865b49a48
-# ╠═19940b6b-901c-4175-84e4-ca151dc49841
-# ╠═bc58fba0-a0b2-45c7-a415-6edc6af3a315
-# ╠═2de29067-b788-4419-bddd-f6092e8b5307
-# ╠═a3ac719d-a13d-4f92-8395-8f95bd8f0ded
-# ╠═1d703048-9186-4dc6-af7e-94f3f03d4f15
-# ╠═28be8f50-1905-481e-ace4-ee1682f11514
-# ╠═66c8f04d-cada-4eaf-b41e-b16966735c4e
-# ╠═63ac5301-28e2-4551-bb2f-8e8ad7987a9f
-# ╠═789955de-1f40-4b07-9abf-994437e3685f
-# ╠═dfb5b0ec-6cf3-4233-8b2d-6ef8834d6441
-# ╠═51dbf095-a024-4f99-ab90-330d4b18b8eb
-# ╠═a0997724-2959-43c1-9fc0-3ee68f8c6b2a
-# ╠═a8fc5873-2add-4061-8977-c6cd6a1d2433
-# ╠═7d633d24-9d0a-472b-8fbe-9ce7f6a14447
-# ╠═64acf4d6-8655-44cb-b3ea-5e09b829912b
-# ╠═d07c578c-1386-45ce-9fec-9bf20632333c
-# ╠═1a572f06-ae70-44fa-af1f-95415a05d7be
+# ╟─399b4977-95ff-431d-84b1-c57865b49a48
+# ╟─19940b6b-901c-4175-84e4-ca151dc49841
+# ╟─bc58fba0-a0b2-45c7-a415-6edc6af3a315
+# ╟─2de29067-b788-4419-bddd-f6092e8b5307
+# ╟─a3ac719d-a13d-4f92-8395-8f95bd8f0ded
+# ╟─1d703048-9186-4dc6-af7e-94f3f03d4f15
+# ╟─28be8f50-1905-481e-ace4-ee1682f11514
+# ╟─66c8f04d-cada-4eaf-b41e-b16966735c4e
+# ╟─63ac5301-28e2-4551-bb2f-8e8ad7987a9f
+# ╟─789955de-1f40-4b07-9abf-994437e3685f
+# ╟─dfb5b0ec-6cf3-4233-8b2d-6ef8834d6441
+# ╟─51dbf095-a024-4f99-ab90-330d4b18b8eb
+# ╟─a0997724-2959-43c1-9fc0-3ee68f8c6b2a
+# ╟─a8fc5873-2add-4061-8977-c6cd6a1d2433
+# ╟─7d633d24-9d0a-472b-8fbe-9ce7f6a14447
+# ╟─64acf4d6-8655-44cb-b3ea-5e09b829912b
+# ╟─d07c578c-1386-45ce-9fec-9bf20632333c
+# ╟─1a572f06-ae70-44fa-af1f-95415a05d7be
 # ╠═028284e2-e901-4c25-bdc6-cde904279799
-# ╠═11db793f-dabc-4b76-bf50-c6d40eb4d497
-# ╠═e2afac2b-f375-49ec-a020-e934aaa104a9
-# ╠═6941cc03-75e1-48cb-bde1-837f8f809132
-# ╠═9fc8e26a-c45f-41c6-bcf4-bb065fcfc70b
-# ╠═ff678064-7f1e-4c70-a269-980fbb16daf4
-# ╠═98a8402d-0d73-4223-b565-9f1861753b25
-# ╠═75ab0065-074b-466e-9230-228c33696a81
-# ╠═75fa570d-37d4-4fe0-be67-e765b4db8a06
-# ╠═d5863d29-8a7d-4042-b9b3-ced734168e0e
-# ╠═6e770f8d-b25d-4263-abc0-97dbd6d421ac
-# ╠═5f7365cc-ee95-41f1-b402-f7953fb20535
+# ╟─11db793f-dabc-4b76-bf50-c6d40eb4d497
+# ╟─e2afac2b-f375-49ec-a020-e934aaa104a9
+# ╟─6941cc03-75e1-48cb-bde1-837f8f809132
+# ╟─9fc8e26a-c45f-41c6-bcf4-bb065fcfc70b
+# ╟─ff678064-7f1e-4c70-a269-980fbb16daf4
+# ╟─98a8402d-0d73-4223-b565-9f1861753b25
+# ╟─75ab0065-074b-466e-9230-228c33696a81
+# ╟─75fa570d-37d4-4fe0-be67-e765b4db8a06
+# ╟─d5863d29-8a7d-4042-b9b3-ced734168e0e
+# ╟─6e770f8d-b25d-4263-abc0-97dbd6d421ac
+# ╟─5f7365cc-ee95-41f1-b402-f7953fb20535
 # ╠═9c7dcf4d-5cf7-4b5c-a3a6-cc4c5e07d1c3
 # ╠═bbad76b9-34d2-4c7a-8b38-0684a92f10ed
 # ╠═ee2764c9-0f99-4aea-b1ce-9ffcc9d05eef
