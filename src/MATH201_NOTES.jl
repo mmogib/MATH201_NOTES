@@ -1983,6 +1983,18 @@ cm"""
 [GeoGebra](https://www.geogebra.org/classic/j52tbtke?embed)
 """
 
+# ╔═╡ 19ec57cc-aecf-42f6-a337-b7f273834934
+let
+	f(x,y)=-x^3 + 4*x*y - 2*y^2 + 1
+	P1 = [0 ; 0]
+	P2 = [4//3 ; 4//3]
+	fxx(x,y) = -6x
+	fxy(x,y) = 4
+	fyy(x,y) = -4
+	d(x,y) = fxx(x,y)*fyy(x,y) - (fxy(x,y))^2
+	fxx(P1...), d(P1...), fxx(P2...), d(P2...)
+end
+
 # ╔═╡ 7d633d24-9d0a-472b-8fbe-9ce7f6a14447
 md"""
 # 13.9 Applications of Extrema
@@ -2018,7 +2030,7 @@ let
     P(x, y) = 8x + 10y - (1 // 1000) * (x^2 + x * y + y^2) - 10_000
     Px = expand_derivatives(Dx(P(x, y))) ~ 0
     Py = expand_derivatives(Dy(P(x, y))) ~ 0
-    # symbolic_solve([Px,Py],[x,y])
+    Px, Py, symbolic_solve([Px,Py],[x,y]), P(2_000,4_000)
 end
 
 # ╔═╡ 11db793f-dabc-4b76-bf50-c6d40eb4d497
@@ -4192,7 +4204,7 @@ $(ex(1,"Finding the Total Differential"))
 Find the total differential for each function.
 - (a.) ``z=2 x \sin y-3 x^2 y^2``
 - (b.) ``w=x^2+y^2+z^2``
-# """
+"""
 
 # ╔═╡ a54bcc59-6b84-4553-878f-4a4abfd6e9d6
 cm"""
@@ -7914,6 +7926,7 @@ version = "1.4.1+2"
 # ╟─dfb5b0ec-6cf3-4233-8b2d-6ef8834d6441
 # ╟─51dbf095-a024-4f99-ab90-330d4b18b8eb
 # ╟─a0997724-2959-43c1-9fc0-3ee68f8c6b2a
+# ╠═19ec57cc-aecf-42f6-a337-b7f273834934
 # ╟─a8fc5873-2add-4061-8977-c6cd6a1d2433
 # ╟─7d633d24-9d0a-472b-8fbe-9ce7f6a14447
 # ╟─64acf4d6-8655-44cb-b3ea-5e09b829912b
