@@ -1,6 +1,8 @@
-# MATH201: Calculus III (Term 251)
+# MATH201: Calculus III (Term 252)
 
 This repository contains notes, exercises, and resources for **MATH201 – Calculus III**, offered by the Department of Mathematics at King Fahd University of Petroleum & Minerals (KFUPM).
+
+Notes are authored in Julia using Pluto.jl. The main notebook is located at `src/MATH201_NOTES.jl` and can be exported to `docs/index.html` using `src/export.jl`.
 
 ## 📚 Course Description
 
@@ -33,8 +35,8 @@ Authors: Ron Larson & Bruce Edwards
 
 ## 🧑‍🏫 Course Coordinator
 
-<!-- **Dr. Adel Khalfallah**   -->
-<!-- 📧 khelifa@kfupm.edu.sa -->
+<!-- **Dr. Faisal Fairag**   -->
+<!-- 📧 ffairag@kfupm.edu.sa -->
 
 
 Total: **100% (300 points)**
