@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.20
+# v0.20.21
 
 using Markdown
 using InteractiveUtils
@@ -92,7 +92,7 @@ end
 
 # ╔═╡ b15e87af-7574-48a7-b014-ef0ad8f3ea62
 let
-    f(x) = -x^2 + x + 1
+    f(y) = -y^2 + y + 1
     eval(Meta.parse("x(t)=$s10_2_xt"))
     p = plot(f; framestyle=:origin, xlimits=(0, 2), label=L"y=-x^2 + x + 1")
     scatter(p, [x(s10_2_t)], [f(x(s10_2_t))], label="Person")
@@ -154,6 +154,7 @@ let
 	ts = -0.999:0.1:s10_2_t_e2
     p = plot(x.(ts),y.(ts); framestyle=:origin, xlimits=(-0.1, 2), ylimits=(-1,2),label=L"y=1-x^2")
     scatter(p, [x(s10_2_t_e2)], [y(s10_2_t_e2)], label=nothing)
+	""
 end
 
 # ╔═╡ 15a0e2e8-382e-487a-a297-12feaaab6f91
@@ -244,7 +245,7 @@ let
 	
 	# Parameters
 	A = 24 # 24
-	B = 7
+	B = 5
 	
 	# Range of parameter t
 	t = range(0, 20π, length=2000)  # enough to complete the curve
@@ -410,10 +411,16 @@ md"## Coordinate Conversion"
 
 ## Cell 7
 
+# ╔═╡ 09ad3cf9-ccc7-4508-b20a-2b541fba963b
+md"###### Kahoot it 🎯📱🎉✨"
+
 # ╔═╡ c86f3735-7430-4216-a8e8-d018c844142e
 md"## Polar Graphs"
 
 ## Cell 14
+
+# ╔═╡ 2b853097-db70-4f47-988f-f9caed5a042f
+md"[Plotting Guidelines](https://www.dropbox.com/scl/fi/6537efq8elmarwa6sqyqf/guides_plotting_polar.pdf?rlkey=ccna60nezql5ilq8wqdko9yvk&raw=1)"
 
 # ╔═╡ e1e067d5-5416-4d8e-be65-5c52ae95b24b
 let
@@ -2394,14 +2401,16 @@ begin
 end
 
 # ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+
+# __ChatGPT:__ (Course AI assistant)
+# $(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
+
 cm"""
 __Course website:__ (Notes, Syllabus)
 $(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
 
 ---
 
-__ChatGPT:__ (Course AI assistant)
-$(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
 
 """
 
@@ -2410,7 +2419,7 @@ begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
     md""" # Syllabus
     ## Syallbus
-    See here [Term 251 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/default-document-library/math201-251.pdf)
+    See here [Term 252 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/default-document-library/math201-252.pdf)
     ## Textbook
     __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
     $text_book
@@ -2420,9 +2429,8 @@ begin
 
     | Day       | Time        |
     |-----------|-------------|
-    | Sunday    | 01:00-01:50PM |
-    | Tuesday | 01:00-01:50PM |
-    | Thursday | 01:00-01:50PM |
+    | Sunday    | 11:00-11:50AM |
+    | Tuesday | 11:00-11:50AM |
     Also you can ask for an online meeting through __TEAMS__.
     """
 end
@@ -5428,7 +5436,7 @@ Unitful = "~1.25.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.1"
+julia_version = "1.12.4"
 manifest_format = "2.0"
 project_hash = "676df27baecaecff2557233cea90ba46b7661a91"
 
@@ -5829,7 +5837,7 @@ version = "0.7.16"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
+version = "1.7.0"
 
 [[deps.DynamicPolynomials]]
 deps = ["Future", "LinearAlgebra", "MultivariatePolynomials", "MutableArithmetics", "Reexport", "Test"]
@@ -6336,7 +6344,7 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.11.1+1"
+version = "8.15.0+0"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -6502,7 +6510,7 @@ version = "0.3.7"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2025.5.20"
+version = "2025.11.4"
 
 [[deps.MultivariatePolynomials]]
 deps = ["ChainRulesCore", "DataStructures", "LinearAlgebra", "MutableArithmetics"]
@@ -6596,7 +6604,7 @@ version = "1.6.0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.1+0"
+version = "3.5.4+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -6659,7 +6667,7 @@ version = "0.44.2+0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.12.0"
+version = "1.12.1"
 weakdeps = ["REPL"]
 
     [deps.Pkg.extensions]
@@ -7576,9 +7584,9 @@ uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.64.0+1"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "Libdl"]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.5.0+2"
+version = "17.7.0+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -7614,9 +7622,9 @@ version = "1.9.2+0"
 # ╟─3fad0402-00d4-4c3b-9ca7-bed4897452c2
 # ╟─72eaba37-67d9-4d52-b1a6-e108401aa93e
 # ╟─0f02e8df-9945-4d41-af5f-290dd991db92
-# ╟─1e7b4218-ca92-4384-83db-31e97fa5545f
+# ╠═1e7b4218-ca92-4384-83db-31e97fa5545f
 # ╟─ef07b8c6-a4a8-4daa-8843-39d522f995ef
-# ╟─4ba93c73-86c0-447e-bc4e-c4eafe68d3ca
+# ╠═4ba93c73-86c0-447e-bc4e-c4eafe68d3ca
 # ╟─0870140d-366c-4953-9f84-1316c2419bad
 # ╟─15a0e2e8-382e-487a-a297-12feaaab6f91
 # ╟─948e5b3a-40a2-4081-85f8-12c42837ae3a
@@ -7630,9 +7638,9 @@ version = "1.9.2+0"
 # ╟─0d8c28f3-b885-4b16-95ef-99708a6bb179
 # ╟─98951c5f-438a-4b27-b0b1-5aef88c6bfab
 # ╟─d1029e12-aacd-49bf-aebf-ded4a3a31ca6
-# ╠═080c8917-6a7f-46ab-9ce7-4a19d2062375
+# ╟─080c8917-6a7f-46ab-9ce7-4a19d2062375
 # ╟─46cb1033-5bdc-4978-a8b8-3caf5da336b9
-# ╠═ebc1271e-0fcf-47bc-bf74-850b1d2ed425
+# ╟─ebc1271e-0fcf-47bc-bf74-850b1d2ed425
 # ╟─96b650e7-d4ce-478f-878f-d9cd6d10f2b6
 # ╟─b64864dc-953d-41c5-bae6-5ede6734c8af
 # ╟─76ace408-0ae7-458e-9b0a-cc6c3a314cd2
@@ -7664,14 +7672,16 @@ version = "1.9.2+0"
 # ╟─b5699352-1bca-4040-bbd9-2bc64085460c
 # ╟─26479599-3609-4814-9750-3406df4fba1f
 # ╟─4564edd1-7611-45b1-8f4c-26088d4c6d97
+# ╟─09ad3cf9-ccc7-4508-b20a-2b541fba963b
 # ╟─c86f3735-7430-4216-a8e8-d018c844142e
 # ╟─6fbc1529-ed21-4e53-91de-a026a9a4ee26
+# ╟─2b853097-db70-4f47-988f-f9caed5a042f
 # ╟─602ac6a2-80a3-445c-abc2-bc5b01e44d7b
 # ╟─e1e067d5-5416-4d8e-be65-5c52ae95b24b
 # ╟─6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
 # ╟─003f7d8c-b316-4a2b-8170-ff148ccb9f50
 # ╟─2abd04ed-edf8-4bf0-bebf-e9c299927551
-# ╠═5b7101e1-7f13-4825-8e0e-a9725e0e0438
+# ╟─5b7101e1-7f13-4825-8e0e-a9725e0e0438
 # ╟─31b384d2-9194-4ddd-8b6c-d1a137692dbc
 # ╟─e303f5bf-f37e-4cb8-abe9-5d4891f08e77
 # ╟─a2b14cca-72f5-4e27-b198-a7b3deb9893a
