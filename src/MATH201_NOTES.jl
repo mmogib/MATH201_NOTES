@@ -4109,6 +4109,13 @@ and
 ```math
 \left.\frac{\partial z}{\partial y}\right|_{(a, b)}=f_y(a, b)
 ```
+
+Informally, the values of 
+```math
+\frac{\partial f}{\partial x} \quad \text{and} \quad \frac{\partial f}{\partial y}
+``` 
+at the point ``(x_0, y_0, z_0)`` denote the __slopes 
+of the surface__ in the ``x-``and ``y-``directions, respectively
 """
 
 # ╔═╡ 7a1c7ca9-659d-4f66-ab27-21a02201e60d
@@ -4142,6 +4149,9 @@ cm"""
 $(ex(5,"Using Partial Derivatives to Find Rates of Change"))
 The area of a parallelogram with adjacent sides ``a`` and ``b`` and included angle ``\theta`` is given by ``A=a b \sin \theta``, as shown below
 $(post_img("https://www.dropbox.com/scl/fi/jahlir2ftz4fz3ngbwpkh/fig13.33.png?rlkey=2iaac1h3pmm0qmwwzejhr8rfm&dl=1"))
+
+- a. Find the rate of change of ``A`` with respect to ``a`` for ``a=10, b=20``, and ``\theta=\pi / 6``.
+- b. Find the rate of change of ``A`` with respect to ``\theta`` for ``a=10, b=20``, and ``\theta=\pi / 6``.
 """
 
 # ╔═╡ 64acd27c-8af7-4051-b018-2f8dd0615b34
