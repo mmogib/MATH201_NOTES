@@ -773,9 +773,6 @@ let
 
     # )
     cm"""
-    __Rose__
-
-   ``r  = 1-2\sin \theta``
 
    $p
 
@@ -891,6 +888,7 @@ let
     vs = [v1; v2]
     p = plot(; frame_style=:origin, xlimits=(-1, 3), ylimits=(-1, 3))
     for (i, v) in enumerate(vs)
+		lbl = i == 1 ? "u" : "v"
         plot!(p, [0; v[1]], [0, v[2]], arrow=true, annotations=[((v .+ 0.1)..., L"v_%$i")], label=:none, c=:black)
     end
     v = v1 .+ v2
@@ -2419,7 +2417,7 @@ begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
     md""" # Syllabus
     ## Syallbus
-    See here [Term 252 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/default-document-library/math201-252.pdf)
+    See here [Term 252 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-252.pdf)
     ## Textbook
     __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
     $text_book
@@ -7744,7 +7742,7 @@ version = "1.9.2+0"
 # ╟─6419f344-a1b3-4d60-8f27-8469a6e6b022
 # ╟─f6836f13-5370-4ac3-813a-50fc012bfcab
 # ╟─94194246-ad29-43d1-9925-126fe9e5e696
-# ╠═e3363ab4-1543-421f-a68c-cb1685a2f06a
+# ╟─e3363ab4-1543-421f-a68c-cb1685a2f06a
 # ╟─2c4b3a89-8257-48fa-8e3a-30f059e0187d
 # ╠═734ef678-1329-4d59-8753-0797b6a675c7
 # ╟─0a7b91d0-5ca6-4006-9b59-f9e077a8c3db
@@ -7838,7 +7836,7 @@ version = "1.9.2+0"
 # ╠═7932b9ab-1041-44ee-8e31-f10870a58d90
 # ╟─b829aed8-9618-44ea-9a2d-2c5d36416e62
 # ╠═8934159d-2dc6-4e4d-a5c4-2125831e0c52
-# ╟─2407b715-09cd-4568-bf81-4b9f5cf4065e
+# ╠═2407b715-09cd-4568-bf81-4b9f5cf4065e
 # ╟─037e8495-26d6-45d9-a855-4d1c88917561
 # ╟─5e96be6d-4801-4056-ae2c-0b1b95307ac4
 # ╟─eacf6145-a437-45e9-8eee-fb587077be60
