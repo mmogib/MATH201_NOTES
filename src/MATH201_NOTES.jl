@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.21
+# v0.20.24
 
 using Markdown
 using InteractiveUtils
@@ -1720,7 +1720,7 @@ md"""
 """
 
 # ╔═╡ b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
-md"## Increments and Differentialsp"
+md"## Increments and Differentials"
 
 # ╔═╡ 14852a74-f0a5-41c7-a9ef-d110a4bd8807
 md"## Differentiability"
@@ -1778,6 +1778,12 @@ md"""
 
 # ╔═╡ 527952f0-6be5-4be3-9676-3eb063188706
 rand(1:29,6)
+
+# ╔═╡ 47fe0a92-3fb5-4a1b-9618-87eec99c068e
+# cm"""
+# $(ex(3,"Finding Partial Derivatives by Substitution"))
+# Find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
+# """
 
 # ╔═╡ 2127153a-edfd-49dc-8c45-8743629af637
 md"## Implicit Partial Differentiation"
@@ -4205,7 +4211,7 @@ f(x, y)= \begin{cases}\frac{x y\left(x^2-y^2\right)}{x^2+y^2}, & (x, y) \neq(0,0
 # ╔═╡ a57476c4-7f42-40aa-a453-b7b29e7b9f7d
 cm"""
 $(ex(8,"Finding Higher-Order Partial Derivatives"))
-Show that ``f_{x z}=f_{z x}`` and ``f_{x z z}=f_{z z z}=f_{z z x}`` for the function
+Show that ``f_{x z}=f_{z x}`` and ``f_{x z z}=f_{z x z}=f_{z z x}`` for the function
 ```math
 f(x, y, z)=y e^x+x \ln z .
 ```
@@ -4323,12 +4329,6 @@ x_2=2 \sin 2 t& \text{and} & y_2=3 \cos 2 t & \color{red}{\text{second object}}
 ``` 
 
 At what rate is the distance between the two objects changing when ``t=\pi`` ?
-"""
-
-# ╔═╡ 47fe0a92-3fb5-4a1b-9618-87eec99c068e
-cm"""
-$(ex(3,"Finding Partial Derivatives by Substitution"))
-Find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
 """
 
 # ╔═╡ 69abaecb-13d5-4e81-a401-567b581e8eda
@@ -5444,7 +5444,7 @@ Unitful = "~1.25.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.4"
+julia_version = "1.12.5"
 manifest_format = "2.0"
 project_hash = "676df27baecaecff2557233cea90ba46b7661a91"
 
