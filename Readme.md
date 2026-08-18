@@ -1,73 +1,117 @@
-# MATH201: Calculus III (Term 252)
+# MATH201: Calculus III (Term 261)
 
-This repository contains notes, exercises, and resources for **MATH201 – Calculus III**, offered by the Department of Mathematics at King Fahd University of Petroleum & Minerals (KFUPM).
+This repository contains Pluto.jl notes, exercises, and static course materials for MATH201 Calculus III (Term 261) at King Fahd University of Petroleum & Minerals (KFUPM).
 
-Notes are authored in Julia using Pluto.jl. The main notebook is located at `src/MATH201_NOTES.jl` and can be exported to `docs/index.html` using `src/export.jl`.
+## Course Material
 
-## 📚 Course Description
+Open the published course site:
 
-This course provides a comprehensive introduction to multivariable calculus, covering:
+- [Course landing page](./docs/index.html)
+- [Chapter 10 notes](./docs/MATH_201_CH10.html)
+- [Chapter 11 notes](./docs/MATH_201_CH11.html)
+- [Chapter 13 notes](./docs/MATH_201_CH13.html)
+- [Chapter 14 notes](./docs/MATH_201_CH14.html)
 
-- Polar and parametric curves
-- Vectors, lines, planes, and surfaces in space
-- Cylindrical and spherical coordinates
-- Functions of several variables, limits, and continuity
-- Partial and directional derivatives, gradients, and tangent planes
-- Extrema of multivariable functions with and without constraints
-- Double and triple integrals in various coordinate systems
+## Source Notebooks
 
-## 🧠 Learning Outcomes
+The chapter notes are standalone Pluto notebooks:
 
-By the end of the course, students will be able to:
+- `src/MATH_201_CH10.jl`
+- `src/MATH_201_CH11.jl`
+- `src/MATH_201_CH13.jl`
+- `src/MATH_201_CH14.jl`
 
-1. Describe and analyze parametric and polar curves, and identify surfaces in space.
-2. Compute areas, arc lengths, and surface areas in plane curves.
-3. Perform vector operations and determine equations of lines and planes in 3D.
-4. Analyze limits and continuity of multivariable functions.
-5. Compute directional derivatives, gradients, and tangent planes.
-6. Find local/global extrema of multivariable functions, including with Lagrange multipliers.
-7. Evaluate multiple integrals in rectangular, polar, cylindrical, and spherical coordinates.
+Each notebook includes its own imports and helper definitions so it can be opened and exported independently.
 
-## 📖 Textbook
+The legacy combined source notebook is archived for reference:
 
-**Calculus: Early Transcendental Functions**, 7th Edition (Metric Version)  
-Authors: Ron Larson & Bruce Edwards
+- `refs/MATH201_NOTES_legacy.jl`
 
-## 🧑‍🏫 Course Coordinator
+Use the MATH201 wrapper to regenerate the published chapter notebooks:
 
-<!-- **Dr. Faisal Fairag**   -->
-<!-- 📧 ffairag@kfupm.edu.sa -->
+```bash
+julia --project=. scripts/split_math201_notebook.jl
+```
 
+Use the generic splitter directly when you need to override the defaults:
 
-Total: **100% (300 points)**
+```bash
+julia --project=. scripts/split_pluto_chapters.jl --source refs/MATH201_NOTES_legacy.jl --output-prefix MATH_201
+```
 
-## 🗓️ Weekly Schedule Snapshot
+You can also limit the split to selected chapters:
 
-| Week | Topics Covered |
-|------|----------------|
-| 1    | Parametric & polar curves |
-| 2–5  | Polar area, arc length, 3D vectors |
-| 6–7  | Lines, planes, surfaces, intro to multivariable functions |
-| 8–10 | Partial derivatives, gradients, tangent planes |
-| 11–12| Extrema, Lagrange multipliers, double integrals |
-| 13–15| Triple integrals & change of variables |
-| 16   | Review |
+```bash
+julia --project=. scripts/split_pluto_chapters.jl --source refs/MATH201_NOTES_legacy.jl --output-prefix MATH_201 --chapters 10,11
+```
 
-Check the syllabus for a detailed pacing schedule and suggested practice problems.
+## Build And Export
 
+Install Julia dependencies:
 
-## 🌐 GitHub Pages
+```bash
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
+```
 
-Course notes may be published via GitHub Pages at:
-👉 [https://mmogib.github.io/MATH201\_NOTES](https://mmogib.github.io/MATH201_NOTES)
+Export the chapter notebooks:
 
----
+```bash
+julia --project=. src/export.jl
+```
 
-### ✅ Tips for Success
+The exporter updates only the chapter HTML files in `docs/`. It does not regenerate `docs/index.html`.
 
-* Practice suggested problems, not just assigned ones.
-* Review lecture material before each class.
-* Work out solutions by hand before asking for help.
-* Visit your instructor during office hours with prepared questions.
-* Solve problems from chapter reviews and true/false sections.
+Export only selected chapters:
 
+```bash
+julia --project=. src/export.jl --ch=10
+julia --project=. src/export.jl --ch=10,11
+```
+
+Publish with a commit message:
+
+```bash
+./export_push.sh "Update MATH201 notes"
+```
+
+On Windows:
+
+```bat
+export_push.bat "Update MATH201 notes"
+```
+
+Pass export arguments through the publish scripts after the commit message:
+
+```bash
+./export_push.sh "Update selected chapters" --ch=10,11
+```
+
+```bat
+export_push.bat "Update selected chapters" --ch=10,11
+```
+
+## Landing Page
+
+The landing page is maintained directly at `docs/index.html`.
+
+- It is a static branded page, not a generated Julia template.
+- Published landing-page assets live under `docs/assets/`.
+- Repo-level source assets can remain under `imgs/`, but `docs/index.html` should reference only published paths inside `docs/`.
+
+## Repository Layout
+
+- `src/`: Pluto notebooks and export scripts.
+- `docs/`: published static-site output, including the static landing page.
+- `docs/assets/`: published assets used by the landing page.
+- `imgs/`: course image assets.
+- `refs/`: syllabus/reference material and archived legacy sources.
+- `notes/`: project plans, specs, and discussion notes.
+- `AGENTS.md`: repository-specific guidance for future agent sessions.
+
+## Course Description
+
+This course provides a comprehensive introduction to multivariable calculus, covering parametric and polar curves, vectors, lines, planes, and surfaces in space, cylindrical and spherical coordinates, functions of several variables, partial and directional derivatives, gradients, tangent planes, extrema with and without constraints, and double and triple integrals in various coordinate systems.
+
+## Textbook
+
+Calculus: Early Transcendental Functions, 7th Edition (Metric Version), by Ron Larson and Bruce Edwards.

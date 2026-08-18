@@ -56,6 +56,30 @@ snippets.jl
 mds.md
 yamels.yaml
 
+# Operating-system and editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local Julia/Pluto state
+.julia/
+.pluto/
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.bak
+*.orig
+
+# Python helper caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Notebook/editor checkpoints
+.ipynb_checkpoints/
+
 
 
 

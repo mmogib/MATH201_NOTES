@@ -3,11 +3,16 @@
 set -uo pipefail
 
 if [[ $# -eq 0 ]]; then
-  printf 'Usage: %s <commit-message>\n' "${0##*/}" >&2
+  printf 'Usage: %s <commit-message> [export-args...]\n' "${0##*/}" >&2
   exit 1
 fi
 
-message="$*"
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$script_dir" || exit 1
+
+message="$1"
+shift
+export_args=("$@")
 
 run_or_fail() {
   "$@"
@@ -19,7 +24,7 @@ run_or_fail() {
   fi
 }
 
-run_or_fail julia --project=. src/export.jl
-run_or_fail git add .
+run_or_fail julia --project=. src/export.jl "${export_args[@]}"
+run_or_fail git add docs
 run_or_fail git commit -m "$message"
 run_or_fail git push

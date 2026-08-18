@@ -1,40 +1,45 @@
-# Repository Guidelines
+# AGENTS.md
 
-## Project Structure & Module Organization
-- `src/`: Pluto notebooks and helpers (e.g., `MATH201_NOTES.jl`, `Section11_6.jl`, small Python helpers).
-- `docs/`: Static export. `index.html` is generated; do not edit manually.
-- `imgs/`: Figures referenced by notebooks.
-- Root: `Project.toml`, `src/export.jl`, `Dockerfile`, `docker-compose.yaml`, `postcreate.jl`.
+## Project
 
-## Build, Test, and Development Commands
-- Install deps: `julia --project=. -e "using Pkg; Pkg.instantiate()"`
-- Run Pluto locally: `julia --project=. -e "using Pluto; Pluto.run()"`
-- Export site (generates `docs/index.html`): `julia --project=. src/export.jl`
-- Preview export: open `docs/index.html` or `python -m http.server -d docs 8000`
-- Optional container: `docker compose up --build` (bind-mounts repo; Julia preinstalled).
+This repository contains MATH201 Calculus III course notes authored as Pluto notebooks and exported as a static site.
 
-## Coding Style & Naming Conventions
-- Language: Julia (primary) with occasional small Python utilities.
-- Indentation: 4 spaces; keep lines focused; avoid trailing whitespace.
-- Names: functions/variables `lowercase_with_underscores`; modules/types `CamelCase`.
-- Notebooks: main `MATH201_NOTES.jl`; new sections like `SectionNN_M.jl` (e.g., `Section11_6.jl`).
-- Images: place in `imgs/` and reference via relative paths.
+## Workflow
 
-## Testing Guidelines
-- No formal test suite. Validate by:
-  - Running the notebook in Pluto without cell errors.
-  - Running `src/export.jl` and confirming `docs/index.html` updates.
-  - Spot-checking key figures/links render correctly.
+- Edit notebooks in Pluto.
+- Maintain `docs/index.html` directly as a static landing page.
+- Export and publish through `export_push.sh` or `export_push.bat` with a commit message.
+- Use `src/export.jl` as the build and export entry point.
+- `src/export.jl` exports chapter notebooks only; it must not regenerate `docs/index.html`.
+- Use `julia --project=. src/export.jl --ch=...` for selective chapter exports when needed.
+- Treat `docs/` as the published static-site tree.
+- Keep landing-page-only published assets under `docs/assets/`.
+- Publish wrappers should run from the repository root and stage only `docs/` unless explicitly redesigned.
+- Prefer Julia for repository automation scripts. Do not add Python or a Python environment unless there is a clear technical reason.
 
-## Commit & Pull Request Guidelines
-- Commits: short, present-tense summaries with scope (e.g., `update 13.3`, `finish chapter 13`, `add remark on lines`).
-- PRs: describe changes, reference affected sections, include screenshots or a note confirming `docs/index.html` renders, and link related issues if any.
+## Notebook Split Conventions
 
-## Security & Configuration Tips
-- Do not edit `docs/index.html` directly—regenerate via `src/export.jl`.
-- Avoid committing large media (videos); prefer external links or compress.
-- Keep dependencies minimal; update `Project.toml` intentionally; do not commit secrets.
+- Chapter notebooks should be standalone Pluto notebooks.
+- Do not introduce a shared `common.jl` dependency for chapter notebooks.
+- Duplicate required imports, helper functions, and setup cells into each standalone chapter notebook.
+- Split by Pluto cell boundaries, not by raw line ranges inside a cell.
+- Preserve valid Pluto headers and `Cell order` sections.
+- The source of truth is the standalone chapter notebooks under `src/`.
+- `refs/MATH201_NOTES_legacy.jl` is an archived pre-split source retained only for historical reference or re-running the splitter.
+- After validation, archive the legacy notebook under `refs/`.
 
-## Agent-Specific Instructions
-- Prefer changes in `src/` and `imgs/`; regenerate exports after edits.
-- Do not restructure directories or modify Docker setup unless required by the task.
+## Repository Folders
+
+- `src/`: Pluto notebooks and export scripts.
+- `docs/`: published static-site output, including the hand-maintained landing page.
+- `docs/assets/`: published assets used by the static landing page.
+- `imgs/`: course image assets.
+- `refs/`: syllabus/reference files and archived legacy sources.
+- `notes/`: project plans, specs, and discussion notes.
+
+## Agent Notes
+
+- Save project specs and planning notes under `notes/`, not `docs/superpowers/...`.
+- Review `.gitignore` before staging broad generated changes.
+- Do not delete or reorganize assets unless explicitly requested.
+- Avoid reverting user cleanup or generated changes unless explicitly approved.
