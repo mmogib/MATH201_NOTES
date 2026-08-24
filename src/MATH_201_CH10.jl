@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.24
+# v1.0.3
 
 using Markdown
 using InteractiveUtils
@@ -16,6 +16,29 @@ macro bind(def, element)
     #! format: on
 end
 
+# ╔═╡ 83571d10-7eff-11f0-10db-391640417d07
+begin
+    using CommonMark
+    using PlutoUI, PlutoExtras
+    using Plots, PlotThemes, LaTeXStrings
+    # using PyPlot
+    using Latexify
+    using HypertextLiteral
+    using Colors
+    using LinearAlgebra, Random, Printf, SparseArrays
+    using Symbolics, Nemo, Groebner
+    # using SymPy
+    using QRCoders
+    using PrettyTables
+    # using Primes
+    # using LinearSolve
+    # using NonlinearSolve
+    using ForwardDiff
+    # using Integrals
+    # using OrdinaryDiffEq
+    using Unitful
+end
+
 # ╔═╡ 9858d0f8-ba7e-44fe-bcfc-4af064b7985c
 TableOfContents(title="📚 MATH201: Calculus III", indent=true, depth=4)
 
@@ -28,41 +51,6 @@ begin
     function Base.show(io::IO, ::MIME"image/png", w::LocalImage)
         write(io, read(w.filename))
     end
-end
-
-# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
-
-# __ChatGPT:__ (Course AI assistant)
-# $(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
-
-cm"""
-__Course website:__ (Notes, Syllabus)
-$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
-
----
-
-
-"""
-
-# ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
-begin
-    text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
-    md""" # Syllabus
-    ## Syallbus
-    See here [Term 252 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-252.pdf)
-    ## Textbook
-    __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
-    $text_book
-
-    ## Office Hours
-    I strongly encourage all students to make use of my office hours. These dedicated times are a valuable opportunity for you to ask questions, seek clarification on lecture material, discuss challenging problems, and get personalized feedback on your work. Engaging with me during office hours can greatly enhance your understanding of the course content and improve your performance. Whether you're struggling with a specific concept or simply want to delve deeper into the subject, I am here to support your learning journey. Don't hesitate to drop by; __your success is my priority__.
-
-    | Day       | Time        |
-    |-----------|-------------|
-    | Sunday    | 11:00-11:50AM |
-    | Tuesday | 11:00-11:50AM |
-    Also you can ask for an online meeting through __TEAMS__.
-    """
 end
 
 # ╔═╡ dc65d765-0bef-4c49-93af-1cd0ebabe632
@@ -103,38 +91,9 @@ begin
 end
 
 # ╔═╡ b15e87af-7574-48a7-b014-ef0ad8f3ea62
-let
-    f(y) = -y^2 + y + 1
-    eval(Meta.parse("x(t)=$s10_2_xt"))
-    p = plot(f; framestyle=:origin, xlimits=(0, 2), label=L"y=-x^2 + x + 1")
-    scatter(p, [x(s10_2_t)], [f(x(s10_2_t))], label="Person")
+let 
+    f(y) = -y^2 + y + 1; xf = eval(Meta.parse("t -> ($s10_2_xt)")); xv = Base.invokelatest(xf, s10_2_t); p = plot(f; framestyle=:origin, xlimits=(0, 2), label=L"y=-x^2 + x + 1"); scatter(p, [xv], [f(xv)], label="Person") 
 end
-
-# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
-## Cell 5
-cm"""
-$(define("a Plane Curve"))
-If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
-```math
-x=f(t) \quad \text { and } \quad y=g(t)
-```
-are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
-"""
-
-# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
-## Cell 6
-cm"""
-$(ex(1,"Sketching a Curve"))
-Sketch the curve described by the parametric equations
-```math
-x=f(t)=t^2-4
-```
-and
-```math
-y=g(t)=\frac{t}{2}
-```
-where ``-2 \leq t \leq 3``.
-"""
 
 # ╔═╡ 7ab904a8-91e2-4814-9eba-3e55f35f0503
 ## Cell 7
@@ -175,41 +134,6 @@ end
 ## Cell 8
 md"##  Eliminating the Parameter"
 
-# ╔═╡ 72eaba37-67d9-4d52-b1a6-e108401aa93e
-
-## Cell 9
-HTML(warning_box(
-    "⚠️ Common Errors When Eliminating Parameters",
-    """
-    <strong>Three major mistakes students make:</strong>
-    <ol>
-        <li><strong>Forgetting domain restrictions:</strong> The parameter t might have limits that affect x and y</li>
-        <li><strong>Losing orientation:</strong> Parametric curves have direction; rectangular equations don't</li>
-        <li><strong>Incomplete elimination:</strong> Make sure your final equation has no parameter left!</li>
-    </ol>
-    <em>Always verify: Does your rectangular equation represent the same curve over the same domain?</em>
-    """
-))
-
-# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
-## Cell 10
-cm"""
-
-$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
-"""
-
-# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
-
-## Cell 11
-cm"""
-$(ex(2,"Adjusting the Domain"))
-Sketch the curve represented by the equations
-```math
-x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
-```
-by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
-"""
-
 # ╔═╡ ef07b8c6-a4a8-4daa-8843-39d522f995ef
 begin
     s10_2_t_e2_slider = @bind s10_2_t_e2 Slider(-0.99:1:100, show_value=true)
@@ -226,21 +150,18 @@ let
     ts = -0.999:0.1:s10_2_t_e2
     p = plot(x.(ts),y.(ts); framestyle=:origin, xlimits=(-0.1, 2), ylimits=(-1,2),label=L"y=1-x^2")
     scatter(p, [x(s10_2_t_e2)], [y(s10_2_t_e2)], label=nothing)
-    ""
+    # ""
 end
 
-# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
-
-## Cell 12
-cm"""
-$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
-See LarsonCalculus.com for an interactive version of this type of example.
-Sketch the curve represented by
-```math
-x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
-```
-by eliminating the parameter and finding the corresponding rectangular equation.
+# ╔═╡ 9c8987f5-a609-45df-94f0-99c372e5876d
+#✓ SOL 10.2 ex3
+begin
+    s10_2_ex3_sol_box = @bind s10_2_ex3_show_sol CheckBox(default=false)
+    cm"""
+$(s10_2_ex3_sol_box) **Show Solution**
 """
+end
+
 
 # ╔═╡ 15a0e2e8-382e-487a-a297-12feaaab6f91
 
@@ -265,74 +186,66 @@ let
     scatter(p, [x(b)], [y(b)], label=nothing)
 end
 
-# ╔═╡ b05fcc39-dad9-4bdf-874e-6dedf75fe36c
-
-## Cell 15
-HTML(warning_box(
-    "⚠️ Trigonometric Parameter Elimination Mistakes",
-    """
-    When using sin²θ + cos²θ = 1, watch out for these errors:
-    <br><br>
-    <strong>✗ Wrong:</strong> x² + y² = 1<br>
-    <strong>✗ Wrong:</strong> (x/3) + (y/4) = 1<br>
-    <strong>✓ Correct:</strong> (x/3)² + (y/4)² = 1
-    <br><br>
-    <strong>Why?</strong> We have x = 3cos(θ), so cos(θ) = x/3<br>
-    Similarly, y = 4sin(θ), so sin(θ) = y/4<br>
-    Therefore: (x/3)² + (y/4)² = cos²(θ) + sin²(θ) = 1
-    """
-))
-
-# ╔═╡ 577dbd65-1377-4dd1-bb8f-52e4202ae745
-## Cell 16
-HTML(tip_box(
-    "💡 Quick Check",
-    """
-    <strong>Verify your elimination:</strong>
-    <ul>
-        <li>Substitute a simple value (like θ = 0) into both forms</li>
-        <li>Do you get the same point? ✓</li>
-        <li>Check the shape: This gives an ellipse with semi-axes 3 and 4</li>
-    </ul>
-    """
-))
-
-# ╔═╡ cab568b8-a82e-4886-8988-7766297153c6
-## Cell 17
-HTML(warning_box(
-    "⚠️ Don't Forget: Direction Matters!",
-    """
-    <strong>Parametric equations show direction of motion:</strong>
-    <ul>
-        <li>As θ increases from 0 to 2π, the point moves <strong>counterclockwise</strong></li>
-        <li>The rectangular equation x²/9 + y²/16 = 1 just shows the ellipse shape</li>
-        <li>It doesn't tell us the starting point or direction of travel</li>
-    </ul>
-    <strong>Try the slider above:</strong> Watch how the point traces the curve as θ increases!
-    """
-))
-
 # ╔═╡ b8d18b8b-43e7-4ce8-8942-d01454614f3d
 ## Cell 18
 md"##  Finding Parametric Equations"
 
-# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
-## Cell 19
-cm"""
-$(ex(4,"Finding Parametric Equations for a Given Graph"))
-Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
-
-- __(a.)__ ``t=x``
-- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
-
+# ╔═╡ d3f76ebe-9587-4f85-aa8c-c068478855e3
+#✓ SOL 10.2 ex4b
+begin
+    s10_2_ex4_sol_box = @bind s10_2_ex4_show_sol CheckBox(default=false)
+    cm"""
+$(s10_2_ex4_sol_box) **Show Solution**
 """
+end
 
-# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
-## Cell 20
-cm"""
-$(ex(5,"Parametric Equations for a Cycloid"))
-Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a __cycloid__.
+
+# ╔═╡ 8f4206ed-c4de-42f9-8539-ffabf79306b2
+#✓ ANIM 10.2 ex4b
+begin
+    s10_2_ex4_clock_box = @bind s10_2_ex4_k Clock(0.12)
+    s10_2_ex4_scrub_box = @bind s10_2_ex4_j Slider(0:60, default=0)
+    cm"""
+**Animate** $(s10_2_ex4_clock_box)
+
+**Scrub** $(s10_2_ex4_scrub_box)
 """
+end
+
+
+# ╔═╡ c4d041e7-214a-4eb4-8e4a-f4308efd6a83
+let
+    N = 60
+    n = mod(s10_2_ex4_k + s10_2_ex4_j, N + 1)
+    s = n / N
+    f(x) = 1 - x^2
+    xs = range(-2, 2, length=250)
+
+    t = -2 + 4s
+    m = -4 + 8s
+    ta = range(-2, t, length=150)
+    mb = range(-4, m, length=150)
+    xb = -m / 2
+    yb = 1 - m^2 / 4
+
+    opts = (framestyle=:origin, xlims=(-2.6, 2.6), ylims=(-3.8, 2.2),
+        legend=false, titlefontsize=10, grid=false)
+
+    pa = plot(xs, f.(xs); color=:gray, lw=1, alpha=0.5,
+        title=L"(a)\quad x=t,\ \ y=1-t^2", opts...)
+    plot!(pa, ta, f.(ta); color=:red, lw=3)
+    scatter!(pa, [t], [f(t)]; color=:red, ms=6)
+    annotate!(pa, 0, -3.4, text("t = $(round(t, digits=2))   (moving right)", 9, :red))
+
+    pb = plot(xs, f.(xs); color=:gray, lw=1, alpha=0.5,
+        title=L"(b)\quad x=-m/2,\ \ y=1-m^2/4", opts...)
+    plot!(pb, -mb ./ 2, 1 .- (mb .^ 2) ./ 4; color=:blue, lw=3)
+    scatter!(pb, [xb], [yb]; color=:blue, ms=6)
+    annotate!(pb, 0, -3.4, text("m = $(round(m, digits=2))   (moving left)", 9, :blue))
+
+    plot(pa, pb; layout=(1, 2), size=(760, 330))
+end
+
 
 # ╔═╡ efb426c5-ac63-4360-86e4-b579b847b69a
 ## Cell 21
@@ -362,88 +275,62 @@ let
     annotate!(p, [(5π, 2a + 5, L"x=a(\theta-\sin{\theta})"), (5π, 2a + 3, L"y=a(1-\cos{\theta)}")])
 end
 
-# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
-## Cell 23
-cm"""
-$(define("Smooth Curve"))
-A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+# ╔═╡ 310a267a-288d-4ab7-a8c6-4700b951703a
+#✓ PARAM 10.2 hypocycloid
+begin
+    s10_2_hypo_A_box = @bind s10_2_hypo_A Slider(2:40, default=32, show_value=true)
+    s10_2_hypo_B_box = @bind s10_2_hypo_B Slider(1:40, default=14, show_value=true)
+    cm"""
+**Hypocycloid** ``H(A,B)`` — drag to change the radii (we need ``B \lt A``)
+
+``A = `` $(s10_2_hypo_A_box)
+
+``B = `` $(s10_2_hypo_B_box)
 """
-
-# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
-cm"""
-$(bbl("Hypocycloid", "H(A, B)"))
-The path traced by a fixed point on a circle of radius ``B`` as it rolls around the inside of a circle of radius ``A``
-```math
-\begin{aligned}
-& x=(A-B) \cos t+B \cos \left(\frac{A-B}{B}\right) t \\
-& y=(A-B) \sin t-B \sin \left(\frac{A-B}{B}\right) t
-\end{aligned}
-```
-"""
-
-# ╔═╡ 080c8917-6a7f-46ab-9ce7-4a19d2062375
-let
-
-    # Parameters
-    A = 32 # 24
-    B = 14 # 3
-
-    # Range of parameter t
-    t = range(0, 20π, length=2000)  # enough to complete the curve
-
-    # Parametric equations
-    x = (A - B) * cos.(t) .- B * cos.((A - B)/B .* t)
-    y = (A - B) * sin.(t) .- B * sin.((A - B)/B .* t)
-
-    # Plot
-    plot(x, y,
-         aspect_ratio=:equal,
-         linewidth=1.2,
-         color=:red,
-         label="Hypocycloid E($A,$B)",
-         frame_style=:origin)
-    xlabel!("x")
-    ylabel!("y")
-    title!("Hypocycloid E($A,$B)")
 end
 
-# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
-cm"""
-$(bbl("Epicycloid","E(A, B)"))
-The path traced by a fixed point on a circle of radius ``B`` as it rolls around the outside of a circle of radius ``A``
-```math
-\begin{aligned}
-& x=(A+B) \cos t-B \cos \left(\frac{A+B}{B}\right) t \\
-& y=(A+B) \sin t-B \sin \left(\frac{A+B}{B}\right) t
-\end{aligned}
-```
+
+# ╔═╡ 676045ab-7fa0-48ab-a215-1e0a9abfdf1e
+#✓ PARAM 10.2 epicycloid
+begin
+    s10_2_epi_A_box = @bind s10_2_epi_A Slider(1:40, default=7, show_value=true)
+    s10_2_epi_B_box = @bind s10_2_epi_B Slider(1:40, default=5, show_value=true)
+    cm"""
+**Epicycloid** ``E(A,B)`` — drag to change the radii
+
+``A = `` $(s10_2_epi_A_box)
+
+``B = `` $(s10_2_epi_B_box)
 """
+end
+
 
 # ╔═╡ ebc1271e-0fcf-47bc-bf74-850b1d2ed425
 let
+    A = s10_2_epi_A
+    B = s10_2_epi_B
 
-    # Parameters
-    A = 24 # 24
-    B = 5
+    d = gcd(A, B)
+    tmax = 2 * pi * B / d
+    t = range(0, tmax, length=4000)
+    c = range(0, 2 * pi, length=400)
 
-    # Range of parameter t
-    t = range(0, 20π, length=2000)  # enough to complete the curve
+    x = (A + B) .* cos.(t) .- B .* cos.((A + B) / B .* t)
+    y = (A + B) .* sin.(t) .- B .* sin.((A + B) / B .* t)
 
-    # Parametric equations
-    x = (A + B) * cos.(t) .- B * cos.((A + B)/B .* t)
-    y = (A + B) * sin.(t) .- B * sin.((A + B)/B .* t)
-
-    # Plot
-    plot(x, y,
-         aspect_ratio=:equal,
-         linewidth=1.2,
-         color=:red,
-         label="Epicycloid E($A,$B)",
-         frame_style=:origin)
-    xlabel!("x")
-    ylabel!("y")
-    title!("Epicycloid E($A,$B)")
+    R = A + 2B + 1
+    p = plot(A .* cos.(c), A .* sin.(c);
+        color=:gray, ls=:dash, lw=1, label="fixed circle, radius A = $(A)")
+    plot!(p, x, y;
+        aspect_ratio=:equal, lw=1.4, color=:red, label="E($(A),$(B))",
+        framestyle=:origin, xlims=(-R, R), ylims=(-R, R),
+        title="Epicycloid  E($(A),$(B))   -   $(div(A, d)) cusps",
+        titlefontsize=11, size=(560, 560))
+    xlabel!(p, "x")
+    ylabel!(p, "y")
+    p
 end
+
 
 # ╔═╡ 96b650e7-d4ce-478f-878f-d9cd6d10f2b6
 # Section 10.3: Parametric Equations and Calculus - Verbatim Content
@@ -469,65 +356,25 @@ md"##  Slope and Tangent Lines"
 
 ## Cell 4
 
-# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
-cm"""
-$(bth("Parametric Form of the Derivative"))
-If a smooth curve ``C`` is given by the equations
-```math
-x=f(t) \quad \text { and } \quad y=g(t)
-```
-then the slope of ``C`` at ``(x, y)`` is
-```math
-\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
-```
+# ╔═╡ 58873013-9dd1-4a76-84a7-6f43462dbcb6
+#✓ SOL 10.3 ex2
+begin
+    s10_3_ex2_sol_box = @bind s10_3_ex2_show_sol CheckBox(default=false)
+    cm"""
+$(s10_3_ex2_sol_box) **Show Solution**
 """
+end
 
-## Cell 5
 
-# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
-cm"""
-$(ex(1,"Differentiation and Parametric Form"))
-Find ``d y / d x`` for the curve given by
-```math
-x=\sin t\quad \text{and} \quad y=\cos t.
-```
+# ╔═╡ 2ac5fa04-03d8-4725-88d0-6f76213e5fa6
+#✓ SOL 10.3 ex3
+begin
+    s10_3_ex3_sol_box = @bind s10_3_ex3_show_sol CheckBox(default=false)
+    cm"""
+$(s10_3_ex3_sol_box) **Show Solution**
 """
+end
 
-## Cell 6
-
-# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
-cm"""
-$(bbl("Remark",""))
-```math
-\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
-```
-"""
-
-## Cell 7
-
-# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
-cm"""
-$(ex(2,"Finding Slope and Concavity"))
-For the curve given by
-```math
-x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
-```
-find the slope and concavity at the point ``(2,3)``.
-"""
-
-## Cell 8
-
-# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
-cm"""
-$(ex(3,"A Curve with Two Tangent Lines at a Point"))
-The prolate cycloid given by
-```math
-x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
-```
-crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
-"""
-
-## Cell 9
 
 # ╔═╡ 29c142be-48e3-488f-b8fb-3b9c34de64b0
 begin
@@ -567,30 +414,15 @@ md"## Arc Length"
 
 ## Cell 12
 
-# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
-cm"""
-$(bth("Arc Length in Parametric Form"))
-If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
-```math
-s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
-```
+# ╔═╡ 2497c799-3aad-451d-abc6-30aa20aa6924
+#✓ SOL 10.3 ex4
+begin
+    s10_3_ex4_sol_box = @bind s10_3_ex4_show_sol CheckBox(default=false)
+    cm"""
+$(s10_3_ex4_sol_box) **Show Solution**
 """
+end
 
-## Cell 13
-
-# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
-cm"""
-$(ex(4,"Finding Arc Length"))
-
-A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
-```math
-x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
-```
-
-Find the distance traveled by the point in one complete trip about the larger circle.
-"""
-
-## Cell 14
 
 # ╔═╡ d6ccee4f-40be-429b-860e-f53067077a14
 begin
@@ -631,35 +463,18 @@ md"## Area of a Surface of Revolution"
 
 ## Cell 17
 
-# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
-cm"""
-$(bth("Area of a Surface of Revolution"))
-If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
-
-__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
-
-Revolution about the ``x``-axis: ``g(t) \geq 0``
-
-__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
-
-Revolution about the ``y``-axis: ``f(t) \geq 0``
-"""
-
-## Cell 18
-
 # ╔═╡ 46c3a799-1982-419c-9254-9604ad95c926
 sin(π/3), sqrt(3)/2
 
-# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
-cm"""
-$(ex(5,"Finding the Area of a Surface of Revolution"))
-
-Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
-```math
-\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
-```
-Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
+# ╔═╡ 7c1266f6-2f5d-4fdf-af5a-67fa202ddae2
+#✓ SOL 10.3 ex5
+begin
+    s10_3_ex5_sol_box = @bind s10_3_ex5_show_sol CheckBox(default=false)
+    cm"""
+$(s10_3_ex5_sol_box) **Show Solution**
 """
+end
+
 
 # ╔═╡ b4223dd0-faaa-4508-813f-0a9babbcdc09
 # Section 10.4: Polar coordinates and Polar Graphs - Verbatim Content
@@ -686,29 +501,6 @@ md"## Polar Coordinates"
 
 ## Cell 4
 
-# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
-cm"""
-$(bbl("",""))
-To form the polar coordinate system in the plane,
-- fix a point ``O``, called __the pole (or origin)__, and
-- construct from ``O`` an initial ray called the __polar axis__,
-
-Then each point ``P`` in the plane can be assigned polar coordinates
-```math
-(r, \theta)
-```
-as follows.
-```math
-\begin{aligned}
-& r=\text { directed distance from } O \text { to } P \\
-& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
-\end{aligned}
-```
-
-"""
-
-## Cell 5
-
 # ╔═╡ e5df9962-b908-4219-bfaf-7be799b8c8a8
 let
     n = 0
@@ -725,140 +517,6 @@ md"## Coordinate Conversion"
 
 ## Cell 7
 
-# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
-cm"""
-$(bth("Coordinate Conversion"))
-The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
-```math
-\begin{array}{ll}
-\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
-x=r \cos \theta & \tan \theta=\frac{y}{x} \\
-y=r \sin \theta & r^2=x^2+y^2
-\end{array}
-```
-"""
-
-## Cell 8
-
-# ╔═╡ c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
-HTML(warning_box(
-    "⚠️ Common Coordinate Conversion Mistakes",
-    """
-    <strong>Most frequent errors:</strong>
-    <ol>
-        <li><strong>Wrong quadrant:</strong> θ = arctan(y/x) only works in Quadrants I & IV</li>
-        <li><strong>Forgetting absolute value:</strong> r = √(x² + y²), not just √(x² + y²)</li>
-        <li><strong>Angle confusion:</strong> Adding 2π doesn't change the point, but adding π does!</li>
-    </ol>
-    <br>
-    <strong>Safe approach:</strong> Always check which quadrant your point is in before finding θ.
-    """
-))
-
-## Cell 9
-
-# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
-cm"""
-$(ex(1,"Polar-to-Rectangular Conversion"))
-
-
-- (a) For the point ``(r, \theta)=(2, \pi)``,
-- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
-
-"""
-
-## Cell 10
-
-# ╔═╡ b5699352-1bca-4040-bbd9-2bc64085460c
-HTML(tip_box(
-    "💡 Polar-to-Rectangular is Easy!",
-    """
-    <strong>Always straightforward:</strong>
-    <ul>
-        <li>x = r cos(θ) ← Just substitute and calculate</li>
-        <li>y = r sin(θ) ← No quadrant worries here!</li>
-        <li>These formulas work for ANY r and θ values</li>
-    </ul>
-    <em>The hard direction is rectangular-to-polar...</em>
-    """
-))
-
-## Cell 11
-
-# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
-cm"""
-$(ex(2,"Rectangular-to-Polar Conversion"))
-- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
-- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
-"""
-
-## Cell 12
-
-# ╔═╡ 4564edd1-7611-45b1-8f4c-26088d4c6d97
-let
-    warn = HTML(warning_box(
-        "⚠️ Rectangular-to-Polar: Watch the Quadrant!",
-        """
-        <strong>For point (-1, 1) in Quadrant II:</strong>
-        <br><br>
-        <strong>✗ Wrong approach:</strong><br>
-        θ = arctan(y/x) = arctan(1/(-1)) = arctan(-1) = -π/4
-        <br><br>
-        <strong>✓ Correct approach:</strong><br>
-        • Point is in Quadrant II<br>
-        • θ = π + arctan(y/x) = π + (-π/4) = 3π/4<br>
-        <br>
-        <strong>Quick check:</strong> cos(3π/4) = -1/√2 ✓ and sin(3π/4) = 1/√2 ✓
-        """
-    ))
-
-    tip = HTML(tip_box(
-        "💡 Quadrant Reference Guide",
-        """
-        <table style="border-collapse: collapse; width: 100%;">
-        <tr style="background-color: #f0f0f0;">
-            <th style="border: 1px solid #ddd; padding: 8px;">Quadrant</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Signs (x,y)</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Angle Range</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Formula</th>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 8px;">I</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">(+,+)</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">0 to π/2</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">θ = arctan(y/x)</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 8px;">II</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">(-,+)</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">π/2 to π</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">θ = π + arctan(y/x)</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 8px;">III</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">(-,-)</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">π to 3π/2</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">θ = π + arctan(y/x)</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 8px;">IV</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">(+,-)</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">3π/2 to 2π</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">θ = 2π + arctan(y/x)</td>
-        </tr>
-        </table>
-        """
-    ))
-
-    md"""
-    $(warn)
-
-    $(tip)
-    """
-end
-
-## Cell 13
-
 # ╔═╡ 09ad3cf9-ccc7-4508-b20a-2b541fba963b
 md"###### Kahoot it 🎯📱🎉✨"
 
@@ -867,37 +525,8 @@ md"## Polar Graphs"
 
 ## Cell 14
 
-# ╔═╡ 6fbc1529-ed21-4e53-91de-a026a9a4ee26
-HTML(warning_box(
-    "⚠️ Polar Graphing Mistakes",
-    """
-    <strong>Common graphing errors:</strong>
-    <ul>
-        <li><strong>Negative r values:</strong> r = -2 means go 2 units in the opposite direction</li>
-        <li><strong>Period confusion:</strong> cos(3θ) has period 2π/3, not 2π!</li>
-        <li><strong>Forgetting restrictions:</strong> Some curves need r ≥ 0 constraints</li>
-    </ul>
-    <br>
-    <strong>Pro tip:</strong> Always check a few key points (θ = 0, π/2, π, 3π/2) first!
-    """
-))
-
-## Cell 15
-
 # ╔═╡ 2b853097-db70-4f47-988f-f9caed5a042f
 md"[Plotting Guidelines](https://www.dropbox.com/scl/fi/6537efq8elmarwa6sqyqf/guides_plotting_polar.pdf?rlkey=ccna60nezql5ilq8wqdko9yvk&raw=1)"
-
-# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
-cm"""
-$(ex(3,"
-Graphing Polar Equations"))
-Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
-- __(a.)__ ``r=2``
-- __(b.)__ ``\theta=\frac{\pi}{3}``
-- __(c.)__ ``r=\sec \theta``
-"""
-
-## Cell 16
 
 # ╔═╡ e1e067d5-5416-4d8e-be65-5c52ae95b24b
 let
@@ -928,15 +557,6 @@ let
 end
 
 ## Cell 17
-
-# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
-cm"""
-$(ex(4,"
-Sketching a Polar Graph"))
-Sketch the graph of ``r=2 \cos 3 \theta``.
-"""
-
-## Cell 18
 
 # ╔═╡ 003f7d8c-b316-4a2b-8170-ff148ccb9f50
 let
@@ -1014,56 +634,6 @@ md"##  Slope and Tangent Lines"
 
 ## Cell 22
 
-# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
-cm"""
-$(bth("Slope in Polar Form"))
-If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
-```math
-\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
-```
-provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``.
-"""
-
-## Cell 23
-
-# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
-cm"""
-$(bbl("Remarks",""))
-
-- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
-- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
-
-- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
-"""
-
-## Cell 24
-
-# ╔═╡ 35429393-e411-4ac8-9719-c90523ade5ea
-HTML(warning_box(
-    "⚠️ Polar Slope Formula Confusion",
-    """
-    <strong>Don't mix up the formulas!</strong>
-    <br><br>
-    <strong>In rectangular coordinates:</strong><br>
-    dy/dx = f'(x)
-    <br><br>
-    <strong>In polar coordinates:</strong><br>
-    dy/dx = (r cos θ + r' sin θ)/(-r sin θ + r' cos θ)
-    <br><br>
-    <strong>Key difference:</strong> Polar slope depends on BOTH r and θ, not just the rate of change of r!
-    """
-))
-
-## Cell 25
-
-# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
-cm"""
-$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
-Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
-"""
-
-## Cell 26
-
 # ╔═╡ c3b0bf91-fdf0-4a2b-8309-3728c64421e4
 let
 
@@ -1075,15 +645,6 @@ end
 
 ## Cell 27
 
-# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
-cm"""
-$(ex(6,"
-Finding Horizontal and Vertical Tangent Lines"))
-Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
-"""
-
-## Cell 28
-
 # ╔═╡ fae0a60d-8bb5-4be4-a22f-01a951804800
 let
 
@@ -1094,14 +655,6 @@ let
 end
 
 ## Cell 29
-
-# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
-cm"""
-$(bth("Tangent Lines at the Pole"))
-If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
-"""
-
-## Cell 30
 
 # ╔═╡ afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
 md"##  Special Polar Graphs"
@@ -1164,27 +717,6 @@ let
 end
 
 ## Cell 33
-
-# ╔═╡ 3dbb47a8-9310-4013-a4db-0514614d0d4d
-HTML(tip_box(
-    "💡 Rose Curve Quick Facts",
-    """
-    <strong>Number of petals:</strong>
-    <ul>
-        <li><strong>n odd:</strong> exactly n petals</li>
-        <li><strong>n even:</strong> exactly 2n petals</li>
-    </ul>
-    <br>
-    <strong>Examples:</strong><br>
-    • r = cos(3θ) → 3 petals<br>
-    • r = cos(4θ) → 8 petals<br>
-    • r = cos(5θ) → 5 petals
-    <br><br>
-    <em>Try changing n in the interactive plot above to see this pattern!</em>
-    """
-))
-
-## Cell 34
 
 # ╔═╡ 9c06bcf6-403e-4da2-a2b1-06bc10af44a8
 md"---"
@@ -1255,38 +787,6 @@ md"""
 # ╔═╡ bd3e2109-3aa0-4a9c-9082-d6d196f7932b
 md"##  Area of a Polar Region"
 
-# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
-cm"""
-__What is the area of a sector of a circle?__
-
-$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
-
-__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
-
-$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
-
-
-"""
-
-# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
-cm"""
-$(bth("Area in Polar Coordinates"))
-If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
-```math
-A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
-```
-```math
-=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
-```
-"""
-
-# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
-cm"""
-$(ex(1,"
-Finding the Area of a Polar Region"))
-Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
-"""
-
 # ╔═╡ 6c577bcb-2f01-41e2-b8cc-7593372f4cf6
 let
     r(θ) = 3 * cos(3 * θ)
@@ -1312,12 +812,6 @@ let
    """
 
 end
-
-# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
-cm"""
-$(ex(2,"Finding the Area Bounded by a Single Curve"))
-Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
-"""
 
 # ╔═╡ 65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
 let
@@ -1357,20 +851,6 @@ end
 
 # ╔═╡ 770456f6-fe19-4aec-86d2-482834cc419f
 md"##  Points of Intersection of Polar Graphs"
-
-# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
-cm"""
-$(ex(3,"Finding the Area of a Region Between Two Curves"))
-Find the area of the region common to the two regions bounded by the curves
-```math
-r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
-```
-and
-```math
-r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
-```
-
-"""
 
 # ╔═╡ 2e4f2876-a92d-4b3d-a473-ef12341baacc
 let
@@ -1413,21 +893,6 @@ end
 # ╔═╡ 782bd8fb-e3c7-471a-9bce-668d45b911af
 md"##  Arc Length in Polar Form"
 
-# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
-cm"""
-$(bth("Arc Length of a Polar Curve"))
-Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
-```math
-s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
-```
-"""
-
-# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
-cm"""
-$(ex(4,"Finding the Length of a Polar Curve"))
-Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
-"""
-
 # ╔═╡ 8ad44287-5a21-477b-b0fd-0d710440dc25
 let
     r(θ) = 2 - 2cos(θ)
@@ -1444,21 +909,6 @@ end
 # ╔═╡ ba8dc58b-5c37-4713-9bef-930c735850bf
 md"## Area of a Surface of Revolution"
 
-# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
-cm"""
-$(bth("Area of a Surface of Revolution"))
-Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
-1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
-
-
-
-2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
-$(ebl())
-
-$(ex(5,"Finding the Area of a Surface of Revolution"))
-Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
-"""
-
 # ╔═╡ 0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
 let
     r(θ) = cos(θ)
@@ -1470,29 +920,6 @@ let
    $p
    """
 
-end
-
-# ╔═╡ 83571d10-7eff-11f0-10db-391640417d07
-begin
-    using CommonMark
-    using PlutoUI, PlutoExtras
-    using Plots, PlotThemes, LaTeXStrings
-    # using PyPlot
-    using Latexify
-    using HypertextLiteral
-    using Colors
-    using LinearAlgebra, Random, Printf, SparseArrays
-    using Symbolics, Nemo, Groebner
-    # using SymPy
-    using QRCoders
-    using PrettyTables
-    # using Primes
-    # using LinearSolve
-    # using NonlinearSolve
-    using ForwardDiff
-    # using Integrals
-    # using OrdinaryDiffEq
-    using Unitful
 end
 
 # ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
@@ -1684,6 +1111,940 @@ begin
     @htl("")
 end
 
+# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+
+# __ChatGPT:__ (Course AI assistant)
+# $(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
+
+cm"""
+__Course website:__ (Notes, Syllabus)
+$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
+
+---
+
+
+"""
+
+# ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
+begin
+    text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
+    md""" # Syllabus
+    ## Syallbus
+    See here [Term 261 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-252.pdf)
+    ## Textbook
+    __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
+    $text_book
+
+    ## Office Hours
+    I strongly encourage all students to make use of my office hours. These dedicated times are a valuable opportunity for you to ask questions, seek clarification on lecture material, discuss challenging problems, and get personalized feedback on your work. Engaging with me during office hours can greatly enhance your understanding of the course content and improve your performance. Whether you're struggling with a specific concept or simply want to delve deeper into the subject, I am here to support your learning journey. Don't hesitate to drop by; __your success is my priority__.
+
+    | Day       | Time        |
+    |-----------|-------------|
+    | Sunday    | 11:00-11:50AM |
+    | Tuesday | 11:00-11:50AM |
+    Also you can ask for an online meeting through __TEAMS__.
+    """
+end
+
+# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
+## Cell 5
+cm"""
+$(define("a Plane Curve"))
+If ``f`` and ``g`` are continuous functions of ``t`` on an interval ``I``, then the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+are __parametric equations__ and ``t`` is the __parameter__. The set of points ``(x, y)`` obtained as ``t`` varies over the interval ``I`` is the __graph__ of the parametric equations. Taken together, the parametric equations and the graph are a __plane curve__, denoted by ``C``.
+"""
+
+# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
+## Cell 6
+cm"""
+$(ex(1,"Sketching a Curve"))
+Sketch the curve described by the parametric equations
+```math
+x=f(t)=t^2-4
+```
+and
+```math
+y=g(t)=\frac{t}{2}
+```
+where ``-2 \leq t \leq 3``.
+"""
+
+# ╔═╡ 72eaba37-67d9-4d52-b1a6-e108401aa93e
+
+## Cell 9
+HTML(warning_box(
+    "⚠️ Common Errors When Eliminating Parameters",
+    """
+    <strong>Three major mistakes students make:</strong>
+    <ol>
+        <li><strong>Forgetting domain restrictions:</strong> The parameter t might have limits that affect x and y</li>
+        <li><strong>Losing orientation:</strong> Parametric curves have direction; rectangular equations don't</li>
+        <li><strong>Incomplete elimination:</strong> Make sure your final equation has no parameter left!</li>
+    </ol>
+    <em>Always verify: Does your rectangular equation represent the same curve over the same domain?</em>
+    """
+))
+
+# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
+## Cell 10
+cm"""
+
+$(post_img("https://www.dropbox.com/scl/fi/7ijq8twppy0b4urn2ct3c/fig0_10_2.png?rlkey=abd13ney9wz9ya3vjxcrddo10&raw=1",500))
+"""
+
+# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
+
+## Cell 11
+cm"""
+$(ex(2,"Adjusting the Domain"))
+Sketch the curve represented by the equations
+```math
+x=\frac{1}{\sqrt{t+1}} \quad \text { and } \quad y=\frac{t}{t+1}, \quad t>-1
+```
+by eliminating the parameter and adjusting the domain of the resulting rectangular equation.
+"""
+
+# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
+
+## Cell 12
+cm"""
+$(ex(3,"Using Trigonometry to Eliminate a Parameter"))
+See LarsonCalculus.com for an interactive version of this type of example.
+Sketch the curve represented by
+```math
+x=3 \cos \theta \quad \text { and } \quad y=4 \sin \theta, \quad 0 \leq \theta \leq 2 \pi
+```
+by eliminating the parameter and finding the corresponding rectangular equation.
+"""
+
+# ╔═╡ 62ad6901-4883-4cdb-9b8b-0d2e4b409d4e
+if s10_2_ex3_show_sol
+    cm"""
+$(bbl("Solution",""))
+Solve each equation for the trigonometric function
+
+``\cos\theta = \dfrac{x}{3} \qquad\text{and}\qquad \sin\theta = \dfrac{y}{4}``
+
+and use the Pythagorean identity ``\sin^2\theta+\cos^2\theta=1``
+
+```math
+\left(\frac{x}{3}\right)^2+\left(\frac{y}{4}\right)^2=\cos^2\theta+\sin^2\theta=1
+```
+
+so the rectangular equation is
+
+```math
+\frac{x^2}{9}+\frac{y^2}{16}=1.
+```
+
+This is an **ellipse** centered at the origin, with
+
+- vertices ``(0,\pm 4)``: major axis on the ``y``-axis of length ``8``,
+- co-vertices ``(\pm 3,0)``: minor axis on the ``x``-axis of length ``6``.
+
+**Orientation and domain.** As ``\theta`` increases from ``0`` to ``2\pi``, the point traces the **entire** ellipse exactly once in the **counterclockwise** direction, starting and ending at ``(3,0)``
+
+``\theta=0 \to (3,0),\quad \theta=\dfrac{\pi}{2} \to (0,4),\quad \theta=\pi \to (-3,0),\quad \theta=\dfrac{3\pi}{2} \to (0,-4).``
+
+Note that the rectangular equation alone carries neither the starting point nor the direction of motion.
+$(ebl())
+"""
+else
+    md""
+end
+
+
+# ╔═╡ b05fcc39-dad9-4bdf-874e-6dedf75fe36c
+
+## Cell 15
+HTML(warning_box(
+    "⚠️ Trigonometric Parameter Elimination Mistakes",
+    """
+    When using sin²θ + cos²θ = 1, watch out for these errors:
+    <br><br>
+    <strong>✗ Wrong:</strong> x² + y² = 1<br>
+    <strong>✗ Wrong:</strong> (x/3) + (y/4) = 1<br>
+    <strong>✓ Correct:</strong> (x/3)² + (y/4)² = 1
+    <br><br>
+    <strong>Why?</strong> We have x = 3cos(θ), so cos(θ) = x/3<br>
+    Similarly, y = 4sin(θ), so sin(θ) = y/4<br>
+    Therefore: (x/3)² + (y/4)² = cos²(θ) + sin²(θ) = 1
+    """
+))
+
+# ╔═╡ 577dbd65-1377-4dd1-bb8f-52e4202ae745
+## Cell 16
+HTML(tip_box(
+    "💡 Quick Check",
+    """
+    <strong>Verify your elimination:</strong>
+    <ul>
+        <li>Substitute a simple value (like θ = 0) into both forms</li>
+        <li>Do you get the same point? ✓</li>
+        <li>Check the shape: This gives an ellipse with semi-axes 3 and 4</li>
+    </ul>
+    """
+))
+
+# ╔═╡ cab568b8-a82e-4886-8988-7766297153c6
+## Cell 17
+HTML(warning_box(
+    "⚠️ Don't Forget: Direction Matters!",
+    """
+    <strong>Parametric equations show direction of motion:</strong>
+    <ul>
+        <li>As θ increases from 0 to 2π, the point moves <strong>counterclockwise</strong></li>
+        <li>The rectangular equation x²/9 + y²/16 = 1 just shows the ellipse shape</li>
+        <li>It doesn't tell us the starting point or direction of travel</li>
+    </ul>
+    <strong>Try the slider above:</strong> Watch how the point traces the curve as θ increases!
+    """
+))
+
+# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
+## Cell 19
+cm"""
+$(ex(4,"Finding Parametric Equations for a Given Graph"))
+Find a set of parametric equations that represents the graph of ``y=1-x^2``, using each of the following parameters.
+
+- __(a.)__ ``t=x``
+- __(b.)__ The slope ``m=\frac{d y}{d x}`` at the point ``(x, y)``
+
+"""
+
+# ╔═╡ aaea1a28-8b28-496d-b575-a7711beda83d
+if s10_2_ex4_show_sol
+    cm"""
+$(bbl("Solution",""))
+**(a) Using the parameter ``t=x``.** Substituting ``x=t`` in ``y=1-x^2`` gives
+
+```math
+x=t,\qquad y=1-t^2,\qquad t\in \mathbb{R}.
+```
+
+**(b) Using the slope ``m=\dfrac{dy}{dx}`` as parameter.** Differentiating ``y=1-x^2``
+
+```math
+m=\frac{dy}{dx}=-2x \qquad\Longrightarrow\qquad x=-\frac{m}{2},
+```
+
+and substituting this ``x`` back in ``y=1-x^2``
+
+```math
+y=1-\left(-\frac{m}{2}\right)^2=1-\frac{m^2}{4},
+```
+
+so
+
+```math
+x=-\frac{m}{2},\qquad y=1-\frac{m^2}{4},\qquad m\in \mathbb{R}.
+```
+
+**Check.** ``\dfrac{dy}{dx}=\dfrac{dy/dm}{dx/dm}=\dfrac{-m/2}{-1/2}=m``, so the parameter really is the slope.
+
+**Same graph, different motion.**
+
+- Both parametrizations trace the **same** parabola ``y=1-x^2``, and both sit at the vertex ``(0,1)`` when the parameter is ``0``.
+- In **(a)** the point moves **left to right**, since ``x=t`` increases with ``t``. In **(b)** it moves **right to left**, since ``x=-m/2`` decreases as ``m`` increases.
+- In **(b)** the point sweeps the curve at **half the rate**: to cover ``-2\le x\le 2`` the parameter ``t`` runs over ``[-2,2]``, while ``m`` must run over ``[-4,4]``.
+
+Press play on the animation below to see both effects at once.
+$(ebl())
+"""
+else
+    md""
+end
+
+
+# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
+## Cell 20
+cm"""
+$(ex(5,"Parametric Equations for a Cycloid"))
+Determine the curve traced by a point ``P`` on the circumference of a circle of radius ``a`` rolling along a straight line in a plane. Such a curve is called a __cycloid__.
+"""
+
+# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
+## Cell 23
+cm"""
+$(define("Smooth Curve"))
+A curve ``C`` represented by ``x=f(t)`` and ``y=g(t)`` on an interval ``I`` is called __smooth__ when ``f^{\prime}`` and ``g^{\prime}`` are continuous on ``I`` and not simultaneously ``0`` , except possibly at the endpoints of ``I``. The curve ``C`` is called __piecewise smooth__ when it is smooth on each subinterval of some partition of ``I``.
+"""
+
+# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
+cm"""
+$(bbl("Hypocycloid", "H(A, B)"))
+The path traced by a fixed point on a circle of radius ``B`` as it rolls around the inside of a circle of radius ``A``
+```math
+\begin{aligned}
+& x=(A-B) \cos t+B \cos \left(\frac{A-B}{B}\right) t \\
+& y=(A-B) \sin t-B \sin \left(\frac{A-B}{B}\right) t
+\end{aligned}
+```
+"""
+
+# ╔═╡ 080c8917-6a7f-46ab-9ce7-4a19d2062375
+let
+    A = s10_2_hypo_A
+    B = s10_2_hypo_B
+
+    if B >= A
+        cm"""
+$(bbl("Note",""))
+For a **hypo**cycloid the rolling circle must roll **inside** the fixed circle, so we need ``B \lt A``.
+Right now ``A`` = $(A) and ``B`` = $(B): decrease ``B`` (or increase ``A``) to see the curve.
+$(ebl())
+"""
+    else
+        d = gcd(A, B)
+        tmax = 2 * pi * B / d
+        t = range(0, tmax, length=4000)
+        c = range(0, 2 * pi, length=400)
+
+        x = (A - B) .* cos.(t) .+ B .* cos.((A - B) / B .* t)
+        y = (A - B) .* sin.(t) .- B .* sin.((A - B) / B .* t)
+
+        R = A + 1
+        p = plot(A .* cos.(c), A .* sin.(c);
+            color=:gray, ls=:dash, lw=1, label="fixed circle, radius A = $(A)")
+        plot!(p, x, y;
+            aspect_ratio=:equal, lw=1.4, color=:red, label="H($(A),$(B))",
+            framestyle=:origin, xlims=(-R, R), ylims=(-R, R),
+            title="Hypocycloid  H($(A),$(B))   -   $(div(A, d)) cusps",
+            titlefontsize=11, size=(560, 560))
+        xlabel!(p, "x")
+        ylabel!(p, "y")
+        p
+    end
+end
+
+
+# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
+cm"""
+$(bbl("Epicycloid","E(A, B)"))
+The path traced by a fixed point on a circle of radius ``B`` as it rolls around the outside of a circle of radius ``A``
+```math
+\begin{aligned}
+& x=(A+B) \cos t-B \cos \left(\frac{A+B}{B}\right) t \\
+& y=(A+B) \sin t-B \sin \left(\frac{A+B}{B}\right) t
+\end{aligned}
+```
+"""
+
+# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
+cm"""
+$(bth("Parametric Form of the Derivative"))
+If a smooth curve ``C`` is given by the equations
+```math
+x=f(t) \quad \text { and } \quad y=g(t)
+```
+then the slope of ``C`` at ``(x, y)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d t}{d x / d t}, \quad \frac{d x}{d t} \neq 0 .
+```
+"""
+
+## Cell 5
+
+# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
+cm"""
+$(ex(1,"Differentiation and Parametric Form"))
+Find ``d y / d x`` for the curve given by
+```math
+x=\sin t\quad \text{and} \quad y=\cos t.
+```
+"""
+
+## Cell 6
+
+# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
+cm"""
+$(bbl("Remark",""))
+```math
+\begin{aligned} & \frac{d^2 y}{d x^2}=\frac{d}{d x}\left[\frac{d y}{d x}\right]=\frac{\frac{d}{d t}\left[\frac{d y}{d x}\right]}{d x / d t} \\ & \frac{d^3 y}{d x^3}=\frac{d}{d x}\left[\frac{d^2 y}{d x^2}\right]=\frac{\frac{d}{d t}\left[\frac{d^2 y}{d x^2}\right]}{d x / d t} .\end{aligned}
+```
+"""
+
+## Cell 7
+
+# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
+cm"""
+$(ex(2,"Finding Slope and Concavity"))
+For the curve given by
+```math
+x=\sqrt{t} \quad \text { and } \quad y=\frac{1}{4}\left(t^2-4\right), \quad t \geq 0
+```
+find the slope and concavity at the point ``(2,3)``.
+"""
+
+## Cell 8
+
+# ╔═╡ a87bd52c-86ad-43ac-8766-04f56a196b88
+if s10_3_ex2_show_sol
+    cm"""
+$(bbl("Solution",""))
+The point ``(2,3)`` corresponds to ``t=4``: from ``x=\sqrt{t}=2`` we get ``t=4``, and then ``y=\frac{1}{4}(4^2-4)=3``.
+
+**Slope.** Since ``\dfrac{dx}{dt}=\dfrac{1}{2\sqrt{t}}`` and ``\dfrac{dy}{dt}=\dfrac{t}{2}``,
+
+```math
+\frac{dy}{dx}=\frac{dy/dt}{dx/dt}=\frac{t/2}{1/\left(2\sqrt{t}\right)}=t\sqrt{t}=t^{3/2}.
+```
+
+At ``t=4`` the slope is ``\dfrac{dy}{dx}=4^{3/2}=8``.
+
+**Concavity.** Differentiate ``dy/dx`` with respect to ``t`` and divide by ``dx/dt``
+
+```math
+\frac{d^2y}{dx^2}=\frac{\dfrac{d}{dt}\left[\dfrac{dy}{dx}\right]}{dx/dt}
+=\frac{\dfrac{3}{2}\sqrt{t}}{\dfrac{1}{2\sqrt{t}}}=3t.
+```
+
+At ``t=4`` this gives ``\dfrac{d^2y}{dx^2}=12>0``, so the curve is **concave upward** at ``(2,3)``.
+$(ebl())
+"""
+else
+    md""
+end
+
+
+# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
+cm"""
+$(ex(3,"A Curve with Two Tangent Lines at a Point"))
+The prolate cycloid given by
+```math
+x=2 t-\pi \sin t \quad \text { and } \quad y=2-\pi \cos t
+```
+crosses itself at the point ``(0,2)``. Find the equations of both tangent lines at this point.
+"""
+
+## Cell 9
+
+# ╔═╡ bdb0938d-658d-4abc-94ed-e38edc55adb4
+if s10_3_ex3_show_sol
+    cm"""
+$(bbl("Solution",""))
+**Find the parameters at the point.** Set ``y=2``
+
+```math
+2-\pi\cos t=2 \quad\Longrightarrow\quad \cos t=0 \quad\Longrightarrow\quad t=-\frac{\pi}{2}\ \text{ or }\ t=\frac{\pi}{2},
+```
+
+and both values give ``x=0``:
+
+``t=\dfrac{\pi}{2}:\ x=2\left(\dfrac{\pi}{2}\right)-\pi(1)=0`` and ``t=-\dfrac{\pi}{2}:\ x=-\pi-\pi(-1)=0``.
+
+So the curve passes through ``(0,2)`` **twice**, at two different parameter values — that is why there are two tangent lines.
+
+**Slope.** ``\dfrac{dx}{dt}=2-\pi\cos t`` and ``\dfrac{dy}{dt}=\pi\sin t``, so
+
+```math
+\frac{dy}{dx}=\frac{\pi\sin t}{2-\pi\cos t}.
+```
+
+At ``t=\dfrac{\pi}{2}``: ``\dfrac{dy}{dx}=\dfrac{\pi(1)}{2-0}=\dfrac{\pi}{2}``.
+
+At ``t=-\dfrac{\pi}{2}``: ``\dfrac{dy}{dx}=\dfrac{\pi(-1)}{2-0}=-\dfrac{\pi}{2}``.
+
+**The two tangent lines** at ``(0,2)`` are therefore
+
+```math
+y=2+\frac{\pi}{2}x \qquad\text{and}\qquad y=2-\frac{\pi}{2}x.
+```
+$(ebl())
+"""
+else
+    md""
+end
+
+
+# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
+cm"""
+$(bth("Arc Length in Parametric Form"))
+If a smooth curve ``C`` is given by ``x=f(t)`` and ``y=g(t)`` such that ``C`` does not intersect itself on the interval ``a \leq t \leq b`` (except possibly at the endpoints), then the arc length of ``C`` over the interval is given by
+```math
+s=\int_a^b \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t=\int_a^b \sqrt{\left[f^{\prime}(t)\right]^2+\left[g^{\prime}(t)\right]^2} d t
+```
+"""
+
+## Cell 13
+
+# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
+cm"""
+$(ex(4,"Finding Arc Length"))
+
+A circle of radius 1 rolls around the circumference of a larger circle of radius 4, as shown below The epicycloid traced by a point on the circumference of the smaller circle is given by
+```math
+x=5 \cos t-\cos 5 t \quad \text { and } \quad y=5 \sin t-\sin 5 t .
+```
+
+Find the distance traveled by the point in one complete trip about the larger circle.
+"""
+
+## Cell 14
+
+# ╔═╡ 0daa50ef-abb0-4f10-a3c0-6081beab4bfb
+if s10_3_ex4_show_sol
+    cm"""
+$(bbl("Solution",""))
+The point makes one complete trip as ``t`` runs from ``0`` to ``2\pi``. Differentiating,
+
+```math
+\frac{dx}{dt}=-5\sin t+5\sin 5t, \qquad \frac{dy}{dt}=5\cos t-5\cos 5t.
+```
+
+**Simplify the integrand.**
+
+```math
+\left(\frac{dx}{dt}\right)^2+\left(\frac{dy}{dt}\right)^2
+=25\left[2-2\left(\sin 5t\sin t+\cos 5t\cos t\right)\right]
+=50\left(1-\cos 4t\right),
+```
+
+using ``\cos 5t\cos t+\sin 5t\sin t=\cos(5t-t)=\cos 4t``. Now apply ``1-\cos 4t=2\sin^2 2t``:
+
+```math
+\sqrt{50\left(1-\cos 4t\right)}=\sqrt{100\sin^2 2t}=10\left|\sin 2t\right|.
+```
+
+**Integrate.** By symmetry (``|\sin 2t|`` has period ``\pi/2``),
+
+```math
+s=\int_0^{2\pi}10\left|\sin 2t\right|\,dt=4\int_0^{\pi/2}10\sin 2t\,dt
+=40\left[-\frac{\cos 2t}{2}\right]_0^{\pi/2}=40.
+```
+
+The point travels a distance of ``40`` in one complete trip about the larger circle.
+$(ebl())
+"""
+else
+    md""
+end
+
+
+# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
+cm"""
+$(bth("Area of a Surface of Revolution"))
+If a smooth curve ``C`` given by ``x=f(t)`` and ``y=g(t)`` does not cross itself on an interval ``a \leq t \leq b``, then the area ``S`` of the surface of revolution formed by revolving ``C`` about the coordinate axes is given by the following.
+
+__``(1)``__ ``S=2 \pi \int_a^b g(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``x``-axis: ``g(t) \geq 0``
+
+__``(2)``__ ``S=2 \pi \int_a^b f(t) \sqrt{\left(\frac{d x}{d t}\right)^2+\left(\frac{d y}{d t}\right)^2} d t``
+
+Revolution about the ``y``-axis: ``f(t) \geq 0``
+"""
+
+## Cell 18
+
+# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
+cm"""
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+
+Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to
+```math
+\left(\frac{3}{2}, \frac{3 \sqrt{3}}{2}\right)
+```
+Find the area of the surface formed by revolving ``C`` about the ``x``-axis.
+"""
+
+# ╔═╡ 195378cf-cda9-43e4-97b6-3d20cb41069f
+if s10_3_ex5_show_sol
+    cm"""
+$(bbl("Solution",""))
+**Parametrize the arc.** The circle ``x^2+y^2=9`` is ``x=3\cos t``, ``y=3\sin t``. The endpoints give
+
+``(3,0):\ t=0`` and ``\left(\dfrac{3}{2},\dfrac{3\sqrt{3}}{2}\right):\ \cos t=\dfrac{1}{2},\ \sin t=\dfrac{\sqrt{3}}{2}\ \Rightarrow\ t=\dfrac{\pi}{3}``,
+
+so ``0\le t\le \dfrac{\pi}{3}``.
+
+**The radical collapses.** Since ``\dfrac{dx}{dt}=-3\sin t`` and ``\dfrac{dy}{dt}=3\cos t``,
+
+```math
+\sqrt{\left(\frac{dx}{dt}\right)^2+\left(\frac{dy}{dt}\right)^2}=\sqrt{9\sin^2t+9\cos^2t}=3.
+```
+
+**Revolve about the ``x``-axis**, so use ``S=2\pi\displaystyle\int_a^b g(t)\sqrt{\cdots}\,dt`` with ``g(t)=3\sin t``:
+
+```math
+S=2\pi\int_0^{\pi/3}(3\sin t)(3)\,dt=18\pi\Big[-\cos t\Big]_0^{\pi/3}
+=18\pi\left(1-\frac{1}{2}\right)=9\pi.
+```
+$(ebl())
+"""
+else
+    md""
+end
+
+
+# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
+cm"""
+$(bbl("",""))
+To form the polar coordinate system in the plane,
+- fix a point ``O``, called __the pole (or origin)__, and
+- construct from ``O`` an initial ray called the __polar axis__,
+
+Then each point ``P`` in the plane can be assigned polar coordinates
+```math
+(r, \theta)
+```
+as follows.
+```math
+\begin{aligned}
+& r=\text { directed distance from } O \text { to } P \\
+& \theta=\text { directed angle, counterclockwise from polar axis to segment } \overline{O P}
+\end{aligned}
+```
+
+"""
+
+## Cell 5
+
+# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
+cm"""
+$(bth("Coordinate Conversion"))
+The polar coordinates ``(r, \theta)`` of a point are related to the rectangular coordinates ``(x, y)`` of the point as follows.
+```math
+\begin{array}{ll}
+\text { Polar-to-Rectangular } & \text { Rectangular-to-Polar } \\
+x=r \cos \theta & \tan \theta=\frac{y}{x} \\
+y=r \sin \theta & r^2=x^2+y^2
+\end{array}
+```
+"""
+
+## Cell 8
+
+# ╔═╡ c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
+HTML(warning_box(
+    "⚠️ Common Coordinate Conversion Mistakes",
+    """
+    <strong>Most frequent errors:</strong>
+    <ol>
+        <li><strong>Wrong quadrant:</strong> θ = arctan(y/x) only works in Quadrants I & IV</li>
+        <li><strong>Forgetting absolute value:</strong> r = √(x² + y²), not just √(x² + y²)</li>
+        <li><strong>Angle confusion:</strong> Adding 2π doesn't change the point, but adding π does!</li>
+    </ol>
+    <br>
+    <strong>Safe approach:</strong> Always check which quadrant your point is in before finding θ.
+    """
+))
+
+## Cell 9
+
+# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
+cm"""
+$(ex(1,"Polar-to-Rectangular Conversion"))
+
+
+- (a) For the point ``(r, \theta)=(2, \pi)``,
+- (b) For the point ``(r, \theta)=(\sqrt{3}, \pi / 6)``,
+
+"""
+
+## Cell 10
+
+# ╔═╡ b5699352-1bca-4040-bbd9-2bc64085460c
+HTML(tip_box(
+    "💡 Polar-to-Rectangular is Easy!",
+    """
+    <strong>Always straightforward:</strong>
+    <ul>
+        <li>x = r cos(θ) ← Just substitute and calculate</li>
+        <li>y = r sin(θ) ← No quadrant worries here!</li>
+        <li>These formulas work for ANY r and θ values</li>
+    </ul>
+    <em>The hard direction is rectangular-to-polar...</em>
+    """
+))
+
+## Cell 11
+
+# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
+cm"""
+$(ex(2,"Rectangular-to-Polar Conversion"))
+- __(a)__ For the second-quadrant point ``(x, y)=(-1,1)``,
+- __(a)__ For the second-quadrant point ``(x, y)=(0,2)``,
+"""
+
+## Cell 12
+
+# ╔═╡ 4564edd1-7611-45b1-8f4c-26088d4c6d97
+let
+    warn = HTML(warning_box(
+        "⚠️ Rectangular-to-Polar: Watch the Quadrant!",
+        """
+        <strong>For point (-1, 1) in Quadrant II:</strong>
+        <br><br>
+        <strong>✗ Wrong approach:</strong><br>
+        θ = arctan(y/x) = arctan(1/(-1)) = arctan(-1) = -π/4
+        <br><br>
+        <strong>✓ Correct approach:</strong><br>
+        • Point is in Quadrant II<br>
+        • θ = π + arctan(y/x) = π + (-π/4) = 3π/4<br>
+        <br>
+        <strong>Quick check:</strong> cos(3π/4) = -1/√2 ✓ and sin(3π/4) = 1/√2 ✓
+        """
+    ))
+
+    tip = HTML(tip_box(
+        "💡 Quadrant Reference Guide",
+        """
+        <table style="border-collapse: collapse; width: 100%;">
+        <tr style="background-color: #f0f0f0;">
+            <th style="border: 1px solid #ddd; padding: 8px;">Quadrant</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Signs (x,y)</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Angle Range</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Formula</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">I</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">(+,+)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">0 to π/2</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">θ = arctan(y/x)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">II</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">(-,+)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">π/2 to π</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">θ = π + arctan(y/x)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">III</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">(-,-)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">π to 3π/2</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">θ = π + arctan(y/x)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">IV</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">(+,-)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">3π/2 to 2π</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">θ = 2π + arctan(y/x)</td>
+        </tr>
+        </table>
+        """
+    ))
+
+    md"""
+    $(warn)
+
+    $(tip)
+    """
+end
+
+## Cell 13
+
+# ╔═╡ 6fbc1529-ed21-4e53-91de-a026a9a4ee26
+HTML(warning_box(
+    "⚠️ Polar Graphing Mistakes",
+    """
+    <strong>Common graphing errors:</strong>
+    <ul>
+        <li><strong>Negative r values:</strong> r = -2 means go 2 units in the opposite direction</li>
+        <li><strong>Period confusion:</strong> cos(3θ) has period 2π/3, not 2π!</li>
+        <li><strong>Forgetting restrictions:</strong> Some curves need r ≥ 0 constraints</li>
+    </ul>
+    <br>
+    <strong>Pro tip:</strong> Always check a few key points (θ = 0, π/2, π, 3π/2) first!
+    """
+))
+
+## Cell 15
+
+# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
+cm"""
+$(ex(3,"
+Graphing Polar Equations"))
+Describe the graph of each polar equation. Confirm each description by converting to a rectangular equation.
+- __(a.)__ ``r=2``
+- __(b.)__ ``\theta=\frac{\pi}{3}``
+- __(c.)__ ``r=\sec \theta``
+"""
+
+## Cell 16
+
+# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
+cm"""
+$(ex(4,"
+Sketching a Polar Graph"))
+Sketch the graph of ``r=2 \cos 3 \theta``.
+"""
+
+## Cell 18
+
+# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
+cm"""
+$(bth("Slope in Polar Form"))
+If ``f`` is a differentiable function of ``\theta``, then the slope of the tangent line to the graph of ``r=f(\theta)`` at the point ``(r, \theta)`` is
+```math
+\frac{d y}{d x}=\frac{d y / d \theta}{d x / d \theta}=\frac{f(\theta) \cos \theta+f^{\prime}(\theta) \sin \theta}{-f(\theta) \sin \theta+f^{\prime}(\theta) \cos \theta}
+```
+provided that ``d x / d \theta \neq 0`` at ``(r, \theta)``.
+"""
+
+## Cell 23
+
+# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
+cm"""
+$(bbl("Remarks",""))
+
+- Solutions of ``\frac{d y}{d \theta}=0`` yield horizontal tangents, provided that ``\frac{d x}{d \theta} \neq 0``.
+- Solutions of ``\frac{d x}{d \theta}=0`` yield vertical tangents, provided that ``\frac{d y}{d \theta} \neq 0``.
+
+- If ``d y / d \theta`` and ``d x / d \theta`` are simultaneously 0 , then no conclusion can be drawn about tangent lines.
+"""
+
+## Cell 24
+
+# ╔═╡ 35429393-e411-4ac8-9719-c90523ade5ea
+HTML(warning_box(
+    "⚠️ Polar Slope Formula Confusion",
+    """
+    <strong>Don't mix up the formulas!</strong>
+    <br><br>
+    <strong>In rectangular coordinates:</strong><br>
+    dy/dx = f'(x)
+    <br><br>
+    <strong>In polar coordinates:</strong><br>
+    dy/dx = (r cos θ + r' sin θ)/(-r sin θ + r' cos θ)
+    <br><br>
+    <strong>Key difference:</strong> Polar slope depends on BOTH r and θ, not just the rate of change of r!
+    """
+))
+
+## Cell 25
+
+# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
+cm"""
+$(ex(5,"Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \leq \theta<\pi``.
+"""
+
+## Cell 26
+
+# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
+cm"""
+$(ex(6,"
+Finding Horizontal and Vertical Tangent Lines"))
+Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \theta)``, where ``0 \leq \theta<2 \pi``.
+"""
+
+## Cell 28
+
+# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
+cm"""
+$(bth("Tangent Lines at the Pole"))
+If ``f(\alpha)=0`` and ``f^{\prime}(\alpha) \neq 0``, then the line ``\theta=\alpha`` is tangent at the pole to the graph of ``r=f(\theta)``.
+"""
+
+## Cell 30
+
+# ╔═╡ 3dbb47a8-9310-4013-a4db-0514614d0d4d
+HTML(tip_box(
+    "💡 Rose Curve Quick Facts",
+    """
+    <strong>Number of petals:</strong>
+    <ul>
+        <li><strong>n odd:</strong> exactly n petals</li>
+        <li><strong>n even:</strong> exactly 2n petals</li>
+    </ul>
+    <br>
+    <strong>Examples:</strong><br>
+    • r = cos(3θ) → 3 petals<br>
+    • r = cos(4θ) → 8 petals<br>
+    • r = cos(5θ) → 5 petals
+    <br><br>
+    <em>Try changing n in the interactive plot above to see this pattern!</em>
+    """
+))
+
+## Cell 34
+
+# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
+cm"""
+__What is the area of a sector of a circle?__
+
+$(post_img("https://www.dropbox.com/scl/fi/sgx7mh1hbsj2zbc2ka19t/fig48_10_5.png?rlkey=7dc54g4fkrlnkdt6ijebxga2w&dl=1",300))
+
+__How to find the area of the region bounded by the graph of the function ``f`` and the radial lines ``\theta = \alpha`` and ``\theta = \beta``?__
+
+$(post_img("https://www.dropbox.com/scl/fi/6ks10wxt27god0jec8ae7/fig49_a_10_5.png?rlkey=5xb3cva5jq1tbe3477d46z98i&dl=1",300))
+
+
+"""
+
+# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
+cm"""
+$(bth("Area in Polar Coordinates"))
+If ``f`` is continuous and nonnegative on the interval ``[\alpha, \beta], 0<\beta-\alpha \leq 2 \pi``, then the area of the region bounded by the graph of ``r=f(\theta)`` between the radial lines ``\theta=\alpha`` and ``\theta=\beta`` is
+```math
+A=\frac{1}{2} \int_\alpha^\beta[f(\theta)]^2 d \theta
+```
+```math
+=\frac{1}{2} \int_\alpha^\beta r^2 d \theta . \quad 0<\beta-\alpha \leq 2 \pi
+```
+"""
+
+# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
+cm"""
+$(ex(1,"
+Finding the Area of a Polar Region"))
+Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
+"""
+
+# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
+cm"""
+$(ex(2,"Finding the Area Bounded by a Single Curve"))
+Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
+"""
+
+# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
+cm"""
+$(ex(3,"Finding the Area of a Region Between Two Curves"))
+Find the area of the region common to the two regions bounded by the curves
+```math
+r=-6 \cos \theta \qquad \color{red}{\text{Circle}}
+```
+and
+```math
+r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
+```
+
+"""
+
+# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
+cm"""
+$(bth("Arc Length of a Polar Curve"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The length of the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` is
+```math
+s=\int_\alpha^\beta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta=\int_\alpha^\beta \sqrt{r^2+\left(\frac{d r}{d \theta}\right)^2} d \theta
+```
+"""
+
+# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
+cm"""
+$(ex(4,"Finding the Length of a Polar Curve"))
+Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
+"""
+
+# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
+cm"""
+$(bth("Area of a Surface of Revolution"))
+Let ``f`` be a function whose derivative is continuous on an interval ``\alpha \leq \theta \leq \beta``. The area of the surface formed by revolving the graph of ``r=f(\theta)`` from ``\theta=\alpha`` to ``\theta=\beta`` about the indicated line is as follows.
+1. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \sin \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta \quad \color{red}{\text{About the polar axis}}``
+
+
+
+2. ``\displaystyle S=2 \pi \int_\alpha^\beta f(\theta) \cos \theta \sqrt{[f(\theta)]^2+\left[f^{\prime}(\theta)\right]^2} d \theta\quad \color{red}{\text{About the line } \theta=\frac{\pi}{2}}``
+$(ebl())
+
+$(ex(5,"Finding the Area of a Surface of Revolution"))
+Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
+"""
+
 # ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
 @htl("""
 <style>
@@ -1771,7 +2132,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 Colors = "~0.12.11"
-CommonMark = "~0.9.1"
+CommonMark = "~1.0.1"
 ForwardDiff = "~1.2.2"
 Groebner = "~0.10.0"
 HypertextLiteral = "~0.9.5"
@@ -1779,10 +2140,10 @@ LaTeXStrings = "~1.4.0"
 Latexify = "~0.16.10"
 Nemo = "~0.52.3"
 PlotThemes = "~3.3.0"
-Plots = "~1.41.1"
-PlutoExtras = "~0.7.16"
-PlutoUI = "~0.7.73"
-PrettyTables = "~3.1.0"
+Plots = "~1.41.6"
+PlutoExtras = "~0.7.18"
+PlutoUI = "~0.7.80"
+PrettyTables = "~3.3.2"
 QRCoders = "~1.4.5"
 Symbolics = "~6.57.0"
 Unitful = "~1.25.1"
@@ -1792,9 +2153,9 @@ Unitful = "~1.25.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.5"
+julia_version = "1.12.6"
 manifest_format = "2.0"
-project_hash = "676df27baecaecff2557233cea90ba46b7661a91"
+project_hash = "8f77f2a32de6eb5c5324ae11dbc41b9b01712021"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "27cecae79e5cc9935255f90c53bb831cc3c870d7"
@@ -1833,10 +2194,9 @@ weakdeps = ["ChainRulesCore", "Test"]
     AbstractFFTsTestExt = "Test"
 
 [[deps.AbstractPlutoDingetjes]]
-deps = ["Pkg"]
-git-tree-sha1 = "6e1d2a35f2f90a4bc7c2ed98079b2ba09c35b83a"
+git-tree-sha1 = "6c3913f4e9bdf6ba3c08041a446fb1332716cbc2"
 uuid = "6e696c72-6542-2067-7265-42206c756150"
-version = "1.3.2"
+version = "1.4.0"
 
 [[deps.AbstractTrees]]
 git-tree-sha1 = "2d9c9a55f9c93e8887ad391fbae72f8ef55e1177"
@@ -1960,9 +2320,9 @@ uuid = "e2ed5e7c-b2de-5872-ae92-c73ca462fb04"
 version = "0.2.2"
 
 [[deps.BitFlags]]
-git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
+git-tree-sha1 = "bbe1079eecf9c9fbb52765193ad2bae27ae09bc8"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
-version = "0.1.9"
+version = "0.1.10"
 
 [[deps.Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -1976,10 +2336,10 @@ uuid = "fa961155-64e5-5f13-b03f-caf6b980ea82"
 version = "0.5.0"
 
 [[deps.Cairo_jll]]
-deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "fde3bf89aead2e723284a8ff9cdf5b551ed700e8"
+deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
+git-tree-sha1 = "d0efe2c6fdcdaa1c161d206aa8b933788397ec71"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
-version = "1.18.5+0"
+version = "1.18.6+0"
 
 [[deps.ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra"]
@@ -1993,9 +2353,9 @@ weakdeps = ["SparseArrays"]
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
-git-tree-sha1 = "962834c22b66e32aa10f7611c08c8ca4e20749a9"
+git-tree-sha1 = "970758a3d591a2a5c2a907c53f2e2f8c1b1d3537"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
-version = "0.7.8"
+version = "0.7.9"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
@@ -2028,14 +2388,22 @@ version = "1.0.2"
 
 [[deps.CommonMark]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "351d6f4eaf273b753001b2de4dffb8279b100769"
+git-tree-sha1 = "019ad9e55bb3549403f2d5a9b314fbb29a806ecb"
 uuid = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
-version = "0.9.1"
+version = "1.0.1"
+
+    [deps.CommonMark.extensions]
+    CommonMarkMarkdownASTExt = "MarkdownAST"
+    CommonMarkMarkdownExt = "Markdown"
+
+    [deps.CommonMark.weakdeps]
+    Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
+    MarkdownAST = "d0879d2d-cac2-40c8-9cee-1863dc0c7391"
 
 [[deps.CommonSolve]]
-git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
+git-tree-sha1 = "78ea4ddbcf9c241827e7035c3a03e2e456711470"
 uuid = "38540f10-b2f7-11e9-35d8-d573e4eb0ff2"
-version = "0.2.4"
+version = "0.2.6"
 
 [[deps.CommonSubexpressions]]
 deps = ["MacroTools"]
@@ -2079,9 +2447,9 @@ weakdeps = ["InverseFunctions"]
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
-git-tree-sha1 = "d9d26935a0bcffc87d2613ce14c527c99fc543fd"
+git-tree-sha1 = "3c9be947934c38475bafe822c6d61aaed17f0738"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
-version = "2.5.0"
+version = "2.6.0"
 
 [[deps.ConstructionBase]]
 git-tree-sha1 = "b4b092499347b18a015186eae3042f72267106cb"
@@ -2201,12 +2569,6 @@ git-tree-sha1 = "9a3ae38b460449cc9e7dd0cfb059c76028724627"
 uuid = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
 version = "0.6.1"
 
-[[deps.EarCut_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "e3290f2d49e661fbd94046d7e3726ffcb2d41053"
-uuid = "5ae413db-bbd1-5e63-b57d-d24a61df00f5"
-version = "2.2.4+0"
-
 [[deps.EnumX]]
 git-tree-sha1 = "bddad79635af6aec424f53ed8aad5d7555dc6f00"
 uuid = "4e289a0a-7415-4d19-859d-a7e5c4648b56"
@@ -2226,9 +2588,9 @@ version = "0.1.11"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "27af30de8b5445644e8ffe3bcb0d72049c089cf1"
+git-tree-sha1 = "f4d39eee89f1e58c26bf447f1d4156c0125d6838"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
-version = "2.7.3+0"
+version = "2.8.3+0"
 
 [[deps.ExprTools]]
 git-tree-sha1 = "27415f162e6028e81c72b82ef756bf321213b6ec"
@@ -2240,11 +2602,6 @@ git-tree-sha1 = "c13f0b150373771b0fdc1713c97860f8df12e6c2"
 uuid = "55351af7-c7e9-48d6-89ff-24e801d99491"
 version = "0.10.14"
 
-[[deps.Extents]]
-git-tree-sha1 = "b309b36a9e02fe7be71270dd8c0fd873625332b4"
-uuid = "411431e0-e8b7-467b-b5e0-f676ba4f2910"
-version = "0.1.6"
-
 [[deps.FFMPEG]]
 deps = ["FFMPEG_jll"]
 git-tree-sha1 = "95ecf07c2eea562b5adbd0696af6db62c0f52560"
@@ -2252,10 +2609,10 @@ uuid = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
 version = "0.4.5"
 
 [[deps.FFMPEG_jll]]
-deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
-git-tree-sha1 = "ccc81ba5e42497f4e76553a5545665eed577a663"
+deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libva_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
+git-tree-sha1 = "66381d7059b5f3f6162f28831854008040a4e905"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
-version = "8.0.0+0"
+version = "8.0.1+1"
 
 [[deps.FFTW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -2271,9 +2628,9 @@ version = "301.300.102+0"
 
 [[deps.FileIO]]
 deps = ["Pkg", "Requires", "UUIDs"]
-git-tree-sha1 = "d60eb76f37d7e5a40cc2e7c36974d864b82dc802"
+git-tree-sha1 = "6522cfb3b8fe97bec632252263057996cbd3de20"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-version = "1.17.1"
+version = "1.18.0"
 weakdeps = ["HTTP"]
 
     [deps.FileIO.extensions]
@@ -2322,23 +2679,11 @@ weakdeps = ["StaticArrays"]
     [deps.ForwardDiff.extensions]
     ForwardDiffStaticArraysExt = "StaticArrays"
 
-[[deps.FreeType]]
-deps = ["CEnum", "FreeType2_jll"]
-git-tree-sha1 = "907369da0f8e80728ab49c1c7e09327bf0d6d999"
-uuid = "b38be410-82b0-50bf-ab77-7b57e271db43"
-version = "4.1.1"
-
 [[deps.FreeType2_jll]]
 deps = ["Artifacts", "Bzip2_jll", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "2c5512e11c791d1baed2049c5652441b28fc6a31"
+git-tree-sha1 = "70329abc09b886fd2c5d94ad2d9527639c421e3e"
 uuid = "d7e528f0-a631-5988-bf34-fe36492bcfd7"
-version = "2.13.4+0"
-
-[[deps.FreeTypeAbstraction]]
-deps = ["ColorVectorSpace", "Colors", "FreeType", "GeometryBasics"]
-git-tree-sha1 = "b5c7fe9cea653443736d264b85466bad8c574f4a"
-uuid = "663a7486-cb36-511b-a19d-713bb74d65c9"
-version = "0.9.9"
+version = "2.14.3+1"
 
 [[deps.FriBidi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -2364,9 +2709,9 @@ version = "1.11.0"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
-git-tree-sha1 = "fcb0584ff34e25155876418979d4c8971243bb89"
+git-tree-sha1 = "b7bfd56fa66616138dfe5237da4dc13bbd83c67f"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.4.0+2"
+version = "3.4.1+0"
 
 [[deps.GMP_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -2391,23 +2736,6 @@ git-tree-sha1 = "4b0406b866ea9fdbaf1148bc9c0b887e59f9af68"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
 version = "0.73.18+0"
 
-[[deps.GeoFormatTypes]]
-git-tree-sha1 = "8e233d5167e63d708d41f87597433f59a0f213fe"
-uuid = "68eda718-8dee-11e9-39e7-89f7f65f511f"
-version = "0.4.4"
-
-[[deps.GeoInterface]]
-deps = ["DataAPI", "Extents", "GeoFormatTypes"]
-git-tree-sha1 = "294e99f19869d0b0cb71aef92f19d03649d028d5"
-uuid = "cf35fbd7-0cd7-5166-be24-54bfbe79505f"
-version = "1.4.1"
-
-[[deps.GeometryBasics]]
-deps = ["EarCut_jll", "Extents", "GeoInterface", "IterTools", "LinearAlgebra", "StaticArrays", "StructArrays", "Tables"]
-git-tree-sha1 = "b62f2b2d76cee0d61a2ef2b3118cd2a3215d3134"
-uuid = "5c1252a2-5f33-56bf-86c9-59e7332b4326"
-version = "0.4.11"
-
 [[deps.GettextRuntime_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Libiconv_jll"]
 git-tree-sha1 = "45288942190db7c5f760f59c04495064eedf9340"
@@ -2428,9 +2756,9 @@ version = "5.2.3+0"
 
 [[deps.Glib_jll]]
 deps = ["Artifacts", "GettextRuntime_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Libiconv_jll", "Libmount_jll", "PCRE2_jll", "Zlib_jll"]
-git-tree-sha1 = "50c11ffab2a3d50192a228c313f05b5b5dc5acb2"
+git-tree-sha1 = "24f6def62397474a297bfcec22384101609142ed"
 uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
-version = "2.86.0+0"
+version = "2.86.3+0"
 
 [[deps.Graphics]]
 deps = ["Colors", "LinearAlgebra", "NaNMath"]
@@ -2461,9 +2789,9 @@ weakdeps = ["DynamicPolynomials"]
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "PrecompileTools", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "5e6fe50ae7f23d171f44e311c2960294aaa0beb5"
+git-tree-sha1 = "51059d23c8bb67911a2e6fd5130229113735fc7e"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.10.19"
+version = "1.11.0"
 
 [[deps.HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll"]
@@ -2527,9 +2855,9 @@ version = "1.4.2"
 
 [[deps.ImageMagick_jll]]
 deps = ["Artifacts", "Bzip2_jll", "FFTW_jll", "Ghostscript_jll", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll", "OpenJpeg_jll", "Zlib_jll", "Zstd_jll", "libpng_jll", "libwebp_jll", "libzip_jll"]
-git-tree-sha1 = "d670e8e3adf0332f57054955422e85a4aec6d0b0"
+git-tree-sha1 = "2c232857f2eb9ecfa3ab534df7f060c9afbeb187"
 uuid = "c73af94c-d91f-53ed-93a7-00f77d67a9d7"
-version = "7.1.2005+0"
+version = "7.1.2011+0"
 
 [[deps.ImageMetadata]]
 deps = ["AxisArrays", "ImageAxes", "ImageBase", "ImageCore"]
@@ -2539,9 +2867,9 @@ version = "0.9.9"
 
 [[deps.Imath_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "0936ba688c6d201805a83da835b55c61a180db52"
+git-tree-sha1 = "dcc8d0cd653e55213df9b75ebc6fe4a8d3254c65"
 uuid = "905a6f67-0a94-5f89-b386-d35d92009cd1"
-version = "3.1.11+0"
+version = "3.2.2+0"
 
 [[deps.IndirectArrays]]
 git-tree-sha1 = "012e604e1c7458645cb8b436f8fba789a51b257f"
@@ -2564,9 +2892,9 @@ uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 version = "1.11.0"
 
 [[deps.IntervalSets]]
-git-tree-sha1 = "5fbb102dcb8b1a858111ae81d56682376130517d"
+git-tree-sha1 = "d966f85b3b7a8e49d034d27a189e9a4874b4391a"
 uuid = "8197267c-284f-5f27-9208-e0e47529a953"
-version = "0.7.11"
+version = "0.7.13"
 weakdeps = ["Random", "RecipesBase", "Statistics"]
 
     [deps.IntervalSets.extensions]
@@ -2607,15 +2935,21 @@ version = "0.1.11"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "0533e564aae234aff59ab625543145446d8b6ec2"
+git-tree-sha1 = "7204148362dafe5fe6a273f855b8ccbe4df8173e"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.7.1"
+version = "1.8.0"
 
 [[deps.JSON]]
-deps = ["Dates", "Mmap", "Parsers", "Unicode"]
-git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
+deps = ["Dates", "Logging", "Parsers", "PrecompileTools", "StructUtils", "UUIDs", "Unicode"]
+git-tree-sha1 = "c7345ab1a7ca4dc8a02c9f6510da0d9857bbe513"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "0.21.4"
+version = "1.7.1"
+
+    [deps.JSON.extensions]
+    JSONArrowExt = ["ArrowTypes"]
+
+    [deps.JSON.weakdeps]
+    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
 
 [[deps.Jieko]]
 deps = ["ExproniconLite"]
@@ -2631,9 +2965,9 @@ version = "0.1.6"
 
 [[deps.JpegTurbo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "4255f0032eafd6451d707a51d5f0248b8a165e4d"
+git-tree-sha1 = "b6893345fd6658c8e475d40155789f4860ac3b21"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
-version = "3.1.3+0"
+version = "3.1.4+0"
 
 [[deps.JuliaSyntaxHighlighting]]
 deps = ["StyledStrings"]
@@ -2657,12 +2991,6 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "eb62a3deb62fc6d8822c0c4bef73e4412419c5d8"
 uuid = "1d63c593-3942-5779-bab2-d838dc0a180e"
 version = "18.1.8+0"
-
-[[deps.LZO_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "1c602b1127f4751facb671441ca72715cc95938a"
-uuid = "dd4b983a-f0e5-5f8d-a1b7-129d4a5fb1ac"
-version = "2.10.3+0"
 
 [[deps.LaTeXStrings]]
 git-tree-sha1 = "dda21b8cbd6a6c40d9d02a73230f9d70fed6918c"
@@ -2741,9 +3069,9 @@ version = "1.18.0+0"
 
 [[deps.Libmount_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "3acf07f130a76f87c041cfb2ff7d7284ca67b072"
+git-tree-sha1 = "97bbca976196f2a1eb9607131cb108c69ec3f8a6"
 uuid = "4b2f31a3-9ecc-558c-b454-b3730dcb73e9"
-version = "2.41.2+0"
+version = "2.41.3+0"
 
 [[deps.Libtiff_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "LERC_jll", "Libdl", "XZ_jll", "Zlib_jll", "Zstd_jll"]
@@ -2753,9 +3081,9 @@ version = "4.7.2+0"
 
 [[deps.Libuuid_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "2a7a12fc0a4e7fb773450d17975322aa77142106"
+git-tree-sha1 = "d0205286d9eceadc518742860bf23f703779a3d6"
 uuid = "38a345b3-de98-5d2b-a5d3-14cd9215e700"
-version = "2.41.2+0"
+version = "2.41.3+0"
 
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
@@ -2810,9 +3138,9 @@ uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
 version = "0.5.16"
 
 [[deps.MappedArrays]]
-git-tree-sha1 = "2dab0221fe2b0f2cb6754eaa743cc266339f527e"
+git-tree-sha1 = "0ee4497a4e80dbd29c058fcee6493f5219556f40"
 uuid = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
-version = "0.4.2"
+version = "0.4.3"
 
 [[deps.MarchingCubes]]
 deps = ["PrecompileTools", "StaticArrays"]
@@ -2827,9 +3155,9 @@ version = "1.11.0"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "NetworkOptions", "Random", "Sockets"]
-git-tree-sha1 = "c067a280ddc25f196b5e7df3877c6b226d390aaf"
+git-tree-sha1 = "8785729fa736197687541f7053f6d8ab7fc44f92"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "1.1.9"
+version = "1.1.10"
 
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -2936,9 +3264,9 @@ version = "0.3.3"
 
 [[deps.OpenEXR_jll]]
 deps = ["Artifacts", "Imath_jll", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "8292dd5c8a38257111ada2174000a33745b06d4e"
+git-tree-sha1 = "135492b7e97fc86d9b132b96a54d2d3dd3e0c6a8"
 uuid = "18a262bb-aa17-5467-a713-aee519bc75cb"
-version = "3.2.4+0"
+version = "3.4.8+0"
 
 [[deps.OpenJpeg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libtiff_jll", "LittleCMS_jll", "libpng_jll"]
@@ -2953,9 +3281,9 @@ version = "0.8.7+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "NetworkOptions", "OpenSSL_jll", "Sockets"]
-git-tree-sha1 = "386b47442468acfb1add94bf2d85365dea10cbab"
+git-tree-sha1 = "1d1aaa7d449b58415f97d2839c318b70ffb525a0"
 uuid = "4d8831e6-92b7-49fb-bdf8-b643e874388c"
-version = "1.6.0"
+version = "1.6.1"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -2970,14 +3298,14 @@ version = "0.5.6+0"
 
 [[deps.Opus_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "c392fc5dd032381919e3b22dd32d6443760ce7ea"
+git-tree-sha1 = "e2bb57a313a74b8104064b7efd01406c0a50d2ff"
 uuid = "91d4177d-7536-5919-b921-800302f37372"
-version = "1.5.2+0"
+version = "1.6.1+0"
 
 [[deps.OrderedCollections]]
-git-tree-sha1 = "05868e21324cede2207c6f0f466b4bfef6d5e7ee"
+git-tree-sha1 = "94ba93778373a53bfd5a0caaf7d809c445292ff4"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
-version = "1.8.1"
+version = "1.8.2"
 
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -3004,15 +3332,15 @@ version = "0.5.12"
 
 [[deps.Pango_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "FriBidi_jll", "Glib_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "1f7f9bbd5f7a2e5a9f7d96e51c9754454ea7f60b"
+git-tree-sha1 = "0662b083e11420952f2e62e17eddae7fc07d5997"
 uuid = "36c8627f-9965-5494-a995-c6b170f724f3"
-version = "1.56.4+0"
+version = "1.57.0+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
-git-tree-sha1 = "7d2f8f21da5db6a806faf7b9b292296da42b2810"
+git-tree-sha1 = "3de8f5e6e90ebfa8d6d1f86997d6cdcd6a912ff3"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.8.3"
+version = "2.8.7"
 
 [[deps.Pixman_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "LLVMOpenMP_jll", "Libdl"]
@@ -3049,9 +3377,9 @@ version = "1.4.4"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "PrecompileTools", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "TOML", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "12ce661880f8e309569074a61d3767e5756a199f"
+git-tree-sha1 = "cb20a4eacda080e517e4deb9cfb6c7c518131265"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.41.1"
+version = "1.41.6"
 
     [deps.Plots.extensions]
     FileIOExt = "FileIO"
@@ -3069,33 +3397,39 @@ version = "1.41.1"
 
 [[deps.PlutoExtras]]
 deps = ["AbstractPlutoDingetjes", "DocStringExtensions", "HypertextLiteral", "InteractiveUtils", "Markdown", "PlutoUI", "REPL", "Random"]
-git-tree-sha1 = "fed8c477f3028dcbffbc12b957d6b328196dcc00"
+git-tree-sha1 = "ba293b0d67584aa71badebdf8e5e572ba61d0246"
 uuid = "ed5d0301-4775-4676-b788-cf71e66ff8ed"
-version = "0.7.16"
+version = "0.7.18"
 
 [[deps.PlutoUI]]
-deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Downloads", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
-git-tree-sha1 = "3faff84e6f97a7f18e0dd24373daa229fd358db5"
+deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Downloads", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
+git-tree-sha1 = "fbc875044d82c113a9dee6fc14e16cf01fd48872"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.73"
+version = "0.7.80"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
-git-tree-sha1 = "07a921781cab75691315adc645096ed5e370cb77"
+git-tree-sha1 = "edbeefc7a4889f528644251bdb5fc9ab5348bc2c"
 uuid = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
-version = "1.3.3"
+version = "1.3.4"
 
 [[deps.Preferences]]
 deps = ["TOML"]
-git-tree-sha1 = "0f27480397253da18fe2c12a4ba4eb9eb208bf3d"
+git-tree-sha1 = "8b770b60760d4451834fe79dd483e318eee709c4"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
-version = "1.5.0"
+version = "1.5.2"
 
 [[deps.PrettyTables]]
 deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "REPL", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "6b8e2f0bae3f678811678065c09571c1619da219"
+git-tree-sha1 = "624de6279ab7d94fc9f672f0068107eb6619732c"
 uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "3.1.0"
+version = "3.3.2"
+
+    [deps.PrettyTables.extensions]
+    PrettyTablesTypstryExt = "Typstry"
+
+    [deps.PrettyTables.weakdeps]
+    Typstry = "f0ed7684-a786-439e-b1e3-3b82803b501e"
 
 [[deps.Primes]]
 deps = ["IntegerMathUtils"]
@@ -3121,9 +3455,9 @@ version = "1.3.0"
 
 [[deps.QOI]]
 deps = ["ColorTypes", "FileIO", "FixedPointNumbers"]
-git-tree-sha1 = "8b3fc30bc0390abdce15f8822c889f669baed73d"
+git-tree-sha1 = "472daaa816895cb7aee81658d4e7aec901fa1106"
 uuid = "4b34888f-f399-49d4-9bb3-47ed5cae4e65"
-version = "1.0.1"
+version = "1.0.2"
 
 [[deps.QRCoders]]
 deps = ["FileIO", "ImageCore", "ImageIO", "ImageMagick", "StatsBase", "UnicodePlots"]
@@ -3380,9 +3714,9 @@ version = "1.12.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "f2685b435df2613e25fc10ad8c26dddb8640f547"
+git-tree-sha1 = "2700b235561b0335d5bef7097a111dc513b8655e"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.6.1"
+version = "2.7.2"
 weakdeps = ["ChainRulesCore"]
 
     [deps.SpecialFunctions.extensions]
@@ -3390,9 +3724,9 @@ weakdeps = ["ChainRulesCore"]
 
 [[deps.StableRNGs]]
 deps = ["Random"]
-git-tree-sha1 = "95af145932c2ed859b63329952ce8d633719f091"
+git-tree-sha1 = "4f96c596b8c8258cc7d3b19797854d368f243ddc"
 uuid = "860ef19b-820b-49d6-a774-d7a799459cd3"
-version = "1.0.3"
+version = "1.0.4"
 
 [[deps.StackViews]]
 deps = ["OffsetArrays"]
@@ -3402,9 +3736,9 @@ version = "0.1.2"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
-git-tree-sha1 = "b8693004b385c842357406e3af647701fe783f98"
+git-tree-sha1 = "246a8bb2e6667f832eea063c3a56aef96429a3db"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.9.15"
+version = "1.9.18"
 weakdeps = ["ChainRulesCore", "Statistics"]
 
     [deps.StaticArrays.extensions]
@@ -3428,9 +3762,9 @@ weakdeps = ["SparseArrays"]
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "9d72a13a3f4dd3795a195ac5a44d7d6ff5f552ff"
+git-tree-sha1 = "178ed29fd5b2a2cfc3bd31c13375ae925623ff36"
 uuid = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
-version = "1.7.1"
+version = "1.8.0"
 
 [[deps.StatsBase]]
 deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
@@ -3451,30 +3785,25 @@ weakdeps = ["ChainRulesCore", "InverseFunctions"]
 
 [[deps.StringManipulation]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "725421ae8e530ec29bcbdddbe91ff8053421d023"
+git-tree-sha1 = "d05693d339e37d6ab134c5ab53c29fce5ee5d7d5"
 uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.4.1"
+version = "0.4.4"
 
-[[deps.StructArrays]]
-deps = ["ConstructionBase", "DataAPI", "Tables"]
-git-tree-sha1 = "9537ef82c42cdd8c5d443cbc359110cbb36bae10"
-uuid = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
-version = "0.6.21"
+[[deps.StructUtils]]
+deps = ["Dates", "UUIDs"]
+git-tree-sha1 = "2d0fc55c61321ba245c47be599570d11bac50303"
+uuid = "ec057cc2-7a8d-4b58-b3b3-92acb9f63b42"
+version = "2.8.5"
 
-    [deps.StructArrays.extensions]
-    StructArraysAdaptExt = "Adapt"
-    StructArraysGPUArraysCoreExt = ["GPUArraysCore", "KernelAbstractions"]
-    StructArraysLinearAlgebraExt = "LinearAlgebra"
-    StructArraysSparseArraysExt = "SparseArrays"
-    StructArraysStaticArraysExt = "StaticArrays"
+    [deps.StructUtils.extensions]
+    StructUtilsMeasurementsExt = ["Measurements"]
+    StructUtilsStaticArraysCoreExt = ["StaticArraysCore"]
+    StructUtilsTablesExt = ["Tables"]
 
-    [deps.StructArrays.weakdeps]
-    Adapt = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
-    GPUArraysCore = "46192b85-c4d5-4398-a991-12ede77f4527"
-    KernelAbstractions = "63c18a36-062a-441e-b654-da1e3ab1ce7c"
-    LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-    SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-    StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+    [deps.StructUtils.weakdeps]
+    Measurements = "eff96d63-e80a-5855-80a2-b1b0885c5ab7"
+    StaticArraysCore = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+    Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
@@ -3558,9 +3887,9 @@ version = "1.0.1"
 
 [[deps.Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "OrderedCollections", "TableTraits"]
-git-tree-sha1 = "f2c1efbc8f3a609aadf318094f8fc5204bdaf344"
+git-tree-sha1 = "0f38a06c83f0007bbab3cf911262841c9a0f07e0"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "1.12.1"
+version = "1.13.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -3617,9 +3946,9 @@ uuid = "410a4b4d-49e4-4fbc-ab6d-cb71b17b3775"
 version = "0.1.13"
 
 [[deps.URIs]]
-git-tree-sha1 = "bef26fb046d031353ef97a82e3fdb6afe7f21b1a"
+git-tree-sha1 = "908fec9df6c5de98548ead82a468c95ccf6cd263"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.6.1"
+version = "1.7.0"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
@@ -3637,10 +3966,10 @@ uuid = "1cfade01-22cf-5700-b092-accc4b62d6e1"
 version = "0.4.1"
 
 [[deps.UnicodePlots]]
-deps = ["ColorTypes", "Contour", "Crayons", "Dates", "FileIO", "FreeTypeAbstraction", "LazyModules", "LinearAlgebra", "MarchingCubes", "NaNMath", "Printf", "SparseArrays", "StaticArrays", "StatsBase", "Unitful"]
-git-tree-sha1 = "ae67ab0505b9453655f7d5ea65183a1cd1b3cfa0"
+deps = ["Contour", "Crayons", "Dates", "LinearAlgebra", "MarchingCubes", "NaNMath", "SparseArrays", "StaticArrays", "StatsBase"]
+git-tree-sha1 = "66f9127e995e4eab4041c5f01d644a7278ac8bc2"
 uuid = "b8865327-cd53-5732-bb35-84acbb429228"
-version = "2.12.4"
+version = "2.8.1"
 
 [[deps.Unitful]]
 deps = ["Dates", "LinearAlgebra", "Random"]
@@ -3692,9 +4021,9 @@ version = "1.24.0+0"
 
 [[deps.XZ_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "fee71455b0aaa3440dfdd54a9a36ccef829be7d4"
+git-tree-sha1 = "9cce64c0fdd1960b597ba7ecda2950b5ed957438"
 uuid = "ffd25f8a-64ca-5728-b0f7-c24cf3aae800"
-version = "5.8.1+0"
+version = "5.8.2+0"
 
 [[deps.Xorg_libICE_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -3710,9 +4039,9 @@ version = "1.2.6+0"
 
 [[deps.Xorg_libX11_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libxcb_jll", "Xorg_xtrans_jll"]
-git-tree-sha1 = "b5899b25d17bf1889d25906fb9deed5da0c15b3b"
+git-tree-sha1 = "808090ede1d41644447dd5cbafced4731c56bd2f"
 uuid = "4f6342f7-b3d2-589e-9d20-edeb45f2b2bc"
-version = "1.8.12+0"
+version = "1.8.13+0"
 
 [[deps.Xorg_libXau_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -3734,9 +4063,9 @@ version = "1.1.6+0"
 
 [[deps.Xorg_libXext_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
-git-tree-sha1 = "a4c0ee07ad36bf8bbce1c3bb52d21fb1e0b987fb"
+git-tree-sha1 = "1a4a26870bf1e5d26cd585e38038d399d7e65706"
 uuid = "1082639a-0dae-5f34-9b06-72781eeb8cb3"
-version = "1.3.7+0"
+version = "1.3.8+0"
 
 [[deps.Xorg_libXfixes_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
@@ -3752,21 +4081,27 @@ version = "1.8.3+0"
 
 [[deps.Xorg_libXinerama_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXext_jll"]
-git-tree-sha1 = "a5bc75478d323358a90dc36766f3c99ba7feb024"
+git-tree-sha1 = "0ba01bc7396896a4ace8aab67db31403c71628f4"
 uuid = "d1454406-59df-5ea1-beac-c340f2130bc3"
-version = "1.1.6+0"
+version = "1.1.7+0"
 
 [[deps.Xorg_libXrandr_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXext_jll", "Xorg_libXrender_jll"]
-git-tree-sha1 = "aff463c82a773cb86061bce8d53a0d976854923e"
+git-tree-sha1 = "6c174ef70c96c76f4c3f4d3cfbe09d018bcd1b53"
 uuid = "ec84b674-ba8e-5d96-8ba1-2a689ba10484"
-version = "1.5.5+0"
+version = "1.5.6+0"
 
 [[deps.Xorg_libXrender_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
 git-tree-sha1 = "7ed9347888fac59a618302ee38216dd0379c480d"
 uuid = "ea2f1a96-1ddc-540d-b46f-429655e07cfa"
 version = "0.9.12+0"
+
+[[deps.Xorg_libpciaccess_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
+git-tree-sha1 = "4909eb8f1cbf6bd4b1c30dd18b2ead9019ef2fad"
+uuid = "a65dc6b1-eb27-53a1-bb3e-dea574b5389e"
+version = "0.18.1+0"
 
 [[deps.Xorg_libxcb_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXau_jll", "Xorg_libXdmcp_jll"]
@@ -3776,9 +4111,9 @@ version = "1.17.1+0"
 
 [[deps.Xorg_libxkbfile_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
-git-tree-sha1 = "e3150c7400c41e207012b41659591f083f3ef795"
+git-tree-sha1 = "ed756a03e95fff88d8f738ebc2849431bdd4fd1a"
 uuid = "cc61e674-0454-545c-8b26-ed2c68acab7a"
-version = "1.1.3+0"
+version = "1.2.0+0"
 
 [[deps.Xorg_xcb_util_cursor_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_jll", "Xorg_xcb_util_renderutil_jll"]
@@ -3880,6 +4215,12 @@ git-tree-sha1 = "9bf7903af251d2050b467f76bdbe57ce541f7f4f"
 uuid = "1183f4f0-6f2a-5f1a-908b-139f9cdfea6f"
 version = "0.2.2+0"
 
+[[deps.libdrm_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libpciaccess_jll"]
+git-tree-sha1 = "63aac0bcb0b582e11bad965cef4a689905456c03"
+uuid = "8e53e030-5e6c-5a89-a30b-be5b7263a166"
+version = "2.4.125+1"
+
 [[deps.libevdev_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "56d643b57b188d30cccc25e331d416d3d358e557"
@@ -3900,15 +4241,21 @@ version = "1.28.1+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "07b6a107d926093898e82b3b1db657ebe33134ec"
+git-tree-sha1 = "e2a7072fc0cdd7949528c1455a3e5da4122e1153"
 uuid = "b53b4c65-9356-5827-b1ea-8c7a1a84506f"
-version = "1.6.50+0"
+version = "1.6.56+0"
 
 [[deps.libsixel_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "Libdl", "libpng_jll"]
 git-tree-sha1 = "c1733e347283df07689d71d61e14be986e49e47a"
 uuid = "075b6546-f08a-558a-be8f-8157d0f608a5"
 version = "1.10.5+0"
+
+[[deps.libva_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll", "Xorg_libXext_jll", "Xorg_libXfixes_jll", "libdrm_jll"]
+git-tree-sha1 = "7dbf96baae3310fe2fa0df0ccbb3c6288d5816c9"
+uuid = "9a156e7d-b971-5f62-b2c9-67348b8fb97c"
+version = "2.23.0+0"
 
 [[deps.libvorbis_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Ogg_jll"]
@@ -3958,126 +4305,142 @@ version = "4.1.0+0"
 
 [[deps.xkbcommon_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libxcb_jll", "Xorg_xkeyboard_config_jll"]
-git-tree-sha1 = "fbf139bce07a534df0e699dbb5f5cc9346f95cc1"
+git-tree-sha1 = "a1fc6507a40bf504527d0d4067d718f8e179b2b8"
 uuid = "d8fb68d0-12a3-5cfd-a85a-d49703b185fd"
-version = "1.9.2+0"
+version = "1.13.0+0"
 """
 
 # ╔═╡ Cell order:
-# ╔═╡ 00000000-0000-0000-0000-000000000001
-# ╔═╡ 00000000-0000-0000-0000-000000000002
-# ╔═╡ 9858d0f8-ba7e-44fe-bcfc-4af064b7985c
-# ╔═╡ 83571d10-7eff-11f0-10db-391640417d07
-# ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
-# ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
-# ╔═╡ 286b172a-8bfe-430c-b13b-83e0e14798d1
-# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
-# ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
-# ╔═╡ dc65d765-0bef-4c49-93af-1cd0ebabe632
-# ╔═╡ bf29e57e-d859-4d73-876c-46d6a7805228
-# ╔═╡ c0fe5d64-6d06-4daf-a827-87e2a98b7389
-# ╔═╡ b15e87af-7574-48a7-b014-ef0ad8f3ea62
-# ╔═╡ e3eaab8a-46db-45f1-a57c-5fe61e583919
-# ╔═╡ bd0ffc3a-0773-4368-b179-e6502a3fbee7
-# ╔═╡ 7ab904a8-91e2-4814-9eba-3e55f35f0503
-# ╔═╡ 3fad0402-00d4-4c3b-9ca7-bed4897452c2
-# ╔═╡ 72eaba37-67d9-4d52-b1a6-e108401aa93e
-# ╔═╡ 0f02e8df-9945-4d41-af5f-290dd991db92
-# ╔═╡ 1e7b4218-ca92-4384-83db-31e97fa5545f
-# ╔═╡ ef07b8c6-a4a8-4daa-8843-39d522f995ef
-# ╔═╡ 4ba93c73-86c0-447e-bc4e-c4eafe68d3ca
-# ╔═╡ 0870140d-366c-4953-9f84-1316c2419bad
-# ╔═╡ 15a0e2e8-382e-487a-a297-12feaaab6f91
-# ╔═╡ 948e5b3a-40a2-4081-85f8-12c42837ae3a
-# ╔═╡ b05fcc39-dad9-4bdf-874e-6dedf75fe36c
-# ╔═╡ 577dbd65-1377-4dd1-bb8f-52e4202ae745
-# ╔═╡ cab568b8-a82e-4886-8988-7766297153c6
-# ╔═╡ b8d18b8b-43e7-4ce8-8942-d01454614f3d
-# ╔═╡ 66b48d42-742f-49f9-8e97-684f2d790b32
-# ╔═╡ 6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
-# ╔═╡ efb426c5-ac63-4360-86e4-b579b847b69a
-# ╔═╡ 0d8c28f3-b885-4b16-95ef-99708a6bb179
-# ╔═╡ 98951c5f-438a-4b27-b0b1-5aef88c6bfab
-# ╔═╡ d1029e12-aacd-49bf-aebf-ded4a3a31ca6
-# ╔═╡ 080c8917-6a7f-46ab-9ce7-4a19d2062375
-# ╔═╡ 46cb1033-5bdc-4978-a8b8-3caf5da336b9
-# ╔═╡ ebc1271e-0fcf-47bc-bf74-850b1d2ed425
-# ╔═╡ 96b650e7-d4ce-478f-878f-d9cd6d10f2b6
-# ╔═╡ b64864dc-953d-41c5-bae6-5ede6734c8af
-# ╔═╡ 76ace408-0ae7-458e-9b0a-cc6c3a314cd2
-# ╔═╡ c9e03dab-763a-4ddf-aa8f-36c1f85143a4
-# ╔═╡ 2861e7e5-c7d4-4764-a52e-9422fff637b5
-# ╔═╡ 92b10e3c-8187-4785-a4bb-b724eb120476
-# ╔═╡ 3e357741-353d-4aca-9110-a96208c7f60c
-# ╔═╡ a0adc254-80b7-4ef3-a880-e864851f937a
-# ╔═╡ 29c142be-48e3-488f-b8fb-3b9c34de64b0
-# ╔═╡ 698c533c-4bca-44ae-ab4b-68a107e1db2a
-# ╔═╡ 48467e30-614d-4ab9-852d-6e7f19bd2a3b
-# ╔═╡ 3ff7e63b-0e3f-4933-a58a-b538f0bd4307
-# ╔═╡ 567cc54f-b6ed-4934-8f6c-c843f722bb98
-# ╔═╡ d6ccee4f-40be-429b-860e-f53067077a14
-# ╔═╡ c65a1abc-85c1-44a1-bce1-adddb8d8781c
-# ╔═╡ b2c1aaf8-c0e8-4ff2-a32c-69e797063a16
-# ╔═╡ 66c7ab95-a158-418d-a276-84042e882aa0
-# ╔═╡ 46c3a799-1982-419c-9254-9604ad95c926
-# ╔═╡ 13beada8-dd59-4252-a730-aedb5c6c09e6
-# ╔═╡ b4223dd0-faaa-4508-813f-0a9babbcdc09
-# ╔═╡ 5f6b7fce-fbc0-4464-a0cc-9fa179937ebb
-# ╔═╡ ae5f7e4b-9f4f-4066-9595-3ec65257b4f9
-# ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
-# ╔═╡ e5df9962-b908-4219-bfaf-7be799b8c8a8
-# ╔═╡ fc8794db-0fa4-4641-865d-34a199d843c0
-# ╔═╡ cb4b3d81-67c9-4012-ae28-04247ddd9125
-# ╔═╡ c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
-# ╔═╡ 3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
-# ╔═╡ b5699352-1bca-4040-bbd9-2bc64085460c
-# ╔═╡ 26479599-3609-4814-9750-3406df4fba1f
-# ╔═╡ 4564edd1-7611-45b1-8f4c-26088d4c6d97
-# ╔═╡ 09ad3cf9-ccc7-4508-b20a-2b541fba963b
-# ╔═╡ c86f3735-7430-4216-a8e8-d018c844142e
-# ╔═╡ 6fbc1529-ed21-4e53-91de-a026a9a4ee26
-# ╔═╡ 2b853097-db70-4f47-988f-f9caed5a042f
-# ╔═╡ 602ac6a2-80a3-445c-abc2-bc5b01e44d7b
-# ╔═╡ e1e067d5-5416-4d8e-be65-5c52ae95b24b
-# ╔═╡ 6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
-# ╔═╡ 003f7d8c-b316-4a2b-8170-ff148ccb9f50
-# ╔═╡ 2abd04ed-edf8-4bf0-bebf-e9c299927551
-# ╔═╡ 5b7101e1-7f13-4825-8e0e-a9725e0e0438
-# ╔═╡ 31b384d2-9194-4ddd-8b6c-d1a137692dbc
-# ╔═╡ e303f5bf-f37e-4cb8-abe9-5d4891f08e77
-# ╔═╡ a2b14cca-72f5-4e27-b198-a7b3deb9893a
-# ╔═╡ 35429393-e411-4ac8-9719-c90523ade5ea
-# ╔═╡ 2bc60f92-4577-4866-9344-d7f0b397c637
-# ╔═╡ c3b0bf91-fdf0-4a2b-8309-3728c64421e4
-# ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
-# ╔═╡ fae0a60d-8bb5-4be4-a22f-01a951804800
-# ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
-# ╔═╡ afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
-# ╔═╡ 135756cf-c917-4974-bb36-eae97ddf00b7
-# ╔═╡ 81e9e206-ed9b-4fc6-b936-2307621558f1
-# ╔═╡ 942ad12e-f0b2-4d1d-b3c6-d664f4293bcc
-# ╔═╡ e37317fb-b219-410c-bfc0-653ebe20a632
-# ╔═╡ 7f15a20e-adc7-4028-a5d1-2a1af197f390
-# ╔═╡ 3dbb47a8-9310-4013-a4db-0514614d0d4d
-# ╔═╡ 9c06bcf6-403e-4da2-a2b1-06bc10af44a8
-# ╔═╡ 005bfac2-bf5c-4456-8889-c4cecb7d3228
-# ╔═╡ efd1ef70-c4ae-4112-8fb5-db0490269102
-# ╔═╡ fac91f7f-4b2b-4576-9435-e2e9b8bae16e
-# ╔═╡ 87dfeb75-613d-49a3-bce2-46dbd0d33429
-# ╔═╡ bd3e2109-3aa0-4a9c-9082-d6d196f7932b
-# ╔═╡ 3c52a17c-75e9-4e2f-ae64-afc05fc110d4
-# ╔═╡ 09c29e2e-3561-479a-8b71-627be4e214df
-# ╔═╡ 7620fe26-1c9d-4a41-b358-eaef9f52d52d
-# ╔═╡ 6c577bcb-2f01-41e2-b8cc-7593372f4cf6
-# ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
-# ╔═╡ 65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
-# ╔═╡ 770456f6-fe19-4aec-86d2-482834cc419f
-# ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
-# ╔═╡ 2e4f2876-a92d-4b3d-a473-ef12341baacc
-# ╔═╡ 782bd8fb-e3c7-471a-9bce-668d45b911af
-# ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
-# ╔═╡ 04b58a60-31a9-4d68-b496-5ff73bb9a864
-# ╔═╡ 8ad44287-5a21-477b-b0fd-0d710440dc25
-# ╔═╡ ba8dc58b-5c37-4713-9bef-930c735850bf
-# ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
-# ╔═╡ 0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
+# ╟─9858d0f8-ba7e-44fe-bcfc-4af064b7985c
+# ╟─286b172a-8bfe-430c-b13b-83e0e14798d1
+# ╟─f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+# ╟─c7a8937d-6d27-41c3-ac54-8d59db9c8937
+# ╟─dc65d765-0bef-4c49-93af-1cd0ebabe632
+# ╟─bf29e57e-d859-4d73-876c-46d6a7805228
+# ╟─c0fe5d64-6d06-4daf-a827-87e2a98b7389
+# ╟─b15e87af-7574-48a7-b014-ef0ad8f3ea62
+# ╟─e3eaab8a-46db-45f1-a57c-5fe61e583919
+# ╟─bd0ffc3a-0773-4368-b179-e6502a3fbee7
+# ╟─7ab904a8-91e2-4814-9eba-3e55f35f0503
+# ╟─3fad0402-00d4-4c3b-9ca7-bed4897452c2
+# ╟─72eaba37-67d9-4d52-b1a6-e108401aa93e
+# ╟─0f02e8df-9945-4d41-af5f-290dd991db92
+# ╟─1e7b4218-ca92-4384-83db-31e97fa5545f
+# ╟─ef07b8c6-a4a8-4daa-8843-39d522f995ef
+# ╟─4ba93c73-86c0-447e-bc4e-c4eafe68d3ca
+# ╟─0870140d-366c-4953-9f84-1316c2419bad
+# ╟─9c8987f5-a609-45df-94f0-99c372e5876d
+# ╟─62ad6901-4883-4cdb-9b8b-0d2e4b409d4e
+# ╟─15a0e2e8-382e-487a-a297-12feaaab6f91
+# ╟─948e5b3a-40a2-4081-85f8-12c42837ae3a
+# ╟─b05fcc39-dad9-4bdf-874e-6dedf75fe36c
+# ╟─577dbd65-1377-4dd1-bb8f-52e4202ae745
+# ╟─cab568b8-a82e-4886-8988-7766297153c6
+# ╟─b8d18b8b-43e7-4ce8-8942-d01454614f3d
+# ╟─66b48d42-742f-49f9-8e97-684f2d790b32
+# ╟─d3f76ebe-9587-4f85-aa8c-c068478855e3
+# ╟─aaea1a28-8b28-496d-b575-a7711beda83d
+# ╟─8f4206ed-c4de-42f9-8539-ffabf79306b2
+# ╟─c4d041e7-214a-4eb4-8e4a-f4308efd6a83
+# ╟─6f2b9ee3-1579-4685-9b2d-c7fa7b07a828
+# ╟─efb426c5-ac63-4360-86e4-b579b847b69a
+# ╟─0d8c28f3-b885-4b16-95ef-99708a6bb179
+# ╟─98951c5f-438a-4b27-b0b1-5aef88c6bfab
+# ╟─d1029e12-aacd-49bf-aebf-ded4a3a31ca6
+# ╟─310a267a-288d-4ab7-a8c6-4700b951703a
+# ╟─080c8917-6a7f-46ab-9ce7-4a19d2062375
+# ╟─46cb1033-5bdc-4978-a8b8-3caf5da336b9
+# ╟─676045ab-7fa0-48ab-a215-1e0a9abfdf1e
+# ╟─ebc1271e-0fcf-47bc-bf74-850b1d2ed425
+# ╟─96b650e7-d4ce-478f-878f-d9cd6d10f2b6
+# ╟─b64864dc-953d-41c5-bae6-5ede6734c8af
+# ╟─76ace408-0ae7-458e-9b0a-cc6c3a314cd2
+# ╟─c9e03dab-763a-4ddf-aa8f-36c1f85143a4
+# ╟─2861e7e5-c7d4-4764-a52e-9422fff637b5
+# ╟─92b10e3c-8187-4785-a4bb-b724eb120476
+# ╟─3e357741-353d-4aca-9110-a96208c7f60c
+# ╟─58873013-9dd1-4a76-84a7-6f43462dbcb6
+# ╟─a87bd52c-86ad-43ac-8766-04f56a196b88
+# ╟─a0adc254-80b7-4ef3-a880-e864851f937a
+# ╟─2ac5fa04-03d8-4725-88d0-6f76213e5fa6
+# ╟─bdb0938d-658d-4abc-94ed-e38edc55adb4
+# ╟─29c142be-48e3-488f-b8fb-3b9c34de64b0
+# ╟─698c533c-4bca-44ae-ab4b-68a107e1db2a
+# ╟─48467e30-614d-4ab9-852d-6e7f19bd2a3b
+# ╟─3ff7e63b-0e3f-4933-a58a-b538f0bd4307
+# ╟─567cc54f-b6ed-4934-8f6c-c843f722bb98
+# ╟─2497c799-3aad-451d-abc6-30aa20aa6924
+# ╟─0daa50ef-abb0-4f10-a3c0-6081beab4bfb
+# ╟─d6ccee4f-40be-429b-860e-f53067077a14
+# ╟─c65a1abc-85c1-44a1-bce1-adddb8d8781c
+# ╟─b2c1aaf8-c0e8-4ff2-a32c-69e797063a16
+# ╟─66c7ab95-a158-418d-a276-84042e882aa0
+# ╠═46c3a799-1982-419c-9254-9604ad95c926
+# ╟─13beada8-dd59-4252-a730-aedb5c6c09e6
+# ╟─7c1266f6-2f5d-4fdf-af5a-67fa202ddae2
+# ╟─195378cf-cda9-43e4-97b6-3d20cb41069f
+# ╟─b4223dd0-faaa-4508-813f-0a9babbcdc09
+# ╟─5f6b7fce-fbc0-4464-a0cc-9fa179937ebb
+# ╟─ae5f7e4b-9f4f-4066-9595-3ec65257b4f9
+# ╟─0d9600d8-087d-4900-bcb2-c81a745bb131
+# ╟─e5df9962-b908-4219-bfaf-7be799b8c8a8
+# ╟─fc8794db-0fa4-4641-865d-34a199d843c0
+# ╟─cb4b3d81-67c9-4012-ae28-04247ddd9125
+# ╟─c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
+# ╟─3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
+# ╟─b5699352-1bca-4040-bbd9-2bc64085460c
+# ╟─26479599-3609-4814-9750-3406df4fba1f
+# ╟─4564edd1-7611-45b1-8f4c-26088d4c6d97
+# ╟─09ad3cf9-ccc7-4508-b20a-2b541fba963b
+# ╟─c86f3735-7430-4216-a8e8-d018c844142e
+# ╟─6fbc1529-ed21-4e53-91de-a026a9a4ee26
+# ╟─2b853097-db70-4f47-988f-f9caed5a042f
+# ╟─602ac6a2-80a3-445c-abc2-bc5b01e44d7b
+# ╟─e1e067d5-5416-4d8e-be65-5c52ae95b24b
+# ╟─6f5ea5bc-0e8e-4c4e-893a-3266e5ecbe47
+# ╟─003f7d8c-b316-4a2b-8170-ff148ccb9f50
+# ╟─2abd04ed-edf8-4bf0-bebf-e9c299927551
+# ╟─5b7101e1-7f13-4825-8e0e-a9725e0e0438
+# ╟─31b384d2-9194-4ddd-8b6c-d1a137692dbc
+# ╟─e303f5bf-f37e-4cb8-abe9-5d4891f08e77
+# ╟─a2b14cca-72f5-4e27-b198-a7b3deb9893a
+# ╟─35429393-e411-4ac8-9719-c90523ade5ea
+# ╟─2bc60f92-4577-4866-9344-d7f0b397c637
+# ╟─c3b0bf91-fdf0-4a2b-8309-3728c64421e4
+# ╟─3722b027-a69b-4646-bf4d-c8ebe1cb27ea
+# ╟─fae0a60d-8bb5-4be4-a22f-01a951804800
+# ╟─0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
+# ╟─afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
+# ╟─135756cf-c917-4974-bb36-eae97ddf00b7
+# ╟─81e9e206-ed9b-4fc6-b936-2307621558f1
+# ╟─942ad12e-f0b2-4d1d-b3c6-d664f4293bcc
+# ╟─e37317fb-b219-410c-bfc0-653ebe20a632
+# ╟─7f15a20e-adc7-4028-a5d1-2a1af197f390
+# ╟─3dbb47a8-9310-4013-a4db-0514614d0d4d
+# ╟─9c06bcf6-403e-4da2-a2b1-06bc10af44a8
+# ╟─005bfac2-bf5c-4456-8889-c4cecb7d3228
+# ╟─efd1ef70-c4ae-4112-8fb5-db0490269102
+# ╟─fac91f7f-4b2b-4576-9435-e2e9b8bae16e
+# ╟─87dfeb75-613d-49a3-bce2-46dbd0d33429
+# ╟─bd3e2109-3aa0-4a9c-9082-d6d196f7932b
+# ╟─3c52a17c-75e9-4e2f-ae64-afc05fc110d4
+# ╟─09c29e2e-3561-479a-8b71-627be4e214df
+# ╟─7620fe26-1c9d-4a41-b358-eaef9f52d52d
+# ╟─6c577bcb-2f01-41e2-b8cc-7593372f4cf6
+# ╟─8bae4edc-d910-4927-9cab-79bc8387b2c5
+# ╟─65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
+# ╠═770456f6-fe19-4aec-86d2-482834cc419f
+# ╟─8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
+# ╟─2e4f2876-a92d-4b3d-a473-ef12341baacc
+# ╟─782bd8fb-e3c7-471a-9bce-668d45b911af
+# ╟─ca18659d-269d-4fc6-9872-26946aca3a2e
+# ╟─04b58a60-31a9-4d68-b496-5ff73bb9a864
+# ╟─8ad44287-5a21-477b-b0fd-0d710440dc25
+# ╟─ba8dc58b-5c37-4713-9bef-930c735850bf
+# ╟─c970ee3e-53ae-4914-84a1-91091fc9bac8
+# ╟─0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
+# ╟─83571d10-7eff-11f0-10db-391640417d07
+# ╟─f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
+# ╟─8ce83819-cf7f-46fc-aded-773e3a716244
+# ╟─00000000-0000-0000-0000-000000000001
+# ╟─00000000-0000-0000-0000-000000000002
