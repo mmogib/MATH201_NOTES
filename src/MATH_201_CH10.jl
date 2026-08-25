@@ -476,6 +476,97 @@ $(s10_3_ex5_sol_box) **Show Solution**
 end
 
 
+# ╔═╡ 01984662-0b51-4178-97cd-584628c58ed2
+#✓ PLOT 10.3 Kahoot Q7
+let
+    t = range(0, pi / 3, length=300)
+    c = range(0, 2 * pi, length=400)
+    xe, ye = 1.5, 3 * sqrt(3) / 2
+
+    p = plot(3 .* cos.(c), 3 .* sin.(c);
+        color=:gray, ls=:dash, lw=1, label=L"x^2+y^2=9",
+        aspect_ratio=:equal, framestyle=:origin,
+        xlims=(-4.2, 4.6), ylims=(-4.0, 4.0),
+        legend=:bottomleft, size=(580, 500))
+
+    plot!(p, [-4.0, 4.4], [0, 0]; color=:steelblue, lw=3, alpha=0.45,
+        label="axis of revolution")
+
+    plot!(p, [0, xe], [0, ye]; color=:gray, ls=:dot, lw=1, label=nothing)
+    plot!(p, [0, 3], [0, 0]; color=:gray, ls=:dot, lw=1, label=nothing)
+
+    plot!(p, 3 .* cos.(t), 3 .* sin.(t); color=:red, lw=4, label=L"C")
+    scatter!(p, [3, xe], [0, ye]; color=:red, ms=6, label=nothing)
+
+    annotate!(p, 3.1, -0.4, text(L"(3,0)", 9, :red, :left))
+    annotate!(p, 1.7, 3.05, text(L"(\frac{3}{2},\frac{3\sqrt{3}}{2})", 9, :red, :left))
+    annotate!(p, 1.15, 0.6, text(L"\theta=\frac{\pi}{3}", 9, :gray))
+    p
+end
+
+
+# ╔═╡ ac75c8fb-3d69-43c6-ad31-a281650366dd
+#✓ ANIM 10.3 Kahoot Q7 -- 3D revolution
+begin
+    kahoot10_3_q7_clock_box = @bind kahoot10_3_q7_k Clock(0.15)
+    kahoot10_3_q7_scrub_box = @bind kahoot10_3_q7_j Slider(0:80, default=0)
+    cm"""
+**Revolve** $(kahoot10_3_q7_clock_box)
+
+**Scrub** $(kahoot10_3_q7_scrub_box)
+"""
+end
+
+
+# ╔═╡ 9ffec60d-5310-4587-a50f-0ac4994caa5f
+let
+    N = 48
+    n = mod(kahoot10_3_q7_k + kahoot10_3_q7_j, N + 1)
+    phimax = 2 * pi * n / N
+
+    R = 3.0
+    tt = range(0, pi / 3, length=80)
+    cc = range(0, 2 * pi, length=200)
+    L = 3.4
+
+    gen(f) = (R .* cos.(tt), R .* sin.(tt) .* cos(f), R .* sin.(tt) .* sin(f))
+
+    p = plot([-L, L], [0, 0], [0, 0];
+        color=:steelblue, lw=3, alpha=0.5, label="axis of revolution",
+        xlims=(-L, L), ylims=(-L, L), zlims=(-L, L),
+        camera=(35, 20), legend=:topright, size=(640, 560),
+        xlabel="x", ylabel="y", zlabel="z", titlefontsize=11,
+        title="Revolving C about the x-axis    phi = $(round(Int, rad2deg(phimax))) deg")
+
+    plot!(p, R .* cos.(cc), R .* sin.(cc), zeros(length(cc));
+        color=:gray, ls=:dash, lw=1, alpha=0.35, label=nothing)
+
+    if n > 0
+        np = max(2, ceil(Int, 160 * phimax / (2 * pi)) + 2)
+        ff = range(0, phimax, length=np)
+        for t in range(pi / 24, pi / 3, length=6)
+            plot!(p, fill(R * cos(t), np), R * sin(t) .* cos.(ff), R * sin(t) .* sin.(ff);
+                color=:gray, lw=1, alpha=0.6, label=nothing)
+        end
+        for f in 0:(pi/6):phimax
+            gx, gy, gz = gen(f)
+            plot!(p, gx, gy, gz; color=:gray, lw=1, alpha=0.6, label=nothing)
+        end
+    end
+
+    gx0, gy0, gz0 = gen(0.0)
+    plot!(p, gx0, gy0, gz0; color=:red, lw=4, label="C  (generating arc)")
+
+    if n > 0
+        gx1, gy1, gz1 = gen(phimax)
+        plot!(p, gx1, gy1, gz1; color=:orange, lw=4, label="leading edge")
+    end
+
+    scatter!(p, [3.0, 1.5], [0.0, 0.0], [0.0, 0.0]; color=:red, ms=4, label=nothing)
+    p
+end
+
+
 # ╔═╡ b4223dd0-faaa-4508-813f-0a9babbcdc09
 # Section 10.4: Polar coordinates and Polar Graphs - Verbatim Content
 
@@ -1679,6 +1770,40 @@ else
     md""
 end
 
+
+# ╔═╡ f1211824-c65f-4e55-9bbd-974c1dea6a49
+#✓ KAHOOT 10.3 Q7
+begin
+	kahoot10_3_q7_box = @bind kahoot10_3_q7_show CheckBox(default=false)
+	cm"""
+$(bbl("Note",""))**Kahoot Q7 (Section 10.3).** Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to ``\left(\dfrac{3}{2},\dfrac{3\sqrt{3}}{2}\right)``. Revolve ``C`` about the ``x``-axis and find the area of the resulting surface.
+
+$(kahoot10_3_q7_box) **Show Solution**
+"""
+end
+
+# ╔═╡ eb220b5f-614d-4944-9626-e3d27dde779a
+if kahoot10_3_q7_show
+	cm"""
+$(bbl("Solution",""))**Parametrize the arc.** The circle ``x^2+y^2=9`` is ``x=3\cos t``, ``y=3\sin t``. The endpoint ``(3,0)`` gives ``t=0``, and ``\left(\dfrac{3}{2},\dfrac{3\sqrt{3}}{2}\right)`` gives ``\cos t=\dfrac{1}{2}``, ``\sin t=\dfrac{\sqrt{3}}{2}``, so ``t=\dfrac{\pi}{3}``. Hence ``0\le t\le\dfrac{\pi}{3}``.
+
+**The radical collapses.** Since ``\dfrac{dx}{dt}=-3\sin t`` and ``\dfrac{dy}{dt}=3\cos t``,
+
+```math
+\sqrt{\left(\frac{dx}{dt}\right)^2+\left(\frac{dy}{dt}\right)^2}=\sqrt{9\sin^2 t+9\cos^2 t}=3.
+```
+
+**Revolve about the ``x``-axis**, so use ``S=2\pi\displaystyle\int_a^b g(t)\sqrt{\cdots}\,dt`` with ``g(t)=3\sin t``:
+
+```math
+S=2\pi\int_0^{\pi/3}(3\sin t)(3)\,dt=18\pi\Big[-\cos t\Big]_0^{\pi/3}=18\pi\left(1-\frac{1}{2}\right)=9\pi.
+```
+
+So the correct Kahoot answer is **``9\pi``**.
+
+*Why the distractors are wrong:* ``18\pi`` forgets to evaluate ``1-\cos\dfrac{\pi}{3}``; ``\dfrac{9\pi}{2}`` drops the factor ``2\pi``; ``3\pi`` uses the speed ``3`` as the whole integral.
+"""
+end
 
 # ╔═╡ 0d9600d8-087d-4900-bcb2-c81a745bb131
 cm"""
@@ -4379,6 +4504,11 @@ version = "1.13.0+0"
 # ╟─13beada8-dd59-4252-a730-aedb5c6c09e6
 # ╟─7c1266f6-2f5d-4fdf-af5a-67fa202ddae2
 # ╟─195378cf-cda9-43e4-97b6-3d20cb41069f
+# ╟─f1211824-c65f-4e55-9bbd-974c1dea6a49
+# ╟─01984662-0b51-4178-97cd-584628c58ed2
+# ╟─ac75c8fb-3d69-43c6-ad31-a281650366dd
+# ╟─9ffec60d-5310-4587-a50f-0ac4994caa5f
+# ╟─eb220b5f-614d-4944-9626-e3d27dde779a
 # ╟─b4223dd0-faaa-4508-813f-0a9babbcdc09
 # ╟─5f6b7fce-fbc0-4464-a0cc-9fa179937ebb
 # ╟─ae5f7e4b-9f4f-4066-9595-3ec65257b4f9
