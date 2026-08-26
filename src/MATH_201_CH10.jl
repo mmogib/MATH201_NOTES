@@ -156,7 +156,7 @@ end
 # ╔═╡ 9c8987f5-a609-45df-94f0-99c372e5876d
 #✓ SOL 10.2 ex3
 begin
-    s10_2_ex3_sol_box = @bind s10_2_ex3_show_sol CheckBox(default=false)
+    s10_2_ex3_sol_box = @bind s10_2_ex3_show_sol CheckBox(default=true)
     cm"""
 $(s10_2_ex3_sol_box) **Show Solution**
 """
@@ -193,7 +193,7 @@ md"##  Finding Parametric Equations"
 # ╔═╡ d3f76ebe-9587-4f85-aa8c-c068478855e3
 #✓ SOL 10.2 ex4b
 begin
-    s10_2_ex4_sol_box = @bind s10_2_ex4_show_sol CheckBox(default=false)
+    s10_2_ex4_sol_box = @bind s10_2_ex4_show_sol CheckBox(default=true)
     cm"""
 $(s10_2_ex4_sol_box) **Show Solution**
 """
@@ -359,7 +359,7 @@ md"##  Slope and Tangent Lines"
 # ╔═╡ 58873013-9dd1-4a76-84a7-6f43462dbcb6
 #✓ SOL 10.3 ex2
 begin
-    s10_3_ex2_sol_box = @bind s10_3_ex2_show_sol CheckBox(default=false)
+    s10_3_ex2_sol_box = @bind s10_3_ex2_show_sol CheckBox(default=true)
     cm"""
 $(s10_3_ex2_sol_box) **Show Solution**
 """
@@ -369,7 +369,7 @@ end
 # ╔═╡ 2ac5fa04-03d8-4725-88d0-6f76213e5fa6
 #✓ SOL 10.3 ex3
 begin
-    s10_3_ex3_sol_box = @bind s10_3_ex3_show_sol CheckBox(default=false)
+    s10_3_ex3_sol_box = @bind s10_3_ex3_show_sol CheckBox(default=true)
     cm"""
 $(s10_3_ex3_sol_box) **Show Solution**
 """
@@ -417,7 +417,7 @@ md"## Arc Length"
 # ╔═╡ 2497c799-3aad-451d-abc6-30aa20aa6924
 #✓ SOL 10.3 ex4
 begin
-    s10_3_ex4_sol_box = @bind s10_3_ex4_show_sol CheckBox(default=false)
+    s10_3_ex4_sol_box = @bind s10_3_ex4_show_sol CheckBox(default=true)
     cm"""
 $(s10_3_ex4_sol_box) **Show Solution**
 """
@@ -469,7 +469,7 @@ sin(π/3), sqrt(3)/2
 # ╔═╡ 7c1266f6-2f5d-4fdf-af5a-67fa202ddae2
 #✓ SOL 10.3 ex5
 begin
-    s10_3_ex5_sol_box = @bind s10_3_ex5_show_sol CheckBox(default=false)
+    s10_3_ex5_sol_box = @bind s10_3_ex5_show_sol CheckBox(default=true)
     cm"""
 $(s10_3_ex5_sol_box) **Show Solution**
 """
@@ -608,6 +608,24 @@ md"## Coordinate Conversion"
 
 ## Cell 7
 
+# ╔═╡ c653f8bc-a222-4734-822a-51f9347d9a39
+#✓ SOL 10.4 ex1
+begin
+    s10_4_ex1_sol_box = @bind s10_4_ex1_show_sol CheckBox(default=true)
+    cm"""
+$(s10_4_ex1_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 932105fb-25b6-4fd6-9d26-b7c66ed70c26
+#✓ SOL 10.4 ex2
+begin
+    s10_4_ex2_sol_box = @bind s10_4_ex2_show_sol CheckBox(default=true)
+    cm"""
+$(s10_4_ex2_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 09ad3cf9-ccc7-4508-b20a-2b541fba963b
 md"###### Kahoot it 🎯📱🎉✨"
 
@@ -736,6 +754,41 @@ end
 
 ## Cell 27
 
+# ╔═╡ d82b0993-b72e-4d46-9b68-8855f05b86ce
+#✓ SOL 10.4 ex5
+begin
+    s10_4_ex5_sol_box = @bind s10_4_ex5_show_sol CheckBox(default=true)
+    cm"""
+$(s10_4_ex5_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 70c36a66-d9b4-4ae1-b662-8b3c8af28546
+if s10_4_ex5_show_sol
+    let
+        ts = range(0, π, length=400)
+        r(t) = sin(t)
+        X(t) = r(t) * cos(t)
+        Y(t) = r(t) * sin(t)
+        hs = [0.0, π/2]
+        vs = [π/4, 3π/4]
+        p = plot(X.(ts), Y.(ts), lw=2, label=nothing,
+            frame_style=:origin, aspect_ratio=1,
+            xlimits=(-0.9, 0.9), ylimits=(-0.25, 1.25),
+            title=L"r=\sin\theta")
+        for t in hs
+            plot!(p, [X(t)-0.4, X(t)+0.4], [Y(t), Y(t)], ls=:dash, c=:red, label=nothing)
+        end
+        for t in vs
+            plot!(p, [X(t), X(t)], [Y(t)-0.4, Y(t)+0.4], ls=:dash, c=:green, label=nothing)
+        end
+        scatter!(p, X.(vcat(hs, vs)), Y.(vcat(hs, vs)), c=:black, ms=4, label=nothing)
+        p
+    end
+else
+    md""
+end
+
 # ╔═╡ fae0a60d-8bb5-4be4-a22f-01a951804800
 let
 
@@ -746,6 +799,41 @@ let
 end
 
 ## Cell 29
+
+# ╔═╡ 0f12e41e-01b1-443b-9bbc-031fa52fa753
+#✓ SOL 10.4 ex6
+begin
+    s10_4_ex6_sol_box = @bind s10_4_ex6_show_sol CheckBox(default=true)
+    cm"""
+$(s10_4_ex6_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 00359215-ca8b-4b81-b1b5-c7d67de003e1
+if s10_4_ex6_show_sol
+    let
+        ts = range(0, 2π, length=600)
+        r(t) = 2 * (1 - cos(t))
+        X(t) = r(t) * cos(t)
+        Y(t) = r(t) * sin(t)
+        hs = [2π/3, 4π/3]
+        vs = [π/3, π, 5π/3]
+        p = plot(X.(ts), Y.(ts), lw=2, label=nothing,
+            frame_style=:origin, aspect_ratio=1,
+            xlimits=(-5.0, 1.8), ylimits=(-3.6, 3.6),
+            title=L"r=2(1-\cos\theta)")
+        for t in hs
+            plot!(p, [X(t)-1.3, X(t)+1.3], [Y(t), Y(t)], ls=:dash, c=:red, label=nothing)
+        end
+        for t in vs
+            plot!(p, [X(t), X(t)], [Y(t)-1.3, Y(t)+1.3], ls=:dash, c=:green, label=nothing)
+        end
+        scatter!(p, X.(vcat(hs, vs)), Y.(vcat(hs, vs)), c=:black, ms=4, label=nothing)
+        p
+    end
+else
+    md""
+end
 
 # ╔═╡ afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
 md"##  Special Polar Graphs"
@@ -1221,7 +1309,7 @@ begin
     text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
     md""" # Syllabus
     ## Syallbus
-    See here [Term 261 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-252.pdf)
+    See here [Term 261 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-261.pdf)
     ## Textbook
     __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
     $text_book
@@ -1774,7 +1862,7 @@ end
 # ╔═╡ f1211824-c65f-4e55-9bbd-974c1dea6a49
 #✓ KAHOOT 10.3 Q7
 begin
-	kahoot10_3_q7_box = @bind kahoot10_3_q7_show CheckBox(default=false)
+	kahoot10_3_q7_box = @bind kahoot10_3_q7_show CheckBox(default=true)
 	cm"""
 $(bbl("Note",""))**Kahoot Q7 (Section 10.3).** Let ``C`` be the arc of the circle ``x^2+y^2=9`` from ``(3,0)`` to ``\left(\dfrac{3}{2},\dfrac{3\sqrt{3}}{2}\right)``. Revolve ``C`` about the ``x``-axis and find the area of the resulting surface.
 
@@ -1872,6 +1960,35 @@ $(ex(1,"Polar-to-Rectangular Conversion"))
 
 ## Cell 10
 
+# ╔═╡ 8f77ceb8-634d-4146-8687-179905ebaa9c
+if s10_4_ex1_show_sol
+    cm"""
+$(bbl("Solution",""))
+For each point, use ``x=r\cos\theta`` and ``y=r\sin\theta``.
+
+**(a)** For ``(r,\theta)=(2,\pi)``,
+
+```math
+x = 2\cos\pi = -2, \qquad y = 2\sin\pi = 0.
+```
+
+So the rectangular coordinates are ``(x,y)=(-2,0)``.
+
+**(b)** For ``(r,\theta)=\left(\sqrt{3},\dfrac{\pi}{6}\right)``,
+
+```math
+x = \sqrt{3}\cos\frac{\pi}{6} = \sqrt{3}\left(\frac{\sqrt{3}}{2}\right) = \frac{3}{2}
+\qquad\text{and}\qquad
+y = \sqrt{3}\sin\frac{\pi}{6} = \sqrt{3}\left(\frac{1}{2}\right) = \frac{\sqrt{3}}{2}.
+```
+
+So the rectangular coordinates are ``(x,y)=\left(\dfrac{3}{2},\dfrac{\sqrt{3}}{2}\right)``.
+$(ebl())
+"""
+else
+    md""
+end
+
 # ╔═╡ b5699352-1bca-4040-bbd9-2bc64085460c
 HTML(tip_box(
     "💡 Polar-to-Rectangular is Easy!",
@@ -1896,6 +2013,41 @@ $(ex(2,"Rectangular-to-Polar Conversion"))
 """
 
 ## Cell 12
+
+# ╔═╡ 16bc3457-8de1-4b46-9caf-fd916476986e
+if s10_4_ex2_show_sol
+    cm"""
+$(bbl("Solution",""))
+For each point, use ``\tan\theta=\dfrac{y}{x}`` and ``r^{2}=x^{2}+y^{2}``, and choose ``\theta`` so that the point falls in the correct quadrant.
+
+**(a)** For ``(x,y)=(-1,1)``,
+
+```math
+\tan\theta = \frac{y}{x} = \frac{1}{-1} = -1
+\qquad\text{and}\qquad
+r^{2} = (-1)^{2}+1^{2} = 2 .
+```
+
+Because the point lies in the **second quadrant**, take ``\theta=\dfrac{3\pi}{4}`` and ``r=\sqrt{2}``. One set of polar coordinates is
+
+```math
+(r,\theta)=\left(\sqrt{2},\frac{3\pi}{4}\right).
+```
+
+**(b)** For ``(x,y)=(0,2)``, the point lies on the **positive ``y``-axis**, so ``\theta=\dfrac{\pi}{2}``, and
+
+```math
+r^{2} = 0^{2}+2^{2} = 4 \quad\Longrightarrow\quad r = 2 .
+```
+
+One set of polar coordinates is ``(r,\theta)=\left(2,\dfrac{\pi}{2}\right)``.
+
+Keep in mind that polar coordinates are **not unique** — adding any multiple of ``2\pi`` to ``\theta`` names the same point.
+$(ebl())
+"""
+else
+    md""
+end
 
 # ╔═╡ 4564edd1-7611-45b1-8f4c-26088d4c6d97
 let
@@ -2050,6 +2202,45 @@ Find the horizontal and vertical tangent lines of ``r=\sin \theta``, where ``0 \
 
 ## Cell 26
 
+# ╔═╡ da33d6d3-4601-40f4-9dcd-ffdb41497dea
+if s10_4_ex5_show_sol
+    cm"""
+$(bbl("Solution",""))
+Begin by writing the curve in parametric form, using ``\theta`` as the parameter. Because ``r=\sin\theta``,
+
+```math
+x = r\cos\theta = \sin\theta\cos\theta
+\qquad\text{and}\qquad
+y = r\sin\theta = \sin^{2}\theta .
+```
+
+**Horizontal tangent lines.** Set ``\dfrac{dy}{d\theta}=0``.
+
+```math
+\frac{dy}{d\theta} = 2\sin\theta\cos\theta = \sin 2\theta = 0
+\quad\Longrightarrow\quad
+\theta = 0, \ \frac{\pi}{2}
+```
+
+So the graph has horizontal tangent lines at ``(0,0)`` and ``\left(1,\dfrac{\pi}{2}\right)``.
+
+**Vertical tangent lines.** Set ``\dfrac{dx}{d\theta}=0``.
+
+```math
+\frac{dx}{d\theta} = \cos^{2}\theta-\sin^{2}\theta = \cos 2\theta = 0
+\quad\Longrightarrow\quad
+\theta = \frac{\pi}{4}, \ \frac{3\pi}{4}
+```
+
+So the graph has vertical tangent lines at ``\left(\dfrac{\sqrt{2}}{2},\dfrac{\pi}{4}\right)`` and ``\left(\dfrac{\sqrt{2}}{2},\dfrac{3\pi}{4}\right)``.
+
+The graph of ``r=\sin\theta`` is the circle of radius ``\dfrac{1}{2}`` centred at ``\left(0,\dfrac{1}{2}\right)``, which confirms these four points.
+$(ebl())
+"""
+else
+    md""
+end
+
 # ╔═╡ 3722b027-a69b-4646-bf4d-c8ebe1cb27ea
 cm"""
 $(ex(6,"
@@ -2058,6 +2249,48 @@ Find the horizontal and vertical tangent lines to the graph of ``r=2(1-\cos \the
 """
 
 ## Cell 28
+
+# ╔═╡ 455cd3d3-eaaf-43fe-ad26-c0f1e949fa15
+if s10_4_ex6_show_sol
+    cm"""
+$(bbl("Solution",""))
+Because ``r=2(1-\cos\theta)``, write the cardioid in parametric form.
+
+```math
+x = r\cos\theta = 2(1-\cos\theta)\cos\theta
+\qquad\text{and}\qquad
+y = r\sin\theta = 2(1-\cos\theta)\sin\theta .
+```
+
+**Horizontal tangent lines.** Set ``\dfrac{dy}{d\theta}=0``.
+
+```math
+\frac{dy}{d\theta} = 2\left[(1-\cos\theta)\cos\theta+\sin^{2}\theta\right]
+= -2(2\cos\theta+1)(\cos\theta-1) = 0
+```
+
+So ``\cos\theta=-\dfrac{1}{2}`` or ``\cos\theta=1``, which gives ``\theta=\dfrac{2\pi}{3},\ \dfrac{4\pi}{3},\ 0``.
+
+**Vertical tangent lines.** Set ``\dfrac{dx}{d\theta}=0``.
+
+```math
+\frac{dx}{d\theta} = 2\left[-(1-\cos\theta)\sin\theta+\cos\theta\sin\theta\right]
+= 2\sin\theta(2\cos\theta-1) = 0
+```
+
+So ``\sin\theta=0`` or ``\cos\theta=\dfrac{1}{2}``, which gives ``\theta=0,\ \pi,\ \dfrac{\pi}{3},\ \dfrac{5\pi}{3}``.
+
+From these values, the cardioid has
+
+- horizontal tangent lines at ``\left(3,\dfrac{2\pi}{3}\right)`` and ``\left(3,\dfrac{4\pi}{3}\right)``, and
+- vertical tangent lines at ``\left(1,\dfrac{\pi}{3}\right)``, ``(4,\pi)``, and ``\left(1,\dfrac{5\pi}{3}\right)``.
+
+Notice that both ``\dfrac{dy}{d\theta}`` and ``\dfrac{dx}{d\theta}`` are ``0`` when ``\theta=0``, so this test alone tells you nothing about the tangent line at the pole. Using the theorem on tangent lines at the pole, however, you can see that the graph has a **cusp** at the pole.
+$(ebl())
+"""
+else
+    md""
+end
 
 # ╔═╡ 0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
 cm"""
@@ -4506,9 +4739,9 @@ version = "1.13.0+0"
 # ╟─195378cf-cda9-43e4-97b6-3d20cb41069f
 # ╟─f1211824-c65f-4e55-9bbd-974c1dea6a49
 # ╟─01984662-0b51-4178-97cd-584628c58ed2
+# ╟─eb220b5f-614d-4944-9626-e3d27dde779a
 # ╟─ac75c8fb-3d69-43c6-ad31-a281650366dd
 # ╟─9ffec60d-5310-4587-a50f-0ac4994caa5f
-# ╟─eb220b5f-614d-4944-9626-e3d27dde779a
 # ╟─b4223dd0-faaa-4508-813f-0a9babbcdc09
 # ╟─5f6b7fce-fbc0-4464-a0cc-9fa179937ebb
 # ╟─ae5f7e4b-9f4f-4066-9595-3ec65257b4f9
@@ -4518,8 +4751,12 @@ version = "1.13.0+0"
 # ╟─cb4b3d81-67c9-4012-ae28-04247ddd9125
 # ╟─c0d4716c-fd9c-4a11-8c0c-f5ccb0dd7217
 # ╟─3b1c8db6-6db2-4bf5-a107-366e3d3c53d5
+# ╟─c653f8bc-a222-4734-822a-51f9347d9a39
+# ╟─8f77ceb8-634d-4146-8687-179905ebaa9c
 # ╟─b5699352-1bca-4040-bbd9-2bc64085460c
 # ╟─26479599-3609-4814-9750-3406df4fba1f
+# ╟─932105fb-25b6-4fd6-9d26-b7c66ed70c26
+# ╟─16bc3457-8de1-4b46-9caf-fd916476986e
 # ╟─4564edd1-7611-45b1-8f4c-26088d4c6d97
 # ╟─09ad3cf9-ccc7-4508-b20a-2b541fba963b
 # ╟─c86f3735-7430-4216-a8e8-d018c844142e
@@ -4537,8 +4774,14 @@ version = "1.13.0+0"
 # ╟─35429393-e411-4ac8-9719-c90523ade5ea
 # ╟─2bc60f92-4577-4866-9344-d7f0b397c637
 # ╟─c3b0bf91-fdf0-4a2b-8309-3728c64421e4
+# ╟─d82b0993-b72e-4d46-9b68-8855f05b86ce
+# ╟─da33d6d3-4601-40f4-9dcd-ffdb41497dea
+# ╟─70c36a66-d9b4-4ae1-b662-8b3c8af28546
 # ╟─3722b027-a69b-4646-bf4d-c8ebe1cb27ea
 # ╟─fae0a60d-8bb5-4be4-a22f-01a951804800
+# ╟─0f12e41e-01b1-443b-9bbc-031fa52fa753
+# ╟─455cd3d3-eaaf-43fe-ad26-c0f1e949fa15
+# ╟─00359215-ca8b-4b81-b1b5-c7d67de003e1
 # ╟─0bc9dc7c-d62f-4d00-bb6e-7b34af0f66ca
 # ╟─afeb2022-35c7-42ca-b6a9-fc7ff8b61de0
 # ╟─135756cf-c917-4974-bb36-eae97ddf00b7
