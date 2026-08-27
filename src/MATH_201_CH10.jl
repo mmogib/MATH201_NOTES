@@ -992,6 +992,16 @@ let
 
 end
 
+# ╔═╡ 31c26162-1764-498f-a046-f4c48d424f17
+#✓ SOL 10.5 ex1
+begin
+    s10_5_ex1_sol_box = @bind s10_5_ex1_show_sol CheckBox(default=true)
+    cm"""
+$(s10_5_ex1_sol_box) **Show Solution**
+"""
+end
+
+
 # ╔═╡ 65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
 let
     r(θ) = 1 - 2sin(θ)
@@ -1027,6 +1037,16 @@ let
    """
 
 end
+
+# ╔═╡ 0155b0f3-c777-49f6-baa5-0848ccdd1acd
+#✓ SOL 10.5 ex2
+begin
+    s10_5_ex2_sol_box = @bind s10_5_ex2_show_sol CheckBox(default=true)
+    cm"""
+$(s10_5_ex2_sol_box) **Show Solution**
+"""
+end
+
 
 # ╔═╡ 770456f6-fe19-4aec-86d2-482834cc419f
 md"##  Points of Intersection of Polar Graphs"
@@ -1069,6 +1089,74 @@ let
 
 end
 
+# ╔═╡ 0099aea9-00cc-4fd8-a256-73f20fc1722a
+#✓ SOL 10.5 ex3
+begin
+    s10_5_ex3_sol_box = @bind s10_5_ex3_show_sol CheckBox(default=true)
+    cm"""
+$(s10_5_ex3_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ da168d2b-f650-4722-9247-045236cbb287
+#✓ ANIM 10.5 ex3 -- revealing the region in question
+begin
+    s10_5_ex3_clock_box = @bind s10_5_ex3_k Clock(0.12)
+    s10_5_ex3_scrub_box = @bind s10_5_ex3_j Slider(0:80, default=0)
+    cm"""
+**Animate** $(s10_5_ex3_clock_box)
+
+**Scrub** $(s10_5_ex3_scrub_box)
+"""
+end
+
+
+# ╔═╡ 9521fb59-af3b-48f1-afe1-915351125f37
+let
+    N = 80
+    n = mod(s10_5_ex3_k + s10_5_ex3_j, N + 1)
+
+    rc(θ) = -6cos(θ)         # circle
+    rk(θ) = 2 - 2cos(θ)      # cardioid
+    rin(θ) = min(rc(θ), rk(θ))   # the inner curve bounds the common region
+
+    θ0, θ1 = π / 2, 3π / 2
+    θn = θ0 + (n / N) * (θ1 - θ0)
+    ts = range(θ0, θn + 1e-6, length = 400)
+
+    A = 0.5 * sum(rin.(ts) .^ 2) * step(ts)
+    inner = (θn < 2π / 3 || θn > 4π / 3) ? "circle" : "cardioid"
+
+    plot(ts, rin.(ts);
+        proj = :polar, label = nothing,
+        fill = true, fillalpha = 0.35, c = :steelblue)
+    plot!(rc;
+        proj = :polar, label = nothing,
+        l = (2, :black))
+    plot!(rk;
+        proj = :polar, label = nothing,
+        l = (2, :grey))
+    plot!(repeat([2π / 3], 100), range(0, 6, length = 100);
+        proj = :polar, label = nothing,
+        l = (1, :orange, :dash))
+    plot!(repeat([4π / 3], 100), range(0, 6, length = 100);
+        proj = :polar, label = nothing,
+        l = (1, :orange, :dash))
+    p = plot!(repeat([θn], 100), range(0, 6, length = 100);
+        proj = :polar, label = nothing,
+        l = (2, :red, :dash))
+
+    cm"""
+$p
+
+The ray ``\theta = `` $(round(θn / π, digits = 3))``\pi`` sweeps from ``\pi/2`` to ``3\pi/2``. Along it, the region reaches only as far as the **$(inner)** — the curve nearer the pole. The dashed orange rays mark ``\theta = 2\pi/3`` and ``\theta = 4\pi/3``, where the two curves cross and the roles swap.
+
+``\displaystyle \frac{1}{2}\int_{\pi/2}^{\theta} r_{\text{in}}^{2}\, d\theta \approx `` $(round(A, digits = 3)) ``\qquad \text{(full sweep: } A = 5\pi \approx 15.708\text{)}``
+"""
+end
+
+
 # ╔═╡ 782bd8fb-e3c7-471a-9bce-668d45b911af
 md"##  Arc Length in Polar Form"
 
@@ -1085,6 +1173,16 @@ let
 
 end
 
+# ╔═╡ 3bd0e4f3-0d07-48fb-b6f9-73379dc8a280
+#✓ SOL 10.5 ex4
+begin
+    s10_5_ex4_sol_box = @bind s10_5_ex4_show_sol CheckBox(default=true)
+    cm"""
+$(s10_5_ex4_sol_box) **Show Solution**
+"""
+end
+
+
 # ╔═╡ ba8dc58b-5c37-4713-9bef-930c735850bf
 md"## Area of a Surface of Revolution"
 
@@ -1100,6 +1198,16 @@ let
    """
 
 end
+
+# ╔═╡ 360a946a-885c-4db8-a61b-04911f0f3004
+#✓ SOL 10.5 ex5
+begin
+    s10_5_ex5_sol_box = @bind s10_5_ex5_show_sol CheckBox(default=true)
+    cm"""
+$(s10_5_ex5_sol_box) **Show Solution**
+"""
+end
+
 
 # ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
 begin
@@ -2353,11 +2461,106 @@ Finding the Area of a Polar Region"))
 Find the area of one petal of the rose curve ``r=3 \cos 3 \theta``.
 """
 
+# ╔═╡ 818987f5-415f-4084-9862-9f7d4af1ee37
+if s10_5_ex1_show_sol
+    cm"""
+$(bbl("Solution",""))
+The petal on the right is swept out as ``\theta`` increases from ``-\pi/6`` to ``\pi/6``, because these are the two values of ``\theta`` closest to ``0`` at which the curve passes through the pole:
+
+```math
+3\cos 3\theta = 0
+\quad\Longrightarrow\quad
+3\theta = \pm\frac{\pi}{2}
+\quad\Longrightarrow\quad
+\theta = \pm\frac{\pi}{6}.
+```
+
+So the area of one petal is
+
+```math
+\begin{aligned}
+A &= \frac{1}{2}\int_{-\pi/6}^{\pi/6}\left(3\cos 3\theta\right)^{2}\, d\theta
+&& \color{red}{\text{Formula for area of a polar region}}\\[2pt]
+&= 9\int_{0}^{\pi/6}\cos^{2} 3\theta\, d\theta
+&& \color{red}{\text{Symmetry about the polar axis}}\\[2pt]
+&= \frac{9}{2}\int_{0}^{\pi/6}\left(1+\cos 6\theta\right)\, d\theta
+&& \color{red}{\text{Half-angle identity}}\\[2pt]
+&= \frac{9}{2}\left[\theta+\frac{\sin 6\theta}{6}\right]_{0}^{\pi/6}\\[2pt]
+&= \frac{9}{2}\left(\frac{\pi}{6}\right)
+= \frac{3\pi}{4}.
+\end{aligned}
+```
+
+The rose has six petals, so the total area enclosed by the curve is ``6\left(\frac{3\pi}{4}\right)=\frac{9\pi}{2}``.
+$(ebl())
+"""
+else
+    md""
+end
+
+
 # ╔═╡ 8bae4edc-d910-4927-9cab-79bc8387b2c5
 cm"""
 $(ex(2,"Finding the Area Bounded by a Single Curve"))
 Find the area of the region lying between the inner and outer loops of the limaçon ``r=1-2 \sin \theta``.
 """
+
+# ╔═╡ 55f465e4-447c-43e8-b7b9-532808138a87
+if s10_5_ex2_show_sol
+    cm"""
+$(bbl("Solution",""))
+The limaçon passes through the pole when ``r=0``:
+
+```math
+1-2\sin\theta = 0
+\quad\Longrightarrow\quad
+\sin\theta = \frac{1}{2}
+\quad\Longrightarrow\quad
+\theta = \frac{\pi}{6},\ \frac{5\pi}{6}.
+```
+
+It is convenient to expand the square once and for all:
+
+```math
+(1-2\sin\theta)^{2} = 1-4\sin\theta+4\sin^{2}\theta = 3-4\sin\theta-2\cos 2\theta,
+```
+
+so that ``\displaystyle \int (1-2\sin\theta)^{2}\,d\theta = 3\theta+4\cos\theta-\sin 2\theta + C.``
+
+**Inner loop.** It is traced as ``\theta`` increases from ``\pi/6`` to ``5\pi/6``, so
+
+```math
+\begin{aligned}
+A_{1} &= \frac{1}{2}\int_{\pi/6}^{5\pi/6}(1-2\sin\theta)^{2}\, d\theta\\[2pt]
+&= \frac{1}{2}\Big[\,3\theta+4\cos\theta-\sin 2\theta\,\Big]_{\pi/6}^{5\pi/6}\\[2pt]
+&= \frac{1}{2}\left[\left(\frac{5\pi}{2}-2\sqrt{3}+\frac{\sqrt{3}}{2}\right)-\left(\frac{\pi}{2}+2\sqrt{3}-\frac{\sqrt{3}}{2}\right)\right]
+= \pi-\frac{3\sqrt{3}}{2}.
+\end{aligned}
+```
+
+**Outer loop.** It is traced as ``\theta`` increases from ``5\pi/6`` to ``13\pi/6``, so
+
+```math
+\begin{aligned}
+A_{2} &= \frac{1}{2}\int_{5\pi/6}^{13\pi/6}(1-2\sin\theta)^{2}\, d\theta\\[2pt]
+&= \frac{1}{2}\Big[\,3\theta+4\cos\theta-\sin 2\theta\,\Big]_{5\pi/6}^{13\pi/6}
+= 2\pi+\frac{3\sqrt{3}}{2}.
+\end{aligned}
+```
+
+**The region between the loops.** Subtract: the inner loop is counted inside the outer one, so
+
+```math
+A = A_{2}-A_{1}
+= \left(2\pi+\frac{3\sqrt{3}}{2}\right)-\left(\pi-\frac{3\sqrt{3}}{2}\right)
+= \pi+3\sqrt{3}\approx 8.34.
+```
+$(ebl())
+"""
+else
+    md""
+end
+
 
 # ╔═╡ 8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
 cm"""
@@ -2372,6 +2575,51 @@ r=2-2 \cos \theta  \qquad \color{red}{\text{Cardioid}}
 ```
 
 """
+
+# ╔═╡ 3b6bb2d1-2516-44cc-8743-1d91115b3af0
+if s10_5_ex3_show_sol
+    cm"""
+$(bbl("Solution",""))
+**Where do the curves meet?** Setting the two expressions for ``r`` equal,
+
+```math
+-6\cos\theta = 2-2\cos\theta
+\quad\Longrightarrow\quad
+\cos\theta = -\frac{1}{2}
+\quad\Longrightarrow\quad
+\theta = \frac{2\pi}{3},\ \frac{4\pi}{3},
+```
+
+and at both of these ``r=3``. The two curves also share the pole — the circle reaches it at ``\theta=\pi/2`` and the cardioid at ``\theta=0`` — a common point the equations above cannot detect, which is exactly the caution of the previous subsection.
+
+**Setting up the integral.** Both curves are symmetric with respect to the polar axis, so work with the upper half of the region and double. Sweeping ``\theta`` from ``\pi/2`` to ``\pi``, the boundary of the common region is whichever curve is *closer to the pole*:
+
+* on ``\dfrac{\pi}{2}\le\theta\le\dfrac{2\pi}{3}`` the **circle** ``r=-6\cos\theta`` is inside,
+* on ``\dfrac{2\pi}{3}\le\theta\le\pi`` the **cardioid** ``r=2-2\cos\theta`` is inside.
+
+**Computing.**
+
+```math
+\begin{aligned}
+A &= 2\left[\frac{1}{2}\int_{\pi/2}^{2\pi/3}(-6\cos\theta)^{2} d\theta
+        +\frac{1}{2}\int_{2\pi/3}^{\pi}(2-2\cos\theta)^{2} d\theta\right]\\[2pt]
+&= \int_{\pi/2}^{2\pi/3} 36\cos^{2}\theta\, d\theta
+  +\int_{2\pi/3}^{\pi}\left(6-8\cos\theta+2\cos 2\theta\right) d\theta
+&& \color{red}{\text{Half-angle identity}}\\[2pt]
+&= \Big[\,18\theta+9\sin 2\theta\,\Big]_{\pi/2}^{2\pi/3}
+  +\Big[\,6\theta-8\sin\theta+\sin 2\theta\,\Big]_{2\pi/3}^{\pi}\\[2pt]
+&= \left(3\pi-\frac{9\sqrt{3}}{2}\right)+\left(2\pi+\frac{9\sqrt{3}}{2}\right)\\[2pt]
+&= 5\pi.
+\end{aligned}
+```
+
+The two irrational parts cancel, leaving ``A = 5\pi \approx 15.71`` — a little more than half the area ``9\pi`` of the circle, which is a good sanity check against the figure.
+$(ebl())
+"""
+else
+    md""
+end
+
 
 # ╔═╡ ca18659d-269d-4fc6-9872-26946aca3a2e
 cm"""
@@ -2388,6 +2636,47 @@ $(ex(4,"Finding the Length of a Polar Curve"))
 Find the length of the arc from ``\theta=0`` to ``\theta=2 \pi`` for the cardioid ``r=f(\theta)=2-2 \cos \theta``
 """
 
+# ╔═╡ ce19cc13-8e66-4a48-a10a-e46d32c1a52c
+if s10_5_ex4_show_sol
+    cm"""
+$(bbl("Solution",""))
+With ``f(\theta)=2-2\cos\theta`` you have ``f'(\theta)=2\sin\theta``, and so
+
+```math
+[f(\theta)]^{2}+[f'(\theta)]^{2}
+= \left(4-8\cos\theta+4\cos^{2}\theta\right)+4\sin^{2}\theta
+= 8-8\cos\theta.
+```
+
+The half-angle identity ``1-\cos\theta = 2\sin^{2}\dfrac{\theta}{2}`` turns this into a perfect square:
+
+```math
+8-8\cos\theta = 16\sin^{2}\frac{\theta}{2}
+\quad\Longrightarrow\quad
+\sqrt{[f(\theta)]^{2}+[f'(\theta)]^{2}} = 4\left|\sin\frac{\theta}{2}\right| = 4\sin\frac{\theta}{2},
+```
+
+the absolute value being unnecessary because ``\sin\dfrac{\theta}{2}\ge 0`` on ``0\le\theta\le 2\pi``. Therefore
+
+```math
+\begin{aligned}
+s &= \int_{0}^{2\pi}\sqrt{[f(\theta)]^{2}+[f'(\theta)]^{2}}\, d\theta
+&& \color{red}{\text{Arc length in polar form}}\\[2pt]
+&= \int_{0}^{2\pi} 4\sin\frac{\theta}{2}\, d\theta\\[2pt]
+&= 4\left[-2\cos\frac{\theta}{2}\right]_{0}^{2\pi}\\[2pt]
+&= 4\big[2-(-2)\big]
+= 16.
+\end{aligned}
+```
+
+In practice the cardioid is often taken as ``0\le\theta\le\pi`` and the answer doubled by symmetry; the result is the same.
+$(ebl())
+"""
+else
+    md""
+end
+
+
 # ╔═╡ c970ee3e-53ae-4914-84a1-91091fc9bac8
 cm"""
 $(bth("Area of a Surface of Revolution"))
@@ -2402,6 +2691,36 @@ $(ebl())
 $(ex(5,"Finding the Area of a Surface of Revolution"))
 Find the area of the surface formed by revolving the circle ``r=f(\theta)=\cos \theta`` about the line ``\theta=\pi / 2``
 """
+
+# ╔═╡ 50988784-4732-40ab-8d8b-cacfb74ca411
+if s10_5_ex5_show_sol
+    cm"""
+$(bbl("Solution",""))
+You can use the second formula, ``S = 2\pi\displaystyle\int_{\alpha}^{\beta} f(\theta)\cos\theta\sqrt{[f(\theta)]^{2}+[f'(\theta)]^{2}}\, d\theta``, with ``f(\theta)=\cos\theta`` and ``f'(\theta)=-\sin\theta``. Note first how pleasantly the radical collapses:
+
+```math
+\sqrt{[f(\theta)]^{2}+[f'(\theta)]^{2}} = \sqrt{\cos^{2}\theta+\sin^{2}\theta} = 1.
+```
+
+The circle ``r=\cos\theta`` lies to the right of the line ``\theta=\pi/2``, and revolving the **upper half**, ``0\le\theta\le\pi/2``, about that line already generates the entire surface (a sphere). So
+
+```math
+\begin{aligned}
+S &= 2\pi\int_{0}^{\pi/2}\cos\theta\,(\cos\theta)(1)\, d\theta
+&& \color{red}{\text{About the line } \theta=\frac{\pi}{2}}\\[2pt]
+&= 2\pi\int_{0}^{\pi/2}\cos^{2}\theta\, d\theta\\[2pt]
+&= \pi\int_{0}^{\pi/2}\left(1+\cos 2\theta\right)\, d\theta
+&& \color{red}{\text{Half-angle identity}}\\[2pt]
+&= \pi\left[\theta+\frac{\sin 2\theta}{2}\right]_{0}^{\pi/2}\\[2pt]
+&= \frac{\pi^{2}}{2}.
+\end{aligned}
+```
+$(ebl())
+"""
+else
+    md""
+end
+
 
 # ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
 @htl("""
@@ -4800,18 +5119,30 @@ version = "1.13.0+0"
 # ╟─09c29e2e-3561-479a-8b71-627be4e214df
 # ╟─7620fe26-1c9d-4a41-b358-eaef9f52d52d
 # ╟─6c577bcb-2f01-41e2-b8cc-7593372f4cf6
+# ╟─31c26162-1764-498f-a046-f4c48d424f17
+# ╟─818987f5-415f-4084-9862-9f7d4af1ee37
 # ╟─8bae4edc-d910-4927-9cab-79bc8387b2c5
 # ╟─65179ab3-0475-4ae2-b7e1-5a7caf5a8e66
-# ╠═770456f6-fe19-4aec-86d2-482834cc419f
+# ╟─0155b0f3-c777-49f6-baa5-0848ccdd1acd
+# ╟─55f465e4-447c-43e8-b7b9-532808138a87
+# ╟─770456f6-fe19-4aec-86d2-482834cc419f
 # ╟─8ba3bd5c-8b24-4c42-8c59-af5cd88305e6
 # ╟─2e4f2876-a92d-4b3d-a473-ef12341baacc
+# ╟─0099aea9-00cc-4fd8-a256-73f20fc1722a
+# ╟─3b6bb2d1-2516-44cc-8743-1d91115b3af0
+# ╟─da168d2b-f650-4722-9247-045236cbb287
+# ╟─9521fb59-af3b-48f1-afe1-915351125f37
 # ╟─782bd8fb-e3c7-471a-9bce-668d45b911af
 # ╟─ca18659d-269d-4fc6-9872-26946aca3a2e
 # ╟─04b58a60-31a9-4d68-b496-5ff73bb9a864
 # ╟─8ad44287-5a21-477b-b0fd-0d710440dc25
+# ╟─3bd0e4f3-0d07-48fb-b6f9-73379dc8a280
+# ╟─ce19cc13-8e66-4a48-a10a-e46d32c1a52c
 # ╟─ba8dc58b-5c37-4713-9bef-930c735850bf
 # ╟─c970ee3e-53ae-4914-84a1-91091fc9bac8
 # ╟─0ce9a97b-dab5-4b5b-829d-f03fb823b3d3
+# ╟─360a946a-885c-4db8-a61b-04911f0f3004
+# ╟─50988784-4732-40ab-8d8b-cacfb74ca411
 # ╟─83571d10-7eff-11f0-10db-391640417d07
 # ╟─f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
 # ╟─8ce83819-cf7f-46fc-aded-773e3a716244
