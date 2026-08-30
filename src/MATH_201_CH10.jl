@@ -1103,7 +1103,7 @@ end
 #✓ ANIM 10.5 ex3 -- revealing the region in question
 begin
     s10_5_ex3_clock_box = @bind s10_5_ex3_k Clock(0.12)
-    s10_5_ex3_scrub_box = @bind s10_5_ex3_j Slider(0:80, default=0)
+    s10_5_ex3_scrub_box = @bind s10_5_ex3_j Slider(0:105, default=0)
     cm"""
 **Animate** $(s10_5_ex3_clock_box)
 
@@ -1114,8 +1114,10 @@ end
 
 # ╔═╡ 9521fb59-af3b-48f1-afe1-915351125f37
 let
-    N = 80
-    n = mod(s10_5_ex3_k + s10_5_ex3_j, N + 1)
+    N = 80                   # frames of the sweep
+    H = 25                   # frames held on the completed region
+    m = mod(s10_5_ex3_k + s10_5_ex3_j, N + H + 1)
+    n = min(m, N)
 
     rc(θ) = -6cos(θ)         # circle
     rk(θ) = 2 - 2cos(θ)      # cardioid
@@ -1125,18 +1127,26 @@ let
     θn = θ0 + (n / N) * (θ1 - θ0)
     ts = range(θ0, θn + 1e-6, length = 400)
 
+    # Close the wedge at the pole at BOTH ends. Without the final (θn, 0) the
+    # fill runs to the cartesian baseline y = 0, i.e. all the way round to θ = π.
+    θpath = vcat(θ0, ts, θn)
+    rpath = vcat(0.0, rin.(ts), 0.0)
+
     A = 0.5 * sum(rin.(ts) .^ 2) * step(ts)
     inner = (θn < 2π / 3 || θn > 4π / 3) ? "circle" : "cardioid"
 
-    plot(ts, rin.(ts);
-        proj = :polar, label = nothing,
-        fill = true, fillalpha = 0.35, c = :steelblue)
+    plot(θpath, rpath;                        # the slice from π/2 to θ
+        proj = :polar, label = nothing, ylims = (0, 6),
+        fill = true, fillalpha = 0.5, c = :steelblue, lw = 0)
     plot!(rc;
         proj = :polar, label = nothing,
         l = (2, :black))
     plot!(rk;
         proj = :polar, label = nothing,
         l = (2, :grey))
+    plot!(repeat([θ0], 100), range(0, 6, length = 100);
+        proj = :polar, label = nothing,
+        l = (1, :red, :dot))
     plot!(repeat([2π / 3], 100), range(0, 6, length = 100);
         proj = :polar, label = nothing,
         l = (1, :orange, :dash))
@@ -1150,7 +1160,7 @@ let
     cm"""
 $p
 
-The ray ``\theta = `` $(round(θn / π, digits = 3))``\pi`` sweeps from ``\pi/2`` to ``3\pi/2``. Along it, the region reaches only as far as the **$(inner)** — the curve nearer the pole. The dashed orange rays mark ``\theta = 2\pi/3`` and ``\theta = 4\pi/3``, where the two curves cross and the roles swap.
+The shaded slice runs from ``\theta = \pi/2`` (dotted ray) out to ``\theta = `` $(round(θn / π, digits = 3))``\pi`` (dashed ray). Along each ray the region reaches only as far as the **$(inner)** — the curve nearer the pole. The dashed orange rays mark ``\theta = 2\pi/3`` and ``\theta = 4\pi/3``, where the two curves cross and the roles swap.
 
 ``\displaystyle \frac{1}{2}\int_{\pi/2}^{\theta} r_{\text{in}}^{2}\, d\theta \approx `` $(round(A, digits = 3)) ``\qquad \text{(full sweep: } A = 5\pi \approx 15.708\text{)}``
 """
@@ -2283,6 +2293,67 @@ $(bbl("Remarks",""))
 """
 
 ## Cell 24
+
+# ╔═╡ d66ad8d5-a251-49b5-99f9-380044c34fea
+cm"""
+$(bbl("Remark",""))
+
+**What if ``dx/d\theta`` and ``dy/d\theta`` vanish together?** Writing the two derivatives as a single matrix product,
+
+```math
+\begin{bmatrix} dx/d\theta \\ dy/d\theta \end{bmatrix}
+=\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}
+\begin{bmatrix} f'(\theta) \\ f(\theta) \end{bmatrix},
+```
+
+and noting that the rotation matrix on the right is invertible, we get
+
+```math
+\frac{dx}{d\theta}=\frac{dy}{d\theta}=0
+\quad\text{if and only if}\quad
+f(\theta_0)=0 \;\text{ and }\; f'(\theta_0)=0 .
+```
+
+So the ambiguous case occurs **only at the pole**, and only where ``f`` has a zero of order ``\geq 2`` — precisely the situation the theorem on tangent lines at the pole (which requires ``f'(\alpha)\neq 0``) does not cover.
+
+Even there the slope usually **does** exist, as a limit. Dividing numerator and denominator by ``f'(\theta)``,
+
+```math
+\frac{dy}{dx}=\frac{f\cos\theta+f'\sin\theta}{-f\sin\theta+f'\cos\theta}
+=\frac{\sin\theta+\dfrac{f}{f'}\cos\theta}{\cos\theta-\dfrac{f}{f'}\sin\theta}
+\;\xrightarrow[\;\theta\to\theta_0\;]{}\; \tan\theta_0 ,
+```
+
+since a zero of finite order ``m`` gives ``f/f' \sim (\theta-\theta_0)/m \to 0``. The tangent line at the pole is still ``\theta=\theta_0``.
+
+**Example.** Let ``r=f(\theta)=\left(\theta-\frac{\pi}{4}\right)^{2}`` and ``\theta_0=\frac{\pi}{4}``. Then ``f(\theta_0)=f'(\theta_0)=0``, so with ``u=\theta-\frac{\pi}{4}``
+
+```math
+\frac{dx}{d\theta}=2u\cos\theta-u^{2}\sin\theta,
+\qquad
+\frac{dy}{d\theta}=2u\sin\theta+u^{2}\cos\theta,
+```
+
+and both vanish at ``\theta_0``. But for ``u\neq 0`` the common factor ``u`` cancels:
+
+```math
+\frac{dy}{dx}=\frac{2\sin\theta+u\cos\theta}{2\cos\theta-u\sin\theta}
+\;\xrightarrow[\;\theta\to\pi/4\;]{}\;
+\frac{2\sin\frac{\pi}{4}}{2\cos\frac{\pi}{4}}=1 .
+```
+
+The slope exists and equals ``1``: the tangent line at the origin is ``y=x``, that is the line ``\theta=\pi/4``, and the curve has a **cusp** there, since ``u>0`` and ``u<0`` both leave the pole along the same ray.
+
+The cardioid ``r=2(1-\cos\theta)`` of Example 6 behaves the same way at ``\theta=0``, and there the limit can be found in closed form using ``1-\cos\theta=2\sin^{2}\frac{\theta}{2}`` and ``\sin\theta=2\sin\frac{\theta}{2}\cos\frac{\theta}{2}``:
+
+```math
+\frac{dy}{dx}=\frac{-2(2\cos\theta+1)(\cos\theta-1)}{2\sin\theta\,(2\cos\theta-1)}
+=\frac{2\cos\theta+1}{2\cos\theta-1}\,\tan\frac{\theta}{2}
+\;\xrightarrow[\;\theta\to 0\;]{}\; 0 .
+```
+
+Hence the tangent line at the pole is ``\theta=0`` (the polar axis), approached with a cusp — obtained directly, without appealing to a theorem whose hypothesis ``f'(0)\neq 0`` fails here.
+"""
 
 # ╔═╡ 35429393-e411-4ac8-9719-c90523ade5ea
 HTML(warning_box(
@@ -5090,6 +5161,7 @@ version = "1.13.0+0"
 # ╟─31b384d2-9194-4ddd-8b6c-d1a137692dbc
 # ╟─e303f5bf-f37e-4cb8-abe9-5d4891f08e77
 # ╟─a2b14cca-72f5-4e27-b198-a7b3deb9893a
+# ╟─d66ad8d5-a251-49b5-99f9-380044c34fea
 # ╟─35429393-e411-4ac8-9719-c90523ade5ea
 # ╟─2bc60f92-4577-4866-9344-d7f0b397c637
 # ╟─c3b0bf91-fdf0-4a2b-8309-3728c64421e4
