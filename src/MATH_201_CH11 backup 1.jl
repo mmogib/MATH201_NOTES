@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v1.0.3
+# v0.20.24
 
 using Markdown
 using InteractiveUtils
@@ -16,29 +16,6 @@ macro bind(def, element)
     #! format: on
 end
 
-# ╔═╡ 83571d10-7eff-11f0-10db-391640417d07
-begin
-    using CommonMark
-    using PlutoUI, PlutoExtras
-    using Plots, PlotThemes, LaTeXStrings
-    # using PyPlot
-    using Latexify
-    using HypertextLiteral
-    using Colors
-    using LinearAlgebra, Random, Printf, SparseArrays
-    using Symbolics, Nemo, Groebner
-    # using SymPy
-    using QRCoders
-    using PrettyTables
-    # using Primes
-    # using LinearSolve
-    # using NonlinearSolve
-    using ForwardDiff
-    # using Integrals
-    # using OrdinaryDiffEq
-    using Unitful
-end
-
 # ╔═╡ 9858d0f8-ba7e-44fe-bcfc-4af064b7985c
 TableOfContents(title="📚 MATH201: Calculus III", indent=true, depth=4)
 
@@ -51,6 +28,41 @@ begin
     function Base.show(io::IO, ::MIME"image/png", w::LocalImage)
         write(io, read(w.filename))
     end
+end
+
+# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+
+# __ChatGPT:__ (Course AI assistant)
+# $(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
+
+cm"""
+__Course website:__ (Notes, Syllabus)
+$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
+
+---
+
+
+"""
+
+# ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
+begin
+    text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
+    md""" # Syllabus
+    ## Syallbus
+    See here [Term 252 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-252.pdf)
+    ## Textbook
+    __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
+    $text_book
+
+    ## Office Hours
+    I strongly encourage all students to make use of my office hours. These dedicated times are a valuable opportunity for you to ask questions, seek clarification on lecture material, discuss challenging problems, and get personalized feedback on your work. Engaging with me during office hours can greatly enhance your understanding of the course content and improve your performance. Whether you're struggling with a specific concept or simply want to delve deeper into the subject, I am here to support your learning journey. Don't hesitate to drop by; __your success is my priority__.
+
+    | Day       | Time        |
+    |-----------|-------------|
+    | Sunday    | 11:00-11:50AM |
+    | Tuesday | 11:00-11:50AM |
+    Also you can ask for an online meeting through __TEAMS__.
+    """
 end
 
 # ╔═╡ 004e5898-ebff-4e99-a515-a90a09d347ac
@@ -115,8 +127,53 @@ let
 
 end
 
+# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
+cm"""
+$(ex(1,"Vector Representation: Directed Line Segments"))
+Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
+"""
+
+# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
+cm"""
+$(define("Component Form of a Vector in the Plane"))
+If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
+
+Moreover, the length (or magnitude) of ``\textbf{v}`` is
+```math
+\begin{aligned}
+\|\mathbf{v}\|
+& =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
+\end{aligned}
+```
+"""
+
+# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
+cm"""
+$(ex(2,"Component Form and Length of a Vector"))
+Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
+"""
+
 # ╔═╡ 208b862e-da48-4a79-aaee-2df466adfa17
 md"## Vector Operations"
+
+# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
+cm"""
+$(define("Vector Addition and Scalar Multiplication"))
+Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
+1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
+2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
+```math
+c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
+```
+3. The negative of ``\mathbf{v}`` is the vector
+```math
+-\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
+```
+4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
+```math
+\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
+```
+"""
 
 # ╔═╡ 5ce29b80-bb95-40db-a3c7-4c3d5c94ba0d
 let
@@ -136,25 +193,73 @@ let
     p
 end
 
-# ╔═╡ 228bf657-4801-49d2-8993-c34fb49b6358
-#✓ SOL 11.1 ex3 -- show by default
-begin
-	s11_1_ex3_sol_box = @bind s11_1_ex3_show_sol CheckBox(default=true)
-	cm"""
-$(s11_1_ex3_sol_box) **Show Solution**
+# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
+cm"""
+$(ex(3,"Vector Operations"))
+For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
+- (a.) ``\frac{1}{2} \mathbf{v}``
+- (b.) ``\mathbf{w}-\mathbf{v}``
+- (c.) ``\mathbf{v}+2 \mathbf{w}``
 """
-end
+
+# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
+cm"""
+$(bth("Properties of Vector Operations"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``
 
 
-# ╔═╡ 1ce351b8-0ccb-40e9-8898-3c9462870314
-#✓ SOL 11.1 ex4 -- show by default
-begin
-	s11_1_ex4_sol_box = @bind s11_1_ex4_show_sol CheckBox(default=true)
-	cm"""
-$(s11_1_ex4_sol_box) **Show Solution**
+2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
+
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
+
+4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
+
+5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
+
+6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
+
+
+8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
 """
-end
 
+# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
+cm"""
+$(bth("Length of a Scalar Multiple"))
+Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
+```math
+\|c \mathbf{v}\|=|c|\|\mathbf{v}\|
+```
+``|c|`` is the absolute value of ``c``.
+"""
+
+# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
+cm"""
+$(bth("Unit Vector in the Direction of  v"))
+If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
+```math
+\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
+```
+has length 1 and the same direction as ``\mathbf{v}``.
+"""
+
+# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
+cm"""
+$(bbl("triangle inequality for vectors",""))
+```math
+\|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
+```
+
+"""
+
+# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
+cm"""
+$(ex(4,"Finding a Unit Vector"))
+Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
+"""
 
 # ╔═╡ c23c83d4-4d34-44c7-8dee-f2aa824eda44
 md"## Standard Unit Vectors"
@@ -170,38 +275,30 @@ The unit vectors ``\langle 1,0\rangle`` and ``\langle 0,1\rangle`` are called th
 __Standard unit vectors__
 """
 
-# ╔═╡ 0d040c84-9ed6-4e28-9de4-fab5b1f68b8b
-#✓ SOL 11.1 ex5 -- show by default
-begin
-	s11_1_ex5_sol_box = @bind s11_1_ex5_show_sol CheckBox(default=true)
-	cm"""
-$(s11_1_ex5_sol_box) **Show Solution**
+# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
+cm"""
+$(ex(5,"Writing a Linear Combination of Unit Vectors"))
+Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
+1. ``u``
+2. ``w = 2u − 3v``
 """
-end
 
-
-# ╔═╡ e7154dd2-48a0-49a2-88a3-cac7f8c58555
-#✓ SOL 11.1 ex6 -- show by default
-begin
-	s11_1_ex6_sol_box = @bind s11_1_ex6_show_sol CheckBox(default=true)
-	cm"""
-$(s11_1_ex6_sol_box) **Show Solution**
+# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
+cm"""
+$(ex(6,"Writing a Vector of Given Magnitude and Direction"))
+The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
 """
-end
+
+# ╔═╡ 571a0a6a-b0f2-4899-9b22-4e7948f358e2
+cm"""
 
 
-# ╔═╡ 98fc123c-93b7-4b6e-8da6-1b58b257ec67
-#✓ SOL 11.1 ex7 -- show by default
-begin
-	s11_1_ex7_sol_box = @bind s11_1_ex7_show_sol CheckBox(default=true)
-	cm"""
-$(s11_1_ex7_sol_box) **Show Solution**
+$(ex(7,"Finding the Resultant Force"))
+
+Two tugboats are pushing an ocean liner, as shown in Figure below. Each boat is exerting a force of 400 pounds. What is the resultant force on the ocean liner?
+
+$(post_img("https://www.dropbox.com/scl/fi/y479puutvr1z41k7aqy70/fig11.12.png?rlkey=f1kwce8m1vsrmdk2kim9l4d18&dl=1"))
 """
-end
-
-
-# ╔═╡ 983f500b-9e8b-4605-a82f-3a0dc2a2ab0b
-
 
 # ╔═╡ 6419f344-a1b3-4d60-8f27-8469a6e6b022
 md"""
@@ -214,15 +311,11 @@ md"""
 # ╔═╡ f6836f13-5370-4ac3-813a-50fc012bfcab
 md"## Coordinates in Space"
 
-# ╔═╡ b3607e63-89eb-41c3-b6cf-61f0e0f16678
-#✓ SOL 11.2 ex1 -- show by default
-begin
-	s11_2_ex1_sol_box = @bind s11_2_ex1_show_sol CheckBox(default=true)
-	cm"""
-$(s11_2_ex1_sol_box) **Show Solution**
+# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
+cm"""
+$(ex(1,"Finding the Distance Between Two Points in Space"))
+Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
 """
-end
-
 
 # ╔═╡ e3363ab4-1543-421f-a68c-cb1685a2f06a
 let
@@ -231,15 +324,15 @@ let
     norm(u-v), sqrt(sum((u[i]-v[i])^2 for i in 1:3))
 end
 
-# ╔═╡ 2a7d5253-8435-4952-9349-4cabedcd5077
-#✓ SOL 11.2 ex2 -- show by default
-begin
-	s11_2_ex2_sol_box = @bind s11_2_ex2_show_sol CheckBox(default=true)
-	cm"""
-$(s11_2_ex2_sol_box) **Show Solution**
-"""
-end
+# ╔═╡ 2c4b3a89-8257-48fa-8e3a-30f059e0187d
+cm"""
+$(ex(2,"Finding the equation of a Sphere"))
+Find the standard equation of the sphere that has the points
 
+``(5, −2, 3)`` and ``(0, 4, −3)``
+
+ as endpoints of a diameter.
+"""
 
 # ╔═╡ 734ef678-1329-4d59-8753-0797b6a675c7
 let
@@ -297,35 +390,69 @@ cm"""
 # ╔═╡ 574ab398-71d0-4427-86dc-fd99482feffc
 md"## Vectors in Space"
 
-# ╔═╡ 3798f275-6e8c-4bc4-b6fe-8d3dfe720b40
-#✓ SOL 11.2 ex3 -- show by default
-begin
-	s11_2_ex3_sol_box = @bind s11_2_ex3_show_sol CheckBox(default=true)
-	cm"""
-$(s11_2_ex3_sol_box) **Show Solution**
+# ╔═╡ 7e3feecd-7106-4591-b22a-97a7aa064b6c
+cm"""
+$(bbl("Vectors in Space",""))
+Let ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` be vectors in space and let ``c`` be a scalar.
+1. Equality of Vectors: ``\mathbf{u}=\mathbf{v}`` if and only if ``u_1=v_1, u_2=v_2``, and ``u_3=v_3``.
+2. Component Form: If ``\mathbf{v}`` is represented by the directed line segment from ``P\left(p_1, p_2, p_3\right)`` to ``Q\left(q_1, q_2, q_3\right)``, then
+```math
+\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle=\left\langle q_1-p_1, q_2-p_2, q_3-p_3\right\rangle
+```
+3. Length: ``\|\mathbf{v}\|=\sqrt{v_1^2+v_2^2+v_3^2}``
+4. Unit Vector in the Direction of ``\mathbf{v}: \frac{\mathbf{v}}{\|\mathbf{v}\|}=\left(\frac{1}{\|\mathbf{v}\|}\right)\left\langle v_1, v_2, v_3\right\rangle, \quad \mathbf{v} \neq \mathbf{0}``
+5. Vector Addition: ``\mathbf{v}+\mathbf{u}=\left\langle v_1+u_1, v_2+u_2, v_3+u_3\right\rangle``
+6. Scalar Multiplication: ``c \mathbf{v}=\left\langle c v_1, c v_2, c v_3\right\rangle``
 """
-end
 
-
-# ╔═╡ f6cf7fcc-1d77-444c-9265-a323a4fa3ab1
-#✓ SOL 11.2 ex4 -- show by default
-begin
-	s11_2_ex4_sol_box = @bind s11_2_ex4_show_sol CheckBox(default=true)
-	cm"""
-$(s11_2_ex4_sol_box) **Show Solution**
+# ╔═╡ 108475eb-bae3-426d-88db-f0f5dc177c65
+cm"""
+$(ex(3,"Finding the Component Form of a Vector in Space"))
+Find the component form and magnitude of the vector ``\mathbf{v}`` having initial point ``(-2,3,1)`` and terminal point ``(0,-4,4)``. Then find a unit vector in the direction of ``\mathbf{v}``.
 """
-end
 
-
-# ╔═╡ 3d59184b-ccc8-4818-ae25-b328b7cb0d57
-#✓ SOL 11.2 ex7 -- show by default
-begin
-	s11_2_ex7_sol_box = @bind s11_2_ex7_show_sol CheckBox(default=true)
-	cm"""
-$(s11_2_ex7_sol_box) **Show Solution**
+# ╔═╡ 75e95211-2367-49ed-a1fd-f0ae39870f04
+cm"""
+$(define("Parallel Vectors"))
+Two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}`` are parallel when there is some scalar ``c`` such that ``\mathbf{u}=c \mathbf{v}``.
 """
-end
 
+# ╔═╡ 847f0197-beab-45d7-ae4c-27385719aeb1
+cm"""
+$(ex(4,"Parallel Vectors"))
+Vector ``\mathbf{w}`` has initial point ``(2,-1,3)`` and terminal point ``(-4,7,5)``. Which of the following vectors is parallel to ``\mathbf{w}`` ?
+
+1. ``\mathbf{u}=\langle 3,-4,-1\rangle``
+2. ``\mathbf{v}=\langle 12,-16,4\rangle``
+"""
+
+# ╔═╡ b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
+cm"""
+$(ex(5,"Using Vectors to Determine Collinear Points"))
+Determine whether the points
+```math
+P(1,-2,3), \quad Q(2,1,0), \quad \text { and } \quad R(4,7,-6)
+```
+are collinear.
+"""
+
+# ╔═╡ 8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
+cm"""
+$(ex(6,"Standard Unit Vector Notation"))
+
+- __(a.)__ Write the vector ``\mathbf{v}=4 \mathbf{i}-5 \mathbf{k}`` in component form.
+- __(b.)__ Find the terminal point of the vector ``\mathbf{v}=7 \mathbf{i}-\mathbf{j}+3 \mathbf{k}``, given that the initial point is ``P(-2,3,5)``.
+
+- __(c.)__ Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
+"""
+
+# ╔═╡ 1a2c15f9-af65-4fe5-b517-98d26a3998fd
+cm"""
+$(ex(7,"Measuring Force"))
+A television camera weighing ``120`` pounds is supported by a tripod, as shown below. Represent the force exerted on each leg of the tripod as a vector.
+
+$(post_img("https://www.dropbox.com/scl/fi/avv2vzzviidm4m8opc3uk/fig_11_23.png?rlkey=o3rnxynprpdg5lt0jkbh6wp9p&dl=1"))
+"""
 
 # ╔═╡ 554f972f-8c43-4b67-845a-5f7e85cabfda
 md"""
@@ -342,18 +469,79 @@ md"""
 # ╔═╡ ce3fdcff-d13d-4224-b394-ae73ca08d7b7
 md"##  The Dot Product"
 
+# ╔═╡ e4d12bd7-039a-42a8-b278-05a5e8fe0841
+cm"""
+$(define("Dot Product"))
+The dot product of ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` is
+```math
+\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2
+```
+
+The dot product of ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` is
+```math
+\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2+u_3 v_3
+```
+$(ebl())
+
+$(bth("Properties of the Dot Product"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane or in space and let ``c`` be a scalar.
+
+1. ``\mathbf{u} \cdot \mathbf{v}=\mathbf{v} \cdot \mathbf{u}\qquad \color{red}{\text{Commutative Property}}``
+
+2. ``\mathbf{u} \cdot(\mathbf{v}+\mathbf{w})=\mathbf{u} \cdot \mathbf{v}+\mathbf{u} \cdot \mathbf{w}\qquad \color{red}{\text{Distributive Property}}``
+
+3. ``c(\mathbf{u} \cdot \mathbf{v})=c \mathbf{u} \cdot \mathbf{v}=\mathbf{u} \cdot c \mathbf{v}\qquad \qquad\color{red}{\text{Associative Property}}``
+4. ``\mathbf{0} \cdot \mathbf{v}=0``
+5. ``\mathbf{v} \cdot \mathbf{v}=\|\mathbf{v}\|^2``
+"""
+
+# ╔═╡ 79d33f0f-6b03-420f-a0c1-98108e43ab6b
+cm"""
+$(ex(1,"Finding Dot Products"))
+
+Let ``\mathbf{u}=\langle 2,-2\rangle, \mathbf{v}=\langle 5,8\rangle``, and ``\mathbf{w}=\langle-4,3\rangle``.
+
+- (a.) ``\mathbf{u} \cdot \mathbf{v}=\langle 2,-2\rangle \cdot\langle 5,8\rangle=2(5)+(-2)(8)=-6``
+- (b.) ``(\mathbf{u} \cdot \mathbf{v}) \mathbf{w}=-6\langle-4,3\rangle=\langle 24,-18\rangle``
+- (c.) ``\mathbf{u} \cdot(2 \mathbf{v})=2(\mathbf{u} \cdot \mathbf{v})=2(-6)=-12``
+- (d.) ``\|\mathbf{w}\|^2=\mathbf{w} \cdot \mathbf{w}=\langle-4,3\rangle \cdot\langle-4,3\rangle=(-4)(-4)+(3)(3)=25``
+"""
+
 # ╔═╡ ebbfa978-69b9-4a06-8747-792cb04992eb
 md"## Angle Between Two Vectors"
 
-# ╔═╡ 2a3a956b-6621-4892-8d0a-75476eece1dc
-#✓ SOL 11.3 ex2 -- show by default
-begin
-	s11_3_ex2_sol_box = @bind s11_3_ex2_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex2_sol_box) **Show Solution**
+# ╔═╡ 66eb4dd6-f558-479a-b193-8e852c345721
+cm"""
+$(bth("Angle Between Two Vectors"))
+If ``\theta`` is the angle between two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}``, where ``0 \leq \theta \leq \pi``, then
+```math
+\cos \theta=\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}
+```
 """
-end
 
+# ╔═╡ 4fc2f92f-3773-4e53-82c6-c4e441f164b3
+cm"""
+$(bbl("Remark",""))
+```math
+\mathbf{u} \cdot \mathbf{v}=\|\mathbf{u}\|\|\mathbf{v}\| \cos \theta\qquad \color{red}{\text{Alternative form of dot product}}
+```
+"""
+
+# ╔═╡ 788ea369-4509-4970-9a2d-ea887194b790
+cm"""
+$(define(" Definition of Orthogonal Vectors"))
+ The vectors ``u`` and ``v`` are orthogonal when ``u∙v=0``
+"""
+
+# ╔═╡ de23e5af-1d2d-4b22-9743-dd59bc903a9c
+cm"""
+$(ex(2,"Finding the Angle Between Two Vectors"))
+For ``\mathbf{u}=\langle 3,-1,2\rangle, \mathbf{v}=\langle-4,0,2\rangle, \mathbf{w}=\langle 1,-1,-2\rangle``, and ``\mathbf{z}=\langle 2,0,-1\rangle``, find the angle between each pair of vectors.
+
+- (a.) ``\mathbf{u}`` and ``\mathbf{v}``
+- (b.) ``\mathbf{u}`` and ``\mathbf{w}``
+- (c.) ``\mathbf{v}`` and ``\mathbf{z}``
+"""
 
 # ╔═╡ 4fe2dba9-e764-4f30-a41a-75da08728858
 let
@@ -363,18 +551,21 @@ let
     get_angle(u,w)≈π/2
 end
 
-# ╔═╡ 339f43f6-89ff-4904-9f4f-d2de94a673f4
-#✓ SOL 11.3 ex3 -- show by default
-begin
-	s11_3_ex3_sol_box = @bind s11_3_ex3_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex3_sol_box) **Show Solution**
+# ╔═╡ bc67920c-1bee-4fcc-8469-adf01e1d33e8
+cm"""
+$(ex(3,"Alternative Form of the Dot Product"))
+Given that ``\|\mathbf{u}\|=10,\|\mathbf{v}\|=7``, and the angle between ``\mathbf{u}`` and ``\mathbf{v}`` is ``\pi / 4``, find ``\mathbf{u} \cdot \mathbf{v}``.
 """
-end
-
 
 # ╔═╡ 70ffdb35-aba3-4b8a-834c-f3e996e5c278
 md"## Direction Cosines"
+
+# ╔═╡ bf3af1b5-3959-447f-85ac-b2b0b1ab737f
+cm"""
+
+$(post_img("https://www.dropbox.com/scl/fi/yoip1oldetoeth472ju81/fig_11_26.png?rlkey=g71oyxboekwrwumo2znb7mqtg&dl=1",400))
+
+"""
 
 # ╔═╡ eca05d58-1cab-444f-ae15-df4e3177323f
 cm"""
@@ -396,15 +587,11 @@ cm"""
 ```
 """
 
-# ╔═╡ b7782d17-3e60-428a-bfcf-e911621c4ab8
-#✓ SOL 11.3 ex4 -- show by default
-begin
-	s11_3_ex4_sol_box = @bind s11_3_ex4_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex4_sol_box) **Show Solution**
+# ╔═╡ c925f9ff-245f-4d0a-b085-b703adc1daaf
+cm"""
+$(ex(4,"Finding Direction Angles"))
+Find the direction cosines and angles for the vector ``\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}+4 \mathbf{k}``, and show that ``\cos ^2 \alpha+\cos ^2 \beta+\cos ^2 \gamma=1``
 """
-end
-
 
 # ╔═╡ c27df0f0-d524-4193-8188-271ea5779d04
 let
@@ -421,25 +608,47 @@ end
 # ╔═╡ 1b9821e9-f325-475a-ba9c-70a889a5504c
 md"## Projections and Vector Components"
 
-# ╔═╡ be213c9e-c673-4f15-b3c4-46891cce9756
-#✓ SOL 11.3 ex5 -- show by default
-begin
-	s11_3_ex5_sol_box = @bind s11_3_ex5_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex5_sol_box) **Show Solution**
+# ╔═╡ c1dee7b3-6118-493e-9c9a-4629cd2af8c3
+cm"""
+$(define("Projection and Vector Components"))
+Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors. Moreover, let
+```math
+\mathbf{u}=\mathbf{w}_1+\mathbf{w}_2
+```
+where ``\mathbf{w}_1`` is parallel to ``\mathbf{v}`` and ``\mathbf{w}_2`` is orthogonal to ``\mathbf{v}``, as shown in Figure below.
+1. ``\mathbf{w}_1`` is called the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` or the vector component of ``\mathbf{u}`` along ``\mathbf{v}``, and is denoted by ``\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}``.
+2. ``\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1`` is called the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}``.
+
+$(post_img("https://www.dropbox.com/scl/fi/dek860uer157a294ebkhg/fig_11_29.png?rlkey=yft18nd2xr98ot3s7345x4p6l&dl=1",500))
 """
-end
 
-
-# ╔═╡ 48ec609f-3846-4b67-b858-5157352169af
-#✓ SOL 11.3 ex6 -- show by default
-begin
-	s11_3_ex6_sol_box = @bind s11_3_ex6_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex6_sol_box) **Show Solution**
+# ╔═╡ 8bb57498-9a49-4b45-8d82-fb790465b1ae
+cm"""
+$(ex(5,"Finding a Vector Component of <span style='font-style:italic;font-weight:200;'>u</span> Orthogonal to <span style='font-style:italic;font-weight:200;'>v</span>"))
+Find the vector component of ``\mathbf{u}=\langle 5,10\rangle`` that is orthogonal to ``\mathbf{v}=\langle 4,3\rangle``, given that
+```math
+\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\langle 8,6\rangle
+```
+and
+```math
+\mathbf{u}=\langle 5,10\rangle=\mathbf{w}_1+\mathbf{w}_2 .
+```
 """
-end
 
+# ╔═╡ aac34993-c94d-4fa1-8f45-e249740c914d
+cm"""
+$(bth("Projection Using the Dot Product"))
+If ``\mathbf{u}`` and ``\mathbf{v}`` are nonzero vectors, then the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` is
+```math
+\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\left(\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{v}\|^2}\right) \mathbf{v}
+```
+"""
+
+# ╔═╡ 3eded575-d9c4-424e-8151-3958dababb38
+cm"""
+$(ex(6,"Decomposing a Vector into Vector Components"))
+Find the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` and the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}`` for ``\mathbf{u}=3 \mathbf{i}-5 \mathbf{j}+2 \mathbf{k}`` and ``\quad \mathbf{v}=7 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``.
+"""
 
 # ╔═╡ 29a43516-0209-4a2e-930b-0157237c981f
 let
@@ -450,28 +659,43 @@ let
     # w2 = u-w1
 end
 
-# ╔═╡ e31be1dc-7013-43e4-95b8-9c8f8e086b9f
-#✓ SOL 11.3 ex7 -- show by default
-begin
-	s11_3_ex7_sol_box = @bind s11_3_ex7_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex7_sol_box) **Show Solution**
+# ╔═╡ 97b10d17-61c1-494b-aefe-131a436e374e
+cm"""
+$(ex(7,"Finding a Force"))
+A 600-pound boat sits on a ramp inclined at ``30^{\circ}``, as shown in Figure below. What force is required to keep the boat from rolling down the ramp?
+$(post_img("https://www.dropbox.com/scl/fi/9h16n07tc8x569rwdx5j7/fig_11_32.png?rlkey=rv5hgssgbggmveuj0tcj81ovk&dl=1",500))
 """
-end
-
 
 # ╔═╡ ca13f691-7ec8-4293-b271-8c197b2e0ccf
 md"## Work (Reading)"
 
-# ╔═╡ b086df72-81e8-4e8f-8b6f-92122b21bd23
-#✓ SOL 11.3 ex8 -- show by default
-begin
-	s11_3_ex8_sol_box = @bind s11_3_ex8_show_sol CheckBox(default=true)
-	cm"""
-$(s11_3_ex8_sol_box) **Show Solution**
-"""
-end
+# ╔═╡ b1c3ec5b-003d-42ab-8c6b-806e083a2047
+cm"""
 
+The work ``W`` done by the constant force ``\mathbf{F}`` acting along the line of motion of an object is given by
+```math
+W=(\text { magnitude of force })(\text { distance })=\|\mathbf{F}\|\|\stackrel{\rightharpoonup}{P Q}\|
+```
+as shown in Figure 11.33(a). When the constant force ``\mathbf{F}`` is not directed along the line of motion, you can see from Figure 11.33(b) that the work ``W`` done by the force is
+```math
+W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\|=(\cos \theta)\|\mathbf{F}\|\|\overrightarrow{P Q}\|=\mathbf{F} \cdot \overrightarrow{P Q}
+```
+
+$(post_img("https://www.dropbox.com/scl/fi/qafxufq3s8tcrxnbisru2/fig_11_33.png?rlkey=4uypkytgkkby8yaomav0jszhr&dl=1",400))
+
+This notion of work is summarized in the next definition.
+
+$(define("Work"))
+The work ``W`` done by a constant force ``\mathbf{F}`` as its point of application moves along the vector ``\overrightarrow{P Q}`` is one of the following.
+1. ``W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\| \quad`` Projection form
+2. ``W=\mathbf{F} \cdot \stackrel{\rightharpoonup}{P Q}`` Dot product form
+$(ebl())
+
+$(ex(8,"Finding Work"))
+To close a sliding door, a person pulls on a rope with a constant force of 50 pounds at a constant angle of ``60^{\circ}``, as shown in Figure below. Find the work done in moving the door 12 feet to its closed position.
+
+$(post_img("https://www.dropbox.com/scl/fi/8wn5s5kestb1dtzxulldc/fig_11_34.png?rlkey=r0g1mc0s9vakiye1dkxd5oxrd&dl=1",400))
+"""
 
 # ╔═╡ 99b860bf-9374-4e00-8a92-822af52d403f
 md"# 11.4 The Cross Product of Two Vectors in Space"
@@ -485,6 +709,38 @@ md"""
 
 # ╔═╡ 495c292f-fbcb-4420-93a3-fbcd6a34d17a
 md"## The Cross Product"
+
+# ╔═╡ cce4a136-a23c-45c8-a3e4-78f744cc2836
+cm"""
+$(define("Cross Product of Two Vectors in Space"))
+Let
+```math
+\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k} \quad \text { and } \quad \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}
+```
+be vectors in space. The cross product of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector
+```math
+\mathbf{u} \times \mathbf{v}=\left(u_2 v_3-u_3 v_2\right) \mathbf{i}-\left(u_1 v_3-u_3 v_1\right) \mathbf{j}+\left(u_1 v_2-u_2 v_1\right) \mathbf{k}
+```
+"""
+
+# ╔═╡ 1b792a4f-e23e-441d-9f6c-a64465505e2b
+cm"""
+$(bbl("Remark",""))
+A convenient way to calculate ``\mathbf{u} \times \mathbf{v}`` is to use the determinant form with cofactor expansion shown below. (This ``3 \times 3`` determinant form is used simply to help remember the formula for the cross product. The corresponding array is technically not a matrix because its entries are not all numbers.)
+```math
+\mathbf{u} \times \mathbf{v}=
+\left|\begin{array}{ccc}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3
+\end{array}\right| \begin{array}{ll}
+\text{}\\
+\longleftarrow \text { Put "u" in Row } 2 .\\
+\longleftarrow \text { Put "v" in Row } 3 .
+\end{array}
+```
+
+"""
 
 # ╔═╡ a58b8141-f330-46d8-82d2-b4caa5417887
 md"""
@@ -615,25 +871,49 @@ md"""
 #     p1
 # end
 
-# ╔═╡ d878ec80-8b50-4ff3-9fef-06ca92c63f91
-#✓ SOL 11.4 ex1 -- show by default
-begin
-	s11_4_ex1_sol_box = @bind s11_4_ex1_show_sol CheckBox(default=true)
-	cm"""
-$(s11_4_ex1_sol_box) **Show Solution**
+# ╔═╡ b18adead-c917-450c-9a3c-7253d6d91442
+cm"""
+$(ex(1,"Finding the Cross Product"))
+For ``\mathbf{u}=\mathbf{i}-2 \mathbf{j}+\mathbf{k}`` and ``\mathbf{v}=3 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``, find each of the following.
+- (a.) ``\mathbf{u} \times \mathbf{v}``
+- (b.) ``\mathbf{v} \times \mathbf{u}``
+- (c.) ``\mathbf{v} \times \mathbf{v}``
 """
-end
 
-
-# ╔═╡ 18456035-9e2c-4fa9-9a40-fc161af78522
-#✓ SOL 11.4 ex2 -- show by default
-begin
-	s11_4_ex2_sol_box = @bind s11_4_ex2_show_sol CheckBox(default=true)
-	cm"""
-$(s11_4_ex2_sol_box) **Show Solution**
+# ╔═╡ 79735eb1-16e1-4cf3-a43a-88d1ade37279
+cm"""
+$(bth("Algebraic Properties of the Cross Product"))
+Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in space, and let ``c`` be a scalar.
+1. ``\mathbf{u} \times \mathbf{v}=-(\mathbf{v} \times \mathbf{u})``
+2. ``\mathbf{u} \times(\mathbf{v}+\mathbf{w})=(\mathbf{u} \times \mathbf{v})+(\mathbf{u} \times \mathbf{w})``
+3. ``c(\mathbf{u} \times \mathbf{v})=(c \mathbf{u}) \times \mathbf{v}=\mathbf{u} \times(c \mathbf{v})``
+4. ``\mathbf{u} \times \mathbf{0}=\mathbf{0} \times \mathbf{u}=\mathbf{0}``
+5. ``\mathbf{u} \times \mathbf{u}=\mathbf{0}``
+6. ``\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=(\mathbf{u} \times \mathbf{v}) \cdot \mathbf{w}``
 """
-end
 
+# ╔═╡ f85ad3e4-f7ba-4563-b548-ceb803d13d2c
+cm"""
+$(bth("Geometric Properties of the Cross Product"))
+Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors in space, and let ``\theta`` be the angle between ``\mathbf{u}`` and ``\mathbf{v}``.
+1. ``\mathbf{u} \times \mathbf{v}`` is orthogonal to both ``\mathbf{u}`` and ``\mathbf{v}``.
+2. ``\|\mathbf{u} \times \mathbf{v}\|=\|\mathbf{u}\|\|\mathbf{v}\| \sin \theta``
+3. ``\mathbf{u} \times \mathbf{v}=\mathbf{0}`` if and only if ``\mathbf{u}`` and ``\mathbf{v}`` are scalar multiples of each other.
+4. ``\|\mathbf{u} \times \mathbf{v}\|=`` area of parallelogram having ``\mathbf{u}`` and ``\mathbf{v}`` as adjacent sides.
+"""
+
+# ╔═╡ 1fb44f1d-547e-4bea-b7ad-f171ebed5b20
+cm"""
+$(ex(2," Using the Cross Product"))
+Find a unit vector that is orthogonal to both
+```math
+\mathbf{u}=\mathbf{i}-4 \mathbf{j}+\mathbf{k}
+```
+and
+```math
+\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}
+```
+"""
 
 # ╔═╡ 4fb037ae-7f8e-40a7-9988-26da22529d2e
 let
@@ -643,15 +923,17 @@ let
     w = w/norm(w)
 end
 
-# ╔═╡ f6dd1b1d-af2d-4cef-89b6-cb0131ccb942
-#✓ SOL 11.4 ex3 -- show by default
-begin
-	s11_4_ex3_sol_box = @bind s11_4_ex3_show_sol CheckBox(default=true)
-	cm"""
-$(s11_4_ex3_sol_box) **Show Solution**
+# ╔═╡ 948bbe03-1560-4b79-904f-133256b6423f
+cm"""
+$(ex(3,"Geometric Application of the Cross Product"))
+The vertices of a quadrilateral are listed below. Show that the quadrilateral is a parallelogram and find its area.
+```math
+\begin{array}{ll}
+A=(5,2,0) & B=(2,6,1) \\
+C=(2,4,7) & D=(5,0,6)
+\end{array}
+```
 """
-end
-
 
 # ╔═╡ 12d1fa2a-9a6c-4edc-821e-2f54b4da454e
 let
@@ -675,28 +957,81 @@ cm"""
 # ╔═╡ d6fc1ea1-f463-46a5-94e6-9a4e6f914fc8
 md"## Application"
 
-# ╔═╡ 10aa7935-07cb-4ced-99f3-f65df6d542f6
-#✓ SOL 11.4 ex4 -- show by default
-begin
-	s11_4_ex4_sol_box = @bind s11_4_ex4_show_sol CheckBox(default=true)
-	cm"""
-$(s11_4_ex4_sol_box) **Show Solution**
-"""
-end
+# ╔═╡ f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
+cm"""
+$(bbl("Torque",""))
+In physics, the cross product can be used to measure torque-the moment M of a force ``\mathbf{F}`` about a point ``\boldsymbol{P}``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/691imwz7wog1wxr2vx3jt/fig_11_39.png?rlkey=v4e50kju4mvmy8zd0vjy4v1ef&dl=1",300))
 
+If the point of application of the force is ``Q``, then the moment of ``\mathbf{F}`` about ``P`` is
+```math
+\mathbf{M}=\stackrel{\rightharpoonup}{P Q} \times \mathbf{F} . \quad \text { Moment of } \mathbf{F} \text { about } P
+```
+
+The magnitude of the moment ``\mathbf{M}`` measures the tendency of the vector ``\overrightarrow{P Q}`` to rotate counterclockwise (using the right-hand rule) about an axis directed along the vector ``\mathbf{M}``.
+"""
+
+# ╔═╡ 6f42f537-305f-4e0a-b593-5071e1d7af7b
+cm"""
+$(ex(4,"An Application of the Cross Product"))
+A vertical force of 50 pounds is applied to the end of a one-foot lever that is attached to an axle at point ``P``, as shown below.
+
+$(post_img("https://www.dropbox.com/scl/fi/9sqxf39xyyukd1zbqjv8o/fig_11_40.png?rlkey=szapu3urbrqd9pe9gfl7qfyai&dl=1",300))
+
+Find the moment of this force about the point ``P`` when ``\theta=60^{\circ}``.
+"""
 
 # ╔═╡ 30596df7-5297-4369-ae8c-1970df3da531
 md"## The Triple Scalar Product"
 
-# ╔═╡ 1810ba68-52d4-4ea5-ab66-09c0d7c95846
-#✓ SOL 11.4 ex5 -- show by default
-begin
-	s11_4_ex5_sol_box = @bind s11_4_ex5_show_sol CheckBox(default=true)
-	cm"""
-$(s11_4_ex5_sol_box) **Show Solution**
-"""
-end
+# ╔═╡ 183998e1-735f-4c38-ae61-7f2471fa1ae5
+cm"""
+For vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in space, the dot product of ``\mathbf{u}`` and ``\mathbf{v} \times \mathbf{w}``
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})
+```
+is called the __triple scalar product__,
 
+$(bth("The Triple Scalar Product"))
+For ``\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k}, \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}``, and ``\mathbf{w}=w_1 \mathbf{i}+w_2 \mathbf{j}+w_3 \mathbf{k}``, the triple scalar product is
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{rrr}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{array}\right|
+```
+"""
+
+# ╔═╡ ece4c6d9-8393-43c9-b60d-93df66a95999
+cm"""
+$(bth("Geometric Property of the Triple Scalar Product"))
+The volume ``V`` of a parallelepiped with vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` as adjacent edges is
+```math
+V=|\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})| .
+```
+$(ebl())
+
+$(post_img("https://www.dropbox.com/scl/fi/5hf3ibte2ppgtlx0vegr1/fig_11_41.png?rlkey=z0qrbw2p1z30iyhae0mf2xdfo&dl=1",300))
+"""
+
+# ╔═╡ 8b67f393-e954-4b33-9cc9-c382d7a41b37
+cm"""
+$(ex(5,"Volume by the Triple Scalar Product"))
+Find the volume of the parallelepiped shown below having
+```math
+\begin{aligned}
+\mathbf{u} & =3 \mathbf{i}-5 \mathbf{j}+\mathbf{k} \\
+\mathbf{v} & =2 \mathbf{j}-2 \mathbf{k}
+\end{aligned}
+```
+and
+```math
+\mathbf{w}=3 \mathbf{i}+\mathbf{j}+\mathbf{k}
+```
+as adjacent edges.
+
+"""
 
 # ╔═╡ b35ca1c3-621d-40af-afb7-a96b6fae35a8
 let
@@ -713,6 +1048,22 @@ end
 cm"""
 [Geogebra Graph](https://www.geogebra.org/classic/b5xwbxrg?embed)
 
+"""
+
+# ╔═╡ b1a879f4-3d78-4309-9f4f-117bcb0765da
+cm"""
+$(bbl("Remark",""))
+
+The volume of the parallelepiped is ``0`` if and only if the three vectors are __coplanar__.
+
+That is, when the vectors ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle``, ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle``, and ``\mathbf{w}=\left\langle w_1, w_2, w_3\right\rangle`` have the same initial point, they lie in the same plane if and only if
+```math
+\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{ccc}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{array}\right|=0
+```
 """
 
 # ╔═╡ c9fdf367-035b-4716-9f45-e62d82ec8a6e
@@ -734,6 +1085,27 @@ cm"""
 
 """
 
+# ╔═╡ 0e941631-0e52-4dc3-bdf1-056f36e77499
+cm"""
+$(bth("Parametric Equations of a Line in Space"))
+
+A line ``L`` parallel to the vector ``\mathbf{v}=\langle a, b, c\rangle`` and passing through the point ``P\left(x_1, y_1, z_1\right)`` is represented by the parametric equations
+```math
+x=x_1+a t, \quad y=y_1+b t, \quad \text { and } \quad z=z_1+c t .
+```
+$(ebl())
+
+If the direction numbers ``a, b``, and ``c`` are all nonzero, then you can eliminate the parameter ``t`` in the parametric equations to obtain symmetric equations of the line.
+```math
+\frac{x-x_1}{a}=\frac{y-y_1}{b}=\frac{z-z_1}{c} \quad \color{red}{\text{Symmetric equations}}
+```
+
+
+$(ex(1,"Finding Parametric and Symmetric Equations"))
+Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Below.
+
+"""
+
 # ╔═╡ ca27664a-8f75-4131-9d61-044ea96979de
 cm"""
 [Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
@@ -743,6 +1115,35 @@ cm"""
 
 # ╔═╡ 44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
 md"##  Planes in Space"
+
+# ╔═╡ 23a92df7-77d9-4804-86a5-08cdfea8651c
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/9vzo9clna5s3ugrufyons/fig_11_45.png?rlkey=dyblrdq5uvbjp1wmdl8y5mryl&dl=1",400))
+
+$(bth("Standard Equation of a Plane in Space"))
+The plane containing the point ``\left(x_1, y_1, z_1\right)`` and having normal vector
+```math
+\mathbf{n}=\langle a, b, c\rangle
+```
+can be represented by the standard form of the equation of a plane
+```math
+a\left(x-x_1\right)+b\left(y-y_1\right)+c\left(z-z_1\right)=0 .
+```
+"""
+
+# ╔═╡ 391ff8aa-056a-4867-90db-3d9f4537fe80
+cm"""
+$(bbl("Remark",""))
+```math
+a x+b y+c z+d=0 \qquad \color{red}{\text{General form of equation of plane}}
+```
+"""
+
+# ╔═╡ 8e46e68e-0099-430b-864e-683b14ed2fbd
+cm"""
+$(ex(3,"Finding an Equation of a Plane in Three-Space"))
+Find an equation (in standard form and in general form) of the plane containing the points ``(2,1,1), \quad(1,4,1), \quad`` and ``\quad(-2,0,4)``.
+"""
 
 # ╔═╡ 71a93732-10ff-480f-aacf-6ea729d636b9
 cm"""
@@ -765,6 +1166,30 @@ let
     n ⋅ PQ ~ 0
     # n ⋅ ([x,y,z]) - n⋅A ~ 0
 end
+
+# ╔═╡ 902fbee4-194f-499d-9e9d-ad7bfb08131e
+cm"""
+$(bbl("Angle between two planes",""))
+```math
+\cos \theta=\frac{\left|\mathbf{n}_1 \cdot \mathbf{n}_2\right|}{\left\|\mathbf{n}_1\right\|\left\|\mathbf{n}_2\right\|}
+```
+
+
+"""
+
+# ╔═╡ 772af978-5d7d-467d-bfc5-98dcf5bdd872
+cm"""
+$(bbl("Remark",""))
+Two planes with normal vectors ``\bf n_1`` and ``\bf n_2`` are
+* __perpendicular__ when ``{\bf n_1} \cdot {\bf n_2} = 0``.
+* __parallel__ when ``\bf n_1`` is a scalar multiple of ``\bf n_2``.
+"""
+
+# ╔═╡ 6e53795f-016a-4113-ae5d-5dc2a02758a7
+cm"""
+$(ex(4,"Finding the Line of Intersection of Two Planes"))
+Find the angle between the two planes ``x-2 y+z=0`` and ``2 x+3 y-2 z=0``. Then find parametric equations of their line of intersection.
+"""
 
 # ╔═╡ 21b654c3-e9e3-4277-914d-32c81dc86604
 cm"""
@@ -796,6 +1221,23 @@ Sketch the plane
 # ╔═╡ 5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
 md"## Distances Between Points, Planes, and Lines"
 
+# ╔═╡ 9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
+cm"""
+$(bth("Distance Between a Point and a Plane"))
+$(post_img("https://www.dropbox.com/scl/fi/5l5deuushije2ffszddg4/fig_11_52.png?rlkey=gz5llqi698cjwz5iuwwfruap4&dl=1",300))
+The distance between a plane and a point ``Q`` (not in the plane) is
+```math
+D=\left\|\operatorname{proj}_{\mathbf{n}} \stackrel{\rightharpoonup}{P Q}\right\|=\frac{|\stackrel{\rightharpoonup}{P Q} \cdot \mathbf{n}|}{\|\mathbf{n}\|}
+```
+where ``P`` is a point in the plane and ``\mathbf{n}`` is normal to the plane.
+
+
+$(ebl())
+
+$(ex(5,"Finding the Distance Between a Point and a Plane"))
+Find the distance between the point ``Q(1,5,-4)`` and the plane ``3 x-y+2 z=6``.
+"""
+
 # ╔═╡ 1b6deda2-a68d-4684-8741-275628b24ecf
 let
     Q = (1, 5, -4)
@@ -805,6 +1247,23 @@ let
     PQ = Q .- P
     D = abs(PQ ⋅ n) / norm(n)
 end
+
+# ╔═╡ 1aca8a3e-feb4-4665-a059-8a0c2171198a
+cm"""
+$(bbl("Distance between a point and a plane"))
+Let ``Q(x_0,y_0,z_0)`` be any point. The distance between ``Q`` and the plane ``ax+by+cz+d=0`` is given by
+```math
+D=\frac{\left|a x_0+b y_0+c z_0+d\right|}{\sqrt{a^2+b^2+c^2}}
+```
+where ``P(x_1.y_1,z_2)`` on the plane.
+
+"""
+
+# ╔═╡ bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
+cm"""
+$(ex(6,"Finding the Distance Between Two Parallel Planes"))
+Two parallel planes, ``3 x-y+2 z-6=0`` and ``6 x-2 y+4 z+4=0``, find the distance between them.
+"""
 
 # ╔═╡ 7932b9ab-1041-44ee-8e31-f10870a58d90
 let
@@ -819,6 +1278,25 @@ let
 
 end
 
+# ╔═╡ b829aed8-9618-44ea-9a2d-2c5d36416e62
+cm"""
+$(bth("Distance Between a Point and a Line in Space"))
+The distance between a point ``Q`` and a line in space is
+```math
+D=\frac{\|\overrightarrow{P Q} \times \mathbf{u}\|}{\|\mathbf{u}\|}
+```
+where ``\mathbf{u}`` is a direction vector for the line and ``P`` is a point on the line.
+
+$(post_img("https://www.dropbox.com/scl/fi/y9ty0d9njoshc2ki0skey/fig_11_54.png?rlkey=wicvn44wlqvc72niqy28dfs1w&dl=1",300))
+$(ebl())
+
+$(ex(7,"Finding the Distance Between a Point and a Line"))
+Find the distance between the point ``Q(3,-1,4)`` and the line
+```math
+x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
+```
+"""
+
 # ╔═╡ 8934159d-2dc6-4e4d-a5c4-2125831e0c52
 let
     Q = [3,-1, 4]
@@ -831,6 +1309,28 @@ end
 
 # ╔═╡ 2407b715-09cd-4568-bf81-4b9f5cf4065e
 md"## Skew lines"
+
+# ╔═╡ 037e8495-26d6-45d9-a855-4d1c88917561
+cm"""
+$(define("Skew Lines"))
+Two lines in space are __skew__ if they are neither parallel nor intersecting.
+"""
+
+# ╔═╡ 5e96be6d-4801-4056-ae2c-0b1b95307ac4
+cm"""
+$(ex())
+Consider the following two lines in space.
+```math
+\begin{aligned}
+& L_1: x=4+5 t, y=5+5 t, z=1-4 t \\
+& L_2: x=4+s, y=-6+8 s, z=7-3 s
+\end{aligned}
+```
+- (i) Show that these lines are not parallel.
+- (ii) Show that these lines do not intersect and therefore are skew lines.
+- (iii) Show that the two lines lie in parallel planes.
+- (iv) Find the distance between the parallel planes from part (iii). This is the distance between the original skew lines.
+"""
 
 # ╔═╡ eacf6145-a437-45e9-8eee-fb587077be60
 cm"""
@@ -872,6 +1372,14 @@ md"""
 # ╔═╡ cfbda53f-da9b-422b-b888-28f6acb96ee0
 md"## Cylindrical Surfaces"
 
+# ╔═╡ 203ef45b-a6c3-4d04-a773-43ee348eaabd
+cm"""
+$(define("Cylinder"))
+Let ``C`` be a curve in a plane and let ``L`` be a line not in a parallel plane. The set of all lines parallel to ``L`` and intersecting ``C`` is a __cylinder__. The curve ``C`` is the __generating curve__ (or __directrix__) of the cylinder, and the parallel lines are __rulings__.
+
+$(post_img("https://www.dropbox.com/scl/fi/q0pbnl6g4n9ouhf0kbf4v/fig_11_57.png?rlkey=k0julsbb28j2liez5723p4hz7&dl=1"))
+"""
+
 # ╔═╡ fcb7503a-7145-44ce-9354-80631b966912
 cm"""
 __Equations of Cylinders__
@@ -885,6 +1393,14 @@ cm"""
 
 """
 
+# ╔═╡ f91da06c-b2ed-4b31-9fa6-af1e79c2167a
+cm"""
+$(ex(1,"Sketching a Cylinder"))
+Sketch the surface represented by each equation.
+- (a.) ``z=y^2``
+- (b.) ``z=\sin x, \quad 0 \leq x \leq 2 \pi``
+"""
+
 # ╔═╡ 8054a733-294a-49f6-881c-938c0e032484
 cm"""
 [Geogebra Graph](https://www.geogebra.org/classic/bjkrnchk?embed)
@@ -893,6 +1409,57 @@ cm"""
 
 # ╔═╡ 58d41760-0c3d-4512-9829-7553ba5cc8a1
 md"## Quadric Surfaces"
+
+# ╔═╡ 11ce75b3-0867-441d-958d-1ff5ed3d9eaf
+cm"""
+$(define("Quadric Surface"))
+The equation of a quadric surface in space is a second-degree equation in three variables. The general form of the equation is
+```math
+A x^2+B y^2+C z^2+D x y+E x z+F y z+G x+H y+I z+J=0
+```
+
+There are six basic types of quadric surfaces:
+1. __ellipsoid__,
+2. __hyperboloid of one sheet__,
+3. __hyperboloid of two sheets__,
+4. __elliptic cone__,
+5. __elliptic paraboloid__, and
+6. __hyperbolic paraboloid__.
+"""
+
+# ╔═╡ 2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",800))
+
+$(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",800))
+"""
+
+# ╔═╡ d936afce-e80d-49c9-9e55-cd4432c6e392
+cm"""
+$(ex(2,"Sketching a Quadric Surface"))
+Classify and sketch the surface
+```math
+4 x^2-3 y^2+12 z^2+12=0
+```
+"""
+
+# ╔═╡ bd9cb96f-ab81-4bb8-82a8-56577a0412a6
+cm"""
+$(ex(3,"Sketching a Quadric Surface"))
+Classify and sketch the surface
+```math
+x-y^2-4 z^2=0
+```
+"""
+
+# ╔═╡ ba23c565-f547-4df9-9027-d623bacf8fa6
+cm"""
+$(ex(4,"A Quadric Surface Not Centered at the Origin"))
+Classify and sketch the surface
+```math
+x^2+2 y^2+z^2-4 x+4 y-2 z+3=0
+```
+"""
 
 # ╔═╡ 2443239f-6d9b-41e1-ae93-f30e784a5073
 md"""
@@ -907,6 +1474,14 @@ md"""
 # ╔═╡ 301c9794-a8a2-4186-84c9-554de27bded3
 md"## Cylindrical Coordinates"
 
+# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
+cm"""
+$(bbl("The Cylindrical Coordinate System",""))
+In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
+1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
+2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
+"""
+
 # ╔═╡ cb1ce385-d5e7-464f-a551-dd024d016d29
 cm"""
 __Cylindrical to rectangular:__
@@ -920,6 +1495,40 @@ r^2=x^2+y^2, \quad \tan \theta=\frac{y}{x}, \quad z=z
 ```
 """
 
+# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
+cm"""
+$(ex(1,"Cylindrical-to-Rectangular Conversion"))
+Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
+"""
+
+# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
+cm"""
+$(ex(2,"Rectangular-to-Cylindrical Conversion"))
+
+Convert the point
+```math
+(x, y, z)=(1, \sqrt{3}, 2)
+```
+to cylindrical coordinates.
+"""
+
+# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
+cm"""
+$(ex(3," Rectangular-to-Cylindrical Conversion"))
+Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
+- a. ``x^2+y^2=4 z^2``
+- b. ``y^2=x``
+"""
+
+# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
+cm"""
+$(ex(4,"Cylindrical-to-Rectangular Conversion"))
+Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
+```math
+r^2 \cos 2 \theta+z^2+1=0
+```
+"""
+
 # ╔═╡ c645824c-141c-4236-bf42-d06a9115475c
 md"##  Triple Integrals in Cylindrical Coordinates"
 
@@ -930,8 +1539,30 @@ cm"""
 ```
 """
 
+# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
+cm"""
+$(ex(1,"Finding Volume in Cylindrical Coordinates"))
+Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
+$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
+"""
+
 # ╔═╡ 3d13b289-1bc6-4c79-b60d-abbbc6172cc2
 md"##  Spherical Coordinates"
+
+# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
+cm"""
+$(bbl("The Spherical Coordinate System",""))
+In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
+1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
+2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
+3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
+Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
+"""
+
+# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
+"""
 
 # ╔═╡ 1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
 cm"""
@@ -959,6 +1590,15 @@ __Cylindrical to spherical ``(r \geq 0)`` :__
 ```
 """
 
+# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
+cm"""
+$(ex(5,"Rectangular-to-Spherical Conversion"))
+
+Find an equation in spherical coordinates for the surface represented by each rectangular equation.
+- a. Cone: ``x^2+y^2=z^2``
+- b. Sphere: ``x^2+y^2+z^2-4 z=0``
+"""
+
 # ╔═╡ e0fa4607-ec15-4751-98db-a8feb04ad558
 md"##  Triple Integrals in Spherical Coordinates"
 
@@ -968,6 +1608,38 @@ cm"""
 \iiint_Q f(x, y, z) d V=\int_{\theta_1}^{\theta_2} \int_{\phi_1}^{\phi_2} \int_{\rho_1}^{\rho_2} f(\rho \sin \phi \cos \theta, \rho \sin \phi \sin \theta, \rho \cos \phi) \rho^2 \sin \phi d \rho d \phi d \theta
 ```
 """
+
+# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
+cm"""
+$(ex(4,"Finding Volume in Spherical Coordinates"))
+
+Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
+
+$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
+"""
+
+# ╔═╡ 83571d10-7eff-11f0-10db-391640417d07
+begin
+    using CommonMark
+    using PlutoUI, PlutoExtras
+    using Plots, PlotThemes, LaTeXStrings
+    # using PyPlot
+    using Latexify
+    using HypertextLiteral
+    using Colors
+    using LinearAlgebra, Random, Printf, SparseArrays
+    using Symbolics, Nemo, Groebner
+    # using SymPy
+    using QRCoders
+    using PrettyTables
+    # using Primes
+    # using LinearSolve
+    # using NonlinearSolve
+    using ForwardDiff
+    # using Integrals
+    # using OrdinaryDiffEq
+    using Unitful
+end
 
 # ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
 begin
@@ -1158,1708 +1830,6 @@ begin
     @htl("")
 end
 
-# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
-
-# __ChatGPT:__ (Course AI assistant)
-# $(post_img("https://www.dropbox.com/scl/fi/8scavzk19ewiqd6s7ubj5/chatgpt_qrcode.png?rlkey=5jlmqhovlfd1byh0s7ya93b47&dl=1"))
-
-cm"""
-__Course website:__ (Notes, Syllabus)
-$(post_img("https://www.dropbox.com/scl/fi/swxz2urvoq9olrlpu2xfi/mshahrani_qrcode.png?rlkey=w5ojh9lpnf49qadivxuv1un4b&dl=1"))
-
----
-
-
-"""
-
-# ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
-begin
-    text_book = post_img("https://www.dropbox.com/scl/fi/upln00gqvnbdy7whr23pj/larson_book.jpg?rlkey=wlkgmzw2ernadd9b8v8qwu2jd&dl=1", 200)
-    md""" # Syllabus
-    ## Syallbus
-    See here [Term 252 - MATH201 - Syllabus](https://math.kfupm.edu.sa/docs/default-source/css-library/math201-261.pdf)
-    ## Textbook
-    __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
-    $text_book
-
-    ## Office Hours
-    I strongly encourage all students to make use of my office hours. These dedicated times are a valuable opportunity for you to ask questions, seek clarification on lecture material, discuss challenging problems, and get personalized feedback on your work. Engaging with me during office hours can greatly enhance your understanding of the course content and improve your performance. Whether you're struggling with a specific concept or simply want to delve deeper into the subject, I am here to support your learning journey. Don't hesitate to drop by; __your success is my priority__.
-
-    | Day       | Time        |
-    |-----------|-------------|
-    | Sunday    | 11:00-11:50AM |
-    | Tuesday | 11:00-11:50AM |
-    | Thursday | 11:00-11:50AM |
-    Also you can ask for an online meeting through __TEAMS__.
-    """
-end
-
-# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
-cm"""
-$(ex(1,"Vector Representation: Directed Line Segments"))
-Let ``\mathbf{v}`` be represented by the directed line segment from ``(0,0)`` to ``(3,2)``, and let ``\mathbf{u}`` be represented by the directed line segment from ``(1,2)`` to ``(4,4)``. Show that ``\mathbf{v}`` and ``\mathbf{u}`` are equivalent.
-"""
-
-# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
-cm"""
-$(define("Component Form of a Vector in the Plane"))
-If ``\mathbf{v}`` is a vector in the plane whose initial point is the origin and whose terminal point is ``\left(v_1, v_2\right)``, then the __component form__ of ``\mathbf{v}`` is ``\mathbf{v}=\left\langle v_1, v_2\right\rangle``. The coordinates ``v_1`` and ``v_2`` are called the __components of ``\mathbf{v}``__. If both the initial point and the terminal point lie at the origin, then ``\mathbf{v}`` is called the __zero vector__ and is denoted by ``\mathbf{0}=\langle 0,0\rangle``.
-
-Moreover, the length (or magnitude) of ``\textbf{v}`` is
-```math
-\begin{aligned}
-\|\mathbf{v}\|
-& =\sqrt{v_1^2+v_2^2} \quad \color{red}{\text{Length of a vector}}
-\end{aligned}
-```
-"""
-
-# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
-cm"""
-$(ex(2,"Component Form and Length of a Vector"))
-Find the component form and length of the vector ``\mathbf{v}`` that has initial point ``(3,-7)`` and terminal point ``(-2,5)``.
-"""
-
-# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
-cm"""
-$(define("Vector Addition and Scalar Multiplication"))
-Let ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` be vectors and let ``c`` be a scalar.
-1. The vector sum of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector ``\mathbf{u}+\mathbf{v}=\left\langle u_1+v_1, u_2+v_2\right\rangle``.
-2. The scalar multiple of ``c`` and ``\mathbf{u}`` is the vector
-```math
-c \mathbf{u}=\left\langle c u_1, c u_2\right\rangle
-```
-3. The negative of ``\mathbf{v}`` is the vector
-```math
--\mathbf{v}=(-1) \mathbf{v}=\left\langle-v_1,-v_2\right\rangle
-```
-4. The difference of ``\mathbf{u}`` and ``\mathbf{v}`` is
-```math
-\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=\left\langle u_1-v_1, u_2-v_2\right\rangle .
-```
-"""
-
-# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
-cm"""
-$(ex(3,"Vector Operations"))
-For ``\mathbf{v}=\langle-2,5\rangle`` and ``\mathbf{w}=\langle 3,4\rangle``, find each of the vectors.
-- (a.) ``\frac{1}{2} \mathbf{v}``
-- (b.) ``\mathbf{w}-\mathbf{v}``
-- (c.) ``\mathbf{v}+2 \mathbf{w}``
-"""
-
-# ╔═╡ 937281b4-302e-4aa7-a640-9073028803ba
-#✓ SOL 11.1 ex3
-if s11_1_ex3_show_sol
-	cm"""
-$(bbl("Solution",""))
-Every one of these is done **component by component**.
-
-**(a.)** Scalar multiplication scales each component.
-```math
-\frac{1}{2}\mathbf{v}=\frac{1}{2}\langle -2,5\rangle=\left\langle -1,\frac{5}{2}\right\rangle
-```
-
-**(b.)** Subtraction is addition of the negative.
-```math
-\mathbf{w}-\mathbf{v}=\langle 3-(-2),\;4-5\rangle=\langle 5,-1\rangle
-```
-
-**(c.)** Scale first, then add.
-```math
-\mathbf{v}+2\mathbf{w}=\langle -2,5\rangle+\langle 6,8\rangle=\langle 4,13\rangle
-```
-
-Read the answers geometrically: ``\frac{1}{2}\mathbf{v}`` points in the same direction as ``\mathbf{v}`` but is half as long; ``\mathbf{w}-\mathbf{v}`` is the vector that runs **from the tip of** ``\mathbf{v}`` **to the tip of** ``\mathbf{w}``; and ``\mathbf{v}+2\mathbf{w}`` is the diagonal of the parallelogram built on ``\mathbf{v}`` and ``2\mathbf{w}``.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
-cm"""
-$(bth("Properties of Vector Operations"))
-Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane, and let ``c`` and ``d`` be scalars.
-1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u} \hspace{5cm} \color{red}{\text{Commutative Property}}``
-
-
-2. ``(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w}) \hspace{2.2cm} \color{red}{\text{Associative Property}}``
-
-3. ``\mathbf{u}+\mathbf{0}=\mathbf{u}\hspace{5.8cm} \color{red}{\text{Additive Identity Property}}``
-
-4. ``\mathbf{u}+(-\mathbf{u})=\mathbf{0}\hspace{5cm} \color{red}{\text{Additive Inverse Property}}``
-
-5. ``c(d \mathbf{u})=(c d) \mathbf{u}\hspace{5cm} \color{red}{\text{Associative Property}}``
-
-6. ``(c+d) \mathbf{u}=c \mathbf{u}+d \mathbf{u}\hspace{5cm} \color{red}{\text{Distributive Property}}``
-
-
-7. ``c(\mathbf{u}+\mathbf{v})=c \mathbf{u}+c \mathbf{v}\hspace{5cm} \color{red}{\text{Distributive Property}}``
-
-
-8. ``1(\mathbf{u})=\mathbf{u}, 0(\mathbf{u})=\mathbf{0}\hspace{5cm}``
-"""
-
-# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
-cm"""
-$(bth("Length of a Scalar Multiple"))
-Let ``\mathbf{v}`` be a vector and let ``c`` be a scalar. Then
-```math
-\|c \mathbf{v}\|=|c|\|\mathbf{v}\|
-```
-``|c|`` is the absolute value of ``c``.
-"""
-
-# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
-cm"""
-$(bth("Unit Vector in the Direction of  v"))
-If ``\mathbf{v}`` is a nonzero vector in the plane, then the vector
-```math
-\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\|\mathbf{v}\|} \mathbf{v}
-```
-has length 1 and the same direction as ``\mathbf{v}``.
-"""
-
-# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
-cm"""
-$(bbl("triangle inequality for vectors",""))
-```math
-\|\mathbf{u}+\mathbf{v}\| \leq\|\mathbf{u}\|+\|\mathbf{v}\|
-```
-
-"""
-
-# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
-cm"""
-$(ex(4,"Finding a Unit Vector"))
-Find a unit vector in the direction of ``\mathbf{v}=\langle-2,5\rangle`` and verify that it has length 1.
-"""
-
-# ╔═╡ a9cf512b-4f15-40e4-8314-4c56ac8d5a58
-#✓ SOL 11.1 ex4
-if s11_1_ex4_show_sol
-	cm"""
-$(bbl("Solution",""))
-A unit vector in the direction of ``\mathbf{v}`` is ``\mathbf{v}`` divided by its own length, so first find the length.
-```math
-\|\mathbf{v}\|=\sqrt{(-2)^2+5^2}=\sqrt{4+25}=\sqrt{29}
-```
-
-Now divide.
-```math
-\mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\sqrt{29}}\langle -2,5\rangle
-=\left\langle \frac{-2}{\sqrt{29}},\frac{5}{\sqrt{29}}\right\rangle
-\approx\langle -0.371,\;0.928\rangle
-```
-
-**Verify** that the length really is ``1``.
-```math
-\|\mathbf{u}\|=\sqrt{\left(\frac{-2}{\sqrt{29}}\right)^{2}+\left(\frac{5}{\sqrt{29}}\right)^{2}}
-=\sqrt{\frac{4}{29}+\frac{25}{29}}=\sqrt{\frac{29}{29}}=1
-```
-
-Dividing by the length never changes the direction, because ``1/\|\mathbf{v}\|`` is a **positive** scalar.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
-cm"""
-$(ex(5,"Writing a Linear Combination of Unit Vectors"))
-Let ``\mathbf{u}`` be the vector with initial point ``(2,-5)`` and terminal point ``(-1,3)``, and let ``\mathbf{v}=2 \mathbf{i}-\mathbf{j}``. Write each vector as a linear combination of ``\mathbf{i}`` and ``\mathbf{j}``.
-1. ``u``
-2. ``w = 2u − 3v``
-"""
-
-# ╔═╡ 89003ff4-11e1-423f-bb5e-60517c642a54
-#✓ SOL 11.1 ex5
-if s11_1_ex5_show_sol
-	cm"""
-$(bbl("Solution",""))
-Subtract the initial point from the terminal point to get the components of ``\mathbf{u}``, then read the components off as coefficients of ``\mathbf{i}`` and ``\mathbf{j}``.
-```math
-\mathbf{u}=\langle -1-2,\;3-(-5)\rangle=\langle -3,8\rangle=-3\mathbf{i}+8\mathbf{j}
-```
-
-For ``\mathbf{w}``, work with the ``\mathbf{i}`` and ``\mathbf{j}`` terms exactly as you would with like terms in algebra. Here ``\mathbf{v}=2\mathbf{i}-\mathbf{j}``.
-```math
-\begin{aligned}
-\mathbf{w}&=2\mathbf{u}-3\mathbf{v}\\
-&=2(-3\mathbf{i}+8\mathbf{j})-3(2\mathbf{i}-\mathbf{j}) &&\color{red}{\text{substitute}}\\
-&=-6\mathbf{i}+16\mathbf{j}-6\mathbf{i}+3\mathbf{j} &&\color{red}{\text{distribute}}\\
-&=-12\mathbf{i}+19\mathbf{j} &&\color{red}{\text{collect like terms}}
-\end{aligned}
-```
-
-In component form, ``\mathbf{w}=\langle -12,19\rangle``.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
-cm"""
-$(ex(6,"Writing a Vector of Given Magnitude and Direction"))
-The vector ``\mathbf{v}`` has a magnitude of 3 and makes an angle of ``30^{\circ}=\pi / 6`` with the positive ``x``-axis. Write ``\mathbf{v}`` as a linear combination of the unit vectors ``\mathbf{i}`` and ``\mathbf{j}``.
-"""
-
-# ╔═╡ 22be1c2d-26f2-41ff-97f9-27f58dc3c0b7
-#✓ SOL 11.1 ex6
-if s11_1_ex6_show_sol
-	cm"""
-$(bbl("Solution",""))
-A vector of length ``\|\mathbf{v}\|`` making an angle ``\theta`` with the positive ``x``-axis has the **direction** ``\langle\cos\theta,\sin\theta\rangle``, which is already a unit vector. Multiply that direction by the magnitude.
-```math
-\mathbf{v}=\|\mathbf{v}\|\cos\theta\,\mathbf{i}+\|\mathbf{v}\|\sin\theta\,\mathbf{j}
-```
-
-With ``\|\mathbf{v}\|=3`` and ``\theta=\pi/6``,
-```math
-\begin{aligned}
-\mathbf{v}&=3\cos\frac{\pi}{6}\,\mathbf{i}+3\sin\frac{\pi}{6}\,\mathbf{j}\\
-&=3\left(\frac{\sqrt{3}}{2}\right)\mathbf{i}+3\left(\frac{1}{2}\right)\mathbf{j}\\
-&=\frac{3\sqrt{3}}{2}\,\mathbf{i}+\frac{3}{2}\,\mathbf{j}
-\approx 2.598\,\mathbf{i}+1.5\,\mathbf{j}
-\end{aligned}
-```
-
-**Check the magnitude:** ``\sqrt{27/4+9/4}=\sqrt{36/4}=3``, as required.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 571a0a6a-b0f2-4899-9b22-4e7948f358e2
-cm"""
-
-
-$(ex(7,"Finding the Resultant Force"))
-
-Two tugboats are pushing an ocean liner, as shown in Figure below. Each boat is exerting a force of 400 pounds. What is the resultant force on the ocean liner?
-
-$(post_img("https://www.dropbox.com/scl/fi/y479puutvr1z41k7aqy70/fig11.12.png?rlkey=f1kwce8m1vsrmdk2kim9l4d18&dl=1"))
-"""
-
-# ╔═╡ 5568fedf-6167-4e27-b322-e21c4bd4ca07
-#✓ SOL 11.1 ex7
-if s11_1_ex7_show_sol
-	cm"""
-$(bbl("Solution",""))
-Put the origin at the point where the two forces are applied and let the positive ``x``-axis point along the liner, exactly as in the figure. The lower boat pushes at ``20^{\circ}`` above the axis and the upper boat at ``20^{\circ}`` below it, and each force has magnitude ``400``.
-
-Write each force as (magnitude)(direction).
-```math
-\begin{aligned}
-\mathbf{F}_1&=400\left(\cos 20^{\circ}\right)\mathbf{i}+400\left(\sin 20^{\circ}\right)\mathbf{j}\\
-\mathbf{F}_2&=400\left(\cos\left(-20^{\circ}\right)\right)\mathbf{i}+400\left(\sin\left(-20^{\circ}\right)\right)\mathbf{j}
-\end{aligned}
-```
-
-The resultant force is the **sum**.
-```math
-\begin{aligned}
-\mathbf{R}&=\mathbf{F}_1+\mathbf{F}_2\\
-&=\Big[400\cos 20^{\circ}+400\cos\left(-20^{\circ}\right)\Big]\mathbf{i}
- +\Big[400\sin 20^{\circ}+400\sin\left(-20^{\circ}\right)\Big]\mathbf{j}\\
-&=\Big[800\cos 20^{\circ}\Big]\mathbf{i}+0\,\mathbf{j} &&\color{red}{\sin(-\theta)=-\sin\theta}\\
-&\approx 751.8\,\mathbf{i}
-\end{aligned}
-```
-
-The ``\mathbf{j}``-components cancel because the two boats are symmetric about the axis, so the resultant points straight ahead:
-```math
-\|\mathbf{R}\|=800\cos 20^{\circ}\approx 751.8\text{ pounds.}
-```
-
-$(tip_box("💡 Worth noticing","The two boats supply 800 pounds between them, but only about 752 pounds of it actually moves the liner forward — the rest is spent pulling sideways against the other boat. The smaller the angle, the less is wasted. Play with the animation below and watch ‖R‖ = 800 cos α shrink as the boats spread apart."))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 6e2c6a42-4316-4fda-97b3-d395cdf71030
-#✓ ANIM 11.1 ex7 -- be creative impress me.
-begin
-	s11_1_ex7_anim_clock = @bind s11_1_ex7_tick  Clock(0.08, true, false)
-	s11_1_ex7_anim_scrub = @bind s11_1_ex7_scrub Slider(0:95, default=0)
-	cm"""
-**The boats close in** $(add_space(2)) $(s11_1_ex7_anim_clock) $(add_space(6)) **scrub** $(add_space(1)) $(s11_1_ex7_anim_scrub)
-"""
-end
-
-
-# ╔═╡ bb26e5cc-67e4-47ce-b698-5d5ae5612710
-#✓ ANIM 11.1 ex7
-let
-	N, H = 70, 25                       # sweep frames, held frames
-	n = min(mod(s11_1_ex7_tick + s11_1_ex7_scrub, N + H + 1), N)
-	α = 90 - n                          # half-angle sweeps 90° down to 20° and holds
-	F = 400.0
-
-	F1 = (F*cosd(α),  F*sind(α))
-	F2 = (F*cosd(α), -F*sind(α))
-	R  = (F1[1] + F2[1], 0.0)
-
-	p1 = plot(; xlims=(-140, 920), ylims=(-470, 470), aspect_ratio=1,
-		framestyle=:origin, legend=:topleft, legendfontsize=7,
-		title="Each tugboat pushes with 400 lb", titlefontsize=10)
-	plot!(p1, [0, F1[1], R[1], F2[1], 0], [0, F1[2], R[2], F2[2], 0];
-		seriestype=:shape, fillalpha=0.10, fc=:crimson, lc=:gray,
-		ls=:dash, lw=1, label=false)
-	plot!(p1, [0, F1[1]], [0, F1[2]]; arrow=true, lw=3, c=:steelblue,
-		label=L"\mathbf{F}_1")
-	plot!(p1, [0, F2[1]], [0, F2[2]]; arrow=true, lw=3, c=:darkorange,
-		label=L"\mathbf{F}_2")
-	plot!(p1, [0, R[1]], [0, R[2]]; arrow=true, lw=4, c=:crimson,
-		label=L"\mathbf{R}=\mathbf{F}_1+\mathbf{F}_2")
-	annotate!(p1, 520, 400, text("α = $(α)°", 10, :black))
-	annotate!(p1, 520, 320,
-		text("‖R‖ = $(round(2F*cosd(α), digits=1)) lb", 10, :crimson))
-
-	as = 0:0.5:90
-	p2 = plot(as, 2F .* cosd.(as); lw=2, c=:black, label=false,
-		xlims=(0, 90), ylims=(0, 900), xticks=0:15:90,
-		xlabel="half-angle  α  (degrees)", ylabel="‖R‖  (pounds)",
-		title=L"\|\mathbf{R}\| = 800\cos\alpha", titlefontsize=10,
-		legend=:bottomleft, legendfontsize=7)
-	vline!(p2, [20]; ls=:dash, c=:seagreen, label=false)
-	scatter!(p2, [20], [2F*cosd(20)]; ms=5, c=:seagreen,
-		label="α = 20°  →  751.8 lb")
-	scatter!(p2, [α], [2F*cosd(α)]; ms=6, c=:crimson, label=false)
-
-	plot(p1, p2; layout=(1, 2), size=(920, 380))
-end
-
-
-# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
-cm"""
-$(ex(1,"Finding the Distance Between Two Points in Space"))
-Find the distance between the points ``(2,-1,3)`` and ``(1,0,-2)``.
-"""
-
-# ╔═╡ 454d899d-19b4-449c-a360-bc53a2a40c45
-#✓ SOL 11.2 ex1
-if s11_2_ex1_show_sol
-	cm"""
-$(bbl("Solution",""))
-The Distance Formula in space is the Pythagorean Theorem applied twice, and it looks exactly like the plane version with one more squared difference.
-```math
-d=\sqrt{\left(x_2-x_1\right)^2+\left(y_2-y_1\right)^2+\left(z_2-z_1\right)^2}
-```
-
-Take ``\left(x_1,y_1,z_1\right)=(2,-1,3)`` and ``\left(x_2,y_2,z_2\right)=(1,0,-2)``.
-```math
-\begin{aligned}
-d&=\sqrt{(1-2)^2+\left(0-(-1)\right)^2+(-2-3)^2}\\
-&=\sqrt{(-1)^2+(1)^2+(-5)^2}\\
-&=\sqrt{1+1+25}\\
-&=\sqrt{27}=3\sqrt{3}\approx 5.196
-\end{aligned}
-```
-
-It does not matter which point you call the first one — each difference gets squared.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 2c4b3a89-8257-48fa-8e3a-30f059e0187d
-cm"""
-$(ex(2,"Finding the equation of a Sphere"))
-Find the standard equation of the sphere that has the points
-
-``(5, −2, 3)`` and ``(0, 4, −3)``
-
- as endpoints of a diameter.
-"""
-
-# ╔═╡ 38d7057b-da6e-42e7-a2b9-3c79d94265ba
-#✓ SOL 11.2 ex2
-if s11_2_ex2_show_sol
-	cm"""
-$(bbl("Solution",""))
-The two given points are the ends of a **diameter**, so the centre is their midpoint and the radius is half the distance between them.
-
-**Centre.** Average the coordinates.
-```math
-(h,k,l)=\left(\frac{5+0}{2},\;\frac{-2+4}{2},\;\frac{3+(-3)}{2}\right)=\left(\frac{5}{2},\,1,\,0\right)
-```
-
-**Radius.** Use the distance from the centre to one endpoint — here to ``(5,-2,3)``.
-```math
-r=\sqrt{\left(5-\frac{5}{2}\right)^2+(-2-1)^2+(3-0)^2}
-=\sqrt{\frac{25}{4}+9+9}=\sqrt{\frac{97}{4}}=\frac{\sqrt{97}}{2}
-```
-
-**Standard equation.** Substitute into ``(x-h)^2+(y-k)^2+(z-l)^2=r^2``.
-```math
-\left(x-\frac{5}{2}\right)^2+(y-1)^2+z^2=\frac{97}{4}
-```
-
-$(tip_box("💡 A useful shortcut","The diameter runs along the vector ⟨−5, 6, −6⟩, whose length is √(25 + 36 + 36) = √97. Halving that gives r = √97 / 2 straight away — no midpoint is needed for the radius."))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 7e3feecd-7106-4591-b22a-97a7aa064b6c
-cm"""
-$(bbl("Vectors in Space",""))
-Let ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` be vectors in space and let ``c`` be a scalar.
-1. Equality of Vectors: ``\mathbf{u}=\mathbf{v}`` if and only if ``u_1=v_1, u_2=v_2``, and ``u_3=v_3``.
-2. Component Form: If ``\mathbf{v}`` is represented by the directed line segment from ``P\left(p_1, p_2, p_3\right)`` to ``Q\left(q_1, q_2, q_3\right)``, then
-```math
-\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle=\left\langle q_1-p_1, q_2-p_2, q_3-p_3\right\rangle
-```
-3. Length: ``\|\mathbf{v}\|=\sqrt{v_1^2+v_2^2+v_3^2}``
-4. Unit Vector in the Direction of ``\mathbf{v}: \frac{\mathbf{v}}{\|\mathbf{v}\|}=\left(\frac{1}{\|\mathbf{v}\|}\right)\left\langle v_1, v_2, v_3\right\rangle, \quad \mathbf{v} \neq \mathbf{0}``
-5. Vector Addition: ``\mathbf{v}+\mathbf{u}=\left\langle v_1+u_1, v_2+u_2, v_3+u_3\right\rangle``
-6. Scalar Multiplication: ``c \mathbf{v}=\left\langle c v_1, c v_2, c v_3\right\rangle``
-"""
-
-# ╔═╡ 108475eb-bae3-426d-88db-f0f5dc177c65
-cm"""
-$(ex(3,"Finding the Component Form of a Vector in Space"))
-Find the component form and magnitude of the vector ``\mathbf{v}`` having initial point ``(-2,3,1)`` and terminal point ``(0,-4,4)``. Then find a unit vector in the direction of ``\mathbf{v}``.
-"""
-
-# ╔═╡ 3b5963de-0745-4c00-8aea-1c631989dc53
-#✓ SOL 11.2 ex3
-if s11_2_ex3_show_sol
-	cm"""
-$(bbl("Solution",""))
-**Component form** — terminal point minus initial point.
-```math
-\mathbf{v}=\langle 0-(-2),\;-4-3,\;4-1\rangle=\langle 2,-7,3\rangle
-```
-
-**Magnitude.**
-```math
-\|\mathbf{v}\|=\sqrt{2^2+(-7)^2+3^2}=\sqrt{4+49+9}=\sqrt{62}\approx 7.874
-```
-
-**Unit vector** — divide the vector by its magnitude.
-```math
-\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{1}{\sqrt{62}}\langle 2,-7,3\rangle
-=\left\langle \frac{2}{\sqrt{62}},\,\frac{-7}{\sqrt{62}},\,\frac{3}{\sqrt{62}}\right\rangle
-\approx\langle 0.254,\,-0.889,\,0.381\rangle
-```
-
-**Check:** ``\left(\frac{2}{\sqrt{62}}\right)^2+\left(\frac{-7}{\sqrt{62}}\right)^2+\left(\frac{3}{\sqrt{62}}\right)^2=\frac{4+49+9}{62}=1``.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 75e95211-2367-49ed-a1fd-f0ae39870f04
-cm"""
-$(define("Parallel Vectors"))
-Two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}`` are parallel when there is some scalar ``c`` such that ``\mathbf{u}=c \mathbf{v}``.
-"""
-
-# ╔═╡ 847f0197-beab-45d7-ae4c-27385719aeb1
-cm"""
-$(ex(4,"Parallel Vectors"))
-Vector ``\mathbf{w}`` has initial point ``(2,-1,3)`` and terminal point ``(-4,7,5)``. Which of the following vectors is parallel to ``\mathbf{w}`` ?
-
-1. ``\mathbf{u}=\langle 3,-4,-1\rangle``
-2. ``\mathbf{v}=\langle 12,-16,4\rangle``
-"""
-
-# ╔═╡ 8dccd1af-f9bf-4a8e-9f45-6e4dc2320988
-#✓ SOL 11.2 ex4
-if s11_2_ex4_show_sol
-	cm"""
-$(bbl("Solution",""))
-First put ``\mathbf{w}`` in component form.
-```math
-\mathbf{w}=\langle -4-2,\;7-(-1),\;5-3\rangle=\langle -6,8,2\rangle
-```
-
-Two nonzero vectors are parallel exactly when one is a **scalar multiple** of the other, so test each candidate by asking whether the three ratios of corresponding components agree.
-
-**(a.)** ``\mathbf{u}=\langle 3,-4,-1\rangle``:
-```math
-\frac{-6}{3}=-2,\qquad \frac{8}{-4}=-2,\qquad \frac{2}{-1}=-2
-```
-All three ratios are the same, so ``\mathbf{w}=-2\mathbf{u}`` and ``\mathbf{u}`` **is parallel** to ``\mathbf{w}``. (The negative factor just means ``\mathbf{u}`` points the opposite way.)
-
-**(b.)** ``\mathbf{v}=\langle 12,-16,4\rangle``:
-```math
-\frac{-6}{12}=-\frac{1}{2},\qquad \frac{8}{-16}=-\frac{1}{2},\qquad \frac{2}{4}=+\frac{1}{2}
-```
-The last ratio disagrees, so no single scalar works and ``\mathbf{v}`` is **not parallel** to ``\mathbf{w}``.
-
-$(warning_box("⚠️ Common Error","Two matching ratios out of three are not enough. Here <b>v</b> agrees with <b>w</b> in the x- and y-components and fails only in z — check <b>all three</b> before you answer."))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
-cm"""
-$(ex(5,"Using Vectors to Determine Collinear Points"))
-Determine whether the points
-```math
-P(1,-2,3), \quad Q(2,1,0), \quad \text { and } \quad R(4,7,-6)
-```
-are collinear.
-"""
-
-# ╔═╡ 8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
-cm"""
-$(ex(6,"Standard Unit Vector Notation"))
-
-- __(a.)__ Write the vector ``\mathbf{v}=4 \mathbf{i}-5 \mathbf{k}`` in component form.
-- __(b.)__ Find the terminal point of the vector ``\mathbf{v}=7 \mathbf{i}-\mathbf{j}+3 \mathbf{k}``, given that the initial point is ``P(-2,3,5)``.
-
-- __(c.)__ Find the magnitude of the vector ``\mathbf{v}=-6 \mathbf{i}+2 \mathbf{j}-3 \mathbf{k}``. Then find a unit vector in the direction of ``\mathbf{v}``.
-"""
-
-# ╔═╡ 1a2c15f9-af65-4fe5-b517-98d26a3998fd
-cm"""
-$(ex(7,"Measuring Force"))
-A television camera weighing ``120`` pounds is supported by a tripod, as shown below. Represent the force exerted on each leg of the tripod as a vector.
-
-$(post_img("https://www.dropbox.com/scl/fi/avv2vzzviidm4m8opc3uk/fig_11_23.png?rlkey=o3rnxynprpdg5lt0jkbh6wp9p&dl=1"))
-"""
-
-# ╔═╡ c893062e-3a97-45cb-9f17-e61cc8f0abe2
-#✓ SOL 11.2 ex7
-if s11_2_ex7_show_sol
-	cm"""
-$(bbl("Solution",""))
-Let ``P=(0,0,4)`` be the top of the tripod and let the feet be
-```math
-Q_1=(0,-1,0),\qquad
-Q_2=\left(\frac{\sqrt{3}}{2},\frac{1}{2},0\right),\qquad
-Q_3=\left(-\frac{\sqrt{3}}{2},\frac{1}{2},0\right).
-```
-
-Each leg carries a force **directed along that leg**, so write the leg vectors first.
-```math
-\overrightarrow{P Q_1}=\langle 0,-1,-4\rangle,\qquad
-\overrightarrow{P Q_2}=\left\langle \frac{\sqrt{3}}{2},\frac{1}{2},-4\right\rangle,\qquad
-\overrightarrow{P Q_3}=\left\langle -\frac{\sqrt{3}}{2},\frac{1}{2},-4\right\rangle
-```
-
-By symmetry the three legs share the load equally, so each force is the **same** positive multiple ``c`` of its leg vector: ``\mathbf{F}_i=c\,\overrightarrow{P Q_i}``. The three forces must together support the ``120``-pound camera, whose weight is ``\langle 0,0,-120\rangle``.
-```math
-\begin{aligned}
-\mathbf{F}_1+\mathbf{F}_2+\mathbf{F}_3
-&=c\left(\overrightarrow{P Q_1}+\overrightarrow{P Q_2}+\overrightarrow{P Q_3}\right)\\
-&=c\,\langle 0,0,-12\rangle &&\color{red}{\text{the }x\text{- and }y\text{-parts cancel}}\\
-&=\langle 0,0,-120\rangle
-\end{aligned}
-```
-
-Comparing third components gives ``-12c=-120``, so ``c=10`` and
-```math
-\mathbf{F}_1=\langle 0,-10,-40\rangle,\qquad
-\mathbf{F}_2=\left\langle 5\sqrt{3},\,5,\,-40\right\rangle,\qquad
-\mathbf{F}_3=\left\langle -5\sqrt{3},\,5,\,-40\right\rangle .
-```
-
-Each leg therefore carries a force of magnitude
-```math
-\|\mathbf{F}_i\|=10\left\|\overrightarrow{P Q_i}\right\|=10\sqrt{\frac{3}{4}+\frac{1}{4}+16}=10\sqrt{17}\approx 41.2\text{ pounds.}
-```
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ e4d12bd7-039a-42a8-b278-05a5e8fe0841
-cm"""
-$(define("Dot Product"))
-The dot product of ``\mathbf{u}=\left\langle u_1, u_2\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2\right\rangle`` is
-```math
-\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2
-```
-
-The dot product of ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle`` and ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle`` is
-```math
-\mathbf{u} \cdot \mathbf{v}=u_1 v_1+u_2 v_2+u_3 v_3
-```
-$(ebl())
-
-$(bth("Properties of the Dot Product"))
-Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in the plane or in space and let ``c`` be a scalar.
-
-1. ``\mathbf{u} \cdot \mathbf{v}=\mathbf{v} \cdot \mathbf{u}\qquad \color{red}{\text{Commutative Property}}``
-
-2. ``\mathbf{u} \cdot(\mathbf{v}+\mathbf{w})=\mathbf{u} \cdot \mathbf{v}+\mathbf{u} \cdot \mathbf{w}\qquad \color{red}{\text{Distributive Property}}``
-
-3. ``c(\mathbf{u} \cdot \mathbf{v})=c \mathbf{u} \cdot \mathbf{v}=\mathbf{u} \cdot c \mathbf{v}\qquad \qquad\color{red}{\text{Associative Property}}``
-4. ``\mathbf{0} \cdot \mathbf{v}=0``
-5. ``\mathbf{v} \cdot \mathbf{v}=\|\mathbf{v}\|^2``
-"""
-
-# ╔═╡ 79d33f0f-6b03-420f-a0c1-98108e43ab6b
-cm"""
-$(ex(1,"Finding Dot Products"))
-
-Let ``\mathbf{u}=\langle 2,-2\rangle, \mathbf{v}=\langle 5,8\rangle``, and ``\mathbf{w}=\langle-4,3\rangle``.
-
-- (a.) ``\mathbf{u} \cdot \mathbf{v}=\langle 2,-2\rangle \cdot\langle 5,8\rangle=2(5)+(-2)(8)=-6``
-- (b.) ``(\mathbf{u} \cdot \mathbf{v}) \mathbf{w}=-6\langle-4,3\rangle=\langle 24,-18\rangle``
-- (c.) ``\mathbf{u} \cdot(2 \mathbf{v})=2(\mathbf{u} \cdot \mathbf{v})=2(-6)=-12``
-- (d.) ``\|\mathbf{w}\|^2=\mathbf{w} \cdot \mathbf{w}=\langle-4,3\rangle \cdot\langle-4,3\rangle=(-4)(-4)+(3)(3)=25``
-"""
-
-# ╔═╡ 66eb4dd6-f558-479a-b193-8e852c345721
-cm"""
-$(bth("Angle Between Two Vectors"))
-If ``\theta`` is the angle between two nonzero vectors ``\mathbf{u}`` and ``\mathbf{v}``, where ``0 \leq \theta \leq \pi``, then
-```math
-\cos \theta=\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}
-```
-"""
-
-# ╔═╡ 4fc2f92f-3773-4e53-82c6-c4e441f164b3
-cm"""
-$(bbl("Remark",""))
-```math
-\mathbf{u} \cdot \mathbf{v}=\|\mathbf{u}\|\|\mathbf{v}\| \cos \theta\qquad \color{red}{\text{Alternative form of dot product}}
-```
-"""
-
-# ╔═╡ 788ea369-4509-4970-9a2d-ea887194b790
-cm"""
-$(define(" Definition of Orthogonal Vectors"))
- The vectors ``u`` and ``v`` are orthogonal when ``u∙v=0``
-"""
-
-# ╔═╡ de23e5af-1d2d-4b22-9743-dd59bc903a9c
-cm"""
-$(ex(2,"Finding the Angle Between Two Vectors"))
-For ``\mathbf{u}=\langle 3,-1,2\rangle, \mathbf{v}=\langle-4,0,2\rangle, \mathbf{w}=\langle 1,-1,-2\rangle``, and ``\mathbf{z}=\langle 2,0,-1\rangle``, find the angle between each pair of vectors.
-
-- (a.) ``\mathbf{u}`` and ``\mathbf{v}``
-- (b.) ``\mathbf{u}`` and ``\mathbf{w}``
-- (c.) ``\mathbf{v}`` and ``\mathbf{z}``
-"""
-
-# ╔═╡ 1a71cd7d-fd19-4872-b426-5bf708d79b83
-#✓ SOL 11.3 ex2
-if s11_3_ex2_show_sol
-	cm"""
-$(bbl("Solution",""))
-Everything comes from one formula,
-```math
-\cos\theta=\frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{u}\|\,\|\mathbf{v}\|},\qquad 0\le\theta\le\pi .
-```
-The **sign** of the dot product already tells you a lot: positive means acute, zero means right, negative means obtuse.
-
-**(a.)** ``\mathbf{u}=\langle 3,-1,2\rangle`` and ``\mathbf{v}=\langle -4,0,2\rangle``.
-```math
-\mathbf{u}\cdot\mathbf{v}=-12+0+4=-8,\qquad \|\mathbf{u}\|=\sqrt{14},\qquad \|\mathbf{v}\|=\sqrt{20}
-```
-```math
-\cos\theta=\frac{-8}{\sqrt{14}\sqrt{20}}=\frac{-8}{2\sqrt{70}}=\frac{-4}{\sqrt{70}}
-\quad\Longrightarrow\quad
-\theta=\arccos\frac{-4}{\sqrt{70}}\approx 2.0655\text{ rad}\approx 118.6^{\circ}
-```
-The dot product is negative, so the angle is obtuse — as it must be.
-
-**(b.)** ``\mathbf{u}=\langle 3,-1,2\rangle`` and ``\mathbf{w}=\langle 1,-1,-2\rangle``.
-```math
-\mathbf{u}\cdot\mathbf{w}=3+1-4=0
-\quad\Longrightarrow\quad
-\theta=\frac{\pi}{2}
-```
-No lengths are needed: a zero dot product means the vectors are **orthogonal**.
-
-**(c.)** ``\mathbf{v}=\langle -4,0,2\rangle`` and ``\mathbf{z}=\langle 2,0,-1\rangle``.
-```math
-\mathbf{v}\cdot\mathbf{z}=-8+0-2=-10,\qquad \|\mathbf{v}\|=2\sqrt{5},\qquad \|\mathbf{z}\|=\sqrt{5}
-```
-```math
-\cos\theta=\frac{-10}{2\sqrt{5}\cdot\sqrt{5}}=\frac{-10}{10}=-1
-\quad\Longrightarrow\quad
-\theta=\pi
-```
-Indeed ``\mathbf{z}=-\frac{1}{2}\mathbf{v}``, so the two vectors point in exactly **opposite** directions.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ bc67920c-1bee-4fcc-8469-adf01e1d33e8
-cm"""
-$(ex(3,"Alternative Form of the Dot Product"))
-Given that ``\|\mathbf{u}\|=10,\|\mathbf{v}\|=7``, and the angle between ``\mathbf{u}`` and ``\mathbf{v}`` is ``\pi / 4``, find ``\mathbf{u} \cdot \mathbf{v}``.
-"""
-
-# ╔═╡ 8c5a1d1d-ede5-481b-bcba-0a390a843a26
-#✓ SOL 11.3 ex3
-if s11_3_ex3_show_sol
-	cm"""
-$(bbl("Solution",""))
-Here you are given the lengths and the angle rather than the components, so use the **alternative form** of the dot product.
-```math
-\mathbf{u}\cdot\mathbf{v}=\|\mathbf{u}\|\,\|\mathbf{v}\|\cos\theta
-```
-
-Substitute ``\|\mathbf{u}\|=10``, ``\|\mathbf{v}\|=7`` and ``\theta=\pi/4``.
-```math
-\mathbf{u}\cdot\mathbf{v}=(10)(7)\cos\frac{\pi}{4}=70\left(\frac{\sqrt{2}}{2}\right)=35\sqrt{2}\approx 49.5
-```
-
-The answer is positive, which agrees with ``\theta=\pi/4`` being acute.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ bf3af1b5-3959-447f-85ac-b2b0b1ab737f
-cm"""
-
-$(post_img("https://www.dropbox.com/scl/fi/yoip1oldetoeth472ju81/fig_11_26.png?rlkey=g71oyxboekwrwumo2znb7mqtg&dl=1",400))
-
-"""
-
-# ╔═╡ c925f9ff-245f-4d0a-b085-b703adc1daaf
-cm"""
-$(ex(4,"Finding Direction Angles"))
-Find the direction cosines and angles for the vector ``\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}+4 \mathbf{k}``, and show that ``\cos ^2 \alpha+\cos ^2 \beta+\cos ^2 \gamma=1``
-"""
-
-# ╔═╡ 7a7056e9-ecf9-46b7-a8cf-6aa0a641576c
-#✓ SOL 11.3 ex4
-if s11_3_ex4_show_sol
-	cm"""
-$(bbl("Solution",""))
-The direction cosines are just the **components of the unit vector** in the direction of ``\mathbf{v}``, so start with the magnitude. Here ``\mathbf{v}=\langle 2,3,4\rangle``.
-```math
-\|\mathbf{v}\|=\sqrt{2^2+3^2+4^2}=\sqrt{4+9+16}=\sqrt{29}
-```
-
-Now divide each component by ``\sqrt{29}``.
-```math
-\begin{aligned}
-\cos\alpha&=\frac{v_1}{\|\mathbf{v}\|}=\frac{2}{\sqrt{29}}\approx 0.3714 &&\Longrightarrow\quad \alpha\approx 68.2^{\circ}\\
-\cos\beta &=\frac{v_2}{\|\mathbf{v}\|}=\frac{3}{\sqrt{29}}\approx 0.5571 &&\Longrightarrow\quad \beta \approx 56.1^{\circ}\\
-\cos\gamma&=\frac{v_3}{\|\mathbf{v}\|}=\frac{4}{\sqrt{29}}\approx 0.7428 &&\Longrightarrow\quad \gamma\approx 42.0^{\circ}
-\end{aligned}
-```
-
-Finally, add the squares.
-```math
-\cos^2\alpha+\cos^2\beta+\cos^2\gamma
-=\frac{4}{29}+\frac{9}{29}+\frac{16}{29}
-=\frac{29}{29}=1
-```
-
-$(tip_box("💡 Why the identity always holds","The three squared cosines are the squared components of a <b>unit</b> vector, and the squares of the components of any unit vector add up to 1 by definition. So this check works for every nonzero <b>v</b> — use it to catch arithmetic slips."))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ c1dee7b3-6118-493e-9c9a-4629cd2af8c3
-cm"""
-$(define("Projection and Vector Components"))
-Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors. Moreover, let
-```math
-\mathbf{u}=\mathbf{w}_1+\mathbf{w}_2
-```
-where ``\mathbf{w}_1`` is parallel to ``\mathbf{v}`` and ``\mathbf{w}_2`` is orthogonal to ``\mathbf{v}``, as shown in Figure below.
-1. ``\mathbf{w}_1`` is called the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` or the vector component of ``\mathbf{u}`` along ``\mathbf{v}``, and is denoted by ``\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}``.
-2. ``\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1`` is called the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}``.
-
-$(post_img("https://www.dropbox.com/scl/fi/dek860uer157a294ebkhg/fig_11_29.png?rlkey=yft18nd2xr98ot3s7345x4p6l&dl=1",500))
-"""
-
-# ╔═╡ 8bb57498-9a49-4b45-8d82-fb790465b1ae
-cm"""
-$(ex(5,"Finding a Vector Component of <span style='font-style:italic;font-weight:200;'>u</span> Orthogonal to <span style='font-style:italic;font-weight:200;'>v</span>"))
-Find the vector component of ``\mathbf{u}=\langle 5,10\rangle`` that is orthogonal to ``\mathbf{v}=\langle 4,3\rangle``, given that
-```math
-\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\langle 8,6\rangle
-```
-and
-```math
-\mathbf{u}=\langle 5,10\rangle=\mathbf{w}_1+\mathbf{w}_2 .
-```
-"""
-
-# ╔═╡ 56e90ad9-7135-4113-a4e2-29b14af1f6d8
-#✓ SOL 11.3 ex5
-if s11_3_ex5_show_sol
-	cm"""
-$(bbl("Solution",""))
-The decomposition ``\mathbf{u}=\mathbf{w}_1+\mathbf{w}_2`` splits ``\mathbf{u}`` into a piece **along** ``\mathbf{v}`` and a piece **perpendicular** to ``\mathbf{v}``. Since ``\mathbf{w}_1`` is given, simply solve for ``\mathbf{w}_2``.
-```math
-\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1=\langle 5,10\rangle-\langle 8,6\rangle=\langle -3,4\rangle
-```
-
-**Check that it really is orthogonal to** ``\mathbf{v}``:
-```math
-\mathbf{w}_2\cdot\mathbf{v}=\langle -3,4\rangle\cdot\langle 4,3\rangle=-12+12=0\quad\checkmark
-```
-
-So the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}`` is ``\mathbf{w}_2=\langle -3,4\rangle``, and
-```math
-\langle 5,10\rangle=\underbrace{\langle 8,6\rangle}_{\text{along }\mathbf{v}}+\underbrace{\langle -3,4\rangle}_{\perp\ \mathbf{v}} .
-```
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ aac34993-c94d-4fa1-8f45-e249740c914d
-cm"""
-$(bth("Projection Using the Dot Product"))
-If ``\mathbf{u}`` and ``\mathbf{v}`` are nonzero vectors, then the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` is
-```math
-\operatorname{proj}_{\mathbf{v}} \mathbf{u}=\left(\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{v}\|^2}\right) \mathbf{v}
-```
-"""
-
-# ╔═╡ 3eded575-d9c4-424e-8151-3958dababb38
-cm"""
-$(ex(6,"Decomposing a Vector into Vector Components"))
-Find the projection of ``\mathbf{u}`` onto ``\mathbf{v}`` and the vector component of ``\mathbf{u}`` orthogonal to ``\mathbf{v}`` for ``\mathbf{u}=3 \mathbf{i}-5 \mathbf{j}+2 \mathbf{k}`` and ``\quad \mathbf{v}=7 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``.
-"""
-
-# ╔═╡ 68b02402-4e4f-4fac-a1c6-3709b89a85fb
-#✓ SOL 11.3 ex6
-if s11_3_ex6_show_sol
-	cm"""
-$(bbl("Solution",""))
-Use the projection formula, then subtract to get the orthogonal piece. Here ``\mathbf{u}=\langle 3,-5,2\rangle`` and ``\mathbf{v}=\langle 7,1,-2\rangle``.
-
-**Step 1 — the two numbers you need.**
-```math
-\mathbf{u}\cdot\mathbf{v}=21-5-4=12,\qquad
-\|\mathbf{v}\|^{2}=\mathbf{v}\cdot\mathbf{v}=49+1+4=54
-```
-
-**Step 2 — the projection.**
-```math
-\mathbf{w}_1=\operatorname{proj}_{\mathbf{v}}\mathbf{u}
-=\left(\frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{v}\|^{2}}\right)\mathbf{v}
-=\frac{12}{54}\langle 7,1,-2\rangle
-=\frac{2}{9}\langle 7,1,-2\rangle
-=\left\langle \frac{14}{9},\frac{2}{9},-\frac{4}{9}\right\rangle
-```
-
-**Step 3 — the orthogonal component.**
-```math
-\mathbf{w}_2=\mathbf{u}-\mathbf{w}_1
-=\left\langle 3-\frac{14}{9},\;-5-\frac{2}{9},\;2+\frac{4}{9}\right\rangle
-=\left\langle \frac{13}{9},\,-\frac{47}{9},\,\frac{22}{9}\right\rangle
-```
-
-**Check:** ``\mathbf{w}_2\cdot\mathbf{v}=\frac{1}{9}\big(13(7)+(-47)(1)+22(-2)\big)=\frac{1}{9}(91-47-44)=0``.
-
-$(warning_box("⚠️ Common Error","Divide by ‖v‖², <b>not</b> by ‖v‖. A quick way to remember: the projection has to be a multiple of <b>v</b>, and the scalar (u · v)/(v · v) is the only combination that is dimensionally right."))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 97b10d17-61c1-494b-aefe-131a436e374e
-cm"""
-$(ex(7,"Finding a Force"))
-A 600-pound boat sits on a ramp inclined at ``30^{\circ}``, as shown in Figure below. What force is required to keep the boat from rolling down the ramp?
-$(post_img("https://www.dropbox.com/scl/fi/9h16n07tc8x569rwdx5j7/fig_11_32.png?rlkey=rv5hgssgbggmveuj0tcj81ovk&dl=1",500))
-"""
-
-# ╔═╡ 467af729-83cb-45dc-a472-33110bb277ea
-#✓ SOL 11.3 ex7
-if s11_3_ex7_show_sol
-	cm"""
-$(bbl("Solution",""))
-The force to be resisted is the part of the boat's **weight** that points down the ramp — that is, the projection of the weight onto a vector along the ramp.
-
-Set up the two vectors. The weight acts straight down,
-```math
-\mathbf{F}=-600\,\mathbf{j},
-```
-and a unit vector pointing up the ``30^{\circ}`` ramp is
-```math
-\mathbf{v}=\cos 30^{\circ}\,\mathbf{i}+\sin 30^{\circ}\,\mathbf{j}
-=\frac{\sqrt{3}}{2}\,\mathbf{i}+\frac{1}{2}\,\mathbf{j},
-\qquad \|\mathbf{v}\|=1 .
-```
-
-Project ``\mathbf{F}`` onto ``\mathbf{v}``.
-```math
-\begin{aligned}
-\operatorname{proj}_{\mathbf{v}}\mathbf{F}
-&=\left(\frac{\mathbf{F}\cdot\mathbf{v}}{\|\mathbf{v}\|^{2}}\right)\mathbf{v}\\
-&=\big(\mathbf{F}\cdot\mathbf{v}\big)\mathbf{v} &&\color{red}{\|\mathbf{v}\|=1}\\
-&=\left(-600\cdot\frac{1}{2}\right)\mathbf{v}\\
-&=-300\,\mathbf{v}=-150\sqrt{3}\,\mathbf{i}-150\,\mathbf{j}
-\end{aligned}
-```
-
-The magnitude is what matters:
-```math
-\left\|\operatorname{proj}_{\mathbf{v}}\mathbf{F}\right\|=300 .
-```
-
-So a force of **``300`` pounds** up the ramp is needed to keep the boat from rolling down. Note ``300=600\sin 30^{\circ}`` — the familiar inclined-plane result, obtained here purely from a dot product.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ b1c3ec5b-003d-42ab-8c6b-806e083a2047
-cm"""
-
-The work ``W`` done by the constant force ``\mathbf{F}`` acting along the line of motion of an object is given by
-```math
-W=(\text { magnitude of force })(\text { distance })=\|\mathbf{F}\|\|\stackrel{\rightharpoonup}{P Q}\|
-```
-as shown in Figure 11.33(a). When the constant force ``\mathbf{F}`` is not directed along the line of motion, you can see from Figure 11.33(b) that the work ``W`` done by the force is
-```math
-W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\|=(\cos \theta)\|\mathbf{F}\|\|\overrightarrow{P Q}\|=\mathbf{F} \cdot \overrightarrow{P Q}
-```
-
-$(post_img("https://www.dropbox.com/scl/fi/qafxufq3s8tcrxnbisru2/fig_11_33.png?rlkey=4uypkytgkkby8yaomav0jszhr&dl=1",400))
-
-This notion of work is summarized in the next definition.
-
-$(define("Work"))
-The work ``W`` done by a constant force ``\mathbf{F}`` as its point of application moves along the vector ``\overrightarrow{P Q}`` is one of the following.
-1. ``W=\left\|\operatorname{proj}_{\overrightarrow{P Q}} \mathbf{F}\right\|\|\overrightarrow{P Q}\| \quad`` Projection form
-2. ``W=\mathbf{F} \cdot \stackrel{\rightharpoonup}{P Q}`` Dot product form
-$(ebl())
-
-$(ex(8,"Finding Work"))
-To close a sliding door, a person pulls on a rope with a constant force of 50 pounds at a constant angle of ``60^{\circ}``, as shown in Figure below. Find the work done in moving the door 12 feet to its closed position.
-
-$(post_img("https://www.dropbox.com/scl/fi/8wn5s5kestb1dtzxulldc/fig_11_34.png?rlkey=r0g1mc0s9vakiye1dkxd5oxrd&dl=1",400))
-"""
-
-# ╔═╡ a264b45e-624a-43f1-bccc-288e2e87ac7b
-#✓ SOL 11.3 ex8
-if s11_3_ex8_show_sol
-	cm"""
-$(bbl("Solution",""))
-The force is not aligned with the motion, so use the projection form of work — which is the same as ``W=(\cos\theta)\|\mathbf{F}\|\left\|\overrightarrow{P Q}\right\|``.
-```math
-\begin{aligned}
-W&=\left\|\operatorname{proj}_{\overrightarrow{P Q}}\mathbf{F}\right\|\left\|\overrightarrow{P Q}\right\|\\
-&=(\cos\theta)\|\mathbf{F}\|\left\|\overrightarrow{P Q}\right\|\\
-&=\left(\cos 60^{\circ}\right)(50)(12) &&\color{red}{\|\mathbf{F}\|=50,\ \left\|\overrightarrow{P Q}\right\|=12}\\
-&=\frac{1}{2}(600)\\
-&=300\text{ foot-pounds}
-\end{aligned}
-```
-
-Only the component of the pull along the door's line of motion does any work: ``50\cos 60^{\circ}=25`` pounds of the ``50``-pound pull is useful, and ``25\times 12=300`` foot-pounds.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ cce4a136-a23c-45c8-a3e4-78f744cc2836
-cm"""
-$(define("Cross Product of Two Vectors in Space"))
-Let
-```math
-\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k} \quad \text { and } \quad \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}
-```
-be vectors in space. The cross product of ``\mathbf{u}`` and ``\mathbf{v}`` is the vector
-```math
-\mathbf{u} \times \mathbf{v}=\left(u_2 v_3-u_3 v_2\right) \mathbf{i}-\left(u_1 v_3-u_3 v_1\right) \mathbf{j}+\left(u_1 v_2-u_2 v_1\right) \mathbf{k}
-```
-"""
-
-# ╔═╡ 1b792a4f-e23e-441d-9f6c-a64465505e2b
-cm"""
-$(bbl("Remark",""))
-A convenient way to calculate ``\mathbf{u} \times \mathbf{v}`` is to use the determinant form with cofactor expansion shown below. (This ``3 \times 3`` determinant form is used simply to help remember the formula for the cross product. The corresponding array is technically not a matrix because its entries are not all numbers.)
-```math
-\mathbf{u} \times \mathbf{v}=
-\left|\begin{array}{ccc}
-\mathbf{i} & \mathbf{j} & \mathbf{k} \\
-u_1 & u_2 & u_3 \\
-v_1 & v_2 & v_3
-\end{array}\right| \begin{array}{ll}
-\text{}\\
-\longleftarrow \text { Put "u" in Row } 2 .\\
-\longleftarrow \text { Put "v" in Row } 3 .
-\end{array}
-```
-
-"""
-
-# ╔═╡ b18adead-c917-450c-9a3c-7253d6d91442
-cm"""
-$(ex(1,"Finding the Cross Product"))
-For ``\mathbf{u}=\mathbf{i}-2 \mathbf{j}+\mathbf{k}`` and ``\mathbf{v}=3 \mathbf{i}+\mathbf{j}-2 \mathbf{k}``, find each of the following.
-- (a.) ``\mathbf{u} \times \mathbf{v}``
-- (b.) ``\mathbf{v} \times \mathbf{u}``
-- (c.) ``\mathbf{v} \times \mathbf{v}``
-"""
-
-# ╔═╡ a5156264-eb85-45a0-a605-9b2de672333a
-#✓ SOL 11.4 ex1
-if s11_4_ex1_show_sol
-	cm"""
-$(bbl("Solution",""))
-Set up the determinant form with ``\mathbf{u}=\langle 1,-2,1\rangle`` in row 2 and ``\mathbf{v}=\langle 3,1,-2\rangle`` in row 3, then expand along the first row.
-
-**(a.)**
-```math
-\begin{aligned}
-\mathbf{u}\times\mathbf{v}
-&=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ 1&-2&1\\ 3&1&-2\end{vmatrix}\\
-&=\begin{vmatrix}-2&1\\ 1&-2\end{vmatrix}\mathbf{i}
- -\begin{vmatrix}1&1\\ 3&-2\end{vmatrix}\mathbf{j}
- +\begin{vmatrix}1&-2\\ 3&1\end{vmatrix}\mathbf{k}\\
-&=(4-1)\mathbf{i}-(-2-3)\mathbf{j}+(1+6)\mathbf{k}\\
-&=3\mathbf{i}+5\mathbf{j}+7\mathbf{k}
-\end{aligned}
-```
-
-**(b.)** The cross product is **anticommutative**, so no new work is needed.
-```math
-\mathbf{v}\times\mathbf{u}=-(\mathbf{u}\times\mathbf{v})=-3\mathbf{i}-5\mathbf{j}-7\mathbf{k}
-```
-
-**(c.)** Any vector crossed with itself is the zero vector.
-```math
-\mathbf{v}\times\mathbf{v}=\mathbf{0}
-```
-
-**Check (a.)** against the geometry: ``\mathbf{u}\times\mathbf{v}`` must be orthogonal to both factors.
-```math
-\langle 3,5,7\rangle\cdot\langle 1,-2,1\rangle=3-10+7=0,\qquad
-\langle 3,5,7\rangle\cdot\langle 3,1,-2\rangle=9+5-14=0\quad\checkmark
-```
-
-$(warning_box("⚠️ Common Error","Do not forget the minus sign in front of the <b>j</b>-term when you expand the 3 × 3 determinant. It is the single most common slip in this section."))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 79735eb1-16e1-4cf3-a43a-88d1ade37279
-cm"""
-$(bth("Algebraic Properties of the Cross Product"))
-Let ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` be vectors in space, and let ``c`` be a scalar.
-1. ``\mathbf{u} \times \mathbf{v}=-(\mathbf{v} \times \mathbf{u})``
-2. ``\mathbf{u} \times(\mathbf{v}+\mathbf{w})=(\mathbf{u} \times \mathbf{v})+(\mathbf{u} \times \mathbf{w})``
-3. ``c(\mathbf{u} \times \mathbf{v})=(c \mathbf{u}) \times \mathbf{v}=\mathbf{u} \times(c \mathbf{v})``
-4. ``\mathbf{u} \times \mathbf{0}=\mathbf{0} \times \mathbf{u}=\mathbf{0}``
-5. ``\mathbf{u} \times \mathbf{u}=\mathbf{0}``
-6. ``\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=(\mathbf{u} \times \mathbf{v}) \cdot \mathbf{w}``
-"""
-
-# ╔═╡ f85ad3e4-f7ba-4563-b548-ceb803d13d2c
-cm"""
-$(bth("Geometric Properties of the Cross Product"))
-Let ``\mathbf{u}`` and ``\mathbf{v}`` be nonzero vectors in space, and let ``\theta`` be the angle between ``\mathbf{u}`` and ``\mathbf{v}``.
-1. ``\mathbf{u} \times \mathbf{v}`` is orthogonal to both ``\mathbf{u}`` and ``\mathbf{v}``.
-2. ``\|\mathbf{u} \times \mathbf{v}\|=\|\mathbf{u}\|\|\mathbf{v}\| \sin \theta``
-3. ``\mathbf{u} \times \mathbf{v}=\mathbf{0}`` if and only if ``\mathbf{u}`` and ``\mathbf{v}`` are scalar multiples of each other.
-4. ``\|\mathbf{u} \times \mathbf{v}\|=`` area of parallelogram having ``\mathbf{u}`` and ``\mathbf{v}`` as adjacent sides.
-"""
-
-# ╔═╡ 1fb44f1d-547e-4bea-b7ad-f171ebed5b20
-cm"""
-$(ex(2," Using the Cross Product"))
-Find a unit vector that is orthogonal to both
-```math
-\mathbf{u}=\mathbf{i}-4 \mathbf{j}+\mathbf{k}
-```
-and
-```math
-\mathbf{v}=2 \mathbf{i}+3 \mathbf{j}
-```
-"""
-
-# ╔═╡ 3750ac2e-758a-4388-bee2-1cfbfdb19953
-#✓ SOL 11.4 ex2
-if s11_4_ex2_show_sol
-	cm"""
-$(bbl("Solution",""))
-The cross product is automatically orthogonal to both vectors, so cross them and then normalise. Here ``\mathbf{u}=\langle 1,-4,1\rangle`` and ``\mathbf{v}=\langle 2,3,0\rangle``.
-
-**Step 1 — cross.**
-```math
-\begin{aligned}
-\mathbf{u}\times\mathbf{v}
-&=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ 1&-4&1\\ 2&3&0\end{vmatrix}\\
-&=(0-3)\mathbf{i}-(0-2)\mathbf{j}+(3+8)\mathbf{k}\\
-&=-3\mathbf{i}+2\mathbf{j}+11\mathbf{k}
-\end{aligned}
-```
-
-**Step 2 — normalise.**
-```math
-\|\mathbf{u}\times\mathbf{v}\|=\sqrt{(-3)^2+2^2+11^2}=\sqrt{9+4+121}=\sqrt{134}
-```
-```math
-\frac{\mathbf{u}\times\mathbf{v}}{\|\mathbf{u}\times\mathbf{v}\|}
-=\frac{-3}{\sqrt{134}}\mathbf{i}+\frac{2}{\sqrt{134}}\mathbf{j}+\frac{11}{\sqrt{134}}\mathbf{k}
-\approx\langle -0.259,\,0.173,\,0.950\rangle
-```
-
-There are **two** unit vectors orthogonal to both — the negative of this one works just as well, and it is the one the right-hand rule gives for ``\mathbf{v}\times\mathbf{u}``.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 948bbe03-1560-4b79-904f-133256b6423f
-cm"""
-$(ex(3,"Geometric Application of the Cross Product"))
-The vertices of a quadrilateral are listed below. Show that the quadrilateral is a parallelogram and find its area.
-```math
-\begin{array}{ll}
-A=(5,2,0) & B=(2,6,1) \\
-C=(2,4,7) & D=(5,0,6)
-\end{array}
-```
-"""
-
-# ╔═╡ d87d9c4a-73b4-41a3-ae53-2f13392ce88d
-#✓ SOL 11.4 ex3
-if s11_4_ex3_show_sol
-	cm"""
-$(bbl("Solution",""))
-**Show it is a parallelogram.** A quadrilateral ``ABCD`` is a parallelogram exactly when one pair of opposite sides is given by **equal vectors**.
-```math
-\overrightarrow{A B}=\langle 2-5,\;6-2,\;1-0\rangle=\langle -3,4,1\rangle,\qquad
-\overrightarrow{D C}=\langle 2-5,\;4-0,\;7-6\rangle=\langle -3,4,1\rangle
-```
-Since ``\overrightarrow{A B}=\overrightarrow{D C}``, the sides ``AB`` and ``DC`` are parallel and of equal length, so ``ABCD`` is a parallelogram. (The other pair matches too: ``\overrightarrow{A D}=\langle 0,-2,6\rangle=\overrightarrow{B C}``.)
-
-**Find the area.** The area of the parallelogram with adjacent sides ``\overrightarrow{A B}`` and ``\overrightarrow{A D}`` is the magnitude of their cross product.
-```math
-\begin{aligned}
-\overrightarrow{A B}\times\overrightarrow{A D}
-&=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ -3&4&1\\ 0&-2&6\end{vmatrix}\\
-&=(24+2)\mathbf{i}-(-18-0)\mathbf{j}+(6-0)\mathbf{k}\\
-&=26\mathbf{i}+18\mathbf{j}+6\mathbf{k}
-\end{aligned}
-```
-```math
-\text{Area}=\left\|\overrightarrow{A B}\times\overrightarrow{A D}\right\|
-=\sqrt{26^2+18^2+6^2}=\sqrt{676+324+36}=\sqrt{1036}=2\sqrt{259}\approx 32.19
-```
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
-cm"""
-$(bbl("Torque",""))
-In physics, the cross product can be used to measure torque-the moment M of a force ``\mathbf{F}`` about a point ``\boldsymbol{P}``, as shown below
-$(post_img("https://www.dropbox.com/scl/fi/691imwz7wog1wxr2vx3jt/fig_11_39.png?rlkey=v4e50kju4mvmy8zd0vjy4v1ef&dl=1",300))
-
-If the point of application of the force is ``Q``, then the moment of ``\mathbf{F}`` about ``P`` is
-```math
-\mathbf{M}=\stackrel{\rightharpoonup}{P Q} \times \mathbf{F} . \quad \text { Moment of } \mathbf{F} \text { about } P
-```
-
-The magnitude of the moment ``\mathbf{M}`` measures the tendency of the vector ``\overrightarrow{P Q}`` to rotate counterclockwise (using the right-hand rule) about an axis directed along the vector ``\mathbf{M}``.
-"""
-
-# ╔═╡ 6f42f537-305f-4e0a-b593-5071e1d7af7b
-cm"""
-$(ex(4,"An Application of the Cross Product"))
-A vertical force of 50 pounds is applied to the end of a one-foot lever that is attached to an axle at point ``P``, as shown below.
-
-$(post_img("https://www.dropbox.com/scl/fi/9sqxf39xyyukd1zbqjv8o/fig_11_40.png?rlkey=szapu3urbrqd9pe9gfl7qfyai&dl=1",300))
-
-Find the moment of this force about the point ``P`` when ``\theta=60^{\circ}``.
-"""
-
-# ╔═╡ e86876ea-6102-43cf-9f34-e22d9c433796
-#✓ SOL 11.4 ex4
-if s11_4_ex4_show_sol
-	cm"""
-$(bbl("Solution",""))
-The moment of a force ``\mathbf{F}`` about ``P`` is ``\mathbf{M}=\overrightarrow{P Q}\times\mathbf{F}``, where ``Q`` is the point of application. Read both vectors off the figure.
-
-The lever has length ``1`` and lies in the ``yz``-plane at an angle ``\theta`` from the positive ``y``-axis, so
-```math
-\overrightarrow{P Q}=\cos\theta\,\mathbf{j}+\sin\theta\,\mathbf{k},
-```
-and the ``50``-pound force is vertical and downward,
-```math
-\mathbf{F}=-50\,\mathbf{k}.
-```
-
-With ``\theta=60^{\circ}``, ``\overrightarrow{P Q}=\frac{1}{2}\mathbf{j}+\frac{\sqrt{3}}{2}\mathbf{k}``, so
-```math
-\begin{aligned}
-\mathbf{M}&=\overrightarrow{P Q}\times\mathbf{F}
-=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\[2pt]
-0&\dfrac{1}{2}&\dfrac{\sqrt{3}}{2}\\[6pt]
-0&0&-50\end{vmatrix}\\[4pt]
-&=\left(\frac{1}{2}(-50)-\frac{\sqrt{3}}{2}(0)\right)\mathbf{i}
- -\big(0-0\big)\mathbf{j}+\big(0-0\big)\mathbf{k}\\
-&=-25\,\mathbf{i}
-\end{aligned}
-```
-
-So the moment is ``\mathbf{M}=-25\mathbf{i}``, of magnitude
-```math
-\|\mathbf{M}\|=25\text{ foot-pounds},
-```
-directed along the negative ``x``-axis — the axle turns in that sense by the right-hand rule.
-
-$(tip_box("💡 Sanity check with the sine form","The magnitude of a cross product is ‖PQ‖ · ‖F‖ · sin φ, where φ is the angle between the lever and the force. The lever sits 60° from the y-axis, hence 30° from the z-axis, so φ = 150° and ‖M‖ = (1)(50) sin 150° = 25. ✔"))
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ 183998e1-735f-4c38-ae61-7f2471fa1ae5
-cm"""
-For vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in space, the dot product of ``\mathbf{u}`` and ``\mathbf{v} \times \mathbf{w}``
-```math
-\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})
-```
-is called the __triple scalar product__,
-
-$(bth("The Triple Scalar Product"))
-For ``\mathbf{u}=u_1 \mathbf{i}+u_2 \mathbf{j}+u_3 \mathbf{k}, \mathbf{v}=v_1 \mathbf{i}+v_2 \mathbf{j}+v_3 \mathbf{k}``, and ``\mathbf{w}=w_1 \mathbf{i}+w_2 \mathbf{j}+w_3 \mathbf{k}``, the triple scalar product is
-```math
-\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{rrr}
-u_1 & u_2 & u_3 \\
-v_1 & v_2 & v_3 \\
-w_1 & w_2 & w_3
-\end{array}\right|
-```
-"""
-
-# ╔═╡ ece4c6d9-8393-43c9-b60d-93df66a95999
-cm"""
-$(bth("Geometric Property of the Triple Scalar Product"))
-The volume ``V`` of a parallelepiped with vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` as adjacent edges is
-```math
-V=|\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})| .
-```
-$(ebl())
-
-$(post_img("https://www.dropbox.com/scl/fi/5hf3ibte2ppgtlx0vegr1/fig_11_41.png?rlkey=z0qrbw2p1z30iyhae0mf2xdfo&dl=1",300))
-"""
-
-# ╔═╡ 8b67f393-e954-4b33-9cc9-c382d7a41b37
-cm"""
-$(ex(5,"Volume by the Triple Scalar Product"))
-Find the volume of the parallelepiped shown below having
-```math
-\begin{aligned}
-\mathbf{u} & =3 \mathbf{i}-5 \mathbf{j}+\mathbf{k} \\
-\mathbf{v} & =2 \mathbf{j}-2 \mathbf{k}
-\end{aligned}
-```
-and
-```math
-\mathbf{w}=3 \mathbf{i}+\mathbf{j}+\mathbf{k}
-```
-as adjacent edges.
-
-"""
-
-# ╔═╡ 998fbe79-be22-4017-8721-490717e4a7a8
-#✓ SOL 11.4 ex5
-if s11_4_ex5_show_sol
-	cm"""
-$(bbl("Solution",""))
-The volume of the parallelepiped is the absolute value of the triple scalar product, ``V=\left|\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})\right|``. In components,
-```math
-\mathbf{u}=\langle 3,-5,1\rangle,\qquad
-\mathbf{v}=\langle 0,2,-2\rangle,\qquad
-\mathbf{w}=\langle 3,1,1\rangle .
-```
-
-Evaluate the ``3\times 3`` determinant with ``\mathbf{u}`` in the first row.
-```math
-\begin{aligned}
-\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})
-&=\begin{vmatrix}3&-5&1\\ 0&2&-2\\ 3&1&1\end{vmatrix}\\
-&=3\begin{vmatrix}2&-2\\ 1&1\end{vmatrix}
- -(-5)\begin{vmatrix}0&-2\\ 3&1\end{vmatrix}
- +1\begin{vmatrix}0&2\\ 3&1\end{vmatrix}\\
-&=3(2+2)+5(0+6)+1(0-6)\\
-&=12+30-6\\
-&=36
-\end{aligned}
-```
-
-Therefore
-```math
-V=\left|\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})\right|=|36|=36 .
-```
-
-The value came out positive, which means ``\mathbf{u}``, ``\mathbf{v}``, ``\mathbf{w}`` form a right-handed triple; had it come out negative the volume would still be ``36``. And had it come out ``0``, the three vectors would have been **coplanar** and the solid flat.
-$(ebl())
-"""
-else
-	md""
-end
-
-
-# ╔═╡ b1a879f4-3d78-4309-9f4f-117bcb0765da
-cm"""
-$(bbl("Remark",""))
-
-The volume of the parallelepiped is ``0`` if and only if the three vectors are __coplanar__.
-
-That is, when the vectors ``\mathbf{u}=\left\langle u_1, u_2, u_3\right\rangle``, ``\mathbf{v}=\left\langle v_1, v_2, v_3\right\rangle``, and ``\mathbf{w}=\left\langle w_1, w_2, w_3\right\rangle`` have the same initial point, they lie in the same plane if and only if
-```math
-\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})=\left|\begin{array}{ccc}
-u_1 & u_2 & u_3 \\
-v_1 & v_2 & v_3 \\
-w_1 & w_2 & w_3
-\end{array}\right|=0
-```
-"""
-
-# ╔═╡ 0e941631-0e52-4dc3-bdf1-056f36e77499
-cm"""
-$(bth("Parametric Equations of a Line in Space"))
-
-A line ``L`` parallel to the vector ``\mathbf{v}=\langle a, b, c\rangle`` and passing through the point ``P\left(x_1, y_1, z_1\right)`` is represented by the parametric equations
-```math
-x=x_1+a t, \quad y=y_1+b t, \quad \text { and } \quad z=z_1+c t .
-```
-$(ebl())
-
-If the direction numbers ``a, b``, and ``c`` are all nonzero, then you can eliminate the parameter ``t`` in the parametric equations to obtain symmetric equations of the line.
-```math
-\frac{x-x_1}{a}=\frac{y-y_1}{b}=\frac{z-z_1}{c} \quad \color{red}{\text{Symmetric equations}}
-```
-
-
-$(ex(1,"Finding Parametric and Symmetric Equations"))
-Find parametric and symmetric equations of the line ``L`` that passes through the point ``(1,-2,4)`` and is parallel to ``\mathbf{v}=\langle 2,4,-4\rangle``, as shown in Below.
-
-"""
-
-# ╔═╡ 23a92df7-77d9-4804-86a5-08cdfea8651c
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/9vzo9clna5s3ugrufyons/fig_11_45.png?rlkey=dyblrdq5uvbjp1wmdl8y5mryl&dl=1",400))
-
-$(bth("Standard Equation of a Plane in Space"))
-The plane containing the point ``\left(x_1, y_1, z_1\right)`` and having normal vector
-```math
-\mathbf{n}=\langle a, b, c\rangle
-```
-can be represented by the standard form of the equation of a plane
-```math
-a\left(x-x_1\right)+b\left(y-y_1\right)+c\left(z-z_1\right)=0 .
-```
-"""
-
-# ╔═╡ 391ff8aa-056a-4867-90db-3d9f4537fe80
-cm"""
-$(bbl("Remark",""))
-```math
-a x+b y+c z+d=0 \qquad \color{red}{\text{General form of equation of plane}}
-```
-"""
-
-# ╔═╡ 8e46e68e-0099-430b-864e-683b14ed2fbd
-cm"""
-$(ex(3,"Finding an Equation of a Plane in Three-Space"))
-Find an equation (in standard form and in general form) of the plane containing the points ``(2,1,1), \quad(1,4,1), \quad`` and ``\quad(-2,0,4)``.
-"""
-
-# ╔═╡ 902fbee4-194f-499d-9e9d-ad7bfb08131e
-cm"""
-$(bbl("Angle between two planes",""))
-```math
-\cos \theta=\frac{\left|\mathbf{n}_1 \cdot \mathbf{n}_2\right|}{\left\|\mathbf{n}_1\right\|\left\|\mathbf{n}_2\right\|}
-```
-
-
-"""
-
-# ╔═╡ 772af978-5d7d-467d-bfc5-98dcf5bdd872
-cm"""
-$(bbl("Remark",""))
-Two planes with normal vectors ``\bf n_1`` and ``\bf n_2`` are
-* __perpendicular__ when ``{\bf n_1} \cdot {\bf n_2} = 0``.
-* __parallel__ when ``\bf n_1`` is a scalar multiple of ``\bf n_2``.
-"""
-
-# ╔═╡ 6e53795f-016a-4113-ae5d-5dc2a02758a7
-cm"""
-$(ex(4,"Finding the Line of Intersection of Two Planes"))
-Find the angle between the two planes ``x-2 y+z=0`` and ``2 x+3 y-2 z=0``. Then find parametric equations of their line of intersection.
-"""
-
-# ╔═╡ 9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
-cm"""
-$(bth("Distance Between a Point and a Plane"))
-$(post_img("https://www.dropbox.com/scl/fi/5l5deuushije2ffszddg4/fig_11_52.png?rlkey=gz5llqi698cjwz5iuwwfruap4&dl=1",300))
-The distance between a plane and a point ``Q`` (not in the plane) is
-```math
-D=\left\|\operatorname{proj}_{\mathbf{n}} \stackrel{\rightharpoonup}{P Q}\right\|=\frac{|\stackrel{\rightharpoonup}{P Q} \cdot \mathbf{n}|}{\|\mathbf{n}\|}
-```
-where ``P`` is a point in the plane and ``\mathbf{n}`` is normal to the plane.
-
-
-$(ebl())
-
-$(ex(5,"Finding the Distance Between a Point and a Plane"))
-Find the distance between the point ``Q(1,5,-4)`` and the plane ``3 x-y+2 z=6``.
-"""
-
-# ╔═╡ 1aca8a3e-feb4-4665-a059-8a0c2171198a
-cm"""
-$(bbl("Distance between a point and a plane"))
-Let ``Q(x_0,y_0,z_0)`` be any point. The distance between ``Q`` and the plane ``ax+by+cz+d=0`` is given by
-```math
-D=\frac{\left|a x_0+b y_0+c z_0+d\right|}{\sqrt{a^2+b^2+c^2}}
-```
-where ``P(x_1.y_1,z_2)`` on the plane.
-
-"""
-
-# ╔═╡ bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
-cm"""
-$(ex(6,"Finding the Distance Between Two Parallel Planes"))
-Two parallel planes, ``3 x-y+2 z-6=0`` and ``6 x-2 y+4 z+4=0``, find the distance between them.
-"""
-
-# ╔═╡ b829aed8-9618-44ea-9a2d-2c5d36416e62
-cm"""
-$(bth("Distance Between a Point and a Line in Space"))
-The distance between a point ``Q`` and a line in space is
-```math
-D=\frac{\|\overrightarrow{P Q} \times \mathbf{u}\|}{\|\mathbf{u}\|}
-```
-where ``\mathbf{u}`` is a direction vector for the line and ``P`` is a point on the line.
-
-$(post_img("https://www.dropbox.com/scl/fi/y9ty0d9njoshc2ki0skey/fig_11_54.png?rlkey=wicvn44wlqvc72niqy28dfs1w&dl=1",300))
-$(ebl())
-
-$(ex(7,"Finding the Distance Between a Point and a Line"))
-Find the distance between the point ``Q(3,-1,4)`` and the line
-```math
-x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
-```
-"""
-
-# ╔═╡ 037e8495-26d6-45d9-a855-4d1c88917561
-cm"""
-$(define("Skew Lines"))
-Two lines in space are __skew__ if they are neither parallel nor intersecting.
-"""
-
-# ╔═╡ 5e96be6d-4801-4056-ae2c-0b1b95307ac4
-cm"""
-$(ex())
-Consider the following two lines in space.
-```math
-\begin{aligned}
-& L_1: x=4+5 t, y=5+5 t, z=1-4 t \\
-& L_2: x=4+s, y=-6+8 s, z=7-3 s
-\end{aligned}
-```
-- (i) Show that these lines are not parallel.
-- (ii) Show that these lines do not intersect and therefore are skew lines.
-- (iii) Show that the two lines lie in parallel planes.
-- (iv) Find the distance between the parallel planes from part (iii). This is the distance between the original skew lines.
-"""
-
-# ╔═╡ 203ef45b-a6c3-4d04-a773-43ee348eaabd
-cm"""
-$(define("Cylinder"))
-Let ``C`` be a curve in a plane and let ``L`` be a line not in a parallel plane. The set of all lines parallel to ``L`` and intersecting ``C`` is a __cylinder__. The curve ``C`` is the __generating curve__ (or __directrix__) of the cylinder, and the parallel lines are __rulings__.
-
-$(post_img("https://www.dropbox.com/scl/fi/q0pbnl6g4n9ouhf0kbf4v/fig_11_57.png?rlkey=k0julsbb28j2liez5723p4hz7&dl=1"))
-"""
-
-# ╔═╡ f91da06c-b2ed-4b31-9fa6-af1e79c2167a
-cm"""
-$(ex(1,"Sketching a Cylinder"))
-Sketch the surface represented by each equation.
-- (a.) ``z=y^2``
-- (b.) ``z=\sin x, \quad 0 \leq x \leq 2 \pi``
-"""
-
-# ╔═╡ 11ce75b3-0867-441d-958d-1ff5ed3d9eaf
-cm"""
-$(define("Quadric Surface"))
-The equation of a quadric surface in space is a second-degree equation in three variables. The general form of the equation is
-```math
-A x^2+B y^2+C z^2+D x y+E x z+F y z+G x+H y+I z+J=0
-```
-
-There are six basic types of quadric surfaces:
-1. __ellipsoid__,
-2. __hyperboloid of one sheet__,
-3. __hyperboloid of two sheets__,
-4. __elliptic cone__,
-5. __elliptic paraboloid__, and
-6. __hyperbolic paraboloid__.
-"""
-
-# ╔═╡ 2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/loxxo1654l5ae0czqq0hg/quadratic_surfaces_1.png?rlkey=l7entrslfedfizipo2kae4ja4&dl=1",800))
-
-$(post_img("https://www.dropbox.com/scl/fi/gie6mrs9mrd2do68ukysh/quadratic_surfaces_2.png?rlkey=dqtmhedg3h6078bgbiifm4hey&dl=1",800))
-"""
-
-# ╔═╡ d936afce-e80d-49c9-9e55-cd4432c6e392
-cm"""
-$(ex(2,"Sketching a Quadric Surface"))
-Classify and sketch the surface
-```math
-4 x^2-3 y^2+12 z^2+12=0
-```
-"""
-
-# ╔═╡ bd9cb96f-ab81-4bb8-82a8-56577a0412a6
-cm"""
-$(ex(3,"Sketching a Quadric Surface"))
-Classify and sketch the surface
-```math
-x-y^2-4 z^2=0
-```
-"""
-
-# ╔═╡ ba23c565-f547-4df9-9027-d623bacf8fa6
-cm"""
-$(ex(4,"A Quadric Surface Not Centered at the Origin"))
-Classify and sketch the surface
-```math
-x^2+2 y^2+z^2-4 x+4 y-2 z+3=0
-```
-"""
-
-# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
-cm"""
-$(bbl("The Cylindrical Coordinate System",""))
-In a __cylindrical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(r, \theta, z)``.
-1. ``(r, \theta)`` is a polar representation of the projection of ``P`` in the ``x y``-plane.
-2. ``z`` is the directed distance from ``(r, \theta)`` to ``P``.
-"""
-
-# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
-cm"""
-$(ex(1,"Cylindrical-to-Rectangular Conversion"))
-Convert the point ``(r, \theta, z)=(4,5 \pi / 6,3)`` to rectangular coordinates.
-"""
-
-# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
-cm"""
-$(ex(2,"Rectangular-to-Cylindrical Conversion"))
-
-Convert the point
-```math
-(x, y, z)=(1, \sqrt{3}, 2)
-```
-to cylindrical coordinates.
-"""
-
-# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
-cm"""
-$(ex(3," Rectangular-to-Cylindrical Conversion"))
-Find an equation in cylindrical coordinates for the surface represented by each rectangular equation.
-- a. ``x^2+y^2=4 z^2``
-- b. ``y^2=x``
-"""
-
-# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
-cm"""
-$(ex(4,"Cylindrical-to-Rectangular Conversion"))
-Find an equation in rectangular coordinates for the surface represented by the cylindrical equation
-```math
-r^2 \cos 2 \theta+z^2+1=0
-```
-"""
-
-# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
-cm"""
-$(ex(1,"Finding Volume in Cylindrical Coordinates"))
-Find the volume of the solid region ``Q`` cut from the sphere ``x^2+y^2+z^2=4`` by the cylinder ``r=2 \sin \theta``, as shown below
-$(post_img("https://www.dropbox.com/scl/fi/2f38nlmz7q709en50hlcm/fig_14_65.png?rlkey=vzl7tqupj13l4e93d2cdmr3a6&dl=1"))
-"""
-
-# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
-cm"""
-$(bbl("The Spherical Coordinate System",""))
-In a __spherical coordinate system__, a point ``P`` in space is represented by an ordered triple ``(\rho, \theta, \phi)``, where ``\rho`` is the lowercase Greek letter rho and ``\phi`` is the lowercase Greek letter phi.
-1. ``\rho`` is the distance between ``P`` and the origin, ``\rho \geq 0``.
-2. ``\theta`` is the same angle used in cylindrical coordinates for ``r \geq 0``.
-3. ``\phi`` is the angle between the positive ``z``-axis and the line segment ``\overrightarrow{O P}``, ``0 \leq \phi \leq \pi``.
-Note that the first and third coordinates, ``\rho`` and ``\phi``, are nonnegative.
-"""
-
-# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/nni9wg47ehex96kyrhx0x/fig_11_75.png?rlkey=j0yb2brh26jk94g3xoxja57ho&dl=1",400))
-"""
-
-# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
-cm"""
-$(ex(5,"Rectangular-to-Spherical Conversion"))
-
-Find an equation in spherical coordinates for the surface represented by each rectangular equation.
-- a. Cone: ``x^2+y^2=z^2``
-- b. Sphere: ``x^2+y^2+z^2-4 z=0``
-"""
-
-# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
-cm"""
-$(ex(4,"Finding Volume in Spherical Coordinates"))
-
-Find the volume of the solid region ``Q`` bounded below by the upper nappe of the cone ``z^2=x^2+y^2`` and above by the sphere ``x^2+y^2+z^2=9``, as shown below
-
-$(post_img("https://www.dropbox.com/scl/fi/gaca3jrotv5nxb099eotx/fig_14_70.png?rlkey=oe8rdmtcdwgahcpyt6j9bmawe&dl=1",400))
-"""
-
 # ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
 @htl("""
 <style>
@@ -2947,7 +1917,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 Colors = "~0.12.11"
-CommonMark = "~1.0.1"
+CommonMark = "~0.9.1"
 ForwardDiff = "~1.2.2"
 Groebner = "~0.10.0"
 HypertextLiteral = "~0.9.5"
@@ -2955,10 +1925,10 @@ LaTeXStrings = "~1.4.0"
 Latexify = "~0.16.10"
 Nemo = "~0.52.3"
 PlotThemes = "~3.3.0"
-Plots = "~1.41.6"
-PlutoExtras = "~0.7.18"
-PlutoUI = "~0.7.80"
-PrettyTables = "~3.3.2"
+Plots = "~1.41.1"
+PlutoExtras = "~0.7.16"
+PlutoUI = "~0.7.73"
+PrettyTables = "~3.1.0"
 QRCoders = "~1.4.5"
 Symbolics = "~6.57.0"
 Unitful = "~1.25.1"
@@ -2968,9 +1938,9 @@ Unitful = "~1.25.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.5"
 manifest_format = "2.0"
-project_hash = "8f77f2a32de6eb5c5324ae11dbc41b9b01712021"
+project_hash = "676df27baecaecff2557233cea90ba46b7661a91"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "27cecae79e5cc9935255f90c53bb831cc3c870d7"
@@ -3009,9 +1979,10 @@ weakdeps = ["ChainRulesCore", "Test"]
     AbstractFFTsTestExt = "Test"
 
 [[deps.AbstractPlutoDingetjes]]
-git-tree-sha1 = "6c3913f4e9bdf6ba3c08041a446fb1332716cbc2"
+deps = ["Pkg"]
+git-tree-sha1 = "6e1d2a35f2f90a4bc7c2ed98079b2ba09c35b83a"
 uuid = "6e696c72-6542-2067-7265-42206c756150"
-version = "1.4.0"
+version = "1.3.2"
 
 [[deps.AbstractTrees]]
 git-tree-sha1 = "2d9c9a55f9c93e8887ad391fbae72f8ef55e1177"
@@ -3135,9 +2106,9 @@ uuid = "e2ed5e7c-b2de-5872-ae92-c73ca462fb04"
 version = "0.2.2"
 
 [[deps.BitFlags]]
-git-tree-sha1 = "bbe1079eecf9c9fbb52765193ad2bae27ae09bc8"
+git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
-version = "0.1.10"
+version = "0.1.9"
 
 [[deps.Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -3151,10 +2122,10 @@ uuid = "fa961155-64e5-5f13-b03f-caf6b980ea82"
 version = "0.5.0"
 
 [[deps.Cairo_jll]]
-deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "d0efe2c6fdcdaa1c161d206aa8b933788397ec71"
+deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
+git-tree-sha1 = "fde3bf89aead2e723284a8ff9cdf5b551ed700e8"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
-version = "1.18.6+0"
+version = "1.18.5+0"
 
 [[deps.ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra"]
@@ -3168,9 +2139,9 @@ weakdeps = ["SparseArrays"]
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
-git-tree-sha1 = "970758a3d591a2a5c2a907c53f2e2f8c1b1d3537"
+git-tree-sha1 = "962834c22b66e32aa10f7611c08c8ca4e20749a9"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
-version = "0.7.9"
+version = "0.7.8"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
@@ -3203,22 +2174,14 @@ version = "1.0.2"
 
 [[deps.CommonMark]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "019ad9e55bb3549403f2d5a9b314fbb29a806ecb"
+git-tree-sha1 = "351d6f4eaf273b753001b2de4dffb8279b100769"
 uuid = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
-version = "1.0.1"
-
-    [deps.CommonMark.extensions]
-    CommonMarkMarkdownASTExt = "MarkdownAST"
-    CommonMarkMarkdownExt = "Markdown"
-
-    [deps.CommonMark.weakdeps]
-    Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
-    MarkdownAST = "d0879d2d-cac2-40c8-9cee-1863dc0c7391"
+version = "0.9.1"
 
 [[deps.CommonSolve]]
-git-tree-sha1 = "78ea4ddbcf9c241827e7035c3a03e2e456711470"
+git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
 uuid = "38540f10-b2f7-11e9-35d8-d573e4eb0ff2"
-version = "0.2.6"
+version = "0.2.4"
 
 [[deps.CommonSubexpressions]]
 deps = ["MacroTools"]
@@ -3262,9 +2225,9 @@ weakdeps = ["InverseFunctions"]
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
-git-tree-sha1 = "3c9be947934c38475bafe822c6d61aaed17f0738"
+git-tree-sha1 = "d9d26935a0bcffc87d2613ce14c527c99fc543fd"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
-version = "2.6.0"
+version = "2.5.0"
 
 [[deps.ConstructionBase]]
 git-tree-sha1 = "b4b092499347b18a015186eae3042f72267106cb"
@@ -3384,6 +2347,12 @@ git-tree-sha1 = "9a3ae38b460449cc9e7dd0cfb059c76028724627"
 uuid = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
 version = "0.6.1"
 
+[[deps.EarCut_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "e3290f2d49e661fbd94046d7e3726ffcb2d41053"
+uuid = "5ae413db-bbd1-5e63-b57d-d24a61df00f5"
+version = "2.2.4+0"
+
 [[deps.EnumX]]
 git-tree-sha1 = "bddad79635af6aec424f53ed8aad5d7555dc6f00"
 uuid = "4e289a0a-7415-4d19-859d-a7e5c4648b56"
@@ -3403,9 +2372,9 @@ version = "0.1.11"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "f4d39eee89f1e58c26bf447f1d4156c0125d6838"
+git-tree-sha1 = "27af30de8b5445644e8ffe3bcb0d72049c089cf1"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
-version = "2.8.3+0"
+version = "2.7.3+0"
 
 [[deps.ExprTools]]
 git-tree-sha1 = "27415f162e6028e81c72b82ef756bf321213b6ec"
@@ -3417,6 +2386,11 @@ git-tree-sha1 = "c13f0b150373771b0fdc1713c97860f8df12e6c2"
 uuid = "55351af7-c7e9-48d6-89ff-24e801d99491"
 version = "0.10.14"
 
+[[deps.Extents]]
+git-tree-sha1 = "b309b36a9e02fe7be71270dd8c0fd873625332b4"
+uuid = "411431e0-e8b7-467b-b5e0-f676ba4f2910"
+version = "0.1.6"
+
 [[deps.FFMPEG]]
 deps = ["FFMPEG_jll"]
 git-tree-sha1 = "95ecf07c2eea562b5adbd0696af6db62c0f52560"
@@ -3424,10 +2398,10 @@ uuid = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
 version = "0.4.5"
 
 [[deps.FFMPEG_jll]]
-deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libva_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
-git-tree-sha1 = "66381d7059b5f3f6162f28831854008040a4e905"
+deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
+git-tree-sha1 = "ccc81ba5e42497f4e76553a5545665eed577a663"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
-version = "8.0.1+1"
+version = "8.0.0+0"
 
 [[deps.FFTW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -3443,9 +2417,9 @@ version = "301.300.102+0"
 
 [[deps.FileIO]]
 deps = ["Pkg", "Requires", "UUIDs"]
-git-tree-sha1 = "6522cfb3b8fe97bec632252263057996cbd3de20"
+git-tree-sha1 = "d60eb76f37d7e5a40cc2e7c36974d864b82dc802"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-version = "1.18.0"
+version = "1.17.1"
 weakdeps = ["HTTP"]
 
     [deps.FileIO.extensions]
@@ -3494,11 +2468,23 @@ weakdeps = ["StaticArrays"]
     [deps.ForwardDiff.extensions]
     ForwardDiffStaticArraysExt = "StaticArrays"
 
+[[deps.FreeType]]
+deps = ["CEnum", "FreeType2_jll"]
+git-tree-sha1 = "907369da0f8e80728ab49c1c7e09327bf0d6d999"
+uuid = "b38be410-82b0-50bf-ab77-7b57e271db43"
+version = "4.1.1"
+
 [[deps.FreeType2_jll]]
 deps = ["Artifacts", "Bzip2_jll", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "70329abc09b886fd2c5d94ad2d9527639c421e3e"
+git-tree-sha1 = "2c5512e11c791d1baed2049c5652441b28fc6a31"
 uuid = "d7e528f0-a631-5988-bf34-fe36492bcfd7"
-version = "2.14.3+1"
+version = "2.13.4+0"
+
+[[deps.FreeTypeAbstraction]]
+deps = ["ColorVectorSpace", "Colors", "FreeType", "GeometryBasics"]
+git-tree-sha1 = "b5c7fe9cea653443736d264b85466bad8c574f4a"
+uuid = "663a7486-cb36-511b-a19d-713bb74d65c9"
+version = "0.9.9"
 
 [[deps.FriBidi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -3524,9 +2510,9 @@ version = "1.11.0"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
-git-tree-sha1 = "b7bfd56fa66616138dfe5237da4dc13bbd83c67f"
+git-tree-sha1 = "fcb0584ff34e25155876418979d4c8971243bb89"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.4.1+0"
+version = "3.4.0+2"
 
 [[deps.GMP_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -3551,6 +2537,23 @@ git-tree-sha1 = "4b0406b866ea9fdbaf1148bc9c0b887e59f9af68"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
 version = "0.73.18+0"
 
+[[deps.GeoFormatTypes]]
+git-tree-sha1 = "8e233d5167e63d708d41f87597433f59a0f213fe"
+uuid = "68eda718-8dee-11e9-39e7-89f7f65f511f"
+version = "0.4.4"
+
+[[deps.GeoInterface]]
+deps = ["DataAPI", "Extents", "GeoFormatTypes"]
+git-tree-sha1 = "294e99f19869d0b0cb71aef92f19d03649d028d5"
+uuid = "cf35fbd7-0cd7-5166-be24-54bfbe79505f"
+version = "1.4.1"
+
+[[deps.GeometryBasics]]
+deps = ["EarCut_jll", "Extents", "GeoInterface", "IterTools", "LinearAlgebra", "StaticArrays", "StructArrays", "Tables"]
+git-tree-sha1 = "b62f2b2d76cee0d61a2ef2b3118cd2a3215d3134"
+uuid = "5c1252a2-5f33-56bf-86c9-59e7332b4326"
+version = "0.4.11"
+
 [[deps.GettextRuntime_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Libiconv_jll"]
 git-tree-sha1 = "45288942190db7c5f760f59c04495064eedf9340"
@@ -3571,9 +2574,9 @@ version = "5.2.3+0"
 
 [[deps.Glib_jll]]
 deps = ["Artifacts", "GettextRuntime_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Libiconv_jll", "Libmount_jll", "PCRE2_jll", "Zlib_jll"]
-git-tree-sha1 = "24f6def62397474a297bfcec22384101609142ed"
+git-tree-sha1 = "50c11ffab2a3d50192a228c313f05b5b5dc5acb2"
 uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
-version = "2.86.3+0"
+version = "2.86.0+0"
 
 [[deps.Graphics]]
 deps = ["Colors", "LinearAlgebra", "NaNMath"]
@@ -3604,9 +2607,9 @@ weakdeps = ["DynamicPolynomials"]
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "PrecompileTools", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "51059d23c8bb67911a2e6fd5130229113735fc7e"
+git-tree-sha1 = "5e6fe50ae7f23d171f44e311c2960294aaa0beb5"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.11.0"
+version = "1.10.19"
 
 [[deps.HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll"]
@@ -3670,9 +2673,9 @@ version = "1.4.2"
 
 [[deps.ImageMagick_jll]]
 deps = ["Artifacts", "Bzip2_jll", "FFTW_jll", "Ghostscript_jll", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll", "OpenJpeg_jll", "Zlib_jll", "Zstd_jll", "libpng_jll", "libwebp_jll", "libzip_jll"]
-git-tree-sha1 = "2c232857f2eb9ecfa3ab534df7f060c9afbeb187"
+git-tree-sha1 = "d670e8e3adf0332f57054955422e85a4aec6d0b0"
 uuid = "c73af94c-d91f-53ed-93a7-00f77d67a9d7"
-version = "7.1.2011+0"
+version = "7.1.2005+0"
 
 [[deps.ImageMetadata]]
 deps = ["AxisArrays", "ImageAxes", "ImageBase", "ImageCore"]
@@ -3682,9 +2685,9 @@ version = "0.9.9"
 
 [[deps.Imath_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "dcc8d0cd653e55213df9b75ebc6fe4a8d3254c65"
+git-tree-sha1 = "0936ba688c6d201805a83da835b55c61a180db52"
 uuid = "905a6f67-0a94-5f89-b386-d35d92009cd1"
-version = "3.2.2+0"
+version = "3.1.11+0"
 
 [[deps.IndirectArrays]]
 git-tree-sha1 = "012e604e1c7458645cb8b436f8fba789a51b257f"
@@ -3707,9 +2710,9 @@ uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 version = "1.11.0"
 
 [[deps.IntervalSets]]
-git-tree-sha1 = "d966f85b3b7a8e49d034d27a189e9a4874b4391a"
+git-tree-sha1 = "5fbb102dcb8b1a858111ae81d56682376130517d"
 uuid = "8197267c-284f-5f27-9208-e0e47529a953"
-version = "0.7.13"
+version = "0.7.11"
 weakdeps = ["Random", "RecipesBase", "Statistics"]
 
     [deps.IntervalSets.extensions]
@@ -3750,21 +2753,15 @@ version = "0.1.11"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "7204148362dafe5fe6a273f855b8ccbe4df8173e"
+git-tree-sha1 = "0533e564aae234aff59ab625543145446d8b6ec2"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.8.0"
-
-[[deps.JSON]]
-deps = ["Dates", "Logging", "Parsers", "PrecompileTools", "StructUtils", "UUIDs", "Unicode"]
-git-tree-sha1 = "c7345ab1a7ca4dc8a02c9f6510da0d9857bbe513"
-uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "1.7.1"
 
-    [deps.JSON.extensions]
-    JSONArrowExt = ["ArrowTypes"]
-
-    [deps.JSON.weakdeps]
-    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+[[deps.JSON]]
+deps = ["Dates", "Mmap", "Parsers", "Unicode"]
+git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
+uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+version = "0.21.4"
 
 [[deps.Jieko]]
 deps = ["ExproniconLite"]
@@ -3780,9 +2777,9 @@ version = "0.1.6"
 
 [[deps.JpegTurbo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "b6893345fd6658c8e475d40155789f4860ac3b21"
+git-tree-sha1 = "4255f0032eafd6451d707a51d5f0248b8a165e4d"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
-version = "3.1.4+0"
+version = "3.1.3+0"
 
 [[deps.JuliaSyntaxHighlighting]]
 deps = ["StyledStrings"]
@@ -3806,6 +2803,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "eb62a3deb62fc6d8822c0c4bef73e4412419c5d8"
 uuid = "1d63c593-3942-5779-bab2-d838dc0a180e"
 version = "18.1.8+0"
+
+[[deps.LZO_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl"]
+git-tree-sha1 = "1c602b1127f4751facb671441ca72715cc95938a"
+uuid = "dd4b983a-f0e5-5f8d-a1b7-129d4a5fb1ac"
+version = "2.10.3+0"
 
 [[deps.LaTeXStrings]]
 git-tree-sha1 = "dda21b8cbd6a6c40d9d02a73230f9d70fed6918c"
@@ -3884,9 +2887,9 @@ version = "1.18.0+0"
 
 [[deps.Libmount_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "97bbca976196f2a1eb9607131cb108c69ec3f8a6"
+git-tree-sha1 = "3acf07f130a76f87c041cfb2ff7d7284ca67b072"
 uuid = "4b2f31a3-9ecc-558c-b454-b3730dcb73e9"
-version = "2.41.3+0"
+version = "2.41.2+0"
 
 [[deps.Libtiff_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "LERC_jll", "Libdl", "XZ_jll", "Zlib_jll", "Zstd_jll"]
@@ -3896,9 +2899,9 @@ version = "4.7.2+0"
 
 [[deps.Libuuid_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "d0205286d9eceadc518742860bf23f703779a3d6"
+git-tree-sha1 = "2a7a12fc0a4e7fb773450d17975322aa77142106"
 uuid = "38a345b3-de98-5d2b-a5d3-14cd9215e700"
-version = "2.41.3+0"
+version = "2.41.2+0"
 
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
@@ -3953,9 +2956,9 @@ uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
 version = "0.5.16"
 
 [[deps.MappedArrays]]
-git-tree-sha1 = "0ee4497a4e80dbd29c058fcee6493f5219556f40"
+git-tree-sha1 = "2dab0221fe2b0f2cb6754eaa743cc266339f527e"
 uuid = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
-version = "0.4.3"
+version = "0.4.2"
 
 [[deps.MarchingCubes]]
 deps = ["PrecompileTools", "StaticArrays"]
@@ -3970,9 +2973,9 @@ version = "1.11.0"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "NetworkOptions", "Random", "Sockets"]
-git-tree-sha1 = "8785729fa736197687541f7053f6d8ab7fc44f92"
+git-tree-sha1 = "c067a280ddc25f196b5e7df3877c6b226d390aaf"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "1.1.10"
+version = "1.1.9"
 
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -4079,9 +3082,9 @@ version = "0.3.3"
 
 [[deps.OpenEXR_jll]]
 deps = ["Artifacts", "Imath_jll", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "135492b7e97fc86d9b132b96a54d2d3dd3e0c6a8"
+git-tree-sha1 = "8292dd5c8a38257111ada2174000a33745b06d4e"
 uuid = "18a262bb-aa17-5467-a713-aee519bc75cb"
-version = "3.4.8+0"
+version = "3.2.4+0"
 
 [[deps.OpenJpeg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libtiff_jll", "LittleCMS_jll", "libpng_jll"]
@@ -4096,9 +3099,9 @@ version = "0.8.7+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "NetworkOptions", "OpenSSL_jll", "Sockets"]
-git-tree-sha1 = "1d1aaa7d449b58415f97d2839c318b70ffb525a0"
+git-tree-sha1 = "386b47442468acfb1add94bf2d85365dea10cbab"
 uuid = "4d8831e6-92b7-49fb-bdf8-b643e874388c"
-version = "1.6.1"
+version = "1.6.0"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -4113,14 +3116,14 @@ version = "0.5.6+0"
 
 [[deps.Opus_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "e2bb57a313a74b8104064b7efd01406c0a50d2ff"
+git-tree-sha1 = "c392fc5dd032381919e3b22dd32d6443760ce7ea"
 uuid = "91d4177d-7536-5919-b921-800302f37372"
-version = "1.6.1+0"
+version = "1.5.2+0"
 
 [[deps.OrderedCollections]]
-git-tree-sha1 = "94ba93778373a53bfd5a0caaf7d809c445292ff4"
+git-tree-sha1 = "05868e21324cede2207c6f0f466b4bfef6d5e7ee"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
-version = "1.8.2"
+version = "1.8.1"
 
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -4147,15 +3150,15 @@ version = "0.5.12"
 
 [[deps.Pango_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "FriBidi_jll", "Glib_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "0662b083e11420952f2e62e17eddae7fc07d5997"
+git-tree-sha1 = "1f7f9bbd5f7a2e5a9f7d96e51c9754454ea7f60b"
 uuid = "36c8627f-9965-5494-a995-c6b170f724f3"
-version = "1.57.0+0"
+version = "1.56.4+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
-git-tree-sha1 = "3de8f5e6e90ebfa8d6d1f86997d6cdcd6a912ff3"
+git-tree-sha1 = "7d2f8f21da5db6a806faf7b9b292296da42b2810"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.8.7"
+version = "2.8.3"
 
 [[deps.Pixman_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "LLVMOpenMP_jll", "Libdl"]
@@ -4192,9 +3195,9 @@ version = "1.4.4"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "PrecompileTools", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "TOML", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "cb20a4eacda080e517e4deb9cfb6c7c518131265"
+git-tree-sha1 = "12ce661880f8e309569074a61d3767e5756a199f"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.41.6"
+version = "1.41.1"
 
     [deps.Plots.extensions]
     FileIOExt = "FileIO"
@@ -4212,39 +3215,33 @@ version = "1.41.6"
 
 [[deps.PlutoExtras]]
 deps = ["AbstractPlutoDingetjes", "DocStringExtensions", "HypertextLiteral", "InteractiveUtils", "Markdown", "PlutoUI", "REPL", "Random"]
-git-tree-sha1 = "ba293b0d67584aa71badebdf8e5e572ba61d0246"
+git-tree-sha1 = "fed8c477f3028dcbffbc12b957d6b328196dcc00"
 uuid = "ed5d0301-4775-4676-b788-cf71e66ff8ed"
-version = "0.7.18"
+version = "0.7.16"
 
 [[deps.PlutoUI]]
-deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Downloads", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
-git-tree-sha1 = "fbc875044d82c113a9dee6fc14e16cf01fd48872"
+deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Downloads", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
+git-tree-sha1 = "3faff84e6f97a7f18e0dd24373daa229fd358db5"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.80"
+version = "0.7.73"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
-git-tree-sha1 = "edbeefc7a4889f528644251bdb5fc9ab5348bc2c"
+git-tree-sha1 = "07a921781cab75691315adc645096ed5e370cb77"
 uuid = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
-version = "1.3.4"
+version = "1.3.3"
 
 [[deps.Preferences]]
 deps = ["TOML"]
-git-tree-sha1 = "8b770b60760d4451834fe79dd483e318eee709c4"
+git-tree-sha1 = "0f27480397253da18fe2c12a4ba4eb9eb208bf3d"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
-version = "1.5.2"
+version = "1.5.0"
 
 [[deps.PrettyTables]]
 deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "REPL", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "624de6279ab7d94fc9f672f0068107eb6619732c"
+git-tree-sha1 = "6b8e2f0bae3f678811678065c09571c1619da219"
 uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "3.3.2"
-
-    [deps.PrettyTables.extensions]
-    PrettyTablesTypstryExt = "Typstry"
-
-    [deps.PrettyTables.weakdeps]
-    Typstry = "f0ed7684-a786-439e-b1e3-3b82803b501e"
+version = "3.1.0"
 
 [[deps.Primes]]
 deps = ["IntegerMathUtils"]
@@ -4270,9 +3267,9 @@ version = "1.3.0"
 
 [[deps.QOI]]
 deps = ["ColorTypes", "FileIO", "FixedPointNumbers"]
-git-tree-sha1 = "472daaa816895cb7aee81658d4e7aec901fa1106"
+git-tree-sha1 = "8b3fc30bc0390abdce15f8822c889f669baed73d"
 uuid = "4b34888f-f399-49d4-9bb3-47ed5cae4e65"
-version = "1.0.2"
+version = "1.0.1"
 
 [[deps.QRCoders]]
 deps = ["FileIO", "ImageCore", "ImageIO", "ImageMagick", "StatsBase", "UnicodePlots"]
@@ -4529,9 +3526,9 @@ version = "1.12.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "2700b235561b0335d5bef7097a111dc513b8655e"
+git-tree-sha1 = "f2685b435df2613e25fc10ad8c26dddb8640f547"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.7.2"
+version = "2.6.1"
 weakdeps = ["ChainRulesCore"]
 
     [deps.SpecialFunctions.extensions]
@@ -4539,9 +3536,9 @@ weakdeps = ["ChainRulesCore"]
 
 [[deps.StableRNGs]]
 deps = ["Random"]
-git-tree-sha1 = "4f96c596b8c8258cc7d3b19797854d368f243ddc"
+git-tree-sha1 = "95af145932c2ed859b63329952ce8d633719f091"
 uuid = "860ef19b-820b-49d6-a774-d7a799459cd3"
-version = "1.0.4"
+version = "1.0.3"
 
 [[deps.StackViews]]
 deps = ["OffsetArrays"]
@@ -4551,9 +3548,9 @@ version = "0.1.2"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
-git-tree-sha1 = "246a8bb2e6667f832eea063c3a56aef96429a3db"
+git-tree-sha1 = "b8693004b385c842357406e3af647701fe783f98"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.9.18"
+version = "1.9.15"
 weakdeps = ["ChainRulesCore", "Statistics"]
 
     [deps.StaticArrays.extensions]
@@ -4577,9 +3574,9 @@ weakdeps = ["SparseArrays"]
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "178ed29fd5b2a2cfc3bd31c13375ae925623ff36"
+git-tree-sha1 = "9d72a13a3f4dd3795a195ac5a44d7d6ff5f552ff"
 uuid = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
-version = "1.8.0"
+version = "1.7.1"
 
 [[deps.StatsBase]]
 deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
@@ -4600,25 +3597,30 @@ weakdeps = ["ChainRulesCore", "InverseFunctions"]
 
 [[deps.StringManipulation]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "d05693d339e37d6ab134c5ab53c29fce5ee5d7d5"
+git-tree-sha1 = "725421ae8e530ec29bcbdddbe91ff8053421d023"
 uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.4.4"
+version = "0.4.1"
 
-[[deps.StructUtils]]
-deps = ["Dates", "UUIDs"]
-git-tree-sha1 = "2d0fc55c61321ba245c47be599570d11bac50303"
-uuid = "ec057cc2-7a8d-4b58-b3b3-92acb9f63b42"
-version = "2.8.5"
+[[deps.StructArrays]]
+deps = ["ConstructionBase", "DataAPI", "Tables"]
+git-tree-sha1 = "9537ef82c42cdd8c5d443cbc359110cbb36bae10"
+uuid = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
+version = "0.6.21"
 
-    [deps.StructUtils.extensions]
-    StructUtilsMeasurementsExt = ["Measurements"]
-    StructUtilsStaticArraysCoreExt = ["StaticArraysCore"]
-    StructUtilsTablesExt = ["Tables"]
+    [deps.StructArrays.extensions]
+    StructArraysAdaptExt = "Adapt"
+    StructArraysGPUArraysCoreExt = ["GPUArraysCore", "KernelAbstractions"]
+    StructArraysLinearAlgebraExt = "LinearAlgebra"
+    StructArraysSparseArraysExt = "SparseArrays"
+    StructArraysStaticArraysExt = "StaticArrays"
 
-    [deps.StructUtils.weakdeps]
-    Measurements = "eff96d63-e80a-5855-80a2-b1b0885c5ab7"
-    StaticArraysCore = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
-    Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
+    [deps.StructArrays.weakdeps]
+    Adapt = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
+    GPUArraysCore = "46192b85-c4d5-4398-a991-12ede77f4527"
+    KernelAbstractions = "63c18a36-062a-441e-b654-da1e3ab1ce7c"
+    LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+    SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+    StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
@@ -4702,9 +3704,9 @@ version = "1.0.1"
 
 [[deps.Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "OrderedCollections", "TableTraits"]
-git-tree-sha1 = "a94d9bdda1b7bed0046cea645639ab3f62196fac"
+git-tree-sha1 = "f2c1efbc8f3a609aadf318094f8fc5204bdaf344"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "1.14.0"
+version = "1.12.1"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -4761,9 +3763,9 @@ uuid = "410a4b4d-49e4-4fbc-ab6d-cb71b17b3775"
 version = "0.1.13"
 
 [[deps.URIs]]
-git-tree-sha1 = "908fec9df6c5de98548ead82a468c95ccf6cd263"
+git-tree-sha1 = "bef26fb046d031353ef97a82e3fdb6afe7f21b1a"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.7.0"
+version = "1.6.1"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
@@ -4781,10 +3783,10 @@ uuid = "1cfade01-22cf-5700-b092-accc4b62d6e1"
 version = "0.4.1"
 
 [[deps.UnicodePlots]]
-deps = ["Contour", "Crayons", "Dates", "LinearAlgebra", "MarchingCubes", "NaNMath", "SparseArrays", "StaticArrays", "StatsBase"]
-git-tree-sha1 = "66f9127e995e4eab4041c5f01d644a7278ac8bc2"
+deps = ["ColorTypes", "Contour", "Crayons", "Dates", "FileIO", "FreeTypeAbstraction", "LazyModules", "LinearAlgebra", "MarchingCubes", "NaNMath", "Printf", "SparseArrays", "StaticArrays", "StatsBase", "Unitful"]
+git-tree-sha1 = "ae67ab0505b9453655f7d5ea65183a1cd1b3cfa0"
 uuid = "b8865327-cd53-5732-bb35-84acbb429228"
-version = "2.8.1"
+version = "2.12.4"
 
 [[deps.Unitful]]
 deps = ["Dates", "LinearAlgebra", "Random"]
@@ -4836,9 +3838,9 @@ version = "1.24.0+0"
 
 [[deps.XZ_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "9cce64c0fdd1960b597ba7ecda2950b5ed957438"
+git-tree-sha1 = "fee71455b0aaa3440dfdd54a9a36ccef829be7d4"
 uuid = "ffd25f8a-64ca-5728-b0f7-c24cf3aae800"
-version = "5.8.2+0"
+version = "5.8.1+0"
 
 [[deps.Xorg_libICE_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -4854,9 +3856,9 @@ version = "1.2.6+0"
 
 [[deps.Xorg_libX11_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libxcb_jll", "Xorg_xtrans_jll"]
-git-tree-sha1 = "808090ede1d41644447dd5cbafced4731c56bd2f"
+git-tree-sha1 = "b5899b25d17bf1889d25906fb9deed5da0c15b3b"
 uuid = "4f6342f7-b3d2-589e-9d20-edeb45f2b2bc"
-version = "1.8.13+0"
+version = "1.8.12+0"
 
 [[deps.Xorg_libXau_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -4878,9 +3880,9 @@ version = "1.1.6+0"
 
 [[deps.Xorg_libXext_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
-git-tree-sha1 = "1a4a26870bf1e5d26cd585e38038d399d7e65706"
+git-tree-sha1 = "a4c0ee07ad36bf8bbce1c3bb52d21fb1e0b987fb"
 uuid = "1082639a-0dae-5f34-9b06-72781eeb8cb3"
-version = "1.3.8+0"
+version = "1.3.7+0"
 
 [[deps.Xorg_libXfixes_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
@@ -4896,27 +3898,21 @@ version = "1.8.3+0"
 
 [[deps.Xorg_libXinerama_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXext_jll"]
-git-tree-sha1 = "0ba01bc7396896a4ace8aab67db31403c71628f4"
+git-tree-sha1 = "a5bc75478d323358a90dc36766f3c99ba7feb024"
 uuid = "d1454406-59df-5ea1-beac-c340f2130bc3"
-version = "1.1.7+0"
+version = "1.1.6+0"
 
 [[deps.Xorg_libXrandr_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXext_jll", "Xorg_libXrender_jll"]
-git-tree-sha1 = "6c174ef70c96c76f4c3f4d3cfbe09d018bcd1b53"
+git-tree-sha1 = "aff463c82a773cb86061bce8d53a0d976854923e"
 uuid = "ec84b674-ba8e-5d96-8ba1-2a689ba10484"
-version = "1.5.6+0"
+version = "1.5.5+0"
 
 [[deps.Xorg_libXrender_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
 git-tree-sha1 = "7ed9347888fac59a618302ee38216dd0379c480d"
 uuid = "ea2f1a96-1ddc-540d-b46f-429655e07cfa"
 version = "0.9.12+0"
-
-[[deps.Xorg_libpciaccess_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "4909eb8f1cbf6bd4b1c30dd18b2ead9019ef2fad"
-uuid = "a65dc6b1-eb27-53a1-bb3e-dea574b5389e"
-version = "0.18.1+0"
 
 [[deps.Xorg_libxcb_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXau_jll", "Xorg_libXdmcp_jll"]
@@ -4926,9 +3922,9 @@ version = "1.17.1+0"
 
 [[deps.Xorg_libxkbfile_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll"]
-git-tree-sha1 = "ed756a03e95fff88d8f738ebc2849431bdd4fd1a"
+git-tree-sha1 = "e3150c7400c41e207012b41659591f083f3ef795"
 uuid = "cc61e674-0454-545c-8b26-ed2c68acab7a"
-version = "1.2.0+0"
+version = "1.1.3+0"
 
 [[deps.Xorg_xcb_util_cursor_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_jll", "Xorg_xcb_util_renderutil_jll"]
@@ -5030,12 +4026,6 @@ git-tree-sha1 = "9bf7903af251d2050b467f76bdbe57ce541f7f4f"
 uuid = "1183f4f0-6f2a-5f1a-908b-139f9cdfea6f"
 version = "0.2.2+0"
 
-[[deps.libdrm_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libpciaccess_jll"]
-git-tree-sha1 = "63aac0bcb0b582e11bad965cef4a689905456c03"
-uuid = "8e53e030-5e6c-5a89-a30b-be5b7263a166"
-version = "2.4.125+1"
-
 [[deps.libevdev_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "56d643b57b188d30cccc25e331d416d3d358e557"
@@ -5056,21 +4046,15 @@ version = "1.28.1+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "e2a7072fc0cdd7949528c1455a3e5da4122e1153"
+git-tree-sha1 = "07b6a107d926093898e82b3b1db657ebe33134ec"
 uuid = "b53b4c65-9356-5827-b1ea-8c7a1a84506f"
-version = "1.6.56+0"
+version = "1.6.50+0"
 
 [[deps.libsixel_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "Libdl", "libpng_jll"]
 git-tree-sha1 = "c1733e347283df07689d71d61e14be986e49e47a"
 uuid = "075b6546-f08a-558a-be8f-8157d0f608a5"
 version = "1.10.5+0"
-
-[[deps.libva_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll", "Xorg_libXext_jll", "Xorg_libXfixes_jll", "libdrm_jll"]
-git-tree-sha1 = "7dbf96baae3310fe2fa0df0ccbb3c6288d5816c9"
-uuid = "9a156e7d-b971-5f62-b2c9-67348b8fb97c"
-version = "2.23.0+0"
 
 [[deps.libvorbis_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Ogg_jll"]
@@ -5120,220 +4104,179 @@ version = "4.1.0+0"
 
 [[deps.xkbcommon_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libxcb_jll", "Xorg_xkeyboard_config_jll"]
-git-tree-sha1 = "a1fc6507a40bf504527d0d4067d718f8e179b2b8"
+git-tree-sha1 = "fbf139bce07a534df0e699dbb5f5cc9346f95cc1"
 uuid = "d8fb68d0-12a3-5cfd-a85a-d49703b185fd"
-version = "1.13.0+0"
+version = "1.9.2+0"
 """
 
 # ╔═╡ Cell order:
-# ╟─9858d0f8-ba7e-44fe-bcfc-4af064b7985c
-# ╟─286b172a-8bfe-430c-b13b-83e0e14798d1
-# ╟─f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
-# ╟─c7a8937d-6d27-41c3-ac54-8d59db9c8937
-# ╟─004e5898-ebff-4e99-a515-a90a09d347ac
-# ╟─b9fce471-306a-4ba2-9a99-fcb7e14deac7
-# ╟─1c4d70e7-f245-4963-bd97-f0773f9d6588
-# ╟─0a923d1b-4f8a-4622-a418-0e989e4648b9
-# ╟─1785a7a4-ba84-42f8-863c-747b9ec9cd50
-# ╟─b6845b47-9f90-4a4b-b439-6eeeb7d9519e
-# ╟─9c69eac1-148d-4b24-8962-4ab3922bf606
-# ╟─208b862e-da48-4a79-aaee-2df466adfa17
-# ╟─6c418467-c0c2-4dc4-ae7d-97f7ffc88888
-# ╟─5ce29b80-bb95-40db-a3c7-4c3d5c94ba0d
-# ╟─1e084154-e54f-455d-8bd4-12870c25990d
-# ╟─228bf657-4801-49d2-8993-c34fb49b6358
-# ╟─937281b4-302e-4aa7-a640-9073028803ba
-# ╟─2b149b3a-deab-40d5-8f8b-32b7531a7165
-# ╟─8e3fcc38-1f61-4937-affb-82045e4cfaf9
-# ╟─6b72dabd-148c-46aa-8e5d-2bd1f19fde10
-# ╟─f9b08784-8a16-432e-8012-d5f84e2c97a0
-# ╟─1c8cad4e-4bca-4425-9c47-b074e052d582
-# ╟─1ce351b8-0ccb-40e9-8898-3c9462870314
-# ╟─a9cf512b-4f15-40e4-8314-4c56ac8d5a58
-# ╟─c23c83d4-4d34-44c7-8dee-f2aa824eda44
-# ╟─2cfa4e94-e5ff-4eea-a9fb-6db2cf51cf25
-# ╟─9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
-# ╟─0d040c84-9ed6-4e28-9de4-fab5b1f68b8b
-# ╟─89003ff4-11e1-423f-bb5e-60517c642a54
-# ╟─a6f3a648-a960-414b-8bca-e52ec129881c
-# ╟─e7154dd2-48a0-49a2-88a3-cac7f8c58555
-# ╟─22be1c2d-26f2-41ff-97f9-27f58dc3c0b7
-# ╟─571a0a6a-b0f2-4899-9b22-4e7948f358e2
-# ╟─98fc123c-93b7-4b6e-8da6-1b58b257ec67
-# ╟─5568fedf-6167-4e27-b322-e21c4bd4ca07
-# ╟─6e2c6a42-4316-4fda-97b3-d395cdf71030
-# ╟─bb26e5cc-67e4-47ce-b698-5d5ae5612710
-# ╠═983f500b-9e8b-4605-a82f-3a0dc2a2ab0b
-# ╟─6419f344-a1b3-4d60-8f27-8469a6e6b022
-# ╟─f6836f13-5370-4ac3-813a-50fc012bfcab
-# ╟─94194246-ad29-43d1-9925-126fe9e5e696
-# ╟─b3607e63-89eb-41c3-b6cf-61f0e0f16678
-# ╟─454d899d-19b4-449c-a360-bc53a2a40c45
-# ╟─e3363ab4-1543-421f-a68c-cb1685a2f06a
-# ╟─2c4b3a89-8257-48fa-8e3a-30f059e0187d
-# ╟─2a7d5253-8435-4952-9349-4cabedcd5077
-# ╟─38d7057b-da6e-42e7-a2b9-3c79d94265ba
-# ╟─734ef678-1329-4d59-8753-0797b6a675c7
-# ╟─0a7b91d0-5ca6-4006-9b59-f9e077a8c3db
-# ╟─7bb3abcb-525c-45a4-9989-74c42fee5fe2
-# ╟─574ab398-71d0-4427-86dc-fd99482feffc
-# ╟─7e3feecd-7106-4591-b22a-97a7aa064b6c
-# ╟─108475eb-bae3-426d-88db-f0f5dc177c65
-# ╟─3798f275-6e8c-4bc4-b6fe-8d3dfe720b40
-# ╟─3b5963de-0745-4c00-8aea-1c631989dc53
-# ╟─75e95211-2367-49ed-a1fd-f0ae39870f04
-# ╟─847f0197-beab-45d7-ae4c-27385719aeb1
-# ╟─f6cf7fcc-1d77-444c-9265-a323a4fa3ab1
-# ╟─8dccd1af-f9bf-4a8e-9f45-6e4dc2320988
-# ╟─b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
-# ╟─8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
-# ╟─1a2c15f9-af65-4fe5-b517-98d26a3998fd
-# ╟─3d59184b-ccc8-4818-ae25-b328b7cb0d57
-# ╟─c893062e-3a97-45cb-9f17-e61cc8f0abe2
-# ╟─554f972f-8c43-4b67-845a-5f7e85cabfda
-# ╟─ce3fdcff-d13d-4224-b394-ae73ca08d7b7
-# ╟─e4d12bd7-039a-42a8-b278-05a5e8fe0841
-# ╟─79d33f0f-6b03-420f-a0c1-98108e43ab6b
-# ╟─ebbfa978-69b9-4a06-8747-792cb04992eb
-# ╟─66eb4dd6-f558-479a-b193-8e852c345721
-# ╟─4fc2f92f-3773-4e53-82c6-c4e441f164b3
-# ╟─788ea369-4509-4970-9a2d-ea887194b790
-# ╟─de23e5af-1d2d-4b22-9743-dd59bc903a9c
-# ╟─2a3a956b-6621-4892-8d0a-75476eece1dc
-# ╟─1a71cd7d-fd19-4872-b426-5bf708d79b83
-# ╠═4fe2dba9-e764-4f30-a41a-75da08728858
-# ╟─bc67920c-1bee-4fcc-8469-adf01e1d33e8
-# ╟─339f43f6-89ff-4904-9f4f-d2de94a673f4
-# ╟─8c5a1d1d-ede5-481b-bcba-0a390a843a26
-# ╟─70ffdb35-aba3-4b8a-834c-f3e996e5c278
-# ╟─bf3af1b5-3959-447f-85ac-b2b0b1ab737f
-# ╟─eca05d58-1cab-444f-ae15-df4e3177323f
-# ╟─c925f9ff-245f-4d0a-b085-b703adc1daaf
-# ╟─b7782d17-3e60-428a-bfcf-e911621c4ab8
-# ╟─7a7056e9-ecf9-46b7-a8cf-6aa0a641576c
-# ╠═c27df0f0-d524-4193-8188-271ea5779d04
-# ╟─1b9821e9-f325-475a-ba9c-70a889a5504c
-# ╟─c1dee7b3-6118-493e-9c9a-4629cd2af8c3
-# ╟─8bb57498-9a49-4b45-8d82-fb790465b1ae
-# ╟─be213c9e-c673-4f15-b3c4-46891cce9756
-# ╟─56e90ad9-7135-4113-a4e2-29b14af1f6d8
-# ╟─aac34993-c94d-4fa1-8f45-e249740c914d
-# ╟─3eded575-d9c4-424e-8151-3958dababb38
-# ╟─48ec609f-3846-4b67-b858-5157352169af
-# ╟─68b02402-4e4f-4fac-a1c6-3709b89a85fb
-# ╠═29a43516-0209-4a2e-930b-0157237c981f
-# ╟─97b10d17-61c1-494b-aefe-131a436e374e
-# ╟─e31be1dc-7013-43e4-95b8-9c8f8e086b9f
-# ╟─467af729-83cb-45dc-a472-33110bb277ea
-# ╟─ca13f691-7ec8-4293-b271-8c197b2e0ccf
-# ╟─b1c3ec5b-003d-42ab-8c6b-806e083a2047
-# ╟─b086df72-81e8-4e8f-8b6f-92122b21bd23
-# ╟─a264b45e-624a-43f1-bccc-288e2e87ac7b
-# ╟─99b860bf-9374-4e00-8a92-822af52d403f
-# ╟─d49cf3fa-c325-4efd-9ee5-f27eafa6e2bf
-# ╟─495c292f-fbcb-4420-93a3-fbcd6a34d17a
-# ╟─cce4a136-a23c-45c8-a3e4-78f744cc2836
-# ╟─1b792a4f-e23e-441d-9f6c-a64465505e2b
-# ╟─a58b8141-f330-46d8-82d2-b4caa5417887
-# ╟─771e9a89-d4eb-421b-a19f-a64810766812
-# ╟─1b1f9a05-1792-4004-a1e1-e8b71a1925e9
-# ╟─1b3fb3c8-c5fb-4a33-9630-211e4e29dc87
-# ╟─3018f183-3db6-48e5-90fa-f0ff37d8f216
-# ╟─5121dfa0-5f6a-453a-9795-dddc8d6bdbfb
-# ╟─e0ffce55-f749-439e-8399-7d67cf7ef0c9
-# ╟─b18adead-c917-450c-9a3c-7253d6d91442
-# ╟─d878ec80-8b50-4ff3-9fef-06ca92c63f91
-# ╟─a5156264-eb85-45a0-a605-9b2de672333a
-# ╟─79735eb1-16e1-4cf3-a43a-88d1ade37279
-# ╟─f85ad3e4-f7ba-4563-b548-ceb803d13d2c
-# ╟─1fb44f1d-547e-4bea-b7ad-f171ebed5b20
-# ╟─18456035-9e2c-4fa9-9a40-fc161af78522
-# ╟─3750ac2e-758a-4388-bee2-1cfbfdb19953
-# ╠═4fb037ae-7f8e-40a7-9988-26da22529d2e
-# ╟─948bbe03-1560-4b79-904f-133256b6423f
-# ╟─f6dd1b1d-af2d-4cef-89b6-cb0131ccb942
-# ╟─d87d9c4a-73b4-41a3-ae53-2f13392ce88d
-# ╠═12d1fa2a-9a6c-4edc-821e-2f54b4da454e
-# ╟─bb8ca18e-ecba-40e0-b1c9-caf920ff7586
-# ╟─d6fc1ea1-f463-46a5-94e6-9a4e6f914fc8
-# ╟─f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
-# ╟─6f42f537-305f-4e0a-b593-5071e1d7af7b
-# ╟─10aa7935-07cb-4ced-99f3-f65df6d542f6
-# ╟─e86876ea-6102-43cf-9f34-e22d9c433796
-# ╟─30596df7-5297-4369-ae8c-1970df3da531
-# ╟─183998e1-735f-4c38-ae61-7f2471fa1ae5
-# ╟─ece4c6d9-8393-43c9-b60d-93df66a95999
-# ╟─8b67f393-e954-4b33-9cc9-c382d7a41b37
-# ╟─1810ba68-52d4-4ea5-ab66-09c0d7c95846
-# ╟─998fbe79-be22-4017-8721-490717e4a7a8
-# ╠═b35ca1c3-621d-40af-afb7-a96b6fae35a8
-# ╟─4d59ce5f-85f1-4d35-8fdb-e6b3f9040eb5
-# ╟─b1a879f4-3d78-4309-9f4f-117bcb0765da
-# ╟─c9fdf367-035b-4716-9f45-e62d82ec8a6e
-# ╟─07ffeef2-9434-49d5-b77b-072c00a80d76
-# ╠═b3cc1aa3-6360-4f59-9a30-ac5e44f133bc
-# ╠═0e941631-0e52-4dc3-bdf1-056f36e77499
-# ╠═ca27664a-8f75-4131-9d61-044ea96979de
-# ╠═44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
-# ╠═23a92df7-77d9-4804-86a5-08cdfea8651c
-# ╠═391ff8aa-056a-4867-90db-3d9f4537fe80
-# ╠═8e46e68e-0099-430b-864e-683b14ed2fbd
-# ╠═71a93732-10ff-480f-aacf-6ea729d636b9
-# ╠═1809ee14-dd65-40f4-8efa-92554a5398ea
-# ╠═902fbee4-194f-499d-9e9d-ad7bfb08131e
-# ╠═772af978-5d7d-467d-bfc5-98dcf5bdd872
-# ╠═6e53795f-016a-4113-ae5d-5dc2a02758a7
-# ╠═21b654c3-e9e3-4277-914d-32c81dc86604
-# ╠═d041d81f-b61f-4dfe-9fc0-472cef882098
-# ╠═99fddbde-28de-4a43-977b-a8d9559fe997
-# ╠═7ebe69ae-4d5a-4f4f-a114-15dc3ddd6876
-# ╠═5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
-# ╠═9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
-# ╠═1b6deda2-a68d-4684-8741-275628b24ecf
-# ╠═1aca8a3e-feb4-4665-a059-8a0c2171198a
-# ╠═bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
-# ╠═7932b9ab-1041-44ee-8e31-f10870a58d90
-# ╠═b829aed8-9618-44ea-9a2d-2c5d36416e62
-# ╠═8934159d-2dc6-4e4d-a5c4-2125831e0c52
-# ╠═2407b715-09cd-4568-bf81-4b9f5cf4065e
-# ╠═037e8495-26d6-45d9-a855-4d1c88917561
-# ╠═5e96be6d-4801-4056-ae2c-0b1b95307ac4
-# ╠═eacf6145-a437-45e9-8eee-fb587077be60
-# ╠═8143a2ac-b6dc-42b3-95a7-79006bc8916c
-# ╠═b1f8da27-e3d9-4253-b481-071b5722d1a1
-# ╠═cfbda53f-da9b-422b-b888-28f6acb96ee0
-# ╠═203ef45b-a6c3-4d04-a773-43ee348eaabd
-# ╠═fcb7503a-7145-44ce-9354-80631b966912
-# ╠═3bae6577-7e58-4423-a954-e40eceeceab8
-# ╠═f91da06c-b2ed-4b31-9fa6-af1e79c2167a
-# ╠═8054a733-294a-49f6-881c-938c0e032484
-# ╠═58d41760-0c3d-4512-9829-7553ba5cc8a1
-# ╠═11ce75b3-0867-441d-958d-1ff5ed3d9eaf
-# ╠═2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
-# ╠═d936afce-e80d-49c9-9e55-cd4432c6e392
-# ╠═bd9cb96f-ab81-4bb8-82a8-56577a0412a6
-# ╠═ba23c565-f547-4df9-9027-d623bacf8fa6
-# ╠═2443239f-6d9b-41e1-ae93-f30e784a5073
-# ╠═301c9794-a8a2-4186-84c9-554de27bded3
-# ╠═0a13199e-f144-4d4e-af7e-1959da3fcac6
-# ╠═cb1ce385-d5e7-464f-a551-dd024d016d29
-# ╠═009747f2-3aa5-4f64-87e3-31939c20b249
-# ╠═f69c98fb-bd73-4c5e-a904-06b7f8920324
-# ╠═7100ef5a-919e-4a8e-9857-40e3d70d1a6e
-# ╠═02132858-b6fa-4ce3-9326-0614b60499d6
-# ╠═c645824c-141c-4236-bf42-d06a9115475c
-# ╠═7f09eabc-f74d-4a56-9041-30d439012138
-# ╠═c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
-# ╠═3d13b289-1bc6-4c79-b60d-abbbc6172cc2
-# ╠═e02e7c74-0245-411f-a33e-43c101996220
-# ╠═8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
-# ╠═1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
-# ╠═1ce44bf4-60d4-4607-95cd-b76f931ed594
-# ╠═e0fa4607-ec15-4751-98db-a8feb04ad558
-# ╠═ffb2974d-ef66-4397-8fb7-67ef9c5a53ec
-# ╠═39985a71-8ca8-4892-997a-844fe137dd57
-# ╟─83571d10-7eff-11f0-10db-391640417d07
-# ╟─f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
-# ╠═8ce83819-cf7f-46fc-aded-773e3a716244
-# ╟─00000000-0000-0000-0000-000000000001
-# ╟─00000000-0000-0000-0000-000000000002
+# ╔═╡ 00000000-0000-0000-0000-000000000001
+# ╔═╡ 00000000-0000-0000-0000-000000000002
+# ╔═╡ 9858d0f8-ba7e-44fe-bcfc-4af064b7985c
+# ╔═╡ 83571d10-7eff-11f0-10db-391640417d07
+# ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
+# ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
+# ╔═╡ 286b172a-8bfe-430c-b13b-83e0e14798d1
+# ╔═╡ f7f0dbe3-ab41-4ff2-ad97-5927f657d5a4
+# ╔═╡ c7a8937d-6d27-41c3-ac54-8d59db9c8937
+# ╔═╡ 004e5898-ebff-4e99-a515-a90a09d347ac
+# ╔═╡ b9fce471-306a-4ba2-9a99-fcb7e14deac7
+# ╔═╡ 1c4d70e7-f245-4963-bd97-f0773f9d6588
+# ╔═╡ 0a923d1b-4f8a-4622-a418-0e989e4648b9
+# ╔═╡ 1785a7a4-ba84-42f8-863c-747b9ec9cd50
+# ╔═╡ b6845b47-9f90-4a4b-b439-6eeeb7d9519e
+# ╔═╡ 9c69eac1-148d-4b24-8962-4ab3922bf606
+# ╔═╡ 208b862e-da48-4a79-aaee-2df466adfa17
+# ╔═╡ 6c418467-c0c2-4dc4-ae7d-97f7ffc88888
+# ╔═╡ 5ce29b80-bb95-40db-a3c7-4c3d5c94ba0d
+# ╔═╡ 1e084154-e54f-455d-8bd4-12870c25990d
+# ╔═╡ 2b149b3a-deab-40d5-8f8b-32b7531a7165
+# ╔═╡ 8e3fcc38-1f61-4937-affb-82045e4cfaf9
+# ╔═╡ 6b72dabd-148c-46aa-8e5d-2bd1f19fde10
+# ╔═╡ f9b08784-8a16-432e-8012-d5f84e2c97a0
+# ╔═╡ 1c8cad4e-4bca-4425-9c47-b074e052d582
+# ╔═╡ c23c83d4-4d34-44c7-8dee-f2aa824eda44
+# ╔═╡ 2cfa4e94-e5ff-4eea-a9fb-6db2cf51cf25
+# ╔═╡ 9f218dbe-4296-4b33-87c1-20ffa7ce4a4f
+# ╔═╡ a6f3a648-a960-414b-8bca-e52ec129881c
+# ╔═╡ 571a0a6a-b0f2-4899-9b22-4e7948f358e2
+# ╔═╡ 6419f344-a1b3-4d60-8f27-8469a6e6b022
+# ╔═╡ f6836f13-5370-4ac3-813a-50fc012bfcab
+# ╔═╡ 94194246-ad29-43d1-9925-126fe9e5e696
+# ╔═╡ e3363ab4-1543-421f-a68c-cb1685a2f06a
+# ╔═╡ 2c4b3a89-8257-48fa-8e3a-30f059e0187d
+# ╔═╡ 734ef678-1329-4d59-8753-0797b6a675c7
+# ╔═╡ 0a7b91d0-5ca6-4006-9b59-f9e077a8c3db
+# ╔═╡ 7bb3abcb-525c-45a4-9989-74c42fee5fe2
+# ╔═╡ 574ab398-71d0-4427-86dc-fd99482feffc
+# ╔═╡ 7e3feecd-7106-4591-b22a-97a7aa064b6c
+# ╔═╡ 108475eb-bae3-426d-88db-f0f5dc177c65
+# ╔═╡ 75e95211-2367-49ed-a1fd-f0ae39870f04
+# ╔═╡ 847f0197-beab-45d7-ae4c-27385719aeb1
+# ╔═╡ b9f88efe-fb3f-466e-93f8-a9a99eb30a2e
+# ╔═╡ 8fd1741d-62d4-4a07-8d2c-7ca7f9d41da9
+# ╔═╡ 1a2c15f9-af65-4fe5-b517-98d26a3998fd
+# ╔═╡ 554f972f-8c43-4b67-845a-5f7e85cabfda
+# ╔═╡ ce3fdcff-d13d-4224-b394-ae73ca08d7b7
+# ╔═╡ e4d12bd7-039a-42a8-b278-05a5e8fe0841
+# ╔═╡ 79d33f0f-6b03-420f-a0c1-98108e43ab6b
+# ╔═╡ ebbfa978-69b9-4a06-8747-792cb04992eb
+# ╔═╡ 66eb4dd6-f558-479a-b193-8e852c345721
+# ╔═╡ 4fc2f92f-3773-4e53-82c6-c4e441f164b3
+# ╔═╡ 788ea369-4509-4970-9a2d-ea887194b790
+# ╔═╡ de23e5af-1d2d-4b22-9743-dd59bc903a9c
+# ╔═╡ 4fe2dba9-e764-4f30-a41a-75da08728858
+# ╔═╡ bc67920c-1bee-4fcc-8469-adf01e1d33e8
+# ╔═╡ 70ffdb35-aba3-4b8a-834c-f3e996e5c278
+# ╔═╡ bf3af1b5-3959-447f-85ac-b2b0b1ab737f
+# ╔═╡ eca05d58-1cab-444f-ae15-df4e3177323f
+# ╔═╡ c925f9ff-245f-4d0a-b085-b703adc1daaf
+# ╔═╡ c27df0f0-d524-4193-8188-271ea5779d04
+# ╔═╡ 1b9821e9-f325-475a-ba9c-70a889a5504c
+# ╔═╡ c1dee7b3-6118-493e-9c9a-4629cd2af8c3
+# ╔═╡ 8bb57498-9a49-4b45-8d82-fb790465b1ae
+# ╔═╡ aac34993-c94d-4fa1-8f45-e249740c914d
+# ╔═╡ 3eded575-d9c4-424e-8151-3958dababb38
+# ╔═╡ 29a43516-0209-4a2e-930b-0157237c981f
+# ╔═╡ 97b10d17-61c1-494b-aefe-131a436e374e
+# ╔═╡ ca13f691-7ec8-4293-b271-8c197b2e0ccf
+# ╔═╡ b1c3ec5b-003d-42ab-8c6b-806e083a2047
+# ╔═╡ 99b860bf-9374-4e00-8a92-822af52d403f
+# ╔═╡ d49cf3fa-c325-4efd-9ee5-f27eafa6e2bf
+# ╔═╡ 495c292f-fbcb-4420-93a3-fbcd6a34d17a
+# ╔═╡ cce4a136-a23c-45c8-a3e4-78f744cc2836
+# ╔═╡ 1b792a4f-e23e-441d-9f6c-a64465505e2b
+# ╔═╡ a58b8141-f330-46d8-82d2-b4caa5417887
+# ╔═╡ 771e9a89-d4eb-421b-a19f-a64810766812
+# ╔═╡ 1b1f9a05-1792-4004-a1e1-e8b71a1925e9
+# ╔═╡ 1b3fb3c8-c5fb-4a33-9630-211e4e29dc87
+# """
+
+# ╔═╡ 3018f183-3db6-48e5-90fa-f0ff37d8f216
+# """
+
+# ╔═╡ 5121dfa0-5f6a-453a-9795-dddc8d6bdbfb
+# """
+
+# ╔═╡ e0ffce55-f749-439e-8399-7d67cf7ef0c9
+# ╔═╡ b18adead-c917-450c-9a3c-7253d6d91442
+# ╔═╡ 79735eb1-16e1-4cf3-a43a-88d1ade37279
+# ╔═╡ f85ad3e4-f7ba-4563-b548-ceb803d13d2c
+# ╔═╡ 1fb44f1d-547e-4bea-b7ad-f171ebed5b20
+# ╔═╡ 4fb037ae-7f8e-40a7-9988-26da22529d2e
+# ╔═╡ 948bbe03-1560-4b79-904f-133256b6423f
+# ╔═╡ 12d1fa2a-9a6c-4edc-821e-2f54b4da454e
+# ╔═╡ bb8ca18e-ecba-40e0-b1c9-caf920ff7586
+# ╔═╡ d6fc1ea1-f463-46a5-94e6-9a4e6f914fc8
+# ╔═╡ f9621820-d9f7-41dc-bb7c-185d3cbbf8f4
+# ╔═╡ 6f42f537-305f-4e0a-b593-5071e1d7af7b
+# ╔═╡ 30596df7-5297-4369-ae8c-1970df3da531
+# ╔═╡ 183998e1-735f-4c38-ae61-7f2471fa1ae5
+# ╔═╡ ece4c6d9-8393-43c9-b60d-93df66a95999
+# ╔═╡ 8b67f393-e954-4b33-9cc9-c382d7a41b37
+# ╔═╡ b35ca1c3-621d-40af-afb7-a96b6fae35a8
+# ╔═╡ 4d59ce5f-85f1-4d35-8fdb-e6b3f9040eb5
+# ╔═╡ b1a879f4-3d78-4309-9f4f-117bcb0765da
+# ╔═╡ c9fdf367-035b-4716-9f45-e62d82ec8a6e
+# ╔═╡ 07ffeef2-9434-49d5-b77b-072c00a80d76
+# ╔═╡ b3cc1aa3-6360-4f59-9a30-ac5e44f133bc
+# ╔═╡ 0e941631-0e52-4dc3-bdf1-056f36e77499
+# ╔═╡ ca27664a-8f75-4131-9d61-044ea96979de
+# ╔═╡ 44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
+# ╔═╡ 23a92df7-77d9-4804-86a5-08cdfea8651c
+# ╔═╡ 391ff8aa-056a-4867-90db-3d9f4537fe80
+# ╔═╡ 8e46e68e-0099-430b-864e-683b14ed2fbd
+# ╔═╡ 71a93732-10ff-480f-aacf-6ea729d636b9
+# ╔═╡ 1809ee14-dd65-40f4-8efa-92554a5398ea
+# ╔═╡ 902fbee4-194f-499d-9e9d-ad7bfb08131e
+# ╔═╡ 772af978-5d7d-467d-bfc5-98dcf5bdd872
+# ╔═╡ 6e53795f-016a-4113-ae5d-5dc2a02758a7
+# ╔═╡ 21b654c3-e9e3-4277-914d-32c81dc86604
+# ╔═╡ d041d81f-b61f-4dfe-9fc0-472cef882098
+# ╔═╡ 99fddbde-28de-4a43-977b-a8d9559fe997
+# ╔═╡ 7ebe69ae-4d5a-4f4f-a114-15dc3ddd6876
+# ╔═╡ 5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
+# ╔═╡ 9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
+# ╔═╡ 1b6deda2-a68d-4684-8741-275628b24ecf
+# ╔═╡ 1aca8a3e-feb4-4665-a059-8a0c2171198a
+# ╔═╡ bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
+# ╔═╡ 7932b9ab-1041-44ee-8e31-f10870a58d90
+# ╔═╡ b829aed8-9618-44ea-9a2d-2c5d36416e62
+# ╔═╡ 8934159d-2dc6-4e4d-a5c4-2125831e0c52
+# ╔═╡ 2407b715-09cd-4568-bf81-4b9f5cf4065e
+# ╔═╡ 037e8495-26d6-45d9-a855-4d1c88917561
+# ╔═╡ 5e96be6d-4801-4056-ae2c-0b1b95307ac4
+# ╔═╡ eacf6145-a437-45e9-8eee-fb587077be60
+# ╔═╡ 8143a2ac-b6dc-42b3-95a7-79006bc8916c
+# ╔═╡ b1f8da27-e3d9-4253-b481-071b5722d1a1
+# ╔═╡ cfbda53f-da9b-422b-b888-28f6acb96ee0
+# ╔═╡ 203ef45b-a6c3-4d04-a773-43ee348eaabd
+# ╔═╡ fcb7503a-7145-44ce-9354-80631b966912
+# ╔═╡ 3bae6577-7e58-4423-a954-e40eceeceab8
+# ╔═╡ f91da06c-b2ed-4b31-9fa6-af1e79c2167a
+# ╔═╡ 8054a733-294a-49f6-881c-938c0e032484
+# ╔═╡ 58d41760-0c3d-4512-9829-7553ba5cc8a1
+# ╔═╡ 11ce75b3-0867-441d-958d-1ff5ed3d9eaf
+# ╔═╡ 2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
+# ╔═╡ d936afce-e80d-49c9-9e55-cd4432c6e392
+# ╔═╡ bd9cb96f-ab81-4bb8-82a8-56577a0412a6
+# ╔═╡ ba23c565-f547-4df9-9027-d623bacf8fa6
+# ╔═╡ 2443239f-6d9b-41e1-ae93-f30e784a5073
+# ╔═╡ 301c9794-a8a2-4186-84c9-554de27bded3
+# ╔═╡ 0a13199e-f144-4d4e-af7e-1959da3fcac6
+# ╔═╡ cb1ce385-d5e7-464f-a551-dd024d016d29
+# ╔═╡ 009747f2-3aa5-4f64-87e3-31939c20b249
+# ╔═╡ f69c98fb-bd73-4c5e-a904-06b7f8920324
+# ╔═╡ 7100ef5a-919e-4a8e-9857-40e3d70d1a6e
+# ╔═╡ 02132858-b6fa-4ce3-9326-0614b60499d6
+# ╔═╡ c645824c-141c-4236-bf42-d06a9115475c
+# ╔═╡ 7f09eabc-f74d-4a56-9041-30d439012138
+# ╔═╡ c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
+# ╔═╡ 3d13b289-1bc6-4c79-b60d-abbbc6172cc2
+# ╔═╡ e02e7c74-0245-411f-a33e-43c101996220
+# ╔═╡ 8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
+# ╔═╡ 1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
+# ╔═╡ 1ce44bf4-60d4-4607-95cd-b76f931ed594
+# ╔═╡ e0fa4607-ec15-4751-98db-a8feb04ad558
+# ╔═╡ ffb2974d-ef66-4397-8fb7-67ef9c5a53ec
+# ╔═╡ 39985a71-8ca8-4892-997a-844fe137dd57
