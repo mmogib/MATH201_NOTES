@@ -741,6 +741,16 @@ cm"""
 
 """
 
+# ╔═╡ 6b72f3e5-84cd-478f-bc05-c51ac03beb53
+#✓ SOL 11.5 ex1 -- show by default
+begin
+	s11_5_ex1_sol_box = @bind s11_5_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_ex1_sol_box) **Show Solution**
+"""
+end
+
+
 # ╔═╡ 44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
 md"##  Planes in Space"
 
@@ -749,6 +759,16 @@ cm"""
 [Geogebra Graph](https://www.geogebra.org/classic/a87nndfp?embed)
 
 """
+
+# ╔═╡ 27468d1d-270b-44cf-9df5-9188a39dbda9
+#✓ SOL 11.5 ex3 -- show by default
+begin
+	s11_5_ex3_sol_box = @bind s11_5_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_ex3_sol_box) **Show Solution**
+"""
+end
+
 
 # ╔═╡ 1809ee14-dd65-40f4-8efa-92554a5398ea
 let
@@ -771,6 +791,16 @@ cm"""
 [Geogebra Graph](https://www.geogebra.org/classic/tg4tezst?embed)
 
 """
+
+# ╔═╡ 3d725343-75ca-475f-9365-025a1d0167e2
+#✓ SOL 11.5 ex4 -- show by default
+begin
+	s11_5_ex4_sol_box = @bind s11_5_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_ex4_sol_box) **Show Solution**
+"""
+end
+
 
 # ╔═╡ d041d81f-b61f-4dfe-9fc0-472cef882098
 let
@@ -796,6 +826,19 @@ Sketch the plane
 # ╔═╡ 5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
 md"## Distances Between Points, Planes, and Lines"
 
+# ╔═╡ 0f61a3aa-eba2-407c-857e-25da1fa0cb8f
+#✓ SOL 11.5 ex5 -- show by default
+begin
+	s11_5_ex5_sol_box = @bind s11_5_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_ex5_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 5334fb55-6f5b-462b-ad56-a8908639c2e5
+
+
 # ╔═╡ 1b6deda2-a68d-4684-8741-275628b24ecf
 let
     Q = (1, 5, -4)
@@ -805,6 +848,19 @@ let
     PQ = Q .- P
     D = abs(PQ ⋅ n) / norm(n)
 end
+
+# ╔═╡ c2b527da-9205-41f6-b6dc-e3d1f0eda1f9
+#✓ SOL 11.5 ex6 -- show by default
+begin
+	s11_5_ex6_sol_box = @bind s11_5_ex6_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_ex6_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 48c6bef1-e9b4-484b-b53b-89c86b79298f
+
 
 # ╔═╡ 7932b9ab-1041-44ee-8e31-f10870a58d90
 let
@@ -819,6 +875,19 @@ let
 
 end
 
+# ╔═╡ 600988d8-25dd-4ac0-9f55-cbeb14c3ace0
+
+
+# ╔═╡ 77eaacf3-6151-441c-a678-b718b04868ea
+#✓ SOL 11.5 ex7 -- show by default
+begin
+	s11_5_ex7_sol_box = @bind s11_5_ex7_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_ex7_sol_box) **Show Solution**
+"""
+end
+
+
 # ╔═╡ 8934159d-2dc6-4e4d-a5c4-2125831e0c52
 let
     Q = [3,-1, 4]
@@ -831,6 +900,19 @@ end
 
 # ╔═╡ 2407b715-09cd-4568-bf81-4b9f5cf4065e
 md"## Skew lines"
+
+# ╔═╡ 2fb4bdba-8fab-44e4-abef-79f6c143b1ea
+
+
+# ╔═╡ 6b5eaa7f-bfcc-42ce-a2bb-18733e3d51f5
+#✓ SOL 11.5 above example -- show by default
+begin
+	s11_5_skew_sol_box = @bind s11_5_skew_show_sol CheckBox(default=true)
+	cm"""
+$(s11_5_skew_sol_box) **Show Solution**
+"""
+end
+
 
 # ╔═╡ eacf6145-a437-45e9-8eee-fb587077be60
 cm"""
@@ -2583,6 +2665,47 @@ Find parametric and symmetric equations of the line ``L`` that passes through th
 
 """
 
+# ╔═╡ 445e22cf-be47-413d-9e94-ca3efd42acaa
+#✓ SOL 11.5 ex1
+if s11_5_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+A line in space is pinned down by exactly two ingredients: __one point on it__ and __one direction vector along it__. Both are handed to us here,
+```math
+P(x_1,y_1,z_1)=(1,-2,4),\qquad \mathbf{v}=\langle a,b,c\rangle=\langle 2,4,-4\rangle .
+```
+
+__Parametric equations.__ Substitute into ``x=x_1+at``, ``y=y_1+bt``, ``z=z_1+ct``:
+```math
+\begin{aligned}
+x &= 1+2t, && \color{red}{\text{direction number } a=2}\\
+y &= -2+4t, && \color{red}{\text{direction number } b=4}\\
+z &= 4-4t, && \color{red}{\text{direction number } c=-4}
+\end{aligned}
+```
+As ``t`` runs through all real numbers the point ``(x,y,z)`` traces the entire line; ``t=0`` gives back the given point ``(1,-2,4)``.
+
+__Symmetric equations.__ None of the direction numbers is zero, so each parametric equation can be solved for ``t``,
+```math
+t=\frac{x-1}{2},\qquad t=\frac{y+2}{4},\qquad t=\frac{z-4}{-4},
+```
+and equating the three expressions eliminates the parameter:
+```math
+\frac{x-1}{2}=\frac{y+2}{4}=\frac{z-4}{-4}\qquad \color{red}{\text{Symmetric equations}}
+```
+
+__A word of warning.__ Neither answer is unique. Any point on the line and any nonzero multiple of ``\mathbf{v}`` will serve just as well. Dividing ``\mathbf{v}`` by ``2`` gives the direction ``\langle 1,2,-2\rangle`` and the equally correct
+```math
+\frac{x-1}{1}=\frac{y+2}{2}=\frac{z-4}{-2};
+```
+starting instead from the point ``(3,2,0)`` on the line (that is ``t=1``) gives ``\dfrac{x-3}{2}=\dfrac{y-2}{4}=\dfrac{z}{-4}``.
+$(ebl())
+"""
+else
+	md""
+end
+
+
 # ╔═╡ 23a92df7-77d9-4804-86a5-08cdfea8651c
 cm"""
 $(post_img("https://www.dropbox.com/scl/fi/9vzo9clna5s3ugrufyons/fig_11_45.png?rlkey=dyblrdq5uvbjp1wmdl8y5mryl&dl=1",400))
@@ -2612,6 +2735,57 @@ $(ex(3,"Finding an Equation of a Plane in Three-Space"))
 Find an equation (in standard form and in general form) of the plane containing the points ``(2,1,1), \quad(1,4,1), \quad`` and ``\quad(-2,0,4)``.
 """
 
+# ╔═╡ ab0297ec-c2a5-448e-a138-e0a0dcb4e9ec
+#✓ SOL 11.5 ex3
+if s11_5_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+To write down a plane we need a __point on it__ and a __normal vector__. The three given points supply the point immediately; the normal has to be manufactured, and the cross product is the tool for that.
+
+__Step 1: two vectors lying in the plane.__ Label the points ``A(2,1,1)``, ``B(1,4,1)``, ``C(-2,0,4)`` and subtract,
+```math
+\overrightarrow{AB}=\langle 1-2,\,4-1,\,1-1\rangle=\langle -1,3,0\rangle,\qquad
+\overrightarrow{AC}=\langle -2-2,\,0-1,\,4-1\rangle=\langle -4,-1,3\rangle .
+```
+
+__Step 2: a normal vector.__ Any vector perpendicular to both of these is perpendicular to the whole plane, so take the cross product,
+```math
+\mathbf{n}=\overrightarrow{AB}\times\overrightarrow{AC}
+=\begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k}\\
+-1 & 3 & 0\\
+-4 & -1 & 3
+\end{vmatrix}
+=\langle 9,\,3,\,13\rangle .
+```
+Spelled out, ``\mathbf{i}(3\cdot 3-0\cdot(-1))-\mathbf{j}((-1)(3)-0(-4))+\mathbf{k}((-1)(-1)-3(-4))=\langle 9,3,13\rangle``.
+
+__Step 3: standard form.__ Using ``\mathbf{n}=\langle a,b,c\rangle=\langle 9,3,13\rangle`` and the point ``A(2,1,1)``,
+```math
+9(x-2)+3(y-1)+13(z-1)=0 \qquad \color{red}{\text{Standard form}}
+```
+
+__Step 4: general form.__ Expand and collect,
+```math
+9x-18+3y-3+13z-13=0 \quad\Longrightarrow\quad 9x+3y+13z-34=0 \qquad \color{red}{\text{General form}}
+```
+
+__Check.__ A correct plane must contain all three points:
+```math
+\begin{aligned}
+A:&\ 9(2)+3(1)+13(1)=18+3+13=34 \quad\checkmark\\
+B:&\ 9(1)+3(4)+13(1)=9+12+13=34 \quad\checkmark\\
+C:&\ 9(-2)+3(0)+13(4)=-18+0+52=34 \quad\checkmark
+\end{aligned}
+```
+Had we started from ``B`` or ``C``, or used ``\overrightarrow{AC}\times\overrightarrow{AB}=\langle -9,-3,-13\rangle``, we would have reached the same plane — only the sign or the arrangement of the equation changes.
+$(ebl())
+"""
+else
+	md""
+end
+
+
 # ╔═╡ 902fbee4-194f-499d-9e9d-ad7bfb08131e
 cm"""
 $(bbl("Angle between two planes",""))
@@ -2636,6 +2810,157 @@ $(ex(4,"Finding the Line of Intersection of Two Planes"))
 Find the angle between the two planes ``x-2 y+z=0`` and ``2 x+3 y-2 z=0``. Then find parametric equations of their line of intersection.
 """
 
+# ╔═╡ cde8a3d8-4fff-4981-ad62-05e0aac0a6ad
+#✓ SOL 11.5 ex4
+if s11_5_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+The two planes ``x-2y+z=0`` and ``2x+3y-2z=0`` have normal vectors
+```math
+\mathbf{n}_1=\langle 1,-2,1\rangle,\qquad \mathbf{n}_2=\langle 2,3,-2\rangle .
+```
+Everything asked for is read off these two vectors: the __angle__ from their dot product, the __direction of the line of intersection__ from their cross product.
+
+__The angle between the planes.__
+```math
+\mathbf{n}_1\cdot\mathbf{n}_2=2-6-2=-6,\qquad
+\|\mathbf{n}_1\|=\sqrt{1+4+1}=\sqrt 6,\qquad
+\|\mathbf{n}_2\|=\sqrt{4+9+4}=\sqrt{17}
+```
+```math
+\cos\theta=\frac{|\mathbf{n}_1\cdot\mathbf{n}_2|}{\|\mathbf{n}_1\|\|\mathbf{n}_2\|}
+=\frac{6}{\sqrt 6\sqrt{17}}=\frac{6}{\sqrt{102}}=\sqrt{\frac{6}{17}}\approx 0.5941
+```
+```math
+\theta=\arccos\sqrt{\tfrac{6}{17}}\approx 0.9347\text{ rad}\approx 53.55^{\circ}
+```
+The absolute value is what keeps ``\theta`` acute: reversing either normal would flip the sign of the dot product but must not change the angle between the planes.
+
+__The line of intersection.__ The line lies in both planes, so it is perpendicular to both normals — and the cross product is exactly the vector with that property:
+```math
+\mathbf{u}=\mathbf{n}_1\times\mathbf{n}_2=
+\begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k}\\
+1 & -2 & 1\\
+2 & 3 & -2
+\end{vmatrix}
+=\langle 1,\,4,\,7\rangle .
+```
+Now we need one point on the line. Both equations have constant term ``0``, so the __origin__ lies on both planes and serves as our point. (In general one sets one variable to a convenient value and solves the remaining ``2\times 2`` system: putting ``z=0`` gives ``x-2y=0`` and ``2x+3y=0``, whose only solution is ``x=y=0`` — the origin again.)
+
+With ``P(0,0,0)`` and ``\mathbf{u}=\langle 1,4,7\rangle``,
+```math
+x=t,\qquad y=4t,\qquad z=7t \qquad \color{red}{\text{Line of intersection}}
+```
+
+__Check.__ Substituting into each plane, ``t-2(4t)+7t=t-8t+7t=0\ \checkmark`` and ``2t+3(4t)-2(7t)=2t+12t-14t=0\ \checkmark``.
+$(ebl())
+"""
+else
+	md""
+end
+
+
+# ╔═╡ 02bc899a-c61e-42f3-b5f7-c1bf62f39fd0
+#✓ STEP BY STEP Illustration how one can sketch above plan in 3d. Use traces and grids
+begin
+	s11_5_sketch_clock = @bind s11_5_sketch_tick Clock(1.4, true, false)
+	s11_5_sketch_stepb = @bind s11_5_sketch_step Slider(1:6, default=6, show_value=true)
+	s11_5_sketch_azb   = @bind s11_5_sketch_az   Slider(10:5:80, default=35)
+	cm"""
+**Sketching ``3x+2y+4z=12``, one step at a time** $(add_space(2)) $(s11_5_sketch_clock) $(add_space(4)) **step** $(add_space(1)) $(s11_5_sketch_stepb) $(add_space(4)) **rotate** $(add_space(1)) $(s11_5_sketch_azb)
+"""
+end
+
+
+# ╔═╡ dd32bc92-bd4e-40ea-bce2-3d128ad0a2e4
+#✓ STEP BY STEP Illustration how one can sketch above plan in 3d
+let
+	N, H = 6, 4                              # steps, then a hold on the finished sketch
+	stp = clamp(mod((s11_5_sketch_tick - 1) + (s11_5_sketch_step - 1), N + H) + 1, 1, N)
+
+	a, b, c, d = 3, 2, 4, 12                 # a x + b y + c z = d
+	xi, yi, zi = d/a, d/b, d/c               # intercepts, computed: 4, 6, 3
+	Lx, Ly, Lz = xi + 1, yi + 1, zi + 1
+
+	φ = deg2rad(s11_5_sketch_az)             # how far the x-axis tips toward the viewer
+	k = 0.75                                 # foreshortening along x
+	P(x, y, z) = (y - k*x*cos(φ), z - k*x*sin(φ))          # axonometric projection
+	L(u, v) = ([P(u...)[1], P(v...)[1]], [P(u...)[2], P(v...)[2]])
+
+	titles = [
+		"Step 1  —  draw the axes and rule a unit grid on each coordinate plane",
+		"Step 2  —  mark the intercepts:  x=4,  y=6,  z=3",
+		"Step 3  —  xy-trace:  set z = 0  ⟹  3x + 2y = 12",
+		"Step 4  —  xz-trace:  set y = 0  ⟹  3x + 4z = 12",
+		"Step 5  —  yz-trace:  set x = 0  ⟹  y + 2z = 6",
+		"Step 6  —  shade the first-octant patch of  3x + 2y + 4z = 12",
+	]
+
+	p = plot(; aspect_ratio = 1, framestyle = :none, legend = :topright,
+		legendfontsize = 7, title = titles[stp], titlefontsize = 10,
+		size = (720, 540), xlims = (-4.6, 7.8), ylims = (-3.8, 4.6))
+
+	# unit grids ruled on the three coordinate planes
+	for x in 0:1:Lx
+		plot!(p, L((x, 0, 0), (x, Ly, 0))...; c = :gray85, lw = 0.6, label = false)
+		plot!(p, L((x, 0, 0), (x, 0, Lz))...; c = :gray85, lw = 0.6, label = false)
+	end
+	for y in 0:1:Ly
+		plot!(p, L((0, y, 0), (Lx, y, 0))...; c = :gray85, lw = 0.6, label = false)
+		plot!(p, L((0, y, 0), (0, y, Lz))...; c = :gray85, lw = 0.6, label = false)
+	end
+	for z in 0:1:Lz
+		plot!(p, L((0, 0, z), (Lx, 0, z))...; c = :gray85, lw = 0.6, label = false)
+		plot!(p, L((0, 0, z), (0, Ly, z))...; c = :gray85, lw = 0.6, label = false)
+	end
+
+	# the axes
+	for v in [(Lx, 0, 0), (0, Ly, 0), (0, 0, Lz)]
+		plot!(p, L((0, 0, 0), v)...; c = :black, lw = 2, arrow = true, label = false)
+	end
+	annotate!(p, P(Lx + 0.45, 0, 0)..., text("x", 10))
+	annotate!(p, P(0, Ly + 0.35, 0)..., text("y", 10))
+	annotate!(p, P(0, 0, Lz + 0.3)..., text("z", 10))
+
+	if stp >= 2
+		pts = [P(xi, 0, 0), P(0, yi, 0), P(0, 0, zi)]
+		scatter!(p, first.(pts), last.(pts); ms = 6, c = :crimson, msw = 0,
+			label = "intercepts  (4,0,0), (0,6,0), (0,0,3)")
+		annotate!(p, (P(xi, 0, 0) .+ (-0.15, -0.45))..., text("(4,0,0)", 8, :crimson))
+		annotate!(p, (P(0, yi, 0) .+ (0.55, -0.25))..., text("(0,6,0)", 8, :crimson))
+		annotate!(p, (P(0, 0, zi) .+ (-0.75, 0.35))..., text("(0,0,3)", 8, :crimson))
+	end
+	if stp >= 3
+		plot!(p, L((xi, 0, 0), (0, yi, 0))...; c = :steelblue, lw = 3,
+			label = "xy-trace:  3x+2y=12")
+	end
+	if stp >= 4
+		plot!(p, L((xi, 0, 0), (0, 0, zi))...; c = :darkorange, lw = 3,
+			label = "xz-trace:  3x+4z=12")
+	end
+	if stp >= 5
+		plot!(p, L((0, yi, 0), (0, 0, zi))...; c = :seagreen, lw = 3,
+			label = "yz-trace:  y+2z=6")
+	end
+	if stp >= 6
+		tri = [P(xi, 0, 0), P(0, yi, 0), P(0, 0, zi)]
+		plot!(p, first.(tri), last.(tri); seriestype = :shape,
+			fillalpha = 0.25, fc = :steelblue, lc = :navy, lw = 2,
+			label = "plane  3x+2y+4z=12")
+		for x in 0.5:0.5:(xi - 0.25)             # rulings on the plane: x = const
+			plot!(p, L((x, 0, (d - a*x)/c), (x, (d - a*x)/b, 0))...;
+				c = :royalblue, lw = 0.8, label = false)
+		end
+		for y in 0.5:0.5:(yi - 0.25)             # rulings on the plane: y = const
+			plot!(p, L((0, y, (d - b*y)/c), ((d - b*y)/a, y, 0))...;
+				c = :royalblue, lw = 0.8, label = false)
+		end
+	end
+	p
+end
+
+
 # ╔═╡ 9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
 cm"""
 $(bth("Distance Between a Point and a Plane"))
@@ -2653,6 +2978,51 @@ $(ex(5,"Finding the Distance Between a Point and a Plane"))
 Find the distance between the point ``Q(1,5,-4)`` and the plane ``3 x-y+2 z=6``.
 """
 
+# ╔═╡ 914e1ca7-21ed-4a97-9d4a-dc46896a9535
+#✓ SOL 11.5 ex5
+if s11_5_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+The formula needs a __point in the plane__ and the plane's __normal vector__; both are read straight off the equation ``3x-y+2z=6``.
+
+__A point in the plane.__ Any convenient solution will do. Setting ``y=z=0`` gives ``3x=6``, so
+```math
+P(2,0,0) \quad\text{lies in the plane.}
+```
+
+__The normal vector.__ The coefficients are the components of ``\mathbf{n}``:
+```math
+\mathbf{n}=\langle 3,-1,2\rangle,\qquad \|\mathbf{n}\|=\sqrt{9+1+4}=\sqrt{14}
+```
+
+__The vector from the plane to the point.__
+```math
+\overrightarrow{PQ}=\langle 1-2,\ 5-0,\ -4-0\rangle=\langle -1,5,-4\rangle
+```
+
+__The distance.__ It is the length of the projection of ``\overrightarrow{PQ}`` onto ``\mathbf{n}``:
+```math
+\overrightarrow{PQ}\cdot\mathbf{n}=(-1)(3)+(5)(-1)+(-4)(2)=-3-5-8=-16
+```
+```math
+D=\frac{\left|\overrightarrow{PQ}\cdot\mathbf{n}\right|}{\|\mathbf{n}\|}
+=\frac{16}{\sqrt{14}}=\frac{8\sqrt{14}}{7}\approx 4.28
+```
+The sign of the dot product only tells us which side of the plane ``Q`` is on; the absolute value discards that, as distance must.
+
+__The same answer, faster.__ Writing the plane as ``3x-y+2z-6=0`` and using
+```math
+D=\frac{|ax_0+by_0+cz_0+d|}{\sqrt{a^2+b^2+c^2}}
+=\frac{|3(1)-(5)+2(-4)-6|}{\sqrt{14}}=\frac{|-16|}{\sqrt{14}}=\frac{16}{\sqrt{14}}
+```
+— the choice of ``P`` has quietly cancelled out, which is why the shortcut works for __any__ point in the plane.
+$(ebl())
+"""
+else
+	md""
+end
+
+
 # ╔═╡ 1aca8a3e-feb4-4665-a059-8a0c2171198a
 cm"""
 $(bbl("Distance between a point and a plane"))
@@ -2669,6 +3039,44 @@ cm"""
 $(ex(6,"Finding the Distance Between Two Parallel Planes"))
 Two parallel planes, ``3 x-y+2 z-6=0`` and ``6 x-2 y+4 z+4=0``, find the distance between them.
 """
+
+# ╔═╡ 306a109a-fcd5-4a0b-ab3a-b5b727c4cc4b
+#✓ SOL 11.5 ex6
+if s11_5_ex6_show_sol
+	cm"""
+$(bbl("Solution",""))
+__First check that they really are parallel.__ The normals are
+```math
+\mathbf{n}_1=\langle 3,-1,2\rangle,\qquad \mathbf{n}_2=\langle 6,-2,4\rangle=2\,\mathbf{n}_1 ,
+```
+so one is a scalar multiple of the other and the planes are parallel. (Had they not been, the planes would intersect and the distance would be ``0``.)
+
+__Now pick any point on the first plane__ and measure its distance to the second — for parallel planes that distance is the same wherever the point is taken. From ``3x-y+2z-6=0``, setting ``x=z=0`` gives ``-y=6``, so
+```math
+Q(0,-6,0)\quad\text{lies on the first plane.}
+```
+
+__Distance from ``Q`` to the second plane__ ``6x-2y+4z+4=0``:
+```math
+D=\frac{|6(0)-2(-6)+4(0)+4|}{\sqrt{36+4+16}}
+=\frac{|12+4|}{\sqrt{56}}=\frac{16}{2\sqrt{14}}=\frac{8}{\sqrt{14}}=\frac{4\sqrt{14}}{7}\approx 2.14
+```
+
+__A tidier route.__ Scale the two equations to a __common normal__ first. Dividing the second by ``2``,
+```math
+3x-y+2z-6=0 \qquad\text{and}\qquad 3x-y+2z+2=0 ,
+```
+and then for parallel planes ``ax+by+cz+d_1=0`` and ``ax+by+cz+d_2=0``,
+```math
+D=\frac{|d_1-d_2|}{\sqrt{a^2+b^2+c^2}}=\frac{|-6-2|}{\sqrt{14}}=\frac{8}{\sqrt{14}}\approx 2.14 \quad\checkmark
+```
+This second form is worth remembering, but only after the equations have been put over the same normal — comparing ``-6`` with ``+4`` directly would be wrong.
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ b829aed8-9618-44ea-9a2d-2c5d36416e62
 cm"""
@@ -2688,6 +3096,57 @@ Find the distance between the point ``Q(3,-1,4)`` and the line
 x=-2+3 t, \quad y=-2 t, \quad \text { and } \quad z=1+4 t
 ```
 """
+
+# ╔═╡ 813ce47c-d1be-442a-b489-72708722e0a0
+#✓ SOL 11.5 ex7
+if s11_5_ex7_show_sol
+	cm"""
+$(bbl("Solution",""))
+Read a point and a direction vector off the parametric equations ``x=-2+3t``, ``y=-2t``, ``z=1+4t``:
+```math
+P(-2,0,1)\quad (t=0),\qquad \mathbf{u}=\langle 3,-2,4\rangle .
+```
+
+__The vector from the line to the point.__
+```math
+\overrightarrow{PQ}=\langle 3-(-2),\ -1-0,\ 4-1\rangle=\langle 5,-1,3\rangle
+```
+
+__Cross it with the direction.__
+```math
+\overrightarrow{PQ}\times\mathbf{u}=
+\begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k}\\
+5 & -1 & 3\\
+3 & -2 & 4
+\end{vmatrix}
+=\mathbf{i}(-4+6)-\mathbf{j}(20-9)+\mathbf{k}(-10+3)
+=\langle 2,-11,-7\rangle
+```
+
+__Divide the two lengths.__
+```math
+\left\|\overrightarrow{PQ}\times\mathbf{u}\right\|=\sqrt{4+121+49}=\sqrt{174},\qquad
+\|\mathbf{u}\|=\sqrt{9+4+16}=\sqrt{29}
+```
+```math
+D=\frac{\left\|\overrightarrow{PQ}\times\mathbf{u}\right\|}{\|\mathbf{u}\|}
+=\frac{\sqrt{174}}{\sqrt{29}}=\sqrt{6}\approx 2.45
+```
+
+__Why this works.__ Writing ``\theta`` for the angle between ``\overrightarrow{PQ}`` and ``\mathbf{u}``, the distance is the leg ``\|\overrightarrow{PQ}\|\sin\theta`` of a right triangle, and
+```math
+\left\|\overrightarrow{PQ}\times\mathbf{u}\right\|=\left\|\overrightarrow{PQ}\right\|\,\|\mathbf{u}\|\sin\theta
+\quad\Longrightarrow\quad
+\frac{\left\|\overrightarrow{PQ}\times\mathbf{u}\right\|}{\|\mathbf{u}\|}=\left\|\overrightarrow{PQ}\right\|\sin\theta .
+```
+Any other point on the line would give a different ``\overrightarrow{PQ}`` but the same perpendicular leg — the answer does not depend on the choice of ``P``.
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ 037e8495-26d6-45d9-a855-4d1c88917561
 cm"""
@@ -2710,6 +3169,78 @@ Consider the following two lines in space.
 - (iii) Show that the two lines lie in parallel planes.
 - (iv) Find the distance between the parallel planes from part (iii). This is the distance between the original skew lines.
 """
+
+# ╔═╡ c07d5ba9-12e2-4787-b215-1f847ffd9641
+#✓ SOL 11.5 above example
+if s11_5_skew_show_sol
+	cm"""
+$(bbl("Solution",""))
+Collect the data first. From ``L_1: x=4+5t,\ y=5+5t,\ z=1-4t`` and ``L_2: x=4+s,\ y=-6+8s,\ z=7-3s``,
+```math
+P_1(4,5,1),\quad \mathbf{v}_1=\langle 5,5,-4\rangle;\qquad
+P_2(4,-6,7),\quad \mathbf{v}_2=\langle 1,8,-3\rangle .
+```
+
+__(i) The lines are not parallel.__ Parallel would mean ``\mathbf{v}_1=k\,\mathbf{v}_2`` for some scalar ``k``. Comparing components,
+```math
+5=k(1)\Rightarrow k=5,\qquad\text{but}\qquad 5=k(8)\Rightarrow k=\tfrac58 .
+```
+No single ``k`` works, so ``\mathbf{v}_1`` and ``\mathbf{v}_2`` are not parallel — and neither are the lines.
+
+__(ii) The lines do not meet.__ An intersection would need parameters ``t`` and ``s`` satisfying all three equations at once. From the ``x``-equations,
+```math
+4+5t=4+s \quad\Longrightarrow\quad s=5t .
+```
+Substituting into the ``y``-equations,
+```math
+5+5t=-6+8(5t)=-6+40t \quad\Longrightarrow\quad 11=35t \quad\Longrightarrow\quad t=\tfrac{11}{35},\quad s=\tfrac{11}{7}.
+```
+These are the only candidates. Test them in the ``z``-equations:
+```math
+z_1=1-4\left(\tfrac{11}{35}\right)=-\tfrac{9}{35},
+\qquad
+z_2=7-3\left(\tfrac{11}{7}\right)=\tfrac{16}{7}=\tfrac{80}{35} .
+```
+Since ``-\tfrac{9}{35}\neq\tfrac{80}{35}``, the system is inconsistent: the lines never meet. Neither parallel nor intersecting, they are __skew__.
+
+__(iii) They lie in parallel planes.__ Take the one direction perpendicular to both lines,
+```math
+\mathbf{n}=\mathbf{v}_1\times\mathbf{v}_2=
+\begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k}\\
+5 & 5 & -4\\
+1 & 8 & -3
+\end{vmatrix}
+=\mathbf{i}(-15+32)-\mathbf{j}(-15+4)+\mathbf{k}(40-5)
+=\langle 17,11,35\rangle ,
+```
+and use it as the normal of __both__ planes — one through ``P_1``, one through ``P_2``:
+```math
+\begin{aligned}
+\Pi_1:&\ 17(x-4)+11(y-5)+35(z-1)=0 && \Longrightarrow && 17x+11y+35z-158=0\\
+\Pi_2:&\ 17(x-4)+11(y+6)+35(z-7)=0 && \Longrightarrow && 17x+11y+35z-247=0
+\end{aligned}
+```
+They share the normal ``\mathbf{n}``, so they are parallel. And each line really does lie in its plane, because its direction is orthogonal to ``\mathbf{n}``:
+```math
+\mathbf{v}_1\cdot\mathbf{n}=85+55-140=0,\qquad
+\mathbf{v}_2\cdot\mathbf{n}=17+88-105=0 .
+```
+
+__(iv) The distance.__ For two parallel planes over the same normal, the distance is the gap in the constant terms divided by ``\|\mathbf{n}\|``:
+```math
+\|\mathbf{n}\|=\sqrt{17^2+11^2+35^2}=\sqrt{289+121+1225}=\sqrt{1635}
+```
+```math
+D=\frac{|-158-(-247)|}{\sqrt{1635}}=\frac{89}{\sqrt{1635}}=\frac{89\sqrt{1635}}{1635}\approx 2.20
+```
+Because ``L_1`` lies in ``\Pi_1`` and ``L_2`` in ``\Pi_2``, no point of one line can be closer to the other line than this gap — and the common perpendicular achieves it. So the distance between the skew lines is ``\dfrac{89}{\sqrt{1635}}\approx 2.20``.
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ 203ef45b-a6c3-4d04-a773-43ee348eaabd
 cm"""
@@ -5271,69 +5802,89 @@ version = "1.13.0+0"
 # ╟─b1a879f4-3d78-4309-9f4f-117bcb0765da
 # ╟─c9fdf367-035b-4716-9f45-e62d82ec8a6e
 # ╟─07ffeef2-9434-49d5-b77b-072c00a80d76
-# ╠═b3cc1aa3-6360-4f59-9a30-ac5e44f133bc
-# ╠═0e941631-0e52-4dc3-bdf1-056f36e77499
-# ╠═ca27664a-8f75-4131-9d61-044ea96979de
-# ╠═44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
-# ╠═23a92df7-77d9-4804-86a5-08cdfea8651c
-# ╠═391ff8aa-056a-4867-90db-3d9f4537fe80
-# ╠═8e46e68e-0099-430b-864e-683b14ed2fbd
-# ╠═71a93732-10ff-480f-aacf-6ea729d636b9
+# ╟─b3cc1aa3-6360-4f59-9a30-ac5e44f133bc
+# ╟─0e941631-0e52-4dc3-bdf1-056f36e77499
+# ╟─ca27664a-8f75-4131-9d61-044ea96979de
+# ╟─6b72f3e5-84cd-478f-bc05-c51ac03beb53
+# ╟─445e22cf-be47-413d-9e94-ca3efd42acaa
+# ╟─44dcb641-81a8-429a-b0eb-e85ffa0ea3ff
+# ╟─23a92df7-77d9-4804-86a5-08cdfea8651c
+# ╟─391ff8aa-056a-4867-90db-3d9f4537fe80
+# ╟─8e46e68e-0099-430b-864e-683b14ed2fbd
+# ╟─71a93732-10ff-480f-aacf-6ea729d636b9
+# ╟─27468d1d-270b-44cf-9df5-9188a39dbda9
+# ╟─ab0297ec-c2a5-448e-a138-e0a0dcb4e9ec
 # ╠═1809ee14-dd65-40f4-8efa-92554a5398ea
-# ╠═902fbee4-194f-499d-9e9d-ad7bfb08131e
-# ╠═772af978-5d7d-467d-bfc5-98dcf5bdd872
-# ╠═6e53795f-016a-4113-ae5d-5dc2a02758a7
-# ╠═21b654c3-e9e3-4277-914d-32c81dc86604
+# ╟─902fbee4-194f-499d-9e9d-ad7bfb08131e
+# ╟─772af978-5d7d-467d-bfc5-98dcf5bdd872
+# ╟─6e53795f-016a-4113-ae5d-5dc2a02758a7
+# ╟─21b654c3-e9e3-4277-914d-32c81dc86604
+# ╟─3d725343-75ca-475f-9365-025a1d0167e2
+# ╟─cde8a3d8-4fff-4981-ad62-05e0aac0a6ad
 # ╠═d041d81f-b61f-4dfe-9fc0-472cef882098
-# ╠═99fddbde-28de-4a43-977b-a8d9559fe997
-# ╠═7ebe69ae-4d5a-4f4f-a114-15dc3ddd6876
-# ╠═5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
-# ╠═9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
+# ╟─99fddbde-28de-4a43-977b-a8d9559fe997
+# ╟─7ebe69ae-4d5a-4f4f-a114-15dc3ddd6876
+# ╟─02bc899a-c61e-42f3-b5f7-c1bf62f39fd0
+# ╟─dd32bc92-bd4e-40ea-bce2-3d128ad0a2e4
+# ╟─5c0b0103-d1b8-46e6-8ef3-a65da4dc2db2
+# ╟─9c4292c7-f292-4fc8-9bfd-45ad4b4ccce5
+# ╟─0f61a3aa-eba2-407c-857e-25da1fa0cb8f
+# ╠═5334fb55-6f5b-462b-ad56-a8908639c2e5
+# ╟─914e1ca7-21ed-4a97-9d4a-dc46896a9535
 # ╠═1b6deda2-a68d-4684-8741-275628b24ecf
-# ╠═1aca8a3e-feb4-4665-a059-8a0c2171198a
-# ╠═bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
+# ╟─1aca8a3e-feb4-4665-a059-8a0c2171198a
+# ╟─bea8fbd0-1ac1-43fd-aeba-6eb968e548e1
+# ╟─c2b527da-9205-41f6-b6dc-e3d1f0eda1f9
+# ╠═48c6bef1-e9b4-484b-b53b-89c86b79298f
+# ╟─306a109a-fcd5-4a0b-ab3a-b5b727c4cc4b
 # ╠═7932b9ab-1041-44ee-8e31-f10870a58d90
-# ╠═b829aed8-9618-44ea-9a2d-2c5d36416e62
+# ╟─b829aed8-9618-44ea-9a2d-2c5d36416e62
+# ╠═600988d8-25dd-4ac0-9f55-cbeb14c3ace0
+# ╟─77eaacf3-6151-441c-a678-b718b04868ea
+# ╟─813ce47c-d1be-442a-b489-72708722e0a0
 # ╠═8934159d-2dc6-4e4d-a5c4-2125831e0c52
-# ╠═2407b715-09cd-4568-bf81-4b9f5cf4065e
-# ╠═037e8495-26d6-45d9-a855-4d1c88917561
-# ╠═5e96be6d-4801-4056-ae2c-0b1b95307ac4
-# ╠═eacf6145-a437-45e9-8eee-fb587077be60
+# ╟─2407b715-09cd-4568-bf81-4b9f5cf4065e
+# ╟─037e8495-26d6-45d9-a855-4d1c88917561
+# ╠═2fb4bdba-8fab-44e4-abef-79f6c143b1ea
+# ╟─5e96be6d-4801-4056-ae2c-0b1b95307ac4
+# ╟─6b5eaa7f-bfcc-42ce-a2bb-18733e3d51f5
+# ╟─c07d5ba9-12e2-4787-b215-1f847ffd9641
+# ╟─eacf6145-a437-45e9-8eee-fb587077be60
 # ╠═8143a2ac-b6dc-42b3-95a7-79006bc8916c
-# ╠═b1f8da27-e3d9-4253-b481-071b5722d1a1
-# ╠═cfbda53f-da9b-422b-b888-28f6acb96ee0
-# ╠═203ef45b-a6c3-4d04-a773-43ee348eaabd
-# ╠═fcb7503a-7145-44ce-9354-80631b966912
-# ╠═3bae6577-7e58-4423-a954-e40eceeceab8
-# ╠═f91da06c-b2ed-4b31-9fa6-af1e79c2167a
-# ╠═8054a733-294a-49f6-881c-938c0e032484
+# ╟─b1f8da27-e3d9-4253-b481-071b5722d1a1
+# ╟─cfbda53f-da9b-422b-b888-28f6acb96ee0
+# ╟─203ef45b-a6c3-4d04-a773-43ee348eaabd
+# ╟─fcb7503a-7145-44ce-9354-80631b966912
+# ╟─3bae6577-7e58-4423-a954-e40eceeceab8
+# ╟─f91da06c-b2ed-4b31-9fa6-af1e79c2167a
+# ╟─8054a733-294a-49f6-881c-938c0e032484
 # ╠═58d41760-0c3d-4512-9829-7553ba5cc8a1
-# ╠═11ce75b3-0867-441d-958d-1ff5ed3d9eaf
+# ╟─11ce75b3-0867-441d-958d-1ff5ed3d9eaf
 # ╠═2fa97dda-c94d-4dae-bde8-aff4b9e2ca7e
-# ╠═d936afce-e80d-49c9-9e55-cd4432c6e392
-# ╠═bd9cb96f-ab81-4bb8-82a8-56577a0412a6
-# ╠═ba23c565-f547-4df9-9027-d623bacf8fa6
-# ╠═2443239f-6d9b-41e1-ae93-f30e784a5073
-# ╠═301c9794-a8a2-4186-84c9-554de27bded3
-# ╠═0a13199e-f144-4d4e-af7e-1959da3fcac6
-# ╠═cb1ce385-d5e7-464f-a551-dd024d016d29
-# ╠═009747f2-3aa5-4f64-87e3-31939c20b249
-# ╠═f69c98fb-bd73-4c5e-a904-06b7f8920324
-# ╠═7100ef5a-919e-4a8e-9857-40e3d70d1a6e
-# ╠═02132858-b6fa-4ce3-9326-0614b60499d6
-# ╠═c645824c-141c-4236-bf42-d06a9115475c
-# ╠═7f09eabc-f74d-4a56-9041-30d439012138
-# ╠═c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
-# ╠═3d13b289-1bc6-4c79-b60d-abbbc6172cc2
-# ╠═e02e7c74-0245-411f-a33e-43c101996220
-# ╠═8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
-# ╠═1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
-# ╠═1ce44bf4-60d4-4607-95cd-b76f931ed594
-# ╠═e0fa4607-ec15-4751-98db-a8feb04ad558
-# ╠═ffb2974d-ef66-4397-8fb7-67ef9c5a53ec
-# ╠═39985a71-8ca8-4892-997a-844fe137dd57
+# ╟─d936afce-e80d-49c9-9e55-cd4432c6e392
+# ╟─bd9cb96f-ab81-4bb8-82a8-56577a0412a6
+# ╟─ba23c565-f547-4df9-9027-d623bacf8fa6
+# ╟─2443239f-6d9b-41e1-ae93-f30e784a5073
+# ╟─301c9794-a8a2-4186-84c9-554de27bded3
+# ╟─0a13199e-f144-4d4e-af7e-1959da3fcac6
+# ╟─cb1ce385-d5e7-464f-a551-dd024d016d29
+# ╟─009747f2-3aa5-4f64-87e3-31939c20b249
+# ╟─f69c98fb-bd73-4c5e-a904-06b7f8920324
+# ╟─7100ef5a-919e-4a8e-9857-40e3d70d1a6e
+# ╟─02132858-b6fa-4ce3-9326-0614b60499d6
+# ╟─c645824c-141c-4236-bf42-d06a9115475c
+# ╟─7f09eabc-f74d-4a56-9041-30d439012138
+# ╟─c435d1c0-08c6-4fb3-b0a9-d8aaa738ddfe
+# ╟─3d13b289-1bc6-4c79-b60d-abbbc6172cc2
+# ╟─e02e7c74-0245-411f-a33e-43c101996220
+# ╟─8cb2f20f-68f2-4ba5-aa85-3fb3ca295cb6
+# ╟─1f939754-d4cd-4ca2-8086-fd8d1c3b3f79
+# ╟─1ce44bf4-60d4-4607-95cd-b76f931ed594
+# ╟─e0fa4607-ec15-4751-98db-a8feb04ad558
+# ╟─ffb2974d-ef66-4397-8fb7-67ef9c5a53ec
+# ╟─39985a71-8ca8-4892-997a-844fe137dd57
 # ╟─83571d10-7eff-11f0-10db-391640417d07
 # ╟─f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
-# ╠═8ce83819-cf7f-46fc-aded-773e3a716244
+# ╟─8ce83819-cf7f-46fc-aded-773e3a716244
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
