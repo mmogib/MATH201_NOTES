@@ -383,8 +383,53 @@ md"""
 # ╔═╡ 39226cb1-d58a-4bac-8d2c-dfa0b916aada
 cm"## Partial Derivatives of a Function of Two Variables"
 
+# ╔═╡ 7ece7503-27d5-4723-8794-23e9f77eede9
+#✓ SOL 13.3 ex2 -- show by default
+begin
+	s13_3_ex2_sol_box = @bind s13_3_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex2_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 6d076d64-5391-460d-8606-119204963f10
+#✓ SOL 13.3 ex3 -- show by default
+begin
+	s13_3_ex3_sol_box = @bind s13_3_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex3_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 0a057b44-0b06-4a15-8328-df323277de8f
+#✓ SOL 13.3 ex4 -- show by default
+begin
+	s13_3_ex4_sol_box = @bind s13_3_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex4_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 85858d65-801c-44c0-bbdf-a29db80430d9
+#✓ SOL 13.3 ex5 -- show by default
+begin
+	s13_3_ex5_sol_box = @bind s13_3_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex5_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 4bf026b7-7a1c-4134-a4b1-4c8a9069a73d
 md"## Partial Derivatives of a Function of Three or More Variables"
+
+# ╔═╡ abd6c936-e331-47d2-b18f-0c062315526b
+#✓ SOL 13.3 ex6 -- show by default
+begin
+	s13_3_ex6_sol_box = @bind s13_3_ex6_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex6_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ 0cd9a65d-1d2b-42a4-85b6-a5c2541889d8
 md"## Higher-Order Partial Derivatives"
@@ -415,6 +460,33 @@ z = f(x,y)
 The third and fourth cases are called __mixed partial derivatives__.
 
 """
+
+# ╔═╡ dab7d901-01d0-4901-815f-f250a324bcb7
+#✓ SOL 13.3 ex7 -- show by default
+begin
+	s13_3_ex7_sol_box = @bind s13_3_ex7_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex7_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 5058c25a-4263-41a9-ba5f-594f2cbfca4f
+#✓ SOL 13.3 Example above -- show by default
+begin
+	s13_3_exmix_sol_box = @bind s13_3_exmix_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_exmix_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ d33dfb5f-b957-490d-9c6f-22a26ff0feed
+#✓ SOL 13.3 ex8 -- show by default
+begin
+	s13_3_ex8_sol_box = @bind s13_3_ex8_show_sol CheckBox(default=true)
+	cm"""
+$(s13_3_ex8_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ 068a3704-aa26-47ea-8f4a-ed4aacbb1985
 md"""
@@ -1630,6 +1702,37 @@ $(ex(2,"Finding and Evaluating Partial Derivatives"))
 For ``f(x, y)=x e^{x^2 y}``, find ``f_x`` and ``f_y``, and evaluate each at the point ``(1, \ln 2)``.
 """
 
+# ╔═╡ 9b0ffc97-5157-4e4f-a52b-5717de9b5c2a
+if s13_3_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Hold ``y`` fixed and differentiate with respect to ``x``. Because ``x`` appears both as a factor and inside the exponent, this needs the Product Rule together with the Chain Rule.
+
+```math
+f_x(x, y)=\frac{\partial}{\partial x}\left[x e^{x^2 y}\right]=e^{x^2 y}+x\left(2 x y e^{x^2 y}\right)=\left(1+2 x^2 y\right) e^{x^2 y}
+```
+
+Now hold ``x`` fixed. The leading factor ``x`` is a constant, and the exponent ``x^2 y`` is linear in ``y``, so only the Chain Rule is needed.
+
+```math
+f_y(x, y)=x\left(x^2 e^{x^2 y}\right)=x^3 e^{x^2 y}
+```
+
+At the point ``(1, \ln 2)`` the exponential collapses, since ``e^{(1)^2 \ln 2}=e^{\ln 2}=2``.
+
+```math
+\begin{aligned}
+f_x(1, \ln 2) &=\left(1+2 \ln 2\right)(2)=2+4 \ln 2 && \color{red}{\text{Slope in the } x \text{-direction}}\\
+f_y(1, \ln 2) &=(1)^3(2)=2 && \color{red}{\text{Slope in the } y \text{-direction}}
+\end{aligned}
+```
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 4ed53690-acca-4128-90ee-d935afc71e7c
 cm"""
 $(ex(3,"Finding the Slopes of a Surface"))
@@ -1639,6 +1742,36 @@ f(x, y)=-\frac{x^2}{2}-y^2+\frac{25}{8}
 ```
 at the point ``\left(\frac{1}{2}, 1,2\right)``.
 """
+
+# ╔═╡ 7c1c6220-d6ce-4423-b2da-29a72c3f7909
+if s13_3_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+First note that the given point does lie on the surface:
+
+```math
+f\left(\tfrac{1}{2}, 1\right)=-\frac{1}{2}\left(\tfrac{1}{2}\right)^2-(1)^2+\frac{25}{8}=-\frac{1}{8}-1+\frac{25}{8}=2
+```
+
+The slope in the ``x``-direction is the partial derivative with respect to ``x``, computed with ``y`` held fixed.
+
+```math
+\frac{\partial f}{\partial x}=-x \quad \Longrightarrow \quad f_x\left(\tfrac{1}{2}, 1\right)=-\frac{1}{2}
+```
+
+The slope in the ``y``-direction is the partial derivative with respect to ``y``, computed with ``x`` held fixed.
+
+```math
+\frac{\partial f}{\partial y}=-2 y \quad \Longrightarrow \quad f_y\left(\tfrac{1}{2}, 1\right)=-2
+```
+
+Geometrically, ``f_x\left(\tfrac{1}{2}, 1\right)`` is the slope of the curve cut from the surface by the plane ``y=1``, and ``f_y\left(\tfrac{1}{2}, 1\right)`` is the slope of the curve cut by the plane ``x=\tfrac{1}{2}``. The surface falls away in both directions from this point, and it falls four times as fast in the ``y``-direction.
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ baa0d2e0-ac0d-4371-803e-9cc22d016af7
 cm"""
@@ -1650,6 +1783,33 @@ f(x, y)=1-(x-1)^2-(y-2)^2
 at the point ``(1,2,1)`` in the ``x``-direction and in the ``y``-direction.
 """
 
+# ╔═╡ 7f673c15-d167-439e-9f31-bbf53038d608
+if s13_3_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Differentiate with respect to ``x`` holding ``y`` fixed, then with respect to ``y`` holding ``x`` fixed.
+
+```math
+\begin{aligned}
+f_x(x, y) &=-2(x-1) && \color{red}{\text{Partial with respect to } x}\\
+f_y(x, y) &=-2(y-2) && \color{red}{\text{Partial with respect to } y}
+\end{aligned}
+```
+
+Evaluating at the point ``(1,2)``,
+
+```math
+f_x(1,2)=-2(1-1)=0 \quad \text{and} \quad f_y(1,2)=-2(2-2)=0
+```
+
+Both slopes are zero. That is what the surface looks like: ``z=1-(x-1)^2-(y-2)^2`` is a paraboloid opening downward with its vertex at ``(1,2,1)``. The trace in the plane ``y=2`` and the trace in the plane ``x=1`` both reach their highest point there, so each has a horizontal tangent line, whichever of the two directions you look along.
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ ae48b156-e2e5-43e1-bd8d-ab995cc393a0
 cm"""
 $(ex(5,"Using Partial Derivatives to Find Rates of Change"))
@@ -1659,6 +1819,46 @@ $(post_img("https://www.dropbox.com/scl/fi/jahlir2ftz4fz3ngbwpkh/fig13.33.png?rl
 - a. Find the rate of change of ``A`` with respect to ``a`` for ``a=10, b=20``, and ``\theta=\pi / 6``.
 - b. Find the rate of change of ``A`` with respect to ``\theta`` for ``a=10, b=20``, and ``\theta=\pi / 6``.
 """
+
+# ╔═╡ ffe4588b-e275-4dcd-a3ce-820d239fd530
+if s13_3_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The area is a function of three variables, ``A(a, b, \theta)=a b \sin \theta``. Each question asks for the rate of change with respect to one of them while the other two are held fixed, which is exactly a partial derivative.
+
+__(a)__ Hold ``b`` and ``\theta`` fixed. Then ``b \sin \theta`` is a constant multiple of ``a``, so
+
+```math
+\frac{\partial A}{\partial a}=b \sin \theta
+```
+
+and at ``a=10``, ``b=20``, ``\theta=\pi / 6``,
+
+```math
+\frac{\partial A}{\partial a}=20 \sin \frac{\pi}{6}=20\left(\frac{1}{2}\right)=10
+```
+
+So lengthening the side ``a`` by one unit increases the area by about ``10`` square units. Note the answer does not involve ``a`` at all: the rate is the same for every ``a``, because ``A`` is linear in ``a``.
+
+__(b)__ Now hold ``a`` and ``b`` fixed and differentiate with respect to ``\theta``.
+
+```math
+\frac{\partial A}{\partial \theta}=a b \cos \theta
+```
+
+and at the same values,
+
+```math
+\frac{\partial A}{\partial \theta}=(10)(20) \cos \frac{\pi}{6}=200\left(\frac{\sqrt{3}}{2}\right)=100 \sqrt{3} \approx 173.2
+```
+
+The area is most sensitive to ``\theta`` when the parallelogram is far from a rectangle, and this rate drops to ``0`` at ``\theta=\pi / 2``, where the area is largest.
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 64acd27c-8af7-4051-b018-2f8dd0615b34
 cm"""
@@ -1674,6 +1874,38 @@ __(b)__
 
 """
 
+# ╔═╡ 2415f286-ff21-4a8f-83ac-b48183cc4499
+if s13_3_ex6_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The rule is unchanged: to find one partial derivative, treat the other two variables as constants.
+
+__(a)__ For ``f(x, y, z)=x y+y z^2+x z``, each term is handled separately.
+
+```math
+\begin{aligned}
+f_x(x, y, z) &=y+z && \color{red}{\text{hold } y, z \text{ fixed}}\\
+f_y(x, y, z) &=x+z^2 && \color{red}{\text{hold } x, z \text{ fixed}}\\
+f_z(x, y, z) &=2 y z+x && \color{red}{\text{hold } x, y \text{ fixed}}
+\end{aligned}
+```
+
+__(b)__ For ``f(x, y, z)=z \sin \left(x y^2+2 z\right)``, the Chain Rule is needed, and for ``f_z`` the Product Rule as well, since ``z`` appears both in front and inside the sine.
+
+```math
+\begin{aligned}
+f_x(x, y, z) &=z \cos \left(x y^2+2 z\right) \cdot y^2=y^2 z \cos \left(x y^2+2 z\right)\\
+f_y(x, y, z) &=z \cos \left(x y^2+2 z\right) \cdot 2 x y=2 x y z \cos \left(x y^2+2 z\right)\\
+f_z(x, y, z) &=\sin \left(x y^2+2 z\right)+z \cos \left(x y^2+2 z\right) \cdot 2=\sin \left(x y^2+2 z\right)+2 z \cos \left(x y^2+2 z\right)
+\end{aligned}
+```
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 256acb74-41ef-4352-b14a-f74a9a723deb
 cm"""
 $(ex(7,"Finding Second Partial Derivatives"))
@@ -1684,6 +1916,42 @@ f(x, y)=3 x y^2-2 y+5 x^2 y^2
 ```
 and determine the value of ``f_{x y}(-1,2)``.
 """
+
+# ╔═╡ db1bc45e-0469-4e77-a8a4-842dca3c1f73
+if s13_3_ex7_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin with the two first partials.
+
+```math
+\begin{aligned}
+f_x(x, y) &=3 y^2+10 x y^2\\
+f_y(x, y) &=6 x y-2+10 x^2 y
+\end{aligned}
+```
+
+Differentiating each of these once more gives the four second partials.
+
+```math
+\begin{aligned}
+f_{x x}(x, y) &=\frac{\partial}{\partial x}\left(3 y^2+10 x y^2\right)=10 y^2 && \color{red}{\text{differentiate } f_x \text{ in } x}\\
+f_{x y}(x, y) &=\frac{\partial}{\partial y}\left(3 y^2+10 x y^2\right)=6 y+20 x y && \color{red}{\text{differentiate } f_x \text{ in } y}\\
+f_{y y}(x, y) &=\frac{\partial}{\partial y}\left(6 x y-2+10 x^2 y\right)=6 x+10 x^2 && \color{red}{\text{differentiate } f_y \text{ in } y}\\
+f_{y x}(x, y) &=\frac{\partial}{\partial x}\left(6 x y-2+10 x^2 y\right)=6 y+20 x y && \color{red}{\text{differentiate } f_y \text{ in } x}
+\end{aligned}
+```
+
+The two mixed partials came out equal, as Theorem 13.3 promises for a polynomial, whose partials are continuous everywhere. Finally,
+
+```math
+f_{x y}(-1,2)=6(2)+20(-1)(2)=12-40=-28
+```
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 4b5c59b6-7670-482c-a4de-795530e38b75
 cm"""
@@ -1708,6 +1976,51 @@ f(x, y)= \begin{cases}\frac{x y\left(x^2-y^2\right)}{x^2+y^2}, & (x, y) \neq(0,0
 - (d) Using Theorem 13.3 and the result of part (c), what can be said about ``f_{x y}`` or ``f_{y x}`` ?
 """
 
+# ╔═╡ 204dd658-16d8-4b37-8579-135e5dad3fb2
+if s13_3_exmix_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+__(a)__ Away from the origin, write ``f(x, y)=\frac{x^3 y-x y^3}{x^2+y^2}`` and apply the Quotient Rule.
+
+```math
+\begin{aligned}
+f_x(x, y) &=\frac{\left(3 x^2 y-y^3\right)\left(x^2+y^2\right)-\left(x^3 y-x y^3\right)(2 x)}{\left(x^2+y^2\right)^2}=\frac{y\left(x^4+4 x^2 y^2-y^4\right)}{\left(x^2+y^2\right)^2}\\
+f_y(x, y) &=\frac{\left(x^3-3 x y^2\right)\left(x^2+y^2\right)-\left(x^3 y-x y^3\right)(2 y)}{\left(x^2+y^2\right)^2}=\frac{x\left(x^4-4 x^2 y^2-y^4\right)}{\left(x^2+y^2\right)^2}
+\end{aligned}
+```
+
+__(b)__ At the origin those formulas do not apply, so go back to the definition. Since ``f`` is zero along both axes, both difference quotients are zero.
+
+```math
+\begin{aligned}
+f_x(0,0) &=\lim _{\Delta x \rightarrow 0} \frac{f(\Delta x, 0)-f(0,0)}{\Delta x}=\lim _{\Delta x \rightarrow 0} \frac{0-0}{\Delta x}=0\\
+f_y(0,0) &=\lim _{\Delta y \rightarrow 0} \frac{f(0, \Delta y)-f(0,0)}{\Delta y}=\lim _{\Delta y \rightarrow 0} \frac{0-0}{\Delta y}=0
+\end{aligned}
+```
+
+__(c)__ Use the definition once more, now applied to ``f_x`` and ``f_y``. Along the axes the formulas from part (a) collapse:
+
+```math
+f_x(0, y)=\frac{y\left(-y^4\right)}{\left(y^2\right)^2}=-y \quad \text{and} \quad f_y(x, 0)=\frac{x\left(x^4\right)}{\left(x^2\right)^2}=x
+```
+
+Therefore
+
+```math
+\begin{aligned}
+f_{x y}(0,0) &=\lim _{\Delta y \rightarrow 0} \frac{f_x(0, \Delta y)-f_x(0,0)}{\Delta y}=\lim _{\Delta y \rightarrow 0} \frac{-\Delta y-0}{\Delta y}=-1\\
+f_{y x}(0,0) &=\lim _{\Delta x \rightarrow 0} \frac{f_y(\Delta x, 0)-f_y(0,0)}{\Delta x}=\lim _{\Delta x \rightarrow 0} \frac{\Delta x-0}{\Delta x}=1
+\end{aligned}
+```
+
+__(d)__ Here ``f_{x y}(0,0)=-1 \neq 1=f_{y x}(0,0)``. Theorem 13.3 says that if ``f_{x y}`` and ``f_{y x}`` are both continuous on an open disk, they must be equal there. Since they disagree at the origin, the hypothesis has to fail: **at least one of ``f_{x y}`` and ``f_{y x}`` is discontinuous at ``(0,0)``**. So the order of differentiation does matter in general, and Theorem 13.3 is exactly what makes it safe to ignore for the functions met in practice.
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ a57476c4-7f42-40aa-a453-b7b29e7b9f7d
 cm"""
 $(ex(8,"Finding Higher-Order Partial Derivatives"))
@@ -1716,6 +2029,43 @@ Show that ``f_{x z}=f_{z x}`` and ``f_{x z z}=f_{z x z}=f_{z z x}`` for the func
 f(x, y, z)=y e^x+x \ln z .
 ```
 """
+
+# ╔═╡ 501144f1-f281-447d-b354-6503feea5c96
+if s13_3_ex8_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Start with the two first partials that the problem needs, treating the other two variables as constants each time.
+
+```math
+f_x(x, y, z)=y e^x+\ln z \quad \text{and} \quad f_z(x, y, z)=\frac{x}{z}
+```
+
+For the first claim, differentiate ``f_x`` with respect to ``z``, and ``f_z`` with respect to ``x``.
+
+```math
+\begin{aligned}
+f_{x z}(x, y, z) &=\frac{\partial}{\partial z}\left(y e^x+\ln z\right)=\frac{1}{z}\\
+f_{z x}(x, y, z) &=\frac{\partial}{\partial x}\left(\frac{x}{z}\right)=\frac{1}{z}
+\end{aligned}
+```
+
+so ``f_{x z}=f_{z x}``, as expected. For the third-order partials, carry each of these one step further.
+
+```math
+\begin{aligned}
+f_{x z z}(x, y, z) &=\frac{\partial}{\partial z}\left(f_{x z}\right)=\frac{\partial}{\partial z}\left(\frac{1}{z}\right)=-\frac{1}{z^2}\\
+f_{z x z}(x, y, z) &=\frac{\partial}{\partial z}\left(f_{z x}\right)=\frac{\partial}{\partial z}\left(\frac{1}{z}\right)=-\frac{1}{z^2}\\
+f_{z z x}(x, y, z) &=\frac{\partial}{\partial x}\left(f_{z z}\right)=\frac{\partial}{\partial x}\left(-\frac{x}{z^2}\right)=-\frac{1}{z^2}
+\end{aligned}
+```
+
+All three agree. The function is built from ``e^x`` and ``\ln z``, whose partials of every order are continuous wherever ``z>0``, so Theorem 13.3 applies at each stage and the order of differentiation can be rearranged freely.
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
 cm"""
@@ -4956,17 +5306,33 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─f5e000db-7586-47b9-a673-1829f8e47fd7
 # ╟─2cc5584a-586a-4ae7-bfc3-71ff77fbf3d9
 # ╟─7a1c7ca9-659d-4f66-ab27-21a02201e60d
+# ╟─7ece7503-27d5-4723-8794-23e9f77eede9
+# ╟─9b0ffc97-5157-4e4f-a52b-5717de9b5c2a
 # ╟─4ed53690-acca-4128-90ee-d935afc71e7c
+# ╟─6d076d64-5391-460d-8606-119204963f10
+# ╟─7c1c6220-d6ce-4423-b2da-29a72c3f7909
 # ╟─baa0d2e0-ac0d-4371-803e-9cc22d016af7
+# ╟─0a057b44-0b06-4a15-8328-df323277de8f
+# ╟─7f673c15-d167-439e-9f31-bbf53038d608
 # ╟─ae48b156-e2e5-43e1-bd8d-ab995cc393a0
+# ╟─85858d65-801c-44c0-bbdf-a29db80430d9
+# ╟─ffe4588b-e275-4dcd-a3ce-820d239fd530
 # ╟─4bf026b7-7a1c-4134-a4b1-4c8a9069a73d
 # ╟─64acd27c-8af7-4051-b018-2f8dd0615b34
+# ╟─abd6c936-e331-47d2-b18f-0c062315526b
+# ╟─2415f286-ff21-4a8f-83ac-b48183cc4499
 # ╟─0cd9a65d-1d2b-42a4-85b6-a5c2541889d8
 # ╟─853380dd-f790-4462-bcec-e0744274dc2e
 # ╟─256acb74-41ef-4352-b14a-f74a9a723deb
+# ╟─dab7d901-01d0-4901-815f-f250a324bcb7
+# ╟─db1bc45e-0469-4e77-a8a4-842dca3c1f73
 # ╟─4b5c59b6-7670-482c-a4de-795530e38b75
 # ╟─235057bb-ea29-4b9a-8665-f750cde0d002
+# ╟─5058c25a-4263-41a9-ba5f-594f2cbfca4f
+# ╟─204dd658-16d8-4b37-8579-135e5dad3fb2
 # ╟─a57476c4-7f42-40aa-a453-b7b29e7b9f7d
+# ╟─d33dfb5f-b957-490d-9c6f-22a26ff0feed
+# ╟─501144f1-f281-447d-b354-6503feea5c96
 # ╟─068a3704-aa26-47ea-8f4a-ed4aacbb1985
 # ╟─b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
 # ╟─17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
