@@ -500,8 +500,29 @@ md"""
 # ╔═╡ b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
 md"## Increments and Differentials"
 
+# ╔═╡ 727b1564-6c01-4f43-8f72-55153dab9c1e
+#✓ SOL 13.4 ex1 -- show by default
+begin
+	s13_4_ex1_sol_box = @bind s13_4_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_4_ex1_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 581e17d0-c27d-4d45-a9b0-0a72f55c004c
+
+
 # ╔═╡ 14852a74-f0a5-41c7-a9ef-d110a4bd8807
 md"## Differentiability"
+
+# ╔═╡ df5a1cab-c3ef-448f-af28-d33bdce17ecb
+#✓ SOL 13.4 ex2 -- show by default
+begin
+	s13_4_ex2_sol_box = @bind s13_4_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_4_ex2_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ de197844-f3d6-469c-b41c-995d5ba542ca
 md"## Approximation by Differentials"
@@ -527,6 +548,15 @@ let
 
 end
 
+# ╔═╡ fdbabf0a-ff58-44b8-ab77-9dd5120857fd
+#✓ SOL 13.4 ex3 -- show by default
+begin
+	s13_4_ex3_sol_box = @bind s13_4_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s13_4_ex3_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ e53f41aa-45cd-488a-9123-7dfa22ec3ef7
 let
     @variables x::Real, y::Real, z::Real, dx::Real, dy::Real, dz::Real, dV::Real, V::Real
@@ -546,6 +576,24 @@ let
     dv.rhs/v_value
 end
 
+# ╔═╡ b7bad84e-708a-4257-abcb-80fda6185542
+#✓ SOL 13.4 ex4 -- show by default
+begin
+	s13_4_ex4_sol_box = @bind s13_4_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_4_ex4_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 1df356e6-eb68-4f4b-84fc-4a2b05b9303d
+#✓ SOL 13.4 ex5 -- show by default
+begin
+	s13_4_ex5_sol_box = @bind s13_4_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_4_ex5_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 3de8b2fd-5d34-4a02-b821-a969b439e571
 md"""
 # 13.5 Chain Rules for Functions of Several Variables
@@ -557,10 +605,50 @@ md"""
 # ╔═╡ 527952f0-6be5-4be3-9676-3eb063188706
 rand(1:29,6)
 
+# ╔═╡ 6fb308e1-2e05-45c1-a4c3-287ed2784765
+#✓ SOL 13.5 ex1 -- show by default
+begin
+	s13_5_ex1_sol_box = @bind s13_5_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_5_ex1_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ d3033db7-44c9-4e02-876c-d2fb3bc980b3
+#✓ SOL 13.5 ex2 -- show by default
+begin
+	s13_5_ex2_sol_box = @bind s13_5_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_5_ex2_sol_box) **Show Solution**
+"""
+end
+
+
 # ╔═╡ 47fe0a92-3fb5-4a1b-9618-87eec99c068e
 # cm"""
 # $(ex(3,"Finding Partial Derivatives by Substitution"))
 # Find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
+
+# ╔═╡ 62877fed-7d1c-4e09-bedb-35c9442dd72d
+#✓ SOL 13.5 ex4 -- show by default
+begin
+	s13_5_ex4_sol_box = @bind s13_5_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_5_ex4_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 8c7d7275-059e-4c97-a1e7-251020730295
+#✓ SOL 13.5 ex5 -- show by default
+begin
+	s13_5_ex5_sol_box = @bind s13_5_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_5_ex5_sol_box) **Show Solution**
+"""
+end
+
 
 # ╔═╡ 2127153a-edfd-49dc-8c45-8743629af637
 md"## Implicit Partial Differentiation"
@@ -2088,6 +2176,42 @@ Find the total differential for each function.
 - (b.) ``w=x^2+y^2+z^2``
 """
 
+# ╔═╡ 74cf783a-3751-4c3a-8a7f-b99e17495d48
+if s13_4_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The total differential is built from the first partials, one term per independent variable.
+
+__(a.)__ For ``z=2 x \sin y-3 x^2 y^2``, differentiate once with respect to each variable, holding the other fixed.
+
+```math
+\begin{aligned}
+\frac{\partial z}{\partial x} &= 2 \sin y-6 x y^2 \\
+\frac{\partial z}{\partial y} &= 2 x \cos y-6 x^2 y
+\end{aligned}
+```
+
+So the total differential is
+
+```math
+d z=\frac{\partial z}{\partial x} d x+\frac{\partial z}{\partial y} d y=\left(2 \sin y-6 x y^2\right) d x+\left(2 x \cos y-6 x^2 y\right) d y
+```
+
+__(b.)__ The same idea extends to three independent variables: ``w=x^2+y^2+z^2`` has one term for each of ``dx``, ``dy``, and ``dz``.
+
+```math
+\begin{aligned}
+d w &= \frac{\partial w}{\partial x} d x+\frac{\partial w}{\partial y} d y+\frac{\partial w}{\partial z} d z \\
+&= 2 x d x+2 y d y+2 z d z
+\end{aligned}
+```
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ a54bcc59-6b84-4553-878f-4a4abfd6e9d6
 cm"""
 $(define("Differentiability"))
@@ -2113,6 +2237,36 @@ f(x, y)=x^2+3 y
 is differentiable at every point in the plane.
 """
 
+# ╔═╡ 9cd6b903-7e66-454d-bff5-1ce080c332f2
+if s13_4_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Let ``(x, y)`` be any point in the plane. To test differentiability directly, compute the actual increment ``\Delta z`` and try to write it in the required form.
+
+```math
+\begin{aligned}
+\Delta z &= f(x+\Delta x, y+\Delta y)-f(x, y) \\
+&= \left[(x+\Delta x)^2+3(y+\Delta y)\right]-\left(x^2+3 y\right) \\
+&= x^2+2 x \Delta x+(\Delta x)^2+3 y+3 \Delta y-x^2-3 y \\
+&= 2 x(\Delta x)+3(\Delta y)+\Delta x(\Delta x)+0(\Delta y)
+\end{aligned}
+```
+
+The first two terms are exactly ``f_x(x, y) \Delta x+f_y(x, y) \Delta y``, because ``f_x(x, y)=2 x`` and ``f_y(x, y)=3``. What is left over supplies the error terms:
+
+```math
+\varepsilon_1=\Delta x \quad \text{and} \quad \varepsilon_2=0
+```
+
+Since ``\varepsilon_1 \to 0`` and ``\varepsilon_2 \to 0`` as ``(\Delta x, \Delta y) \to(0,0)``, the definition is satisfied. So ``f`` is differentiable at every point in the plane, and the surface ``z=x^2+3 y`` has a tangent plane at every one of its points.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 9fe522bd-dfdb-4d65-a8d1-3d2d4618e4f7
 cm"""
 $(bth("Sufficient Condition for Differentiability"))
@@ -2130,6 +2284,54 @@ z=\sqrt{4-x^2-y^2}
 as ``(x, y)`` moves from the point ``(1,1)`` to the point ``(1.01,0.97)``. Compare this approximation with the exact change in ``z``.
 """
 
+# ╔═╡ 9d2018fd-406f-48eb-8ace-7f5cdde6b4b3
+if s13_4_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Setting ``(x, y)=(1,1)`` and ``(x+\Delta x, y+\Delta y)=(1.01,0.97)`` gives
+
+```math
+\begin{aligned}
+d x &= \Delta x=0.01 \\
+d y &= \Delta y=-0.03
+\end{aligned}
+```
+
+With ``z=\sqrt{4-x^2-y^2}``, the two first partials are
+
+```math
+\frac{\partial z}{\partial x}=\frac{-x}{\sqrt{4-x^2-y^2}} \quad \text{and} \quad \frac{\partial z}{\partial y}=\frac{-y}{\sqrt{4-x^2-y^2}}
+```
+
+so the change in ``z`` is approximated by
+
+```math
+\begin{aligned}
+\Delta z \approx d z &= \frac{\partial z}{\partial x} d x+\frac{\partial z}{\partial y} d y \\
+&= \frac{-x}{\sqrt{4-x^2-y^2}}(\Delta x)+\frac{-y}{\sqrt{4-x^2-y^2}}(\Delta y)
+\end{aligned}
+```
+
+Evaluating at ``(1,1)``, where ``\sqrt{4-1-1}=\sqrt{2}``,
+
+```math
+d z=\frac{-1}{\sqrt{2}}(0.01)+\frac{-1}{\sqrt{2}}(-0.03)=\frac{0.02}{\sqrt{2}} \approx 0.0141
+```
+
+The exact change, for comparison, is
+
+```math
+\Delta z=\sqrt{4-(1.01)^2-(0.97)^2}-\sqrt{4-1^2-1^2}=\sqrt{2.0390}-\sqrt{2} \approx 0.0137
+```
+
+The two agree to three decimal places — the differential replaces the surface by its tangent plane, and over a step this small the two are almost indistinguishable.
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ d444124f-7afa-4de4-bdcd-f9667f3e9732
 cm"""
 $(ex(4,"Error Analysis"))
@@ -2137,6 +2339,46 @@ The possible error involved in measuring each dimension of a rectangular box is 
 
 $(post_img("https://www.dropbox.com/scl/fi/1y1dnb0lijtqu1p8vl8z5/fig_13_37.png?rlkey=4xpdeaxy3lcn940i0y3vwyq31&dl=1"))
 """
+
+# ╔═╡ 4f59d78e-7402-4499-83c0-ec3e82d55606
+if s13_4_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The volume of the box is ``V=x y z``, so the propagated error is estimated by the total differential
+
+```math
+d V=\frac{\partial V}{\partial x} d x+\frac{\partial V}{\partial y} d y+\frac{\partial V}{\partial z} d z=y z \, d x+x z \, d y+x y \, d z
+```
+
+Watch the units: the measurement error is ``\pm 0.1`` millimeter, and the dimensions are in centimeters, so
+
+```math
+-0.01 \leq d x \leq 0.01, \quad -0.01 \leq d y \leq 0.01, \quad -0.01 \leq d z \leq 0.01
+```
+
+The largest propagated error happens when all three errors push the same way. Using ``x=50``, ``y=20``, ``z=15`` and ``d x=d y=d z=0.01``,
+
+```math
+\begin{aligned}
+d V &= (20)(15)(0.01)+(50)(15)(0.01)+(50)(20)(0.01) \\
+&= 3+7.5+10 \\
+&= 20.5 \text{ cubic centimeters}
+\end{aligned}
+```
+
+That number means little on its own; compare it with the volume ``V=(50)(20)(15)=15{,}000`` cubic centimeters to get the relative error.
+
+```math
+\frac{\Delta V}{V} \approx \frac{d V}{V}=\frac{20.5}{15{,}000} \approx 0.0014
+```
+
+So the propagated error is about ``0.14 \%`` — a volume of roughly ``20.5`` cubic centimeters out of ``15{,}000``.
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ cc9031ef-476d-498b-8850-2b355125f98a
 cm"""
@@ -2154,6 +2396,41 @@ f(x, y)= \begin{cases}\frac{-3 x y}{x^2+y^2}, & (x, y) \neq(0,0) \\ 0, & (x, y)=
 show that ``f_x(0,0)`` and ``f_y(0,0)`` both exist but that ``f`` is not differentiable at ``(0,0)``.
 """
 
+# ╔═╡ 5c671582-7b25-44bd-bb6d-03a3be6e8e87
+if s13_4_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Both partials at the origin come straight from the limit definition, and along each axis the function is identically ``0``.
+
+```math
+\begin{aligned}
+f_x(0,0) &= \lim _{\Delta x \rightarrow 0} \frac{f(\Delta x, 0)-f(0,0)}{\Delta x}=\lim _{\Delta x \rightarrow 0} \frac{0-0}{\Delta x}=0 \\
+f_y(0,0) &= \lim _{\Delta y \rightarrow 0} \frac{f(0, \Delta y)-f(0,0)}{\Delta y}=\lim _{\Delta y \rightarrow 0} \frac{0-0}{\Delta y}=0
+\end{aligned}
+```
+
+So both partial derivatives exist at ``(0,0)``. Existence of the partials is *not* enough for differentiability, and this function shows why: use the theorem above in its contrapositive form — if ``f`` is not continuous at ``(0,0)``, it cannot be differentiable there.
+
+Approach the origin along the line ``y=x``:
+
+```math
+f(x, x)=\frac{-3 x^2}{x^2+x^2}=\frac{-3 x^2}{2 x^2}=-\frac{3}{2}, \quad x \neq 0
+```
+
+while along the ``x``-axis ``f(x, 0)=0``. Two paths give two different values, so
+
+```math
+\lim _{(x, y) \rightarrow(0,0)} f(x, y) \neq 0=f(0,0)
+```
+
+and the limit does not even exist. Therefore ``f`` is not continuous at ``(0,0)``, and by the theorem ``f`` is **not differentiable** at ``(0,0)``.
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ d850bcda-5bf4-4db6-b920-ca87514bfbc6
 cm"""
 $(bth("Chain Rule: One Independent Variable"))
@@ -2166,6 +2443,44 @@ $(ebl())
 $(ex(1,"Chain Rule: One Independent Variable"))
 Let ``w=x^2 y-y^2``, where ``x=\sin t`` and ``y=e^t``. Find ``d w / d t`` when ``t=0``.
 """
+
+# ╔═╡ f18d8f81-20a7-46bb-a74a-fce89591f01d
+if s13_5_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Here ``w`` reaches ``t`` through the two intermediate variables ``x`` and ``y``, so the Chain Rule above applies. Begin with the four derivatives it calls for.
+
+```math
+\begin{aligned}
+\frac{\partial w}{\partial x}&=2 x y, && \frac{\partial w}{\partial y}=x^2-2 y\\[4pt]
+\frac{d x}{d t}&=\cos t, && \frac{d y}{d t}=e^t
+\end{aligned}
+```
+
+Now assemble them.
+
+```math
+\begin{aligned}
+\frac{d w}{d t}&=\frac{\partial w}{\partial x} \frac{d x}{d t}+\frac{\partial w}{\partial y} \frac{d y}{d t} && \color{red}{\text{Chain Rule}}\\[4pt]
+&=(2 x y)(\cos t)+\left(x^2-2 y\right)\left(e^t\right) && \color{red}{\text{substitute the partials}}
+\end{aligned}
+```
+
+When ``t=0`` the intermediate variables are ``x=\sin 0=0`` and ``y=e^0=1``, so
+
+```math
+\left.\frac{d w}{d t}\right|_{t=0}=2(0)(1)(1)+\left(0^2-2(1)\right)(1)=-2.
+```
+
+As a check, substituting first gives ``w=e^t \sin ^2 t-e^{2 t}``, and differentiating that single-variable expression at ``t=0`` returns ``-2`` as well.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ d8943cd3-6930-4447-a5a0-6c6cf8797e81
 cm"""
@@ -2180,6 +2495,54 @@ x_2=2 \sin 2 t& \text{and} & y_2=3 \cos 2 t & \color{red}{\text{second object}}
 
 At what rate is the distance between the two objects changing when ``t=\pi`` ?
 """
+
+# ╔═╡ 05ae535b-b75e-4f36-96ae-e05ec0b9a8a1
+if s13_5_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Let ``s`` be the distance between the two objects, and let
+```math
+x=x_2-x_1 \qquad \text{and} \qquad y=y_2-y_1
+```
+be their horizontal and vertical separations. Then ``s=\sqrt{x^2+y^2}``, and ``s`` depends on ``t`` through ``x`` and ``y``, so
+```math
+\frac{\partial s}{\partial x}=\frac{x}{\sqrt{x^2+y^2}}, \qquad \frac{\partial s}{\partial y}=\frac{y}{\sqrt{x^2+y^2}}.
+```
+
+__Positions at ``t=\pi``.__
+```math
+\begin{aligned}
+x_1&=4 \cos \pi=-4, & y_1&=2 \sin \pi=0\\[2pt]
+x_2&=2 \sin 2 \pi=0, & y_2&=3 \cos 2 \pi=3
+\end{aligned}
+```
+So ``x=0-(-4)=4`` and ``y=3-0=3``, which puts the objects ``s=\sqrt{4^2+3^2}=5`` units apart.
+
+__Rates at ``t=\pi``.__
+```math
+\begin{aligned}
+\frac{d x}{d t}&=\frac{d x_2}{d t}-\frac{d x_1}{d t}=4 \cos 2 t+4 \sin t && \Longrightarrow && \left.\frac{d x}{d t}\right|_{t=\pi}=4\\[4pt]
+\frac{d y}{d t}&=\frac{d y_2}{d t}-\frac{d y_1}{d t}=-6 \sin 2 t-2 \cos t && \Longrightarrow && \left.\frac{d y}{d t}\right|_{t=\pi}=2
+\end{aligned}
+```
+
+__The Chain Rule.__
+```math
+\begin{aligned}
+\frac{d s}{d t}&=\frac{\partial s}{\partial x} \frac{d x}{d t}+\frac{\partial s}{\partial y} \frac{d y}{d t} && \color{red}{\text{Chain Rule}}\\[4pt]
+&=\frac{4}{5}(4)+\frac{3}{5}(2)=\frac{22}{5}
+\end{aligned}
+```
+
+The distance is *increasing* at ``\dfrac{22}{5}=4.4`` units per unit of time.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ 69abaecb-13d5-4e81-a401-567b581e8eda
 cm"""
@@ -2200,6 +2563,43 @@ $(ex(4,"The Chain Rule with Two Independent Variables"))
  Use the Chain Rule to find ``\partial w / \partial s`` and ``\partial w / \partial t`` for ``w=2 x y``, where ``x=s^2+t^2`` and ``y=s / t``
 """
 
+# ╔═╡ a41623fe-d1a6-4655-b6df-6b2cc448b11f
+if s13_5_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Now ``w`` reaches each of ``s`` and ``t`` through *two* intermediate variables, so each answer is a sum of two products. The partials of ``w`` are
+```math
+\frac{\partial w}{\partial x}=2 y, \qquad \frac{\partial w}{\partial y}=2 x.
+```
+
+Holding ``t`` fixed and differentiating with respect to ``s``,
+```math
+\begin{aligned}
+\frac{\partial w}{\partial s}&=\frac{\partial w}{\partial x} \frac{\partial x}{\partial s}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial s} && \color{red}{\text{Chain Rule}}\\[4pt]
+&=2 y(2 s)+2 x\left(\frac{1}{t}\right)\\[4pt]
+&=2\left(\frac{s}{t}\right)(2 s)+2\left(s^2+t^2\right)\left(\frac{1}{t}\right) && \color{red}{\text{write } x \text{ and } y \text{ in terms of } s, t}\\[4pt]
+&=\frac{4 s^2}{t}+\frac{2 s^2+2 t^2}{t}=\frac{6 s^2+2 t^2}{t}
+\end{aligned}
+```
+
+Holding ``s`` fixed and differentiating with respect to ``t``,
+```math
+\begin{aligned}
+\frac{\partial w}{\partial t}&=\frac{\partial w}{\partial x} \frac{\partial x}{\partial t}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial t} && \color{red}{\text{Chain Rule}}\\[4pt]
+&=2 y(2 t)+2 x\left(-\frac{s}{t^2}\right)\\[4pt]
+&=2\left(\frac{s}{t}\right)(2 t)+2\left(s^2+t^2\right)\left(-\frac{s}{t^2}\right)\\[4pt]
+&=4 s-\frac{2 s^3+2 s t^2}{t^2}=\frac{2 s t^2-2 s^3}{t^2}
+\end{aligned}
+```
+
+$(ebl())
+"""
+else
+	md""
+end
+
+
 # ╔═╡ 81fad03e-4540-460c-a149-7681a0c61fb4
 cm"""
 $(ex(5,"The Chain Rule for a Function of Three Variables"))
@@ -2211,6 +2611,47 @@ where ``x=s \cos t, y=s \sin t``, and ``z=t``.
 """
 
 # """
+
+# ╔═╡ 01916c47-a893-48fe-937e-9e105c964266
+if s13_5_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+With *three* intermediate variables the Chain Rule simply gains a third term. The partials of ``w`` are
+```math
+\frac{\partial w}{\partial x}=y+z, \qquad \frac{\partial w}{\partial y}=x+z, \qquad \frac{\partial w}{\partial z}=y+x
+```
+and those of the intermediate variables are
+```math
+\begin{aligned}
+\frac{\partial x}{\partial s}&=\cos t, & \frac{\partial y}{\partial s}&=\sin t, & \frac{\partial z}{\partial s}&=0\\[4pt]
+\frac{\partial x}{\partial t}&=-s \sin t, & \frac{\partial y}{\partial t}&=s \cos t, & \frac{\partial z}{\partial t}&=1
+\end{aligned}
+```
+
+At ``s=1`` and ``t=2 \pi`` the intermediate variables take the values ``x=\cos 2 \pi=1``, ``y=\sin 2 \pi=0``, and ``z=2 \pi``. Therefore
+```math
+\begin{aligned}
+\frac{\partial w}{\partial s}&=\frac{\partial w}{\partial x} \frac{\partial x}{\partial s}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial s}+\frac{\partial w}{\partial z} \frac{\partial z}{\partial s} && \color{red}{\text{Chain Rule}}\\[4pt]
+&=(y+z) \cos t+(x+z) \sin t+(y+x)(0)\\[4pt]
+&=(0+2 \pi)(1)+(1+2 \pi)(0)+0=2 \pi
+\end{aligned}
+```
+and
+```math
+\begin{aligned}
+\frac{\partial w}{\partial t}&=\frac{\partial w}{\partial x} \frac{\partial x}{\partial t}+\frac{\partial w}{\partial y} \frac{\partial y}{\partial t}+\frac{\partial w}{\partial z} \frac{\partial z}{\partial t} && \color{red}{\text{Chain Rule}}\\[4pt]
+&=-(y+z) s \sin t+(x+z) s \cos t+(y+x)(1)\\[4pt]
+&=-(0+2 \pi)(1)(0)+(1+2 \pi)(1)(1)+(0+1)(1)=2+2 \pi
+\end{aligned}
+```
+
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ 21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
 cm"""
@@ -5337,26 +5778,45 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─b64466d6-b4fb-408b-99e4-9ff0ed7bf95a
 # ╟─17cb54f7-f893-47b1-b089-d6f0e5fe6c0c
 # ╟─ebabd01a-2a02-4a8c-9f01-23b347a9f6a7
+# ╟─727b1564-6c01-4f43-8f72-55153dab9c1e
+# ╠═581e17d0-c27d-4d45-a9b0-0a72f55c004c
+# ╟─74cf783a-3751-4c3a-8a7f-b99e17495d48
 # ╟─14852a74-f0a5-41c7-a9ef-d110a4bd8807
 # ╟─a54bcc59-6b84-4553-878f-4a4abfd6e9d6
 # ╟─fdbca96e-0f9c-4edb-8f60-cb53c1dad95e
+# ╟─df5a1cab-c3ef-448f-af28-d33bdce17ecb
+# ╟─9cd6b903-7e66-454d-bff5-1ce080c332f2
 # ╟─9fe522bd-dfdb-4d65-a8d1-3d2d4618e4f7
 # ╟─de197844-f3d6-469c-b41c-995d5ba542ca
 # ╟─957e0ca3-72b6-4687-a7c5-69b6da416f5b
 # ╟─d859bc8d-fce7-4eb6-9e0a-12750dc76275
 # ╟─e08331c1-1e6c-48be-a570-e33a908d830f
+# ╟─fdbabf0a-ff58-44b8-ab77-9dd5120857fd
+# ╟─9d2018fd-406f-48eb-8ace-7f5cdde6b4b3
 # ╟─d444124f-7afa-4de4-bdcd-f9667f3e9732
 # ╟─e53f41aa-45cd-488a-9123-7dfa22ec3ef7
+# ╟─b7bad84e-708a-4257-abcb-80fda6185542
+# ╟─4f59d78e-7402-4499-83c0-ec3e82d55606
 # ╟─cc9031ef-476d-498b-8850-2b355125f98a
 # ╟─108a234a-2272-4971-b762-f7f665133955
+# ╟─1df356e6-eb68-4f4b-84fc-4a2b05b9303d
+# ╟─5c671582-7b25-44bd-bb6d-03a3be6e8e87
 # ╟─3de8b2fd-5d34-4a02-b821-a969b439e571
 # ╟─d850bcda-5bf4-4db6-b920-ca87514bfbc6
-# ╟─527952f0-6be5-4be3-9676-3eb063188706
+# ╠═527952f0-6be5-4be3-9676-3eb063188706
+# ╟─6fb308e1-2e05-45c1-a4c3-287ed2784765
+# ╟─f18d8f81-20a7-46bb-a74a-fce89591f01d
 # ╟─d8943cd3-6930-4447-a5a0-6c6cf8797e81
+# ╟─d3033db7-44c9-4e02-876c-d2fb3bc980b3
+# ╟─05ae535b-b75e-4f36-96ae-e05ec0b9a8a1
 # ╟─47fe0a92-3fb5-4a1b-9618-87eec99c068e
 # ╟─69abaecb-13d5-4e81-a401-567b581e8eda
 # ╟─ab0c80dd-8916-499d-aa3e-c01984a2c0d7
+# ╟─62877fed-7d1c-4e09-bedb-35c9442dd72d
+# ╟─a41623fe-d1a6-4655-b6df-6b2cc448b11f
 # ╟─81fad03e-4540-460c-a149-7681a0c61fb4
+# ╟─8c7d7275-059e-4c97-a1e7-251020730295
+# ╟─01916c47-a893-48fe-937e-9e105c964266
 # ╟─2127153a-edfd-49dc-8c45-8743629af637
 # ╟─21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
 # ╟─47cdd95c-53a5-4e07-9b26-c91b3b1706d9
