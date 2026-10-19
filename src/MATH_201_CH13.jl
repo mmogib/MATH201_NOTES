@@ -653,6 +653,24 @@ end
 # ╔═╡ 2127153a-edfd-49dc-8c45-8743629af637
 md"## Implicit Partial Differentiation"
 
+# ╔═╡ 28ab4ba4-c220-4d1d-b943-2b0de1bcb837
+#✓ SOL 13.5 ex6 -- show by default
+begin
+	s13_5_ex6_sol_box = @bind s13_5_ex6_show_sol CheckBox(default=true)
+	cm"""
+$(s13_5_ex6_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 28ef0d17-d148-4cf3-83fb-d51707356b37
+#✓ SOL 13.5 ex7 -- show by default
+begin
+	s13_5_ex7_sol_box = @bind s13_5_ex7_show_sol CheckBox(default=true)
+	cm"""
+$(s13_5_ex7_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 7e4fb221-9750-4abd-b4f8-5b511629d7f5
 md"""
 # 13.6 Directional Derivatives and Gradients
@@ -679,6 +697,15 @@ let
     substitute(∇f, u) ⋅ d
 end
 
+# ╔═╡ b2e7659a-d0d5-4718-9f2b-aa417b003207
+#✓ SOL 13.6 ex1 -- show by default
+begin
+	s13_6_ex1_sol_box = @bind s13_6_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex1_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ ddd97e19-227f-42ec-9a38-663c926adc86
 let
     @variables x::Real, y::Real, f(..)
@@ -696,8 +723,35 @@ let
     substitute(∇f, u) ⋅ d
 end
 
+# ╔═╡ 965a3f31-9edd-4fd2-8e33-0093c12bed8d
+#✓ SOL 13.6 ex2 -- show by default
+begin
+	s13_6_ex2_sol_box = @bind s13_6_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex2_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 45ba9ada-2921-41d6-b9a1-e4df2963ed0b
 md"## The Gradient of a Function of Two Variables"
+
+# ╔═╡ 23bd5551-085d-4bb2-bf7b-c216c2fd1ac5
+#✓ SOL 13.6 ex3 -- show by default
+begin
+	s13_6_ex3_sol_box = @bind s13_6_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex3_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 1754c328-b556-474a-8333-22d624bf1473
+#✓ SOL 13.6 ex4 -- show by default
+begin
+	s13_6_ex4_sol_box = @bind s13_6_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex4_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ 4cb8757a-ab68-4a51-b11a-44a02c4ec8c5
 md"##  Applications of the Gradient"
@@ -734,8 +788,44 @@ let
 
 end
 
+# ╔═╡ fcb17e74-3e85-48eb-803b-64a21c5508c2
+#✓ SOL 13.6 ex5 -- show by default
+begin
+	s13_6_ex5_sol_box = @bind s13_6_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex5_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 0c0bd95b-5b0f-4a90-b657-5807c856c53e
+#✓ SOL 13.6 ex6 -- show by default
+begin
+	s13_6_ex6_sol_box = @bind s13_6_ex6_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex6_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 628ba284-cb09-44e6-a988-d36ba3db3610
+#✓ SOL 13.6 ex7 -- show by default
+begin
+	s13_6_ex7_sol_box = @bind s13_6_ex7_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex7_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 9dc755ae-8dae-4fcd-969c-a4558ba1a78d
 md"## Functions of Three Variables"
+
+# ╔═╡ 7c05a11b-57a3-4150-b990-f666388189bf
+#✓ SOL 13.6 ex8 -- show by default
+begin
+	s13_6_ex8_sol_box = @bind s13_6_ex8_show_sol CheckBox(default=true)
+	cm"""
+$(s13_6_ex8_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ 9ebe06f1-f95b-43ae-99dd-d4c837060b8f
 md"""
@@ -2675,12 +2765,88 @@ Find ``d y / d x`` for
 y^3+y^2-5 y-x^2+4=0
 ```
 
+"""
+
+# ╔═╡ eec61877-fb80-4d13-af50-fec68c2f32a2
+if s13_5_ex6_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Solving this equation for ``y`` is hopeless, but the Chain Rule for implicit differentiation never asks us to. Move everything to one side and read off the function
+```math
+F(x, y)=y^3+y^2-5 y-x^2+4
+```
+Now differentiate ``F`` partially, treating the other variable as a constant each time:
+```math
+F_x(x, y)=-2 x, \qquad F_y(x, y)=3 y^2+2 y-5
+```
+Therefore
+```math
+\begin{aligned}
+\frac{d y}{d x}&=-\frac{F_x(x, y)}{F_y(x, y)} && \color{red}{\text{Chain Rule: implicit differentiation}}\\[4pt]
+&=-\frac{-2 x}{3 y^2+2 y-5}\\[4pt]
+&=\frac{2 x}{3 y^2+2 y-5}
+\end{aligned}
+```
+
+Because ``3 y^2+2 y-5=(3 y+5)(y-1)``, the formula is valid at every point of the curve except where ``y=1`` or ``y=-\frac{5}{3}`` — exactly the points at which the curve has a vertical tangent line.
+
+$(ebl())
+"""
+else
+	md""
+end
+
+# ╔═╡ 9ffdb602-a835-4014-ba7a-a905b495db09
+cm"""
+
 $(ex(7,"Finding Partial Derivatives Implicitly"))
 Find ``\partial z / \partial x`` and ``\partial z / \partial y`` for
 ```math
 3 x^2 z-x^2 y^2+2 z^3+3 y z-5=0
 ```
 """
+
+# ╔═╡ 11341470-0198-4d7e-ae7a-5ac09a6f6124
+if s13_5_ex7_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Again begin by naming the left-hand side
+```math
+F(x, y, z)=3 x^2 z-x^2 y^2+2 z^3+3 y z-5
+```
+and take the three partial derivatives, each time holding the other two variables fixed:
+```math
+\begin{aligned}
+F_x(x, y, z)&=6 x z-2 x y^2\\[4pt]
+F_y(x, y, z)&=-2 x^2 y+3 z\\[4pt]
+F_z(x, y, z)&=3 x^2+6 z^2+3 y
+\end{aligned}
+```
+
+The ``z`` partial is the one that goes in the denominator, so
+```math
+\begin{aligned}
+\frac{\partial z}{\partial x}&=-\frac{F_x(x, y, z)}{F_z(x, y, z)} && \color{red}{\text{Chain Rule: implicit differentiation}}\\[4pt]
+&=-\frac{6 x z-2 x y^2}{3 x^2+6 z^2+3 y}=\frac{2 x y^2-6 x z}{3 x^2+3 y+6 z^2}
+\end{aligned}
+```
+and
+```math
+\begin{aligned}
+\frac{\partial z}{\partial y}&=-\frac{F_y(x, y, z)}{F_z(x, y, z)}\\[4pt]
+&=-\frac{-2 x^2 y+3 z}{3 x^2+6 z^2+3 y}=\frac{2 x^2 y-3 z}{3 x^2+3 y+6 z^2}
+\end{aligned}
+```
+
+Both formulas hold wherever ``F_z(x, y, z)=3 x^2+3 y+6 z^2 \neq 0``.
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ e3d38fd9-0997-4286-aa2e-762c70b360d1
 cm"""
@@ -2713,6 +2879,38 @@ at ``(1,2)`` in the direction of
 ```
 """
 
+# ╔═╡ cbfb5add-b039-402e-ae97-eefdb4a6bd6d
+if s13_6_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Because ``f_x`` and ``f_y`` are continuous everywhere, ``f`` is differentiable and the theorem applies. The partial derivatives are
+```math
+f_x(x, y)=-2 x \qquad \text{and} \qquad f_y(x, y)=-\frac{1}{2} y
+```
+
+The direction vector is already a unit vector, with ``\theta=\frac{\pi}{3}``, so ``\cos \theta=\frac{1}{2}`` and ``\sin \theta=\frac{\sqrt{3}}{2}``. Therefore
+```math
+\begin{aligned}
+D_{\mathbf{u}} f(x, y)&=f_x(x, y) \cos \theta+f_y(x, y) \sin \theta && \color{red}{\text{Directional derivative}}\\[4pt]
+&=(-2 x)\left(\frac{1}{2}\right)+\left(-\frac{1}{2} y\right)\left(\frac{\sqrt{3}}{2}\right)\\[4pt]
+&=-x-\frac{\sqrt{3}}{4} y
+\end{aligned}
+```
+
+Evaluating at ``(x, y)=(1,2)`` gives
+```math
+D_{\mathbf{u}} f(1,2)=-1-\frac{\sqrt{3}}{4}(2)=-1-\frac{\sqrt{3}}{2} \approx-1.866
+```
+
+The value is **negative**, so a bug walking across the paraboloid from the point above ``(1,2)`` in the direction ``\mathbf{u}`` is heading *downhill*, losing height at about ``1.866`` units per unit of horizontal travel.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 92b3ab49-db16-4a05-8929-1dbd3362d470
 cm"""
 $(ex(2,"Finding a Directional Derivative"))
@@ -2726,6 +2924,43 @@ at ``(1, \pi / 2)`` in the direction of
 \mathbf{v}=3 \mathbf{i}-4 \mathbf{j}
 ```
 """
+
+# ╔═╡ 6e4cf01f-52de-43f7-977f-41c17503147d
+if s13_6_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Here the direction is given as ``\mathbf{v}=3 \mathbf{i}-4 \mathbf{j}``, which is **not** a unit vector. Normalize it first, or the number produced is not a rate per unit distance:
+```math
+\|\mathbf{v}\|=\sqrt{3^2+(-4)^2}=5, \qquad \mathbf{u}=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\frac{3}{5} \mathbf{i}-\frac{4}{5} \mathbf{j}
+```
+so ``\cos \theta=\frac{3}{5}`` and ``\sin \theta=-\frac{4}{5}``.
+
+The partial derivatives of ``f(x, y)=x^2 \sin 2 y`` are
+```math
+f_x(x, y)=2 x \sin 2 y \qquad \text{and} \qquad f_y(x, y)=2 x^2 \cos 2 y
+```
+and both are continuous, so ``f`` is differentiable. Hence
+```math
+\begin{aligned}
+D_{\mathbf{u}} f(x, y)&=f_x(x, y) \cos \theta+f_y(x, y) \sin \theta && \color{red}{\text{Directional derivative}}\\[4pt]
+&=\left(2 x \sin 2 y\right)\left(\frac{3}{5}\right)+\left(2 x^2 \cos 2 y\right)\left(-\frac{4}{5}\right)\\[4pt]
+&=\frac{2}{5} x\left(3 \sin 2 y-4 x \cos 2 y\right)
+\end{aligned}
+```
+
+At ``\left(1, \frac{\pi}{2}\right)`` we have ``\sin 2 y=\sin \pi=0`` and ``\cos 2 y=\cos \pi=-1``, so
+```math
+D_{\mathbf{u}} f\left(1, \frac{\pi}{2}\right)=\frac{2}{5}(1)\bigl(3(0)-4(1)(-1)\bigr)=\frac{8}{5}
+```
+
+This time the value is positive: in the direction of ``\mathbf{v}`` the surface is rising at the rate ``\frac{8}{5}``.
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ ca36e483-976e-4bd3-87f9-4c4a5a12d91d
 cm"""
@@ -2746,6 +2981,37 @@ f(x, y)=y \ln x+x y^2
 at the point ``(1,2)``.
 """
 
+# ╔═╡ 38fc3d73-592c-4c28-8ab2-64a63bbaa4e3
+if s13_6_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The gradient is nothing more than the two first partials packaged as a vector. Using the Product Rule on ``x y^2`` and remembering that ``\frac{\partial}{\partial x}[\ln x]=\frac{1}{x}``,
+```math
+f_x(x, y)=\frac{y}{x}+y^2 \qquad \text{and} \qquad f_y(x, y)=\ln x+2 x y
+```
+
+Therefore the gradient at a general point is
+```math
+\begin{aligned}
+\nabla f(x, y)&=f_x(x, y) \mathbf{i}+f_y(x, y) \mathbf{j} && \color{red}{\text{Definition of gradient}}\\[4pt]
+&=\left(\frac{y}{x}+y^2\right) \mathbf{i}+\left(\ln x+2 x y\right) \mathbf{j}
+\end{aligned}
+```
+
+At the point ``(1,2)``, using ``\ln 1=0``,
+```math
+\nabla f(1,2)=\left(\frac{2}{1}+2^2\right) \mathbf{i}+\bigl(0+2(1)(2)\bigr) \mathbf{j}=6 \mathbf{i}+4 \mathbf{j}
+```
+
+Note that ``\nabla f(1,2)`` is a vector **in the ``xy``-plane**, not a vector in space, even though ``z=f(x, y)`` is a surface.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 31cfcab4-5d77-4f9a-abd7-0bfed85396a3
 cm"""
 $(bth("Alternative Form of the Directional Derivative"))
@@ -2760,6 +3026,39 @@ cm"""
 $(ex(4,"Using ∇f(x, y) to Find a Directional Derivative"))
 Find the directional derivative of ``f(x, y)=3 x^2-2 y^2`` at ``\left(-\frac{3}{4}, 0\right)`` in the direction from ``P\left(-\frac{3}{4}, 0\right)`` to ``Q(0,1)``.
 """
+
+# ╔═╡ 0d3c23c2-9b99-45ba-b0c6-e5e37519d914
+if s13_6_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+With the gradient in hand the directional derivative is just a dot product. First the gradient:
+```math
+\nabla f(x, y)=6 x \mathbf{i}-4 y \mathbf{j}, \qquad \text{so} \qquad \nabla f\left(-\frac{3}{4}, 0\right)=-\frac{9}{2} \mathbf{i}
+```
+
+Next a **unit** vector in the direction from ``P`` to ``Q``:
+```math
+\overrightarrow{P Q}=\left(0-\left(-\frac{3}{4}\right)\right) \mathbf{i}+(1-0) \mathbf{j}=\frac{3}{4} \mathbf{i}+\mathbf{j}, \qquad \|\overrightarrow{P Q}\|=\sqrt{\frac{9}{16}+1}=\frac{5}{4}
+```
+```math
+\mathbf{u}=\frac{\overrightarrow{P Q}}{\|\overrightarrow{P Q}\|}=\frac{3}{5} \mathbf{i}+\frac{4}{5} \mathbf{j}
+```
+
+Because ``f`` is differentiable, the alternative form applies:
+```math
+\begin{aligned}
+D_{\mathbf{u}} f\left(-\frac{3}{4}, 0\right)&=\nabla f\left(-\frac{3}{4}, 0\right) \cdot \mathbf{u} && \color{red}{\text{Alternative form}}\\[4pt]
+&=\left(-\frac{9}{2} \mathbf{i}\right) \cdot\left(\frac{3}{5} \mathbf{i}+\frac{4}{5} \mathbf{j}\right)\\[4pt]
+&=-\frac{9}{2}\left(\frac{3}{5}\right)+0\left(\frac{4}{5}\right)=-\frac{27}{10}
+\end{aligned}
+```
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ b639b1fb-4aea-495f-9580-c4d383a0a1e8
 cm"""
@@ -2785,6 +3084,40 @@ T(x, y)=20-4 x^2-y^2
 ```
 where ``x`` and ``y`` are measured in centimeters. In what direction from ``(2,-3)`` does the temperature increase most rapidly? What is this rate of increase?
 
+"""
+
+# ╔═╡ 8084fa11-e19a-4a22-a318-91993050d8ca
+if s13_6_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The direction of maximum increase of a differentiable function is always the direction of its gradient, so compute
+```math
+\nabla T(x, y)=T_x(x, y) \mathbf{i}+T_y(x, y) \mathbf{j}=-8 x \mathbf{i}-2 y \mathbf{j}
+```
+
+At the point ``(2,-3)``,
+```math
+\nabla T(2,-3)=-16 \mathbf{i}+6 \mathbf{j} \quad \color{red}{\text{Direction of maximum increase}}
+```
+so the temperature climbs fastest in the direction of ``-16 \mathbf{i}+6 \mathbf{j}``.
+
+The rate of that climb is the length of the gradient:
+```math
+\|\nabla T(2,-3)\|=\sqrt{(-16)^2+6^2}=\sqrt{292}=2 \sqrt{73} \approx 17.09
+```
+degrees Celsius per centimetre.
+
+A caution worth stating out loud: ``\nabla T(2,-3)`` points toward *hotter* nearby plate, but it does **not** point straight at the hottest point of the plate (the origin, where ``T=20``). The gradient is a local statement only; a particle that follows it traces a curved path, which is exactly the subject of the next example.
+
+$(ebl())
+"""
+else
+	md""
+end
+
+# ╔═╡ a5a3f9c6-86b6-49e2-bbcc-86be9b77031d
+cm"""
 $(ex(6,"Finding the Path of a Heat-Seeking Particle"))
 A heat-seeking particle is located at the point ``(2,-3)`` on a metal plate whose temperature at ``(x, y)`` is
 ```math
@@ -2793,6 +3126,50 @@ T(x, y)=20-4 x^2-y^2
 
 Find the path of the particle as it continuously moves in the direction of maximum temperature increase.
 """
+
+# ╔═╡ 96ae57b5-e41d-4467-9fbd-3555663c76e3
+if s13_6_ex6_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Represent the path by
+```math
+\mathbf{r}(t)=x(t) \mathbf{i}+y(t) \mathbf{j}
+```
+
+"Continuously moving in the direction of maximum increase" means the velocity vector ``\mathbf{r}'(t)`` is a positive multiple of ``\nabla T``. Taking the multiple to be ``1`` (any positive constant only re-times the trip, it does not change the curve) gives
+```math
+x'(t)=-8 x \qquad \text{and} \qquad y'(t)=-2 y
+```
+
+These are the two separable equations whose solutions are exponentials:
+```math
+x(t)=C_1 e^{-8 t} \qquad \text{and} \qquad y(t)=C_2 e^{-2 t}
+```
+
+The particle starts at ``(2,-3)``, so setting ``t=0`` gives ``C_1=2`` and ``C_2=-3``:
+```math
+x(t)=2 e^{-8 t} \qquad \text{and} \qquad y(t)=-3 e^{-2 t}
+```
+
+Eliminate ``t``. From the second equation ``e^{-2 t}=-\frac{y}{3}``, and because ``e^{-8 t}=\left(e^{-2 t}\right)^4``,
+```math
+x=2\left(-\frac{y}{3}\right)^4=\frac{2 y^4}{81} \quad \color{red}{\text{Path of the particle}}
+```
+
+**A shortcut.** The same curve comes out without ever solving for ``t``, by dividing the two rates:
+```math
+\frac{d y}{d x}=\frac{d y / d t}{d x / d t}=\frac{-2 y}{-8 x}=\frac{y}{4 x} \quad \Longrightarrow \quad \frac{d y}{y}=\frac{d x}{4 x} \quad \Longrightarrow \quad y^4=K x
+```
+and ``(2,-3)`` forces ``K=\frac{81}{2}``, that is ``x=\frac{2 y^4}{81}``.
+
+As ``t \rightarrow \infty`` both ``x`` and ``y`` tend to ``0``: the particle homes in on the origin, the hottest point of the plate — but along a curve, never along the straight line from ``(2,-3)`` to ``(0,0)``.
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 5b535710-51b1-470b-8f9b-18319b908d20
 cm"""
@@ -2807,6 +3184,46 @@ f(x, y)=y-\sin x
 ```
 and find a normal vector at several points on the curve.
 """
+
+# ╔═╡ b0b7a498-0b13-41ee-9e5d-d56128d21050
+if s13_6_ex7_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The level curve for ``c=0`` is the set where ``f(x, y)=0``, that is
+```math
+y-\sin x=0 \qquad \Longleftrightarrow \qquad y=\sin x
+```
+— the ordinary sine curve.
+
+The gradient of ``f`` is
+```math
+\nabla f(x, y)=f_x(x, y) \mathbf{i}+f_y(x, y) \mathbf{j}=-\cos x \mathbf{i}+\mathbf{j}
+```
+
+Evaluating it at points ``(x, \sin x)`` along the curve:
+```math
+\begin{array}{c|c}
+\text{point on } y=\sin x & \nabla f \\ \hline
+(-\pi, 0) & \mathbf{i}+\mathbf{j} \\
+\left(-\frac{\pi}{2},-1\right) & \mathbf{j} \\
+(0,0) & -\mathbf{i}+\mathbf{j} \\
+\left(\frac{\pi}{2}, 1\right) & \mathbf{j} \\
+(\pi, 0) & \mathbf{i}+\mathbf{j}
+\end{array}
+```
+
+Each of these vectors is normal to the sine curve at its point, as the theorem promises. The check is a one-line dot product: the curve ``y=\sin x`` has tangent direction ``\mathbf{T}=\mathbf{i}+\cos x \mathbf{j}``, and
+```math
+\nabla f(x, y) \cdot \mathbf{T}=(-\cos x)(1)+(1)(\cos x)=0
+```
+for **every** ``x``, so the gradient is perpendicular to the curve everywhere along it.
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 2b95a8f3-ffe2-439a-b735-969c4a5ce363
 cm"""
@@ -2845,6 +3262,41 @@ f(x, y, z)=x^2+y^2-4 z
 ```
 and find the direction of maximum increase of ``f`` at the point ``(2,-1,1)``.
 """
+
+# ╔═╡ fb800cf4-9900-4af1-8419-00a05ef6eb53
+if s13_6_ex8_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Nothing changes in three variables except that there is one more partial derivative to compute:
+```math
+f_x(x, y, z)=2 x, \qquad f_y(x, y, z)=2 y, \qquad f_z(x, y, z)=-4
+```
+
+So the gradient is
+```math
+\begin{aligned}
+\nabla f(x, y, z)&=f_x(x, y, z) \mathbf{i}+f_y(x, y, z) \mathbf{j}+f_z(x, y, z) \mathbf{k} && \color{red}{\text{Definition of gradient}}\\[4pt]
+&=2 x \mathbf{i}+2 y \mathbf{j}-4 \mathbf{k}
+\end{aligned}
+```
+
+At the point ``(2,-1,1)``,
+```math
+\nabla f(2,-1,1)=4 \mathbf{i}-2 \mathbf{j}-4 \mathbf{k}
+```
+which is the direction of maximum increase of ``f`` there. The maximum rate itself is the length of that vector,
+```math
+\|\nabla f(2,-1,1)\|=\sqrt{4^2+(-2)^2+(-4)^2}=\sqrt{36}=6
+```
+
+Notice that the ``\mathbf{k}``-component is the constant ``-4`` no matter where you stand, because ``z`` enters ``f`` only through the linear term ``-4 z``.
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ b2b9dd54-3392-4dfd-8918-6fb29b41ff98
 cm"""
@@ -5820,23 +6272,45 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─2127153a-edfd-49dc-8c45-8743629af637
 # ╟─21c9124f-ab99-4d80-b4f7-4ba8ab35c20d
 # ╟─47cdd95c-53a5-4e07-9b26-c91b3b1706d9
+# ╟─28ab4ba4-c220-4d1d-b943-2b0de1bcb837
+# ╟─eec61877-fb80-4d13-af50-fec68c2f32a2
+# ╟─9ffdb602-a835-4014-ba7a-a905b495db09
+# ╟─28ef0d17-d148-4cf3-83fb-d51707356b37
+# ╟─11341470-0198-4d7e-ae7a-5ac09a6f6124
 # ╟─7e4fb221-9750-4abd-b4f8-5b511629d7f5
 # ╟─e3d38fd9-0997-4286-aa2e-762c70b360d1
 # ╟─6aa7ee9d-263f-4768-ac9b-67d0692d0e66
 # ╟─5fe3745a-4a75-4ece-b04a-bd71f7810c6f
+# ╟─b2e7659a-d0d5-4718-9f2b-aa417b003207
+# ╟─cbfb5add-b039-402e-ae97-eefdb4a6bd6d
 # ╟─92b3ab49-db16-4a05-8929-1dbd3362d470
 # ╟─ddd97e19-227f-42ec-9a38-663c926adc86
+# ╟─965a3f31-9edd-4fd2-8e33-0093c12bed8d
+# ╟─6e4cf01f-52de-43f7-977f-41c17503147d
 # ╟─45ba9ada-2921-41d6-b9a1-e4df2963ed0b
 # ╟─ca36e483-976e-4bd3-87f9-4c4a5a12d91d
+# ╟─23bd5551-085d-4bb2-bf7b-c216c2fd1ac5
+# ╟─38fc3d73-592c-4c28-8ab2-64a63bbaa4e3
 # ╟─31cfcab4-5d77-4f9a-abd7-0bfed85396a3
 # ╟─034acc9b-59bb-4d06-9ed6-c0d6a0101cc9
+# ╟─1754c328-b556-474a-8333-22d624bf1473
+# ╟─0d3c23c2-9b99-45ba-b0c6-e5e37519d914
 # ╟─4cb8757a-ab68-4a51-b11a-44a02c4ec8c5
 # ╟─b639b1fb-4aea-495f-9580-c4d383a0a1e8
 # ╟─960c605c-d254-4b2e-9d6d-0acba4121c0e
 # ╟─fda44fd8-0ad6-4f02-a993-791b47ebb90c
+# ╟─fcb17e74-3e85-48eb-803b-64a21c5508c2
+# ╟─8084fa11-e19a-4a22-a318-91993050d8ca
+# ╟─a5a3f9c6-86b6-49e2-bbcc-86be9b77031d
+# ╟─0c0bd95b-5b0f-4a90-b657-5807c856c53e
+# ╟─96ae57b5-e41d-4467-9fbd-3555663c76e3
 # ╟─5b535710-51b1-470b-8f9b-18319b908d20
+# ╟─628ba284-cb09-44e6-a988-d36ba3db3610
+# ╟─b0b7a498-0b13-41ee-9e5d-d56128d21050
 # ╟─9dc755ae-8dae-4fcd-969c-a4558ba1a78d
 # ╟─2b95a8f3-ffe2-439a-b735-969c4a5ce363
+# ╟─7c05a11b-57a3-4150-b990-f666388189bf
+# ╟─fb800cf4-9900-4af1-8419-00a05ef6eb53
 # ╟─9ebe06f1-f95b-43ae-99dd-d4c837060b8f
 # ╟─71c57b83-ec10-47aa-910f-e2b5d9a65db8
 # ╟─fdfdc211-c9c5-4695-911e-b2a767f2b228
