@@ -757,10 +757,11 @@ end
 md"##  Applications of the Gradient"
 
 # ╔═╡ fda44fd8-0ad6-4f02-a993-791b47ebb90c
+#✓ FIX 13.6 ex5 -- ∇T y-component was -y; T_y = -2y. Also finer Euler step for an accurate path.
 let
     # Define the function f(x, y)
     T(x, y) = 20 - 4x^2 - y^2
-    ∇T(x, y) = [-8x; -y]
+    ∇T(x, y) = [-8x; -2y]   # T_y = -2y
 
     # Define ranges for x and y
     # x in [-2, 2] and y in [-2, 2]
@@ -772,8 +773,8 @@ let
     Z = [T(x, y) for x in xs, y in ys]
     P = [2; -3]
     Q = [2; -3]
-    path = map(1:1000) do i
-        Q = Q + 0.01 * ∇T(Q...)
+    path = map(1:5000) do i
+        Q = Q + 0.002 * ∇T(Q...)
         Q
     end
     path = vcat([P], path)
@@ -805,6 +806,79 @@ begin
 $(s13_6_ex6_sol_box) **Show Solution**
 """
 end
+
+# ╔═╡ c8e1c1ac-1807-4e98-8943-083e919f7a00
+#✓ ANIM 13.6 ex6 -- heat-seeking particle: constant-speed sweep, gradient arrow, live isotherm and temperature
+begin
+	s13_6_ex6_N, s13_6_ex6_H = 90, 30
+	s13_6_ex6_clock_box = @bind s13_6_ex6_tick Clock(0.09)
+	s13_6_ex6_scrub_box = @bind s13_6_ex6_scrub Slider(0:(s13_6_ex6_N + s13_6_ex6_H))
+	cm"""
+$(s13_6_ex6_clock_box) $(s13_6_ex6_scrub_box) **drag to scrub**
+"""
+end
+
+# ╔═╡ 88bcf093-00e6-4611-a700-2f4d2ef9b052
+let
+	T(x, y)  = 20 - 4x^2 - y^2
+	∇T(x, y) = (-8x, -2y)
+
+	N, H = s13_6_ex6_N, s13_6_ex6_H
+	n = min(mod(s13_6_ex6_tick + s13_6_ex6_scrub, N + H + 1), N)   # sweep, then hold
+
+	# r(t) = (2e^{-8t}, -3e^{-2t}) eliminates to x = 2y^4/81, traced by y: -3 → 0.
+	# Sample it at equal arc length, so the dot moves at a steady visual speed
+	# instead of bolting for the y-axis in the first few frames.
+	yf  = range(-3, 0, length = 4001)
+	xf  = @. 2 * yf^4 / 81
+	S   = cumsum(vcat(0.0, hypot.(diff(xf), diff(yf))))
+	idx = clamp.([searchsortedfirst(S, s) for s in range(0, S[end], length = N + 1)],
+	             1, length(S))
+	px, py = xf[idx], yf[idx]
+
+	cx, cy = px[n + 1], py[n + 1]
+	Tc = T(cx, cy)
+
+	xs = range(-1.30, 2.30, length = 220)
+	ys = range(-3.25, 1.40, length = 220)
+	Z  = [T(x, y) for x in xs, y in ys]
+
+	plt = contour(xs, ys, Z, levels = 14, alpha = 0.40,
+		colorbar = false, legend = false, aspect_ratio = :equal,
+		xlims = (-0.30, 2.30), ylims = (-3.25, 0.40), size = (560, 660),
+		xlabel = "x", ylabel = "y",
+		title = "Heat-seeking particle      T = $(round(Tc, digits = 2)) °C",
+			frame_style=:origin	 
+				 )
+
+	# The isotherm the particle is standing on right now.  T = Tc is the ellipse
+	# 4x^2 + y^2 = R, drawn parametrically so it passes exactly through (cx, cy).
+	R = 4cx^2 + cy^2
+	th = range(0, 2π, length = 400)
+	plot!(plt, (sqrt(R) / 2) .* cos.(th), sqrt(R) .* sin.(th),
+		color = :darkorange, lw = 2.5, alpha = 0.95)
+
+	# trail, brightening toward the particle
+	plot!(plt, px[1:n+1], py[1:n+1], color = :seagreen, lw = 2, alpha = 0.25)
+	plot!(plt, px[max(1, n-27):n+1], py[max(1, n-27):n+1], color = :seagreen, lw = 3, alpha = 0.55)
+	plot!(plt, px[max(1, n-9):n+1],  py[max(1, n-9):n+1],  color = :seagreen, lw = 4)
+
+	# ∇T at the particle, unit length so it stays readable near the origin
+	gx, gy = ∇T(cx, cy)
+	L = hypot(gx, gy)
+	L > 1e-9 && quiver!(plt, [cx], [cy],
+		quiver = ([0.42gx / L], [0.42gy / L]), color = :crimson, lw = 2)
+
+	scatter!(plt, [2], [-3], color = :black, ms = 4,
+		annotations = [(1.95, -3.12, text("(2, -3)", 8))])
+	scatter!(plt, [0], [0], marker = :star5, ms = 9, color = :orangered)
+	scatter!(plt, [cx], [cy], color = :seagreen, ms = 6,
+		markerstrokecolor = :white, markerstrokewidth = 1.5)
+	plt
+end
+
+# ╔═╡ 87588998-f8f1-48a0-9072-6fab35b6d1b9
+# @ ANIM 
 
 # ╔═╡ 628ba284-cb09-44e6-a988-d36ba3db3610
 #✓ SOL 13.6 ex7 -- show by default
@@ -860,6 +934,15 @@ cm"""
 See [Geogebra Graph](https://www.geogebra.org/classic/c6ynw7v2?embed)
 """
 
+# ╔═╡ 466429aa-a71c-4272-83ae-79996da5f33f
+#✓ SOL 13.7 ex1 -- show by default
+begin
+	s13_7_ex1_sol_box = @bind s13_7_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex1_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 5d8c80b9-c201-4d6f-8212-9924caa88a2a
 let
     F(x, y, z) = z^2 - 2x^2 - 2y^2 - 12
@@ -872,6 +955,24 @@ let
     Eq = dF(P...) ⋅ ([x; y; z] - P) ~ 0
     # cm""
 
+end
+
+# ╔═╡ 554d3aec-f9d9-4f19-a9b4-4e7fd5049e01
+#✓ SOL 13.7 ex2 -- show by default
+begin
+	s13_7_ex2_sol_box = @bind s13_7_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex2_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ e6950b8f-13c0-4ebb-8eec-67bcd519d5f2
+#✓ SOL 13.7 ex3 -- show by default
+begin
+	s13_7_ex3_sol_box = @bind s13_7_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex3_sol_box) **Show Solution**
+"""
 end
 
 # ╔═╡ 0b586670-9290-469a-a7cf-70e1654a9e86
@@ -892,10 +993,28 @@ let
 
 end
 
+# ╔═╡ 0df83aef-05f6-4c3e-9880-12c7a7b0f01a
+#✓ SOL 13.7 ex4 -- show by default
+begin
+	s13_7_ex4_sol_box = @bind s13_7_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex4_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ d879263c-10a0-4cb6-8a05-7342208662ea
 cm"""
 See [GeoGebra Graph](https://www.geogebra.org/classic/rkhgxuag?embed)
 """
+
+# ╔═╡ 50a83bfc-f54c-44ee-8006-dd8c564be2c3
+#✓ SOL 13.7 ex5 -- show by default
+begin
+	s13_7_ex5_sol_box = @bind s13_7_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex5_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ 55ddac47-88aa-40c6-8986-5ed07731f6e2
 let
@@ -922,8 +1041,25 @@ end
 # ╔═╡ 3fd5e38e-ab5e-40be-91f7-65fd05f60eff
 md"## The Angle of Inclination of a Plane"
 
+# ╔═╡ 791c3120-4b49-47ae-8493-6436c8fe7498
+#✓ SOL 13.7 ex6 -- show by default
+begin
+	s13_7_ex6_sol_box = @bind s13_7_ex6_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex6_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 6d392830-65ff-4c10-83d1-20e320341735
 md"## A Comparison of the Gradients ∇f(x, y) and ∇F(x, y, z)"
+
+# ╔═╡ ff6aa87b-8812-44f7-a21e-34798a7641a5
+begin
+	s13_7_ex7_sol_box = @bind s13_7_ex7_show_sol CheckBox(default=true)
+	cm"""
+$(s13_7_ex7_sol_box) **Show Solution**
+"""
+end
 
 # ╔═╡ 399b4977-95ff-431d-84b1-c57865b49a48
 md"""
@@ -3311,6 +3447,33 @@ F(x, y, z) = 0.
 ```
 """
 
+# ╔═╡ e8fca12c-ca1a-4b13-a38f-3f00cbf60541
+if s13_7_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The level surface ``F(x,y,z)=0`` consists of all points ``(x,y,z)`` for which
+
+```math
+x^2+y^2+z^2-4=0 \qquad \Longleftrightarrow \qquad x^2+y^2+z^2=4
+```
+
+This is the standard equation of a **sphere of radius ``2`` centered at the origin**.
+
+Note what the level surface does for us. The function ``F`` itself has three independent variables, so its own graph would live in four-dimensional space and cannot be drawn. The level surface ``F(x,y,z)=0``, however, is an ordinary surface in space. Every surface of the form ``z=f(x,y)`` can be rewritten this way by taking
+
+```math
+F(x,y,z)=f(x,y)-z
+```
+
+and this is the point of view used throughout the rest of the section.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ a2c7699c-344e-434e-a603-4cf3c4c4b67b
 cm"""
 $(define("Tangent Plane and Normal Line"))
@@ -3341,6 +3504,48 @@ z^2 − 2x^2 − 2y^2 = 12
  at the point ``(1, −1, 4)``.
 """
 
+# ╔═╡ 0a0fc6e8-9912-490d-b759-2355075b3d44
+if s13_7_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin by writing the equation of the surface in the form ``F(x,y,z)=0``:
+
+```math
+z^2-2x^2-2y^2-12=0 \qquad \Longrightarrow \qquad F(x,y,z)=z^2-2x^2-2y^2-12
+```
+
+Then the partial derivatives of ``F`` are
+
+```math
+F_x(x,y,z)=-4x, \qquad F_y(x,y,z)=-4y, \qquad F_z(x,y,z)=2z
+```
+
+and at the point ``(1,-1,4)``,
+
+```math
+F_x(1,-1,4)=-4, \qquad F_y(1,-1,4)=4, \qquad F_z(1,-1,4)=8
+```
+
+So ``\nabla F(1,-1,4)=-4\mathbf{i}+4\mathbf{j}+8\mathbf{k}`` is normal to the surface at that point, and an equation of the tangent plane is
+
+```math
+\begin{aligned}
+-4(x-1)+4(y+1)+8(z-4)&=0 && \color{red}{\text{Theorem: Equation of Tangent Plane}}\\[4pt]
+-4x+4+4y+4+8z-32&=0 && \color{red}{\text{expand}}\\[4pt]
+-4x+4y+8z-24&=0 && \color{red}{\text{collect the terms}}\\[4pt]
+x-y-2z+6&=0 && \color{red}{\text{divide by }-4}
+\end{aligned}
+```
+
+A quick check: the point ``(1,-1,4)`` does satisfy ``x-y-2z+6=1+1-8+6=0``, as it must.
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ f2ad6464-e3f3-41e5-96d7-2eb72c6c4cd8
 cm"""
 $(ex(3,"Finding an Equation of the Tangent Plane"))
@@ -3351,6 +3556,46 @@ z=1-\frac{1}{10}(x^2+4y^2)
 at the point ``(1, 1, \frac{1}{2})``.
 """
 
+# ╔═╡ e9fbc6bc-48a7-4a27-abb3-850dd5a890b2
+if s13_7_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The surface is given as ``z=f(x,y)``, so write it as a level surface by moving everything to one side:
+
+```math
+F(x,y,z)=1-\frac{1}{10}\left(x^2+4y^2\right)-z
+```
+
+The partial derivatives of ``F`` are
+
+```math
+F_x(x,y,z)=-\frac{1}{5}x, \qquad F_y(x,y,z)=-\frac{4}{5}y, \qquad F_z(x,y,z)=-1
+```
+
+and at the point ``\left(1,1,\frac{1}{2}\right)``,
+
+```math
+F_x\left(1,1,\tfrac{1}{2}\right)=-\frac{1}{5}, \qquad F_y\left(1,1,\tfrac{1}{2}\right)=-\frac{4}{5}, \qquad F_z\left(1,1,\tfrac{1}{2}\right)=-1
+```
+
+So an equation of the tangent plane at ``\left(1,1,\frac{1}{2}\right)`` is
+
+```math
+\begin{aligned}
+-\frac{1}{5}(x-1)-\frac{4}{5}(y-1)-\left(z-\frac{1}{2}\right)&=0 && \color{red}{\text{Theorem: Equation of Tangent Plane}}\\[4pt]
+(x-1)+4(y-1)+5\left(z-\frac{1}{2}\right)&=0 && \color{red}{\text{multiply by }-5}\\[4pt]
+x+4y+5z-\frac{15}{2}&=0 && \color{red}{\text{collect the terms}}\\[4pt]
+2x+8y+10z-15&=0 && \color{red}{\text{multiply by }2}
+\end{aligned}
+```
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ d4c38abc-7cae-4f3e-ba5f-1dc9377fbeaa
 cm"""
 $(ex(4,"Finding an Equation of a normal line to a Surface"))
@@ -3360,6 +3605,47 @@ xyz=12
 ```
 at the point ``(2, −2, −3)``.
 """
+
+# ╔═╡ bc8b2395-bdf6-430d-8864-9902bae2ca75
+if s13_7_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin by letting
+
+```math
+F(x,y,z)=xyz-12
+```
+
+so that the surface is the level surface ``F(x,y,z)=0``. The gradient is
+
+```math
+\nabla F(x,y,z)=yz\,\mathbf{i}+xz\,\mathbf{j}+xy\,\mathbf{k}
+```
+
+and at the point ``(2,-2,-3)``,
+
+```math
+\nabla F(2,-2,-3)=(-2)(-3)\mathbf{i}+(2)(-3)\mathbf{j}+(2)(-2)\mathbf{k}=6\mathbf{i}-6\mathbf{j}-4\mathbf{k}
+```
+
+The normal line is the line through ``(2,-2,-3)`` with this direction, so a set of symmetric equations is
+
+```math
+\frac{x-2}{6}=\frac{y+2}{-6}=\frac{z+3}{-4}
+```
+
+Any nonzero multiple of ``\nabla F`` gives the same line. Dividing the direction numbers by ``2`` produces the equivalent, slightly tidier form
+
+```math
+\frac{x-2}{3}=\frac{y+2}{-3}=\frac{z+3}{-2}
+```
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 6c75f38d-40ab-4862-9749-7b63fcdfce29
 cm"""
@@ -3374,6 +3660,50 @@ x^2+y^2+z=4
 ```
 at the point ``(0, 1, 3)``,
 """
+
+# ╔═╡ 5cfbd837-b4f0-418d-ab28-43c5596dceb3
+if s13_7_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The desired line is tangent to **both** surfaces at ``(0,1,3)``, so its direction vector must be orthogonal to both normal vectors there. Write each surface as a level surface:
+
+```math
+F(x,y,z)=x^2+2y^2+2z^2-20 \qquad \text{and} \qquad G(x,y,z)=x^2+y^2+z-4
+```
+
+The gradients are
+
+```math
+\begin{aligned}
+\nabla F(x,y,z)&=2x\,\mathbf{i}+4y\,\mathbf{j}+4z\,\mathbf{k} && \Longrightarrow && \nabla F(0,1,3)=4\mathbf{j}+12\mathbf{k}\\[4pt]
+\nabla G(x,y,z)&=2x\,\mathbf{i}+2y\,\mathbf{j}+\mathbf{k} && \Longrightarrow && \nabla G(0,1,3)=2\mathbf{j}+\mathbf{k}
+\end{aligned}
+```
+
+A vector orthogonal to both is their cross product:
+
+```math
+\nabla F(0,1,3)\times\nabla G(0,1,3)=
+\begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k}\\
+0 & 4 & 12\\
+0 & 2 & 1
+\end{vmatrix}
+=(4-24)\mathbf{i}-(0-0)\mathbf{j}+(0-0)\mathbf{k}=-20\mathbf{i}
+```
+
+So the tangent line is parallel to the ``x``-axis. Using the simpler direction vector ``\mathbf{i}`` and the point ``(0,1,3)``, a set of parametric equations is
+
+```math
+x=t, \qquad y=1, \qquad z=3
+```
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 55643865-1506-42a1-ae0a-9a8e20511d7c
 cm"""
@@ -3394,6 +3724,47 @@ Find the angle of inclination of the tangent plane to the ellipsoid
 at the point ``(2,2,1)``.
 """
 
+# ╔═╡ 46eb2ba2-8d5d-4c46-b347-3e7026ce83eb
+if s13_7_ex6_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin by writing the ellipsoid as a level surface:
+
+```math
+F(x,y,z)=\frac{x^2}{12}+\frac{y^2}{12}+\frac{z^2}{3}-1
+```
+
+The gradient is
+
+```math
+\nabla F(x,y,z)=\frac{x}{6}\mathbf{i}+\frac{y}{6}\mathbf{j}+\frac{2z}{3}\mathbf{k}
+```
+
+and at the point ``(2,2,1)`` a normal vector to the tangent plane is
+
+```math
+\mathbf{n}=\nabla F(2,2,1)=\frac{1}{3}\mathbf{i}+\frac{1}{3}\mathbf{j}+\frac{2}{3}\mathbf{k}
+```
+
+Because the angle of inclination depends only on the *direction* of ``\mathbf{n}``, multiply by ``3`` and use ``\mathbf{n}=\mathbf{i}+\mathbf{j}+2\mathbf{k}``. Then
+
+```math
+\cos\theta=\frac{|\mathbf{n}\cdot\mathbf{k}|}{\|\mathbf{n}\|}=\frac{|2|}{\sqrt{1^2+1^2+2^2}}=\frac{2}{\sqrt{6}}=\frac{\sqrt{6}}{3}\approx 0.8165
+```
+
+and therefore
+
+```math
+\theta=\arccos\frac{2}{\sqrt{6}}\approx 0.6155 \text{ rad} \approx 35.26^{\circ}
+```
+
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 6a9f17ae-f24d-492b-a540-a9f0e7424c09
 cm"""
 $(bth("Gradient Is Normal to Level Surfaces"))
@@ -3403,6 +3774,87 @@ If ``F`` is differentiable at ``\left(x_0, y_0, z_0\right)`` and
 ```
 then ``\nabla F\left(x_0, y_0, z_0\right)`` is normal to the level surface through ``\left(x_0, y_0, z_0\right)``.
 """
+
+# ╔═╡ 814397fa-2fe5-4dfd-a200-24b55df68d2c
+#✓ SOL 13.7 ex7 -- new example on the theorem above (gradient is normal to level surfaces), show by default
+cm"""
+$(ex(7,"Using the Gradient to Find a Normal Vector"))
+Let
+
+```math
+F(x,y,z)=x^2+y^2-z
+```
+
+and let ``S`` be the level surface ``F(x,y,z)=0``, that is, the paraboloid ``z=x^2+y^2``.
+
+1. Find a unit vector normal to ``S`` at the point ``(1,2,5)``.
+2. The curve ``\mathbf{r}(t)=t\,\mathbf{i}+2t\,\mathbf{j}+5t^2\,\mathbf{k}`` lies on ``S`` and passes through ``(1,2,5)`` when ``t=1``. Verify directly that ``\nabla F(1,2,5)`` is orthogonal to the tangent vector of this curve at that point.
+"""
+
+# ╔═╡ 4e802a78-cb8a-49cc-a546-3f991ac37e8b
+if s13_7_ex7_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+**1. A unit normal vector.**
+
+The gradient of ``F`` is
+
+```math
+\nabla F(x,y,z)=2x\,\mathbf{i}+2y\,\mathbf{j}-\mathbf{k}
+```
+
+so at the point ``(1,2,5)``,
+
+```math
+\nabla F(1,2,5)=2\mathbf{i}+4\mathbf{j}-\mathbf{k}, \qquad \|\nabla F(1,2,5)\|=\sqrt{2^2+4^2+(-1)^2}=\sqrt{21}
+```
+
+By the theorem, this gradient is normal to the level surface ``S`` at ``(1,2,5)``, so a unit normal vector is
+
+```math
+\mathbf{n}=\frac{\nabla F(1,2,5)}{\|\nabla F(1,2,5)\|}=\frac{1}{\sqrt{21}}\left(2\mathbf{i}+4\mathbf{j}-\mathbf{k}\right)
+```
+
+(The vector ``-\mathbf{n}`` is also a unit normal; a surface has two unit normals at each point.)
+
+**2. Checking the theorem against a curve on the surface.**
+
+First confirm that ``\mathbf{r}`` really does lie on ``S``. For ``\mathbf{r}(t)=\langle t,\,2t,\,5t^2\rangle``,
+
+```math
+x^2+y^2=t^2+(2t)^2=5t^2=z
+```
+
+so ``F(\mathbf{r}(t))=0`` for every ``t``, and ``\mathbf{r}(1)=\langle 1,2,5\rangle`` is the given point. The tangent vector is
+
+```math
+\mathbf{r}'(t)=\mathbf{i}+2\mathbf{j}+10t\,\mathbf{k} \qquad \Longrightarrow \qquad \mathbf{r}'(1)=\mathbf{i}+2\mathbf{j}+10\mathbf{k}
+```
+
+and the dot product with the gradient is
+
+```math
+\nabla F(1,2,5)\cdot\mathbf{r}'(1)=(2)(1)+(4)(2)+(-1)(10)=2+8-10=0
+```
+
+The two vectors are orthogonal, exactly as the theorem predicts.
+
+**Why this always happens.**
+
+The curve lies on the level surface, so ``F(\mathbf{r}(t))=0`` is constant in ``t``. Differentiating with the Chain Rule gives
+
+```math
+\frac{d}{dt}\Bigl[F(\mathbf{r}(t))\Bigr]=\nabla F(\mathbf{r}(t))\cdot\mathbf{r}'(t)=0
+```
+
+Since **every** curve through the point that lies on the surface has a tangent vector satisfying this, ``\nabla F`` is orthogonal to all of them — which is precisely what it means for ``\nabla F`` to be normal to the surface.
+
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ bc58fba0-a0b2-45c7-a415-6edc6af3a315
 cm"""
@@ -6304,6 +6756,9 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─a5a3f9c6-86b6-49e2-bbcc-86be9b77031d
 # ╟─0c0bd95b-5b0f-4a90-b657-5807c856c53e
 # ╟─96ae57b5-e41d-4467-9fbd-3555663c76e3
+# ╟─c8e1c1ac-1807-4e98-8943-083e919f7a00
+# ╠═88bcf093-00e6-4611-a700-2f4d2ef9b052
+# ╠═87588998-f8f1-48a0-9072-6fab35b6d1b9
 # ╟─5b535710-51b1-470b-8f9b-18319b908d20
 # ╟─628ba284-cb09-44e6-a988-d36ba3db3610
 # ╟─b0b7a498-0b13-41ee-9e5d-d56128d21050
@@ -6316,21 +6771,36 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─fdfdc211-c9c5-4695-911e-b2a767f2b228
 # ╟─b2b9dd54-3392-4dfd-8918-6fb29b41ff98
 # ╟─67fc91d3-8058-4f2a-a903-fc667b655514
+# ╟─466429aa-a71c-4272-83ae-79996da5f33f
+# ╟─e8fca12c-ca1a-4b13-a38f-3f00cbf60541
 # ╟─a2c7699c-344e-434e-a603-4cf3c4c4b67b
 # ╟─d55584d1-6c00-4eda-b526-4663851315e9
 # ╟─ae52cc95-7cca-44cf-9742-9791a484c6fe
 # ╟─5d8c80b9-c201-4d6f-8212-9924caa88a2a
+# ╟─554d3aec-f9d9-4f19-a9b4-4e7fd5049e01
+# ╟─0a0fc6e8-9912-490d-b759-2355075b3d44
 # ╟─f2ad6464-e3f3-41e5-96d7-2eb72c6c4cd8
+# ╟─e6950b8f-13c0-4ebb-8eec-67bcd519d5f2
+# ╟─e9fbc6bc-48a7-4a27-abb3-850dd5a890b2
 # ╟─0b586670-9290-469a-a7cf-70e1654a9e86
 # ╟─d4c38abc-7cae-4f3e-ba5f-1dc9377fbeaa
+# ╟─0df83aef-05f6-4c3e-9880-12c7a7b0f01a
+# ╟─bc8b2395-bdf6-430d-8864-9902bae2ca75
 # ╟─6c75f38d-40ab-4862-9749-7b63fcdfce29
 # ╟─d879263c-10a0-4cb6-8a05-7342208662ea
+# ╟─50a83bfc-f54c-44ee-8006-dd8c564be2c3
+# ╟─5cfbd837-b4f0-418d-ab28-43c5596dceb3
 # ╟─55ddac47-88aa-40c6-8986-5ed07731f6e2
 # ╟─3fd5e38e-ab5e-40be-91f7-65fd05f60eff
 # ╟─55643865-1506-42a1-ae0a-9a8e20511d7c
 # ╟─e2ebeec5-e944-4fde-8230-d431a674cb52
+# ╟─791c3120-4b49-47ae-8493-6436c8fe7498
+# ╟─46eb2ba2-8d5d-4c46-b347-3e7026ce83eb
 # ╟─6d392830-65ff-4c10-83d1-20e320341735
 # ╟─6a9f17ae-f24d-492b-a540-a9f0e7424c09
+# ╟─814397fa-2fe5-4dfd-a200-24b55df68d2c
+# ╟─ff6aa87b-8812-44f7-a21e-34798a7641a5
+# ╟─4e802a78-cb8a-49cc-a546-3f991ac37e8b
 # ╟─399b4977-95ff-431d-84b1-c57865b49a48
 # ╟─19940b6b-901c-4175-84e4-ca151dc49841
 # ╟─bc58fba0-a0b2-45c7-a415-6edc6af3a315
