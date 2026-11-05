@@ -1069,6 +1069,46 @@ md"""
 # ╔═╡ 19940b6b-901c-4175-84e4-ca151dc49841
 md"## Absolute Extrema and Relative Extrema"
 
+# ╔═╡ cdc83d68-ec6f-4d16-8369-66f753b834a7
+#✓ SOL 13.8 ex1 -- show by default
+begin
+	s13_8_ex1_sol_box = @bind s13_8_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_8_ex1_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 5cb8fc1e-29b0-4dbb-b728-95bd72fc0163
+#✓ SOL 13.8 ex2 -- show by default
+begin
+	s13_8_ex2_sol_box = @bind s13_8_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_8_ex2_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 05738d79-30d8-4838-9111-229a1d78e3df
+if s13_8_ex2_show_sol
+	let
+		g(x, y) = 1 - (x^2 + y^2)^(1/3)
+		xs = range(-1, 1, length = 121)
+		ys = range(-1, 1, length = 121)
+		plt = surface(xs, ys, g;
+			color = :viridis, alpha = 0.95, legend = false, colorbar = false,
+			xlabel = "x", ylabel = "y", zlabel = "z",
+			title = "z = 1 - (x² + y²)^(1/3)",
+			camera = (40, 20), size = (620, 440))
+		scatter!(plt, [0.0], [0.0], [1.0];
+			color = :crimson, ms = 5, markerstrokecolor = :white)
+		plt
+	end
+else
+	md""
+end
+
+
 # ╔═╡ 63ac5301-28e2-4551-bb2f-8e8ad7987a9f
 md"## The Second Partials Test"
 
@@ -1093,6 +1133,84 @@ let
     d(x,y) = fxx(x,y)*fyy(x,y) - (fxy(x,y))^2
     fxx(P1...), d(P1...), fxx(P2...), d(P2...)
 end
+
+# ╔═╡ 6e8cb79f-9378-4923-9e62-7266cb114685
+#✓ SOL 13.8 ex3 -- show by default
+begin
+	s13_8_ex3_sol_box = @bind s13_8_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s13_8_ex3_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 65d92629-124d-4210-b2ce-444127508dd1
+if s13_8_ex3_show_sol
+	let
+		g(x, y) = -x^3 + 4x * y - 2y^2 + 1
+		xs = range(-1.0, 2.6, length = 321)
+		ys = range(-1.0, 2.6, length = 321)
+		plt = contour(xs, ys, g;
+			levels = 26, color = :viridis, lw = 1.2, aspect_ratio = 1,
+			xlabel = "x", ylabel = "y", legend = false,
+			title = "level curves of f(x,y) = -x³ + 4xy - 2y² + 1",
+			size = (620, 470))
+		scatter!(plt, [0.0], [0.0];
+			color = :crimson, ms = 6, markerstrokecolor = :white,
+			annotations = [(0.0, -0.22, text("saddle (0, 0)", 8, :crimson))])
+		scatter!(plt, [4/3], [4/3];
+			marker = :star5, ms = 10, color = :darkorange, markerstrokecolor = :white,
+			annotations = [(4/3, 4/3 + 0.24, text("max (4/3, 4/3)", 8, :darkorange))])
+		plt
+	end
+else
+	md""
+end
+
+
+# ╔═╡ 3d435c76-392c-4a67-bfdf-9a95d350b7c9
+#✓ SOL 13.8 ex4 -- show by default
+begin
+	s13_8_ex4_sol_box = @bind s13_8_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_8_ex4_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ f2a78b79-ddd9-420a-87ff-89cca3b3e2bd
+#✓ SOL 13.8 ex5 -- show by default
+begin
+	s13_8_ex5_sol_box = @bind s13_8_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_8_ex5_sol_box) **Show Solution**
+"""
+end
+
+
+# ╔═╡ 8fec7432-e7b9-43af-a12f-28f2371659c1
+if s13_8_ex5_show_sol
+	let
+		g(x, y) = sin(x * y)
+		xs = range(0, π, length = 321)
+		ys = range(0, 1, length = 161)
+		plt = contourf(xs, ys, g;
+			levels = 20, color = :viridis, lw = 0, legend = false,
+			xlabel = "x", ylabel = "y", xlims = (0, π), ylims = (0, 1),
+			title = "f(x,y) = sin xy on 0 ≤ x ≤ π, 0 ≤ y ≤ 1",
+			size = (660, 340))
+		xa = range(π/2, π, length = 240)
+		plot!(plt, xa, (π/2) ./ xa; color = :crimson, lw = 3)
+		annotate!(plt, 2.05, 0.86, text("xy = π/2,  f = 1", 8, :crimson))
+		scatter!(plt, [float(π)], [1.0];
+			color = :black, ms = 5, markerstrokecolor = :white)
+		annotate!(plt, 2.72, 0.93, text("(π, 1),  f = 0", 8, :black))
+		plt
+	end
+else
+	md""
+end
+
 
 # ╔═╡ 7d633d24-9d0a-472b-8fbe-9ce7f6a14447
 md"""
@@ -3901,6 +4019,52 @@ f(x, y)=2 x^2+y^2+8 x-6 y+20
 ```
 """
 
+# ╔═╡ 8ecabec0-7c45-43b3-be7b-0cd251a579e9
+if s13_8_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin by locating the critical points. The partial derivatives
+
+```math
+f_x(x,y) = 4x+8 \quad \text{and} \quad f_y(x,y) = 2y-6
+```
+
+exist for every ``(x,y)``, so the critical points are exactly the points at which both are zero.
+
+```math
+\begin{aligned}
+4x+8 &= 0 && \color{red}{\text{Set } f_x(x,y)=0}\\
+2y-6 &= 0 && \color{red}{\text{Set } f_y(x,y)=0}
+\end{aligned}
+```
+
+This gives ``x=-2`` and ``y=3``, so ``(-2,3)`` is the only critical point.
+
+To see what happens there, complete the square in each variable.
+
+```math
+\begin{aligned}
+f(x,y) &= 2x^2+y^2+8x-6y+20\\
+&= 2\left(x^2+4x+4\right)+\left(y^2-6y+9\right)+20-8-9\\
+&= 2(x+2)^2+(y-3)^2+3
+\end{aligned}
+```
+
+Both squares are nonnegative, so ``f(x,y)\ge 3`` for every ``(x,y)``, with equality only at ``(-2,3)``. Therefore ``f`` has a __relative minimum__ — in fact an absolute minimum — of
+
+```math
+f(-2,3) = 3
+```
+
+The graph of ``f`` is an elliptic paraboloid opening upward with vertex ``(-2,3,3)``.
+$(ebl())
+"""
+else
+	md""
+end
+
+
 # ╔═╡ 66c8f04d-cada-4eaf-b41e-b16966735c4e
 cm"""
 $(ex(2,"Finding a Relative Extremum"))
@@ -3909,6 +4073,43 @@ Determine the relative extrema of
 f(x, y)=1-\left(x^2+y^2\right)^{1 / 3}
 ```
 """
+
+# ╔═╡ b9b9674e-b9df-4d0b-8427-4d33a87eaf22
+if s13_8_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Differentiating gives
+
+```math
+f_x(x,y) = \frac{-2x}{3\left(x^2+y^2\right)^{2/3}} \quad \text{and} \quad f_y(x,y) = \frac{-2y}{3\left(x^2+y^2\right)^{2/3}}
+```
+
+Neither partial derivative is zero anywhere: ``f_x`` vanishes only where ``x=0`` and ``f_y`` only where ``y=0``, and at ``(0,0)`` __neither one is defined__. By part 2 of the definition, ``(0,0)`` is a critical point — and it is the only one.
+
+Now read the function itself. For every ``(x,y)``,
+
+```math
+\left(x^2+y^2\right)^{1/3}\ge 0
+```
+
+with equality only at the origin, so
+
+```math
+f(x,y) = 1-\left(x^2+y^2\right)^{1/3}\le 1 = f(0,0)
+```
+
+Therefore ``f`` has a __relative maximum__ of ``1`` at ``(0,0)``.
+$(ebl())
+
+$(bbl("Remark",""))
+The surface comes to a sharp point at ``(0,0,1)``. There is no tangent plane there, yet the point is a genuine maximum — a reminder that critical points include the places where the partials __fail to exist__, not only the places where they are zero.
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ 51dbf095-a024-4f99-ab90-330d4b18b8eb
 cm"""
@@ -3934,11 +4135,131 @@ $(ex(3,"Using the Second Partials Test"))
 Find the relative extrema of ``f(x, y)=-x^3+4 x y-2 y^2+1``.
 """
 
+# ╔═╡ 518c27e2-4f09-464a-8375-f8a10bee1949
+if s13_8_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin by locating the critical points. Because
+
+```math
+f_x(x,y) = -3x^2+4y \quad \text{and} \quad f_y(x,y) = 4x-4y
+```
+
+exist for all ``x`` and ``y``, the only critical points are those at which both are zero. Setting ``f_y(x,y)=0`` gives ``y=x``, and substituting into ``f_x(x,y)=0`` produces
+
+```math
+\begin{aligned}
+-3x^2+4x &= 0 && \color{red}{\text{Substitute } y=x}\\
+x(-3x+4) &= 0 && \color{red}{\text{Factor}}\\
+x &= 0 \quad \text{or} \quad x = \frac{4}{3}
+\end{aligned}
+```
+
+so the critical points are ``(0,0)`` and ``\left(\frac{4}{3},\frac{4}{3}\right)``.
+
+The second partial derivatives are
+
+```math
+f_{xx}(x,y) = -6x, \qquad f_{xy}(x,y) = 4, \qquad f_{yy}(x,y) = -4
+```
+
+and so
+
+```math
+\begin{aligned}
+d(x,y) &= f_{xx}(x,y)\,f_{yy}(x,y)-\left[f_{xy}(x,y)\right]^2\\
+&= (-6x)(-4)-4^2 = 24x-16
+\end{aligned}
+```
+
+__At ``(0,0)``.__
+
+```math
+d(0,0) = -16 < 0
+```
+
+so by part 3 of the Second Partials Test, ``(0,0,1)`` is a __saddle point__ of ``f``.
+
+__At ``\left(\frac{4}{3},\frac{4}{3}\right)``.__
+
+```math
+d\left(\frac{4}{3},\frac{4}{3}\right) = 24\left(\frac{4}{3}\right)-16 = 16 > 0 \quad \text{and} \quad f_{xx}\left(\frac{4}{3},\frac{4}{3}\right) = -8 < 0
+```
+
+so by part 2 of the test, ``f`` has a __relative maximum__ of
+
+```math
+f\left(\frac{4}{3},\frac{4}{3}\right) = -\frac{64}{27}+\frac{64}{9}-\frac{32}{9}+1 = \frac{59}{27}
+```
+$(ebl())
+"""
+else
+	md""
+end
+
+
 # ╔═╡ a8fc5873-2add-4061-8977-c6cd6a1d2433
 cm"""
 $(ex(4,"Failure of the Second Partials Test"))
 Find the relative extrema of ``f(x, y)=x^2 y^2``. (See Graph [Here](https://www.desmos.com/3d/sv7uie6qrq))
 
+
+"""
+
+# ╔═╡ 9c143655-66b3-46f3-9596-801d80937bda
+if s13_8_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Because
+
+```math
+f_x(x,y) = 2xy^2 \quad \text{and} \quad f_y(x,y) = 2x^2y
+```
+
+both partials are zero whenever ``x=0`` __or__ ``y=0``. In other words every point on the ``x``-axis and every point on the ``y``-axis is a critical point — infinitely many of them.
+
+The second partial derivatives are
+
+```math
+f_{xx}(x,y) = 2y^2, \qquad f_{xy}(x,y) = 4xy, \qquad f_{yy}(x,y) = 2x^2
+```
+
+so
+
+```math
+d(x,y) = \left(2y^2\right)\left(2x^2\right)-(4xy)^2 = 4x^2y^2-16x^2y^2 = -12x^2y^2
+```
+
+At each critical point either ``x=0`` or ``y=0``, and therefore
+
+```math
+d(x,y) = 0
+```
+
+The Second Partials Test gives __no information whatever__ at any of these points.
+
+Go back to the function instead. Since ``f(x,y) = x^2y^2 = (xy)^2``,
+
+```math
+f(x,y)\ge 0 \quad \text{for every } (x,y)
+```
+
+and ``f(x,y) = 0`` precisely when ``x=0`` or ``y=0``. So at every one of its critical points ``f`` has an __absolute minimum__ of ``0`` — and an absolute minimum is in particular a relative minimum.
+$(ebl())
+
+$(bbl("Remark",""))
+``d=0`` is the test's silent case: it rules nothing in and nothing out. When you meet it, argue from the function itself.
+$(ebl())
+"""
+else
+	md""
+end
+
+
+# ╔═╡ 78425262-0b89-429d-bc59-60082a9f6d91
+cm"""
 $(ex(5,"Finding Absolute Extrema"))
 Find the absolute extrema of the function
 ```math
@@ -3950,6 +4271,54 @@ on the closed region given by
 ```
 See Graph [Here](https://www.desmos.com/3d/s8ebq9wjeq)
 """
+
+# ╔═╡ 772f7b1f-0fc6-4590-9e4d-2cbbf0b5397d
+if s13_8_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+``f`` is continuous on a closed, bounded region, so by the Extreme Value Theorem it does attain an absolute minimum and an absolute maximum. Each occurs either at a critical point inside the region or somewhere on the boundary.
+
+__Critical points.__ The partial derivatives
+
+```math
+f_x(x,y) = y\cos xy \quad \text{and} \quad f_y(x,y) = x\cos xy
+```
+
+are both zero when ``\cos xy = 0``, that is, along the hyperbola
+
+```math
+xy = \frac{\pi}{2}
+```
+
+The piece of that curve lying in the region runs from ``\left(\frac{\pi}{2},1\right)`` to ``\left(\pi,\frac{1}{2}\right)``. The partials also both vanish at the corner ``(0,0)``.
+
+__Bounding the values.__ Over the whole region ``0\le x\le \pi`` and ``0\le y\le 1``, so
+
+```math
+0\le xy\le \pi \quad \Longrightarrow \quad 0\le \sin xy\le 1
+```
+
+No value of ``f`` can fall outside ``[0,1]``, and both ends are actually reached.
+
+```math
+\begin{aligned}
+f(x,y) &= 1 && \color{red}{\text{on the arc } xy=\frac{\pi}{2}}\\
+f(x,y) &= 0 && \color{red}{\text{on the } x\text{- and } y\text{-axes, and at } (\pi,1)}
+\end{aligned}
+```
+
+__Conclusion.__ The absolute maximum of ``f`` is ``1``, attained at every point of the arc ``xy = \frac{\pi}{2}`` inside the region, and the absolute minimum is ``0``, attained along both axes and at the corner ``(\pi,1)``, where ``\sin \pi = 0``.
+$(ebl())
+
+$(bbl("Remark",""))
+Absolute extrema need not sit at isolated points. Here the maximum is attained along an entire curve and the minimum along two entire edges.
+$(ebl())
+"""
+else
+	md""
+end
+
 
 # ╔═╡ 64acf4d6-8655-44cb-b3ea-5e09b829912b
 cm"""
@@ -6804,14 +7173,28 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─a3ac719d-a13d-4f92-8395-8f95bd8f0ded
 # ╟─1d703048-9186-4dc6-af7e-94f3f03d4f15
 # ╟─28be8f50-1905-481e-ace4-ee1682f11514
+# ╟─cdc83d68-ec6f-4d16-8369-66f753b834a7
+# ╟─8ecabec0-7c45-43b3-be7b-0cd251a579e9
 # ╟─66c8f04d-cada-4eaf-b41e-b16966735c4e
+# ╟─5cb8fc1e-29b0-4dbb-b728-95bd72fc0163
+# ╟─b9b9674e-b9df-4d0b-8427-4d33a87eaf22
+# ╟─05738d79-30d8-4838-9111-229a1d78e3df
 # ╟─63ac5301-28e2-4551-bb2f-8e8ad7987a9f
 # ╟─789955de-1f40-4b07-9abf-994437e3685f
 # ╟─dfb5b0ec-6cf3-4233-8b2d-6ef8834d6441
 # ╟─51dbf095-a024-4f99-ab90-330d4b18b8eb
 # ╟─a0997724-2959-43c1-9fc0-3ee68f8c6b2a
 # ╟─19ec57cc-aecf-42f6-a337-b7f273834934
+# ╟─6e8cb79f-9378-4923-9e62-7266cb114685
+# ╟─518c27e2-4f09-464a-8375-f8a10bee1949
+# ╟─65d92629-124d-4210-b2ce-444127508dd1
 # ╟─a8fc5873-2add-4061-8977-c6cd6a1d2433
+# ╟─3d435c76-392c-4a67-bfdf-9a95d350b7c9
+# ╟─9c143655-66b3-46f3-9596-801d80937bda
+# ╟─78425262-0b89-429d-bc59-60082a9f6d91
+# ╟─f2a78b79-ddd9-420a-87ff-89cca3b3e2bd
+# ╟─772f7b1f-0fc6-4590-9e4d-2cbbf0b5397d
+# ╟─8fec7432-e7b9-43af-a12f-28f2371659c1
 # ╟─7d633d24-9d0a-472b-8fbe-9ce7f6a14447
 # ╟─64acf4d6-8655-44cb-b3ea-5e09b829912b
 # ╟─d07c578c-1386-45ce-9fec-9bf20632333c
