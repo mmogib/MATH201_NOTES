@@ -1240,6 +1240,15 @@ let
 
 end
 
+# ╔═╡ d5c6e201-5fd5-43a8-9b4b-1e47bbaa23f1
+#✓ SOL 13.9 ex1 -- show by default
+begin
+	s13_9_ex1_sol_box = @bind s13_9_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_9_ex1_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 028284e2-e901-4c25-bdc6-cde904279799
 let
     @variables x::Real, y::Real
@@ -1248,6 +1257,15 @@ let
     Px = expand_derivatives(Dx(P(x, y))) ~ 0
     Py = expand_derivatives(Dy(P(x, y))) ~ 0
     Px, Py, symbolic_solve([Px,Py],[x,y]), P(2_000,4_000)
+end
+
+# ╔═╡ 4736e7a8-eef6-49f2-80db-534fd42e32ef
+#✓ SOL 13.9 ex2 -- show by default
+begin
+	s13_9_ex2_sol_box = @bind s13_9_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_9_ex2_sol_box) **Show Solution**
+"""
 end
 
 # ╔═╡ 11db793f-dabc-4b76-bf50-c6d40eb4d497
@@ -1265,6 +1283,33 @@ md"## Lagrange Multipliers"
 # ╔═╡ ff678064-7f1e-4c70-a269-980fbb16daf4
 md"## Constrained Optimization Problems"
 
+# ╔═╡ 91e590d7-a81d-4e34-a46f-9ada1334248b
+#✓ SOL 13.10 ex1 -- show by default
+begin
+	s13_10_ex1_sol_box = @bind s13_10_ex1_show_sol CheckBox(default=true)
+	cm"""
+$(s13_10_ex1_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ cdc1afda-15e4-493f-9be2-ba7e67b05b65
+#✓ SOL 13.10 ex2 -- show by default
+begin
+	s13_10_ex2_sol_box = @bind s13_10_ex2_show_sol CheckBox(default=true)
+	cm"""
+$(s13_10_ex2_sol_box) **Show Solution**
+"""
+end
+
+# ╔═╡ 1a5ce26e-e26e-4e06-ab9d-abf873512f75
+#✓ SOL 13.10 ex3 -- show by default
+begin
+	s13_10_ex3_sol_box = @bind s13_10_ex3_show_sol CheckBox(default=true)
+	cm"""
+$(s13_10_ex3_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 49ef1c3a-2cc9-488e-a92f-8477d2cabfda
 let
     f(x,y) = x^2 + 2y^2-2x+3
@@ -1276,6 +1321,15 @@ let
     map(x->"$x=>$(f(x))",A)
 end
 
+# ╔═╡ cf456695-4d4f-48f1-af8f-4485670424a3
+#✓ SOL 13.10 ex4 -- show by default
+begin
+	s13_10_ex4_sol_box = @bind s13_10_ex4_show_sol CheckBox(default=true)
+	cm"""
+$(s13_10_ex4_sol_box) **Show Solution**
+"""
+end
+
 # ╔═╡ 6e770f8d-b25d-4263-abc0-97dbd6d421ac
 md"## The Method of Lagrange Multipliers with Two Constraints"
 
@@ -1285,6 +1339,15 @@ let
     A, B = [3; -1; 1], [-1; 3; 1]
     C, D = [3 - 2 * sqrt(3); 3 - 2 * sqrt(3); 3 + 4sqrt(3)] / 3, [3 + 2 * sqrt(3); 3 + 2 * sqrt(3); 3 - 4sqrt(3)] / 3
     T(A...), T(B...), T(C...), T(D...)
+end
+
+# ╔═╡ 444b1df6-acf3-4bdd-a631-18449f0831db
+#✓ SOL 13.10 ex5 -- show by default
+begin
+	s13_10_ex5_sol_box = @bind s13_10_ex5_show_sol CheckBox(default=true)
+	cm"""
+$(s13_10_ex5_sol_box) **Show Solution**
+"""
 end
 
 # ╔═╡ f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
@@ -4332,6 +4395,71 @@ as shown below. Find the maximum volume of the box.
 $(post_img("https://www.dropbox.com/scl/fi/pzs7r1nm6s7mtig8lydl4/fig_13_73.png?rlkey=7nxhtml9cmplq47x5mrpgwj8v&dl=1"))
 """
 
+# ╔═╡ 5168dc7f-f495-4e05-8800-40a98b7c8807
+if s13_9_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Let ``x``, ``y`` and ``z`` be the length, width and height of the box. Because one vertex of the box lies in the plane ``6x+4y+3z=24``, you know that ``z=\frac{1}{3}(24-6x-4y)``, and so the volume ``V=xyz`` can be written as a function of the two variables ``x`` and ``y``.
+
+```math
+\begin{aligned}
+V(x,y) &= (x)(y)\left[\frac{1}{3}(24-6x-4y)\right]\\[4pt]
+&= \frac{1}{3}\left(24xy-6x^2y-4xy^2\right)
+\end{aligned}
+```
+
+__Find the critical numbers.__ Setting the first partial derivatives equal to 0
+
+```math
+\begin{aligned}
+V_x(x,y) &= \frac{1}{3}\left(24y-12xy-4y^2\right) = \frac{1}{3}y(24-12x-4y) = 0\\[4pt]
+V_y(x,y) &= \frac{1}{3}\left(24x-6x^2-8xy\right) = \frac{1}{3}x(24-6x-8y) = 0
+\end{aligned}
+```
+
+produces the critical points ``(0,0)``, ``(4,0)`` and ``(0,6)``, each of which gives a degenerate box of volume 0. The remaining critical point comes from solving the system
+
+```math
+\begin{aligned}
+24-12x-4y &= 0 && \color{red}{\text{divide by } 4:\ 3x+y=6}\\
+24-6x-8y &= 0 && \color{red}{\text{divide by } 2:\ 3x+4y=12}
+\end{aligned}
+```
+
+Subtracting gives ``3y=6``, so ``y=2`` and ``x=\frac{4}{3}``.
+
+__Apply the Second Partials Test.__ The second partial derivatives are
+
+```math
+V_{xx}(x,y)=-4y,\qquad V_{yy}(x,y)=-\frac{8}{3}x,\qquad V_{xy}(x,y)=\frac{1}{3}(24-12x-8y)
+```
+
+and at ``\left(\frac{4}{3},2\right)``
+
+```math
+d = V_{xx}V_{yy}-\left(V_{xy}\right)^2 = (-8)\left(-\frac{32}{9}\right)-\left(-\frac{8}{3}\right)^2 = \frac{256}{9}-\frac{64}{9} = \frac{192}{9} > 0
+```
+
+Because ``d>0`` and ``V_{xx}\left(\frac{4}{3},2\right)=-8<0``, the volume is a maximum there.
+
+__Answer.__ The height is
+
+```math
+z = \frac{1}{3}\left[24-6\left(\frac{4}{3}\right)-4(2)\right] = \frac{8}{3}
+```
+
+so the maximum volume is
+
+```math
+V = \left(\frac{4}{3}\right)(2)\left(\frac{8}{3}\right) = \frac{64}{9} \approx 7.11 \text{ cubic units.}
+```
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 1a572f06-ae70-44fa-af1f-95415a05d7be
 cm"""
 $(ex(2,"Finding the Maximum Profit"))
@@ -4342,6 +4470,58 @@ P(x, y)=8 x+10 y-(0.001)\left(x^2+x y+y^2\right)-10,000 .
 
 Find the production level that produces a maximum profit. What is the maximum profit?
 """
+
+# ╔═╡ 16f1d84b-1104-4afe-a8de-496292df2d10
+if s13_9_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The profit function is defined and differentiable for all ``x`` and ``y``, so any maximum must occur at a critical point.
+
+__Find the critical numbers.__ The partial derivatives of the profit function are
+
+```math
+\begin{aligned}
+P_x(x,y) &= 8-(0.001)(2x+y)\\[4pt]
+P_y(x,y) &= 10-(0.001)(x+2y)
+\end{aligned}
+```
+
+Setting these partial derivatives equal to 0 produces the system of linear equations
+
+```math
+\begin{aligned}
+2x+y &= 8000\\
+x+2y &= 10{,}000
+\end{aligned}
+```
+
+Solving this system gives ``x=2000`` and ``y=4000``.
+
+__Apply the Second Partials Test.__ The second partial derivatives are constant,
+
+```math
+P_{xx}=-0.002,\qquad P_{yy}=-0.002,\qquad P_{xy}=-0.001
+```
+
+so
+
+```math
+d = P_{xx}P_{yy}-\left(P_{xy}\right)^2 = (-0.002)(-0.002)-(-0.001)^2 = 3\times 10^{-6} > 0
+```
+
+Because ``d>0`` and ``P_{xx}<0`` at every point, the critical point ``(2000,4000)`` yields a maximum — and since it is the only critical point, the maximum is absolute.
+
+__Answer.__ The maximum profit occurs when ``2000`` units of Product 1 and ``4000`` units of Product 2 are produced and sold, and it is
+
+```math
+P(2000,4000) = 16{,}000+40{,}000-28{,}000-10{,}000 = \$18{,}000.
+```
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 6941cc03-75e1-48cb-bde1-837f8f809132
 cm"""
@@ -4373,6 +4553,60 @@ $(ex(1,"Using a Lagrange Multiplier with One Constraint"))
 Find the maximum value of ``f(x, y)=4 x y``, where ``x>0`` and ``y>0``, subject to the constraint ``\left(x^2 / 3^2\right)+\left(y^2 / 4^2\right)=1``.
 """
 
+# ╔═╡ f90d7835-77c5-4026-bd07-9e6ffb278fad
+if s13_10_ex1_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Begin by letting
+
+```math
+f(x,y)=4xy \qquad \text{and} \qquad g(x,y)=\frac{x^2}{9}+\frac{y^2}{16}=1
+```
+
+The constraint curve is a smooth ellipse, and ``\nabla g \neq \mathbf{0}`` on it, so Lagrange's Theorem applies.
+
+__Set up the system.__ From ``\nabla f(x,y)=\lambda \nabla g(x,y)``,
+
+```math
+4y\mathbf{i}+4x\mathbf{j} = \lambda\left(\frac{2x}{9}\right)\mathbf{i}+\lambda\left(\frac{y}{8}\right)\mathbf{j}
+```
+
+which, together with the constraint, gives the system
+
+```math
+\begin{aligned}
+4y &= \frac{2}{9}\lambda x && \color{red}{f_x = \lambda g_x}\\[4pt]
+4x &= \frac{1}{8}\lambda y && \color{red}{f_y = \lambda g_y}\\[4pt]
+\frac{x^2}{9}+\frac{y^2}{16} &= 1 && \color{red}{\text{Constraint}}
+\end{aligned}
+```
+
+__Solve the system.__ Because ``x>0`` and ``y>0``, solving each of the first two equations for ``\lambda`` gives
+
+```math
+\lambda = \frac{18y}{x} \qquad \text{and} \qquad \lambda = \frac{32x}{y}
+```
+
+Equating these produces ``18y^2=32x^2``, that is, ``y^2=\frac{16}{9}x^2``. Substituting into the constraint,
+
+```math
+\frac{x^2}{9}+\frac{1}{16}\cdot\frac{16}{9}x^2 = \frac{2x^2}{9} = 1 \quad \Longrightarrow \quad x = \frac{3}{\sqrt{2}} = \frac{3\sqrt{2}}{2}
+```
+
+and then ``y=\frac{4}{3}x = 2\sqrt{2}``.
+
+__Answer.__ The maximum value of ``f`` is
+
+```math
+f\left(\frac{3\sqrt{2}}{2},\,2\sqrt{2}\right) = 4\left(\frac{3\sqrt{2}}{2}\right)\left(2\sqrt{2}\right) = 24.
+```
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 75ab0065-074b-466e-9230-228c33696a81
 cm"""
 $(ex(2,"A Business Application"))
@@ -4385,6 +4619,66 @@ Objective function
 where ``x`` represents the units of labor (at ``\$ 150`` per unit) and ``y`` represents the units of capital (at ``\$ 250`` per unit). The total cost of labor and capital is limited to ``\$ 50,000``. Find the maximum production level for this manufacturer.
 """
 
+# ╔═╡ acc50ffe-aea4-479f-936e-c7e1e3a2b7a4
+if s13_10_ex2_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The objective function is the production level ``f(x,y)=100x^{3/4}y^{1/4}``. Because the total cost of labor and capital is limited to ``\$ 50{,}000``, the constraint is
+
+```math
+g(x,y)=150x+250y=50{,}000
+```
+
+__Set up the system.__ The partial derivatives of ``f`` are
+
+```math
+f_x(x,y)=75x^{-1/4}y^{1/4} \qquad \text{and} \qquad f_y(x,y)=25x^{3/4}y^{-3/4}
+```
+
+so ``\nabla f = \lambda \nabla g`` together with the constraint gives
+
+```math
+\begin{aligned}
+75x^{-1/4}y^{1/4} &= 150\lambda && \color{red}{f_x = \lambda g_x}\\[4pt]
+25x^{3/4}y^{-3/4} &= 250\lambda && \color{red}{f_y = \lambda g_y}\\[4pt]
+150x+250y &= 50{,}000 && \color{red}{\text{Constraint}}
+\end{aligned}
+```
+
+__Solve the system.__ Solving each of the first two equations for ``\lambda`` and equating,
+
+```math
+\frac{1}{2}x^{-1/4}y^{1/4} = \frac{1}{10}x^{3/4}y^{-3/4} \quad \Longrightarrow \quad 5 = \frac{x}{y} \quad \Longrightarrow \quad x = 5y
+```
+
+Substituting into the constraint,
+
+```math
+150(5y)+250y = 1000y = 50{,}000 \quad \Longrightarrow \quad y = 50, \quad x = 250
+```
+
+__Answer.__ The maximum production level is
+
+```math
+f(250,50) = 100(250)^{3/4}(50)^{1/4} \approx 16{,}719 \text{ units.}
+```
+$(ebl())
+
+$(bbl("Remark",""))
+The value of ``\lambda`` at the optimum,
+
+```math
+\lambda = \frac{1}{2}(250)^{-1/4}(50)^{1/4} \approx 0.334
+```
+
+is called the __marginal productivity of money__: one additional dollar of budget buys about ``0.334`` of an additional unit of production.
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 75fa570d-37d4-4fe0-be67-e765b4db8a06
 cm"""
 $(ex(3,"Lagrange Multipliers and Three Variables"))
@@ -4394,6 +4688,49 @@ f(x, y, z)=2 x^2+y^2+3 z^2 \quad \text { Objective function }
 ```
 subject to the constraint ``2 x-3 y-4 z=49``.
 """
+
+# ╔═╡ 8dd7969d-6b0f-4c02-93ad-90d7712daf67
+if s13_10_ex3_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Let ``f(x,y,z)=2x^2+y^2+3z^2`` and ``g(x,y,z)=2x-3y-4z=49``. The constraint is a plane, and ``\nabla g = 2\mathbf{i}-3\mathbf{j}-4\mathbf{k} \neq \mathbf{0}`` everywhere, so Lagrange's Theorem applies.
+
+__Set up the system.__ From ``\nabla f = \lambda \nabla g``,
+
+```math
+\begin{aligned}
+4x &= 2\lambda && \color{red}{f_x = \lambda g_x}\\
+2y &= -3\lambda && \color{red}{f_y = \lambda g_y}\\
+6z &= -4\lambda && \color{red}{f_z = \lambda g_z}\\
+2x-3y-4z &= 49 && \color{red}{\text{Constraint}}
+\end{aligned}
+```
+
+__Solve the system.__ The first three equations give
+
+```math
+x = \frac{\lambda}{2}, \qquad y = -\frac{3\lambda}{2}, \qquad z = -\frac{2\lambda}{3}
+```
+
+Substituting into the constraint,
+
+```math
+2\left(\frac{\lambda}{2}\right)-3\left(-\frac{3\lambda}{2}\right)-4\left(-\frac{2\lambda}{3}\right) = \lambda\left(1+\frac{9}{2}+\frac{8}{3}\right) = \frac{49}{6}\lambda = 49
+```
+
+so ``\lambda = 6``, which gives ``x=3``, ``y=-9`` and ``z=-4``.
+
+__Answer.__ This is the only critical point, and ``f`` grows without bound along the plane, so the point yields a minimum. The minimum value is
+
+```math
+f(3,-9,-4) = 2(9)+81+3(16) = 147.
+```
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ d5863d29-8a7d-4042-b9b3-ced734168e0e
 cm"""
@@ -4405,6 +4742,54 @@ f(x, y)=x^2+2 y^2-2 x+3 \quad \text { Objective function }
 subject to the constraint ``x^2+y^2 \leq 10``.
 """
 
+# ╔═╡ a2337a93-77f0-434f-9409-0a906eeaaff0
+if s13_10_ex4_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+The constraint here is an __inequality__: the closed disk ``x^2+y^2 \leq 10``. Because ``f`` is continuous on a closed, bounded region, the Extreme Value Theorem guarantees both an absolute maximum and an absolute minimum. Each occurs either at a critical point __inside__ the disk or __on__ the boundary circle, so check both.
+
+__Interior critical points.__ Setting the partial derivatives equal to 0,
+
+```math
+f_x(x,y)=2x-2=0 \qquad \text{and} \qquad f_y(x,y)=4y=0
+```
+
+gives the single critical point ``(1,0)``, which lies inside the disk, with ``f(1,0)=2``.
+
+__Boundary.__ On the circle ``g(x,y)=x^2+y^2=10``, use Lagrange multipliers:
+
+```math
+\begin{aligned}
+2x-2 &= 2\lambda x && \color{red}{f_x = \lambda g_x}\\
+4y &= 2\lambda y && \color{red}{f_y = \lambda g_y}\\
+x^2+y^2 &= 10 && \color{red}{\text{Constraint}}
+\end{aligned}
+```
+
+The second equation factors as ``2y(2-\lambda)=0``, so either ``y=0`` or ``\lambda=2``.
+
+* If ``\lambda=2``, the first equation gives ``2x-2=4x``, so ``x=-1`` and ``y^2=9``, giving ``(-1,3)`` and ``(-1,-3)``.
+* If ``y=0``, then ``x=\pm\sqrt{10}``, giving ``\left(\sqrt{10},0\right)`` and ``\left(-\sqrt{10},0\right)``.
+
+__Compare the values.__
+
+```math
+\begin{aligned}
+f(1,0) &= 2 && \color{red}{\text{Minimum}}\\
+f\left(\sqrt{10},0\right) &= 13-2\sqrt{10} \approx 6.675\\
+f\left(-\sqrt{10},0\right) &= 13+2\sqrt{10} \approx 19.325\\
+f(-1,3)=f(-1,-3) &= 24 && \color{red}{\text{Maximum}}
+\end{aligned}
+```
+
+__Answer.__ The minimum value of ``f`` is ``2``, at the interior point ``(1,0)``, and the maximum value is ``24``, attained on the boundary at ``(-1,3)`` and ``(-1,-3)``.
+$(ebl())
+"""
+else
+	md""
+end
+
 # ╔═╡ 5f7365cc-ee95-41f1-b402-f7953fb20535
 cm"""
 $(ex(5,"Optimization with Two Constraints"))
@@ -4415,6 +4800,62 @@ x^2+y^2+z^2=11 .
 
 Find the extreme temperatures on the curve formed by the intersection of the plane ``x+y+z=3`` and the sphere.
 """
+
+# ╔═╡ 41dfd3bd-f063-4cf2-a166-f65316deb361
+if s13_10_ex5_show_sol
+	cm"""
+$(bbl("Solution",""))
+
+Here there are __two__ constraints, so two multipliers are needed. Let
+
+```math
+f(x,y,z)=20+2x+2y+z^2, \qquad g(x,y,z)=x+y+z=3, \qquad h(x,y,z)=x^2+y^2+z^2=11
+```
+
+__Set up the system.__ Using ``\nabla f = \lambda \nabla g + \mu \nabla h``,
+
+```math
+\begin{aligned}
+2 &= \lambda + 2\mu x && \color{red}{f_x = \lambda g_x + \mu h_x}\\
+2 &= \lambda + 2\mu y && \color{red}{f_y = \lambda g_y + \mu h_y}\\
+2z &= \lambda + 2\mu z && \color{red}{f_z = \lambda g_z + \mu h_z}\\
+x+y+z &= 3 && \color{red}{\text{Constraint 1}}\\
+x^2+y^2+z^2 &= 11 && \color{red}{\text{Constraint 2}}
+\end{aligned}
+```
+
+__Solve the system.__ Subtracting the second equation from the first gives ``2\mu(x-y)=0``, so either ``\mu=0`` or ``x=y``.
+
+__Case 1: ``\mu=0``.__ Then ``\lambda=2``, and the third equation becomes ``2z=2+2\cdot 0``, so ``z=1``. The constraints then read ``x+y=2`` and ``x^2+y^2=10``, so ``xy=-3`` and ``x`` and ``y`` are the roots of ``t^2-2t-3=0``. This gives the points
+
+```math
+(3,-1,1) \qquad \text{and} \qquad (-1,3,1)
+```
+
+__Case 2: ``x=y``.__ The first constraint gives ``z=3-2x``, and substituting into the second,
+
+```math
+2x^2+(3-2x)^2 = 11 \quad \Longrightarrow \quad 3x^2-6x-1 = 0 \quad \Longrightarrow \quad x = \frac{3\pm 2\sqrt{3}}{3}
+```
+
+with ``z=3-2x=\dfrac{3\mp 4\sqrt{3}}{3}``.
+
+__Compare the temperatures.__
+
+```math
+\begin{aligned}
+T(3,-1,1)=T(-1,3,1) &= 25 && \color{red}{\text{Minimum}}\\[4pt]
+T\left(\frac{3-2\sqrt{3}}{3},\frac{3-2\sqrt{3}}{3},\frac{3+4\sqrt{3}}{3}\right) &= \frac{91}{3} \approx 30.33 && \color{red}{\text{Maximum}}\\[4pt]
+T\left(\frac{3+2\sqrt{3}}{3},\frac{3+2\sqrt{3}}{3},\frac{3-4\sqrt{3}}{3}\right) &= \frac{91}{3} \approx 30.33 && \color{red}{\text{Maximum}}
+\end{aligned}
+```
+
+__Answer.__ On the curve of intersection the temperature ranges from a minimum of ``25^\circ`` to a maximum of ``\frac{91}{3}\approx 30.33^\circ``.
+$(ebl())
+"""
+else
+	md""
+end
 
 # ╔═╡ 8ce83819-cf7f-46fc-aded-773e3a716244
 @htl("""
@@ -7198,21 +7639,35 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─7d633d24-9d0a-472b-8fbe-9ce7f6a14447
 # ╟─64acf4d6-8655-44cb-b3ea-5e09b829912b
 # ╟─d07c578c-1386-45ce-9fec-9bf20632333c
+# ╟─d5c6e201-5fd5-43a8-9b4b-1e47bbaa23f1
+# ╟─5168dc7f-f495-4e05-8800-40a98b7c8807
 # ╟─1a572f06-ae70-44fa-af1f-95415a05d7be
 # ╟─028284e2-e901-4c25-bdc6-cde904279799
+# ╟─4736e7a8-eef6-49f2-80db-534fd42e32ef
+# ╟─16f1d84b-1104-4afe-a8de-496292df2d10
 # ╟─11db793f-dabc-4b76-bf50-c6d40eb4d497
 # ╟─e2afac2b-f375-49ec-a020-e934aaa104a9
 # ╟─6941cc03-75e1-48cb-bde1-837f8f809132
 # ╟─9fc8e26a-c45f-41c6-bcf4-bb065fcfc70b
 # ╟─ff678064-7f1e-4c70-a269-980fbb16daf4
 # ╟─98a8402d-0d73-4223-b565-9f1861753b25
+# ╟─91e590d7-a81d-4e34-a46f-9ada1334248b
+# ╟─f90d7835-77c5-4026-bd07-9e6ffb278fad
 # ╟─75ab0065-074b-466e-9230-228c33696a81
+# ╟─cdc1afda-15e4-493f-9be2-ba7e67b05b65
+# ╟─acc50ffe-aea4-479f-936e-c7e1e3a2b7a4
 # ╟─75fa570d-37d4-4fe0-be67-e765b4db8a06
+# ╟─1a5ce26e-e26e-4e06-ab9d-abf873512f75
+# ╟─8dd7969d-6b0f-4c02-93ad-90d7712daf67
 # ╟─d5863d29-8a7d-4042-b9b3-ced734168e0e
 # ╟─49ef1c3a-2cc9-488e-a92f-8477d2cabfda
+# ╟─cf456695-4d4f-48f1-af8f-4485670424a3
+# ╟─a2337a93-77f0-434f-9409-0a906eeaaff0
 # ╟─6e770f8d-b25d-4263-abc0-97dbd6d421ac
 # ╟─5f7365cc-ee95-41f1-b402-f7953fb20535
 # ╟─9c7dcf4d-5cf7-4b5c-a3a6-cc4c5e07d1c3
+# ╟─444b1df6-acf3-4bdd-a631-18449f0831db
+# ╟─41dfd3bd-f063-4cf2-a166-f65316deb361
 # ╟─83571d10-7eff-11f0-10db-391640417d07
 # ╟─f25c97aa-47a9-4bcd-9f27-3e8eb17857e1
 # ╟─8ce83819-cf7f-46fc-aded-773e3a716244
